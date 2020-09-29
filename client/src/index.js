@@ -12,12 +12,8 @@ import * as serviceWorker from './serviceWorker';
 
 // reducers
 import degRatingReducer from './store/reducers/degRating';
-<<<<<<< HEAD
 import degAuthReducer from './store/reducers/degAuth';
 import adminAuthReducer from './store/reducers/adminAuth';
-=======
-import AuthReducer from './store/reducers/degAuth';
->>>>>>> 272dc2b75321a01b36985dc9559f786937f7dfbe
 import wineResultsReducer from './store/reducers/wineResults';
 import wineListReducer from './store/reducers/wineList';
 import degListReducer from './store/reducers/degList';
