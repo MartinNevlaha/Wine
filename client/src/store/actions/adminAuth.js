@@ -30,11 +30,17 @@ export const adminLoginFailled = (error) => {
 
 export const adminLogin = (adminData) => {
     return dispatch => {
-        dispatch(adminLoginStart);
+        dispatch(adminLoginStart());
         axiosInstance.post('/admin/login', adminData)
             .then(res => {
                 dispatch(adminLoginSuccess(res.data.token))
             })
-            .catch(err => dispatch(adminLoginFailled(err)))
+            .catch(err => {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(adminLoginFailled(error));
+            })
     }
 }

@@ -2,15 +2,15 @@ import { updateObj } from '../../shared/utility';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    adminId: '',
+    adminId: null,
     isValid: false,
     token: null,
-    loading: true,
+    loading: false,
     error: null
 };
 
 const adminLoginStart = (state, action) => {
-    return updateObj(state, {loading: true})
+    return updateObj(state, {loading: true, error: null})
 }
 
 const adminLoginSuccess = (state, action) => {

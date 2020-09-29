@@ -5,6 +5,7 @@ import LoginUserInput from '../../UserInput/UserInput';
 import WineGlass from '../../UI/WineGlass/WineGlass';
 import classes from './AdminLogin.module.css';
 import Button from '../../UI/Button/Button';
+import Spinner from '../../UI/Spinner/Spinner';
 import {isAdminNameValid, isAdminPassValid} from '../../../shared/validations';
 import * as action from '../../../store/actions/index';
 
@@ -80,17 +81,27 @@ class AdminLogin extends Component {
             >{input.labelName}</LoginUserInput>
             );
         })
+        let errorMessage = null;
+        if (this.props.error) {
+            errorMessage = (
+                <p style={{color: "red"}}>
+                    {`Kód chyby: ${this.props.error.code}: ${this.props.error.message}`}
+                </p>
+            );
+        }
         return (
             <div className={classes.AdminLogin}>
                 <WineGlass />
+                {this.props.loading ? <Spinner /> :
                 <div className={classes.LoginContainer}>
-                    {adminLoginForm}
-                    <Button
-                    clicked={this.adminLoginHandler}
-                    disabled={!(this.state.adminName.valid && 
-                        this.state.adminPassword.valid)}
-                    >Prihlásiť</Button>
-                </div>
+                {adminLoginForm}
+                {errorMessage}
+                <Button
+                clicked={this.adminLoginHandler}
+                disabled={!(this.state.adminName.valid && 
+                    this.state.adminPassword.valid)}
+                >Prihlásiť</Button>
+                </div>}
             </div>
         );
     }
@@ -101,5 +112,11 @@ const mapDispatchToProps = dispatch => {
         onAdminLogin: (adminData) => dispatch(action.adminLogin(adminData))
     }
 }
+const mapStateToProps = state => {
+    return {
+        loading: state.adminAuth.loading,
+        error: state.adminAuth.error
+    }
+}
 
-export default connect(null, mapDispatchToProps) (AdminLogin);
+export default connect(mapStateToProps, mapDispatchToProps) (AdminLogin);
