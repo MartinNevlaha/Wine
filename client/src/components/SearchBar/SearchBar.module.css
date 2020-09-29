@@ -1,0 +1,16 @@
+.Search {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+.Search input {
+    width: 20%;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+.Search select {
+    margin-left: 20px;
+    border-radius: 8px;
+}

@@ -1,0 +1,31 @@
+.Btn {
+    padding: 8px 50px;
+    margin: 10px 5px;
+    background-color: rgb(65, 21, 21);
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    border: white solid 1px;
+    transition: all 0.5s;
+}
+.Disabled {
+    cursor: not-allowed;
+    background-color: #A5A1A3;
+    pointer-events: none;
+    box-sizing: border-box;
+    text-decoration:none;
+}
+.Active {
+    color: black;
+    background-color: rgb(182, 24, 24);
+    cursor: pointer;
+    border: black solid 1px;
+}
+.Btn:hover,
+.Btn:focus {
+    color: black;
+    background-color: rgb(182, 24, 24);
+    cursor: pointer;
+    border: black solid 1px;
+}

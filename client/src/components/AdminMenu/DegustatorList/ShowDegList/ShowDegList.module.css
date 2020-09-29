@@ -1,0 +1,20 @@
+.ShowDegList {
+    width: 85%;
+    text-align: center;
+    color: white;
+    background-color: rgb(87, 20, 20);
+    border-collapse: collapse;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-top: 10px; 
+    margin-bottom: 20px;
+}
+td {
+    padding: 10px 15px;
+}
+tr:nth-child(2n-1) {
+    background-color: rgba(26, 24, 24, 0.589);
+}
+span {
+    padding: 0 3px;
+}

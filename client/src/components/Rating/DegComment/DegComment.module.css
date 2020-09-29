@@ -1,0 +1,9 @@
+.DegComment {
+    width: 100%;
+    height: auto;   
+}
+.DegComment textarea {
+    width: 90%;
+    margin: 5px;
+    border-radius: 8px;
+}

@@ -1,0 +1,18 @@
+.DegLogin {
+    width: 30%;
+    height: auto;
+    background: rgba(102, 101, 101, 0.651);
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid white;
+    margin: 0 auto;
+    margin-top: 150px;
+    font-style: normal;
+}
+.LoginContainer {
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;    
+    text-align: center;
+}

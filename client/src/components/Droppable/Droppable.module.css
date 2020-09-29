@@ -1,0 +1,8 @@
+.Droppable {
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 2px white dashed;
+    border-radius: 8px;
+    width: 90%;
+}

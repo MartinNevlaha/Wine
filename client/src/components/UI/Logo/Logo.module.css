@@ -1,0 +1,17 @@
+.Logo {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    color: rgb(180, 18, 18);
+}
+.Logo img {
+    width: 60px;
+    height: auto;
+    top: 0;
+    left: 0;
+}
+.Logo p {
+    padding: 0 5px;
+}

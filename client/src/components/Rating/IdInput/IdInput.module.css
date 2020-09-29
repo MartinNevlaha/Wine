@@ -1,0 +1,12 @@
+.IdInput {
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+}
+.IdInput label {
+    text-align: left;
+    font-weight: bold;
+}
+.IdInput input {
+    border-radius: 8px;
+}

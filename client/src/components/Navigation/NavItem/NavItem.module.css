@@ -1,0 +1,14 @@
+.NavItem a {
+    padding: 10px;
+    margin: 0;
+    color: white;
+    text-decoration: none;
+}
+.NavItem a:hover,
+.NavItem a:active,
+.NavItem a.active {
+    background: rgba(255, 0, 0, 0.699);
+    color: black;
+    border-radius: 8px;
+    cursor: pointer;
+}

@@ -1,0 +1,7 @@
+.WineInfo {
+    list-style-type: none;
+    margin-right: 200px;
+}
+.WineInfo li {
+    text-align: left;
+}

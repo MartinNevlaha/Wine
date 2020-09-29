@@ -1,0 +1,24 @@
+.DegGroups {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.DegGroups p {
+    background-color: rgb(71, 18, 21);
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 5px;
+    margin: 5px;
+    cursor: grab;
+}
+.Right {
+    text-align: right;
+}
+.GroupHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,0 +1,12 @@
+.NavBar {
+    margin: auto;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 21%, rgba(218,31,4,1) 38%, rgba(24,24,24,1) 69%);
+}

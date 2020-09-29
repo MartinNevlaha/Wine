@@ -1,0 +1,19 @@
+.Back {
+    position: fixed;
+    top: 10vh;
+    left: 3%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px white solid;
+    box-shadow: 0 0 .55rem .55rem rgba(173, 121, 129, 0.5);
+    background-color: transparent;
+}
+.Back p {
+    margin: 0;
+    padding: 10px 0;
+}
+.Back:hover {
+    cursor: pointer;
+    background-color: rgb(182, 24, 24);
+}

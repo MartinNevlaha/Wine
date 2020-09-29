@@ -1,0 +1,10 @@
+.WineGlass {
+    padding: 5px;
+    width: 50px;
+    height: auto;
+    margin: 0 auto;
+}
+.WineGlass img {
+    max-width: 100%;
+    height: auto;
+}

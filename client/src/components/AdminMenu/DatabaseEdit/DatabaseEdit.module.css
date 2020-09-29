@@ -1,0 +1,29 @@
+.DBimport {
+    width: 80%;
+    padding: 5px;
+    margin: 5px auto;
+    border-radius: 8px;
+    border: 1px white solid;
+    color: white;
+}
+.DBimport_loaded {
+    width: 80%;
+    padding: 5px;
+    margin: 5px auto;
+    border-radius: 8px;
+    border: 1px white solid;
+    color: black;
+}
+.DBimport input {
+    margin: 10px;
+    width: 90%;
+}
+.DBreset {
+    background-color: rgba(255, 0, 0, 0.514);
+    width: 80%;
+    padding: 5px;
+    margin: 5px auto;
+    border-radius: 8px;
+    border: 1px white solid;
+}
+
