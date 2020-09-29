@@ -30,6 +30,14 @@ const adminLoginFailled = (state, action) => {
     })
 };
 
+const adminLogout = (state, action) => {
+    return updateObj(state, {
+        token: null,
+        adminId: null,
+        isValid: false
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.ADMIN_LOGIN_START:
@@ -38,6 +46,8 @@ const reducer = (state = initialState, action) => {
             return adminLoginSuccess(state, action);
         case actionTypes.ADMIN_LOGIN_FAIL:
             return adminLoginFailled(state, action);
+        case actionTypes.ADMIN_LOGOUT:
+            return adminLogout(state, action);
         default:
             return state;
     }

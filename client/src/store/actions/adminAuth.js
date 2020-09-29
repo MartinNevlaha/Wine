@@ -9,10 +9,7 @@ export const adminLoginStart = () => {
     }
 };
 
-export const adminLoginSuccess = (token) => {
-    const decodedToken = jwt_decode(token);
-    console.log(decodedToken);
-    const { adminId, role } = decodedToken;
+export const adminLoginSuccess = (token, adminId, role) => {
     return {
         type: actionTypes.ADMIN_LOGIN_SUCCESS,
         adminId,
@@ -20,6 +17,21 @@ export const adminLoginSuccess = (token) => {
         token
     }
 };
+
+export const adminLogOut = () => {
+    return {
+        type: actionTypes.ADMIN_LOGOUT
+    }
+}
+
+export const checkAuthTimeout = (exp) => {
+    console.log(exp)
+    return dispatch => {
+        setTimeout(()=> {
+            dispatch(adminLogOut())
+        }, exp * 1000)
+    }
+}
 
 export const adminLoginFailled = (error) => {
     return {
@@ -33,7 +45,11 @@ export const adminLogin = (adminData) => {
         dispatch(adminLoginStart());
         axiosInstance.post('/admin/login', adminData)
             .then(res => {
-                dispatch(adminLoginSuccess(res.data.token))
+                const decodedToken = jwt_decode(res.data.token);
+                console.log(decodedToken);
+                const { adminId, role } = decodedToken;
+                dispatch(adminLoginSuccess(res.data.token, adminId, role))
+                dispatch(checkAuthTimeout(decodedToken.exp - decodedToken.iat))
             })
             .catch(err => {
                 const error = {
