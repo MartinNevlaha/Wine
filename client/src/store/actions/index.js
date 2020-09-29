@@ -2,15 +2,9 @@ export {
     degustatorLogged,
  } from './degAuth';
 
-<<<<<<< HEAD
  export {
     adminLogin
  } from './adminAuth';
-=======
-export {
-    adminLogin
-} from './adminAuth';
->>>>>>> 272dc2b75321a01b36985dc9559f786937f7dfbe
 
 export {
     getWineId,
