@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
 import { connect } from 'react-redux';
-=======
-import {connect} from 'react-redux'
->>>>>>> 272dc2b75321a01b36985dc9559f786937f7dfbe
 
 import LoginUserInput from '../../UserInput/UserInput';
 import WineGlass from '../../UI/WineGlass/WineGlass';
