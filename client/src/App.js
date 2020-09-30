@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -8,6 +8,7 @@ import EntryLogin from './containers/EntryLogin/EntryLogin';
 import AdminLogin from './components/Login/AdminLogin/AdminLogin';
 import Logout from './components/Logout/Logout';
 import Spinner from './components/UI/Spinner/Spinner';
+import * as action from './store/actions/index';
 
 //lazy loading components
 const Degustator = React.lazy(()=> import ('./containers/Degustator/Degustator'));
@@ -21,6 +22,9 @@ const EditDegGroups = React.lazy(()=> import('./containers/EditDegGroups/EditDeg
 const isDegustatorAuth = false;
 
 function App(props) {
+  useEffect(() => {
+    props.onAutoLogin()
+  })
   let routes = (
     <Switch>
       <Route path="/about" />
@@ -72,5 +76,10 @@ const mapStateToProps = state => {
       isAdminAuth: state.adminAuth.token !== null && state.adminAuth.isValid
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    onAutoLogin: () => dispatch(action.adminAuthCheckState())
+  }
+}
 
-export default connect(mapStateToProps)(withRouter(App));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

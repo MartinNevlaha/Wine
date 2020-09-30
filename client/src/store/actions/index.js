@@ -4,7 +4,8 @@ export {
 
  export {
     adminLogin,
-    adminLogout
+    adminLogout,
+    adminAuthCheckState
  } from './adminAuth';
 
 export {

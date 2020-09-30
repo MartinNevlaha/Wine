@@ -19,6 +19,8 @@ export const adminLoginSuccess = (token, adminId, role) => {
 };
 
 export const adminLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expDate')
     return {
         type: actionTypes.ADMIN_LOGOUT
     }
@@ -46,6 +48,7 @@ export const adminLogin = (adminData) => {
             .then(res => {
                 const decodedToken = jwt_decode(res.data.token);
                 const { adminId, role } = decodedToken;
+                localStorage.setItem('token', res.data.token);
                 dispatch(adminLoginSuccess(res.data.token, adminId, role))
                 dispatch(checkAuthTimeout(decodedToken.exp - decodedToken.iat))
             })
@@ -57,4 +60,22 @@ export const adminLogin = (adminData) => {
                 dispatch(adminLoginFailled(error));
             })
     }
+}
+
+export const adminAuthCheckState = () => {
+    return dispatch => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            dispatch(adminLogout());
+        } else {
+            const decodedToken = jwt_decode(token);
+            const actualTime = Date.now() / 1000;
+            if (decodedToken.exp > actualTime) {
+                const { adminId, role } = decodedToken;
+                dispatch(adminLoginSuccess(token, adminId, role))
+                const remainTime = decodedToken.exp - actualTime;
+                dispatch(checkAuthTimeout(remainTime))
+            }
+        }   
+    };
 }
