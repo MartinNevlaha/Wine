@@ -69,7 +69,7 @@ class EditDegustator extends Component {
     }
 
     componentDidMount() {
-        this.props.onFetchDegList();
+        this.props.onFetchDegList(this.props.token);
     }
 
     validationHandler(key, value) {
@@ -101,7 +101,7 @@ class EditDegustator extends Component {
             surname: this.state.inputs.surname.value,
             isEditable: false
         }
-        this.props.onAddDegustator(degData)
+        this.props.onAddDegustator(degData, this.props.token)
     }
 
     importDbHandler = (importedDegList) => {
@@ -127,7 +127,7 @@ class EditDegustator extends Component {
     }
     sendImportedDataHandler = () => {
         const data = this.state.importDegList.degListData;
-        this.props.onDatabaseDegImport(data);
+        this.props.onDatabaseDegImport(data, this.props.token);
     }
     getSearchValueHandler = (e) => {
         this.setState({
@@ -163,7 +163,7 @@ class EditDegustator extends Component {
     deleteDegConfirmHandler = () => {
         const oldDegList = this.props.degList.degustators;
         const newDegList = oldDegList.filter(deg => !(deg._id === this.state.deleteDbId))
-        this.props.onDeleteDeg(this.state.deleteDbId, newDegList);
+        this.props.onDeleteDeg(this.state.deleteDbId, newDegList, this.props.token);
         this.setState(this.initialState);
     }
     render() {
@@ -172,6 +172,7 @@ class EditDegustator extends Component {
             closeModal={this.props.onDatabaseDegDeleteCanceled}
             canceled={this.props.onDatabaseDegDeleteCanceled}
             submit={this.props.onDatabaseDegDelete}
+            token={this.props.token}
             />;
         if (this.props.degList.isImportingDb) {
             modal = <ImportDesision 
@@ -214,6 +215,7 @@ class EditDegustator extends Component {
                 sortDeg={this.props.onSortDegBy}
                 edit={this.editDegHandler}
                 save={this.props.onSaveEditDeg}
+                token={this.props.token}
                 delete={this.deleteDegHandler}
                 loading={this.props.degList.loading}
                 />
@@ -225,26 +227,27 @@ class EditDegustator extends Component {
 
 const mapStateToProps = state => {
     return {
-        degList: state.degList
+        degList: state.degList,
+        token: state.adminAuth.token
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddDegustator: (degData) => dispatch(action.addDegustator(degData)),
-        onDatabaseDegDelete: () => dispatch(action.databaseDegDelete()),
+        onAddDegustator: (degData, token) => dispatch(action.addDegustator(degData, token)),
+        onDatabaseDegDelete: (token) => dispatch(action.databaseDegDelete(token)),
         onDatabaseDegDeleteInit: () => dispatch(action.databaseDegDeleteInit()),
         onDatabaseDegDeleteCanceled: () => dispatch(action.databaseDegDeleteCanceled()),
         onDatabaseDegImportInit: () => dispatch(action.databaseDegImportInit()),
         onDatabaseDegImportCanceled: () => dispatch(action.databaseDegImportCanceled()),
-        onDatabaseDegImport: (degData) => dispatch(action.databaseDegImport(degData)),
-        onFetchDegList: () => dispatch(action.fetchDegList()),
+        onDatabaseDegImport: (degData, token) => dispatch(action.databaseDegImport(degData, token)),
+        onFetchDegList: (token) => dispatch(action.fetchDegList(token)),
         onSortDegBy: (prop) => dispatch(action.sortDegBy(prop)),
         onEditDeg: (chossenDegData) => dispatch(action.editDeg(chossenDegData)),
-        onSaveEditDeg: (_id, index, editedDegData) => dispatch(action.saveEditDeg(_id, index, editedDegData)),
+        onSaveEditDeg: (_id, index, editedDegData, token) => dispatch(action.saveEditDeg(_id, index, editedDegData, token)),
         onDeleteDegInit: () => dispatch(action.deleteDegInit()),
         onDeleteDegCanceled: () => dispatch(action.deleteDegCanceled()),
-        onDeleteDeg: (_id, updatedDegList) => dispatch(action.deleteDeg(_id, updatedDegList))
+        onDeleteDeg: (_id, updatedDegList, token) => dispatch(action.deleteDeg(_id, updatedDegList, token))
     };
 };
 

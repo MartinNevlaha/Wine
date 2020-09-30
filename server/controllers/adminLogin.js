@@ -30,7 +30,7 @@ exports.adminLogin = async (req, res, next) => {
         const token = jwt.sign({
             adminId: loadedAdmin._id,
             role: loadedAdmin.role
-        }, ADMIN_JWT_SECRET, {expiresIn: "30s"})
+        }, ADMIN_JWT_SECRET, {expiresIn: "12h"})
         res.status(200).json({
             message: "Admin prihlásený",
             token: token

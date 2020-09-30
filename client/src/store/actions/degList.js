@@ -21,12 +21,15 @@ export const addDegFailled = (error) => {
    };
 };
 
-export const addDegustator = (data) => {
+export const addDegustator = (data, token) => {
     return dispatch => {
         dispatch(addDegStart());
-        axiosInstance.post('admin/degustator-list', data)
+        axiosInstance.post('admin/degustator-list', data, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => {
-                console.log(response.data)
                 dispatch(addDegSucces(response.data._id, data));
             })
             .catch(error => {
@@ -64,10 +67,14 @@ export const databaseDegDeleteFailled = (error) => {
     };
 };
 
-export const databaseDegDelete = () => {
+export const databaseDegDelete = (token) => {
     return dispatch => {
         dispatch(databaseDegDeleteStart());
-        axiosInstance.delete('admin/degustator-list')
+        axiosInstance.delete('admin/degustator-list', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => dispatch(databaseDegDeleteSucces()))
             .catch(error => dispatch(databaseDegDeleteFailled(error)))
     };
@@ -100,11 +107,15 @@ export const databaseDegImportFailled = (error) => {
         error: error
     };
 };
-export const databaseDegImport = (degData) => {
+export const databaseDegImport = (degData, token) => {
     return dispatch => {
-        dispatch(databaseDegDelete());
+        dispatch(databaseDegDelete(token));
         dispatch(databaseDegImportStart());
-        axiosInstance.post('admin/degustator-list/import', degData)
+        axiosInstance.post('admin/degustator-list/import', degData, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 console.log(resp.data.degustators)
                 dispatch(databaseDegImportSucces(resp.data.degustators))
@@ -132,9 +143,13 @@ export const fetchDegListFailled = (error) => {
     };
 };
 
-export const fetchDegList = () => {
+export const fetchDegList = (token) => {
     return dispatch => {
-        axiosInstance.get('admin/degustator-list')
+        axiosInstance.get('admin/degustator-list', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 dispatch(fetchDegListStart());          
                 const degListData = [];
@@ -187,10 +202,14 @@ export const saveEditDegFailled = (error) => {
         error: error
     };
 };
-export const saveEditDeg = (_id, index, editedDegData) => {
+export const saveEditDeg = (_id, index, editedDegData, token) => {
     return dispatch => {
         dispatch(saveEditDegStart());
-        axiosInstance.put('admin/degustator-list/' + _id, editedDegData)
+        axiosInstance.put('admin/degustator-list/' + _id, editedDegData, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 console.log(resp.data)
                 editedDegData._id = _id;
@@ -232,10 +251,14 @@ export const deleteDegFailled = (error) => {
     };
 };
 
-export const deleteDeg = (_id, updatedDegList) => {
+export const deleteDeg = (_id, updatedDegList, token) => {
     return dispatch => {
         dispatch(deleteDegStart());
-        axiosInstance.delete('admin/degustator-list/' + _id)
+        axiosInstance.delete('admin/degustator-list/' + _id, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(res => dispatch(deleteDegSucces(updatedDegList)))
             .catch(error => dispatch(deleteDegFailled(error)))
     };

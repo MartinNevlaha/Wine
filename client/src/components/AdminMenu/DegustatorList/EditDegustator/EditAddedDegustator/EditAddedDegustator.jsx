@@ -53,7 +53,7 @@ class EditAddedDegustator extends Component {
             name: editedDedData.name,
             surname: editedDedData.surname
         }
-        this.props.save(_id, index, sendData)
+        this.props.save(_id, index, sendData, this.props.token)
         this.setState(this.initialState);
     }
     render() {

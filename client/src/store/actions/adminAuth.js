@@ -20,7 +20,6 @@ export const adminLoginSuccess = (token, adminId, role) => {
 
 export const adminLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('expDate')
     return {
         type: actionTypes.ADMIN_LOGOUT
     }
