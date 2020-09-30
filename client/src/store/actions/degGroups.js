@@ -33,9 +33,13 @@ export const fetchDegListGroupFailled = (error) => {
     };
 };
 
-export const fetchDegListGroup = () => {
+export const fetchDegListGroup = (token) => {
     return dispatch => {
-        axiosInstance.get('admin/degustator-list')
+        axiosInstance.get('admin/degustator-list', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 dispatch(fetchDegListGroupStart());
                 const degListData = resp.data.degustators;
@@ -63,11 +67,15 @@ export const saveDegGroupsFailled = (error) => {
         error: error
     }
 };
-export const saveDegGroups = (data) => {
+export const saveDegGroups = (data, token) => {
     return dispatch => {
         dispatch(saveDegGroupsStart());
         //dispatch(deleteDegGroups());
-        axiosInstance.post('/admin/degustator-groups', data)
+        axiosInstance.post('/admin/degustator-groups', data, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 let createdGroups = [];
                 resp.data.groups.forEach(group => {
@@ -130,10 +138,14 @@ export const fetchDegGroupsFailled = (error) => {
     };
 };
 
-export const fetchDegGroups = () => {
+export const fetchDegGroups = (token) => {
     return dispatch => {
         dispatch(fetchDegGroupsStart());
-        axiosInstance.get('admin/degustator-groups')
+        axiosInstance.get('admin/degustator-groups', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 let groupData = [];
                 resp.data.groups.forEach(group => {
@@ -147,7 +159,7 @@ export const fetchDegGroups = () => {
                 groupData.sort((a, b) => (a.groupName > b.groupName ) ? 1 : -1)
                 dispatch(fetchDegGroupsSucces(groupData));
                 if (!groupData.length) {
-                    dispatch(fetchDegListGroup());
+                    dispatch(fetchDegListGroup(token));
                 }
             })
             .catch(error => {
@@ -187,10 +199,14 @@ export const deleteGroupsFailled = (error) => {
     };
 };
 
-export const deleteGroups = () => {
+export const deleteGroups = (token) => {
     return dispatch => {
         dispatch(deleteGroupsStart());
-        axiosInstance.delete('admin/degustator-groups')
+        axiosInstance.delete('admin/degustator-groups', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(res => dispatch(deleteGroupsSucces()))
             .catch(err => dispatch(deleteGroupsFailled(err)))
     }

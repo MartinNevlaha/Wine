@@ -10,7 +10,7 @@ const deleteDesision = (props) => (
         <p>Ste si istý ?</p>
         <div>
             <Button clicked={props.canceled}>Nie</Button>
-            <Button clicked={props.submit(props.token)}>Ano</Button>
+            <Button clicked={props.submit}>Ano</Button>
         </div>
     </Modal>
 );

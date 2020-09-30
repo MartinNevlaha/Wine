@@ -19,7 +19,7 @@ class ShowDegList extends Component {
         choosenHeaderId: 'id'
     }
     componentDidMount() {
-        this.props.onFetchDegList();
+        this.props.onFetchDegList(this.props.token);
     }
     
     getSearchValueHandler = (e) => {
@@ -86,14 +86,15 @@ class ShowDegList extends Component {
 
 const mapStateToProps = state => {
     return {
-        degList: state.degList.degustators
+        degList: state.degList.degustators,
+        token: state.adminAuth.token
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onSortDegBy: (sortByProp) => dispatch(action.sortDegBy(sortByProp)),
-        onFetchDegList: () => dispatch(action.fetchDegList())
+        onFetchDegList: (token) => dispatch(action.fetchDegList(token))
     };
 };
 

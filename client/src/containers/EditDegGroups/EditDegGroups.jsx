@@ -34,11 +34,11 @@ class EditDegGruops extends Component {
     }
 
     componentDidMount() {
-        this.props.onFetchDegGroups();
+        this.props.onFetchDegGroups(this.props.token);
     }
     componentDidUpdate(prevProps) {
         if (this.props.degGroups.isDeleteSucces !== prevProps.degGroups.isDeleteSucces) {
-            this.props.onFetchDegGroups();
+            this.props.onFetchDegGroups(this.props.token);
         }
     }
 
@@ -117,8 +117,12 @@ class EditDegGruops extends Component {
                 })
             }
         })
-        this.props.onSaveDegGroups(postData);
+        this.props.onSaveDegGroups(postData, this.props.token);
         this.props.history.goBack();
+    }
+
+    deleteGropsHandler = () => {
+        this.props.onDeleteGroups(this.props.token)
     }
 
     render() {
@@ -136,7 +140,7 @@ class EditDegGruops extends Component {
                 show={this.props.degGroups.isDeleting}
                 closeModal={this.props.onDeleteGroupsCanceled}
                 canceled={this.props.onDeleteGroupsCanceled}
-                submit={this.props.onDeleteGroups}
+                submit={this.deleteGropsHandler}
                 />
                 {this.props.degGroups.degListGroups.length ? 
                 <React.Fragment>
@@ -177,22 +181,22 @@ class EditDegGruops extends Component {
 const mapStateToProps = state => {
     return {
         degGroups: state.degGroups,
+        token: state.adminAuth.token
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchDegListGroup: () => dispatch(action.fetchDegListGroup()),
         onCreateGroups: (degGroups) => dispatch(action.createDegGroups(degGroups)),
         onMinimalisedGroup: (updatedGroup) => dispatch(action.minimalisedGroup(updatedGroup)),
         onDragDegFromList: (id) => dispatch(action.dragDegFromList(id)),
         onDropDegToGroup: (index, updatedGroupList) => dispatch(action.dropDegToGroup(index, updatedGroupList)),
         onDragDegFromGroup: (index ,updatedGroupList) => dispatch(action.dragDegFromGroup(index, updatedGroupList)),
-        onSaveDegGroups: (data) => dispatch(action.saveDegGroups(data)),
-        onFetchDegGroups: () => dispatch(action.fetchDegGroups()),
+        onSaveDegGroups: (data, token) => dispatch(action.saveDegGroups(data, token)),
+        onFetchDegGroups: (token) => dispatch(action.fetchDegGroups(token)),
         onDeleteGroupsInit: () => dispatch(action.deleteGroupsInit()),
         onDeleteGroupsCanceled: () => dispatch(action.deleteGroupsCanceled()),
-        onDeleteGroups: () => dispatch(action.deleteGroups())
+        onDeleteGroups: (token) => dispatch(action.deleteGroups(token))
     }
 }
 

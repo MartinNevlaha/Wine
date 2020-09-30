@@ -166,13 +166,15 @@ class EditDegustator extends Component {
         this.props.onDeleteDeg(this.state.deleteDbId, newDegList, this.props.token);
         this.setState(this.initialState);
     }
+    databaseDeleteHandler = () => {
+        this.props.onDatabaseDegDelete(this.props.token)
+    }
     render() {
         let modal = <DeleteDesision 
             show={this.props.degList.isDeletingDb}
             closeModal={this.props.onDatabaseDegDeleteCanceled}
             canceled={this.props.onDatabaseDegDeleteCanceled}
-            submit={this.props.onDatabaseDegDelete}
-            token={this.props.token}
+            submit={this.databaseDeleteHandler}
             />;
         if (this.props.degList.isImportingDb) {
             modal = <ImportDesision 
