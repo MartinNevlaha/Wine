@@ -1,5 +1,6 @@
 import React, {Suspense} from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './App.css';
 import Layout from './hoc/Layout/Layout';
@@ -16,10 +17,9 @@ const EditDegustator = React.lazy(()=> import('./containers/EditDegustator/EditD
 const ShowDegList = React.lazy(()=>import('./components/AdminMenu/DegustatorList/ShowDegList/ShowDegList'));
 const EditDegGroups = React.lazy(()=> import('./containers/EditDegGroups/EditDegGroups'));
 
-const isAdminAuth = false; //temporary
 const isDegustatorAuth = false;
 
-function App() {
+function App(props) {
   let routes = (
     <Switch>
       <Route path="/about" />
@@ -28,7 +28,7 @@ function App() {
       <Redirect to="/" /> 
     </Switch>
   );
-  if (isAdminAuth) {
+  if (props.isAdminAuth) {
     routes = (
       <Switch>
         <Route path="/about" />
@@ -65,4 +65,10 @@ function App() {
   );
 }
 
-export default withRouter(App);
+const mapStateToProps = state => {
+  return {
+      isAdminAuth: state.adminAuth.token !== null && state.adminAuth.isValid
+  }
+}
+
+export default connect(mapStateToProps)(withRouter(App));

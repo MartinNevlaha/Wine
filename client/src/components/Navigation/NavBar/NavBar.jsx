@@ -4,10 +4,10 @@ import NavItems from '../NavItems/NavItems';
 import Logo from '../../UI/Logo/Logo';
 import classes from './NavBar.module.css';
 
-const navBar = () => (
+const navBar = (props) => (
     <nav className={classes.NavBar}>
         <Logo />
-        <NavItems />
+        <NavItems isAdminAuth={props.isAdminAuth}/>
     </nav>
 )
 

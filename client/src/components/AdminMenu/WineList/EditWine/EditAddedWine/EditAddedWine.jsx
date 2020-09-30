@@ -54,7 +54,7 @@ class EditAddedWine extends Component {
             producer: editedWineData.producer,
             vintage: editedWineData.vintage
         }
-        this.props.save(_id, index, sendData);
+        this.props.save(_id, index, sendData, this.props.token);
         this.setState(this.initialState);
     }
     getValueHandler = (e, inputName) => {

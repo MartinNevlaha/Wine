@@ -25,7 +25,6 @@ export const adminLogOut = () => {
 }
 
 export const checkAuthTimeout = (exp) => {
-    console.log(exp)
     return dispatch => {
         setTimeout(()=> {
             dispatch(adminLogOut())
@@ -46,7 +45,6 @@ export const adminLogin = (adminData) => {
         axiosInstance.post('/admin/login', adminData)
             .then(res => {
                 const decodedToken = jwt_decode(res.data.token);
-                console.log(decodedToken);
                 const { adminId, role } = decodedToken;
                 dispatch(adminLoginSuccess(res.data.token, adminId, role))
                 dispatch(checkAuthTimeout(decodedToken.exp - decodedToken.iat))

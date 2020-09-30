@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 
-
 export const addWineStart = () => {
     return {
         type: actionTypes.ADD_WINE_START
@@ -21,10 +20,15 @@ export const addWineFailed = (error) => {
     };
 };
 
-export const addWine = (data) => {
+export const addWine = (data, token) => {
+    console.log(token)
     return dispatch => {
         dispatch(addWineStart());
-        axiosInstance.post('admin/wine-list', data)
+        axiosInstance.post('admin/wine-list', data, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => {
                 dispatch(addWineSucces(response.data._id, data));
             })
@@ -55,9 +59,13 @@ export const fetchWineListFailed = (error) => {
     };
 };
 
-export const fetchWineList = () => {
+export const fetchWineList = (token) => {
     return dispatch => {
-        axiosInstance.get('admin/wine-list')
+        axiosInstance.get('admin/wine-list', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 dispatch(fetchWineListStart());
                 const wineListData = [];
@@ -96,10 +104,14 @@ export const deleteWineSucces = (wineListData) => {
     };
 };
 
-export const deleteWine = (_id, updatedWineList) => {
+export const deleteWine = (_id, updatedWineList, token) => {
     return dispatch => {
         dispatch(deteleWineStart());
-        axiosInstance.delete('admin/wine-list/' + _id)
+        axiosInstance.delete('admin/wine-list/' + _id, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => dispatch(deleteWineSucces(updatedWineList)))
             .catch(error => dispatch(deleteWineFailed(error)))
     };
@@ -132,11 +144,15 @@ export const saveEditWineSucces = (editedWineData, index) => {
     };
 };
 
-export const saveEditWine = (_id, index, editedWineData) => {
+export const saveEditWine = (_id, index, editedWineData, token) => {
     
     return dispatch => {
         dispatch(saveEditWineStart());
-        axiosInstance.put('admin/wine-list/' + _id, editedWineData)
+        axiosInstance.put('admin/wine-list/' + _id, editedWineData, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => {
                 editedWineData._id = _id;
                 dispatch(saveEditWineSucces(editedWineData, index));
@@ -170,10 +186,14 @@ export const databaseDeleteFailled = (error) => {
     };
 };
 
-export const databaseDelete = () => {
+export const databaseDelete = (token) => {
     return dispatch => {
         dispatch(databaseDeleteStart());
-        axiosInstance.delete('admin/wine-list')
+        axiosInstance.delete('admin/wine-list', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => dispatch(databaseDeleteSucces()))
             .catch(error=> dispatch(databaseDeleteFailled(error)))
     };
@@ -203,11 +223,15 @@ export const databaseImportFailed = (error) => {
 };
 
 
-export const databaseImport = (wineData) => {
+export const databaseImport = (wineData, token) => {
     return dispatch => {
-        dispatch(databaseDelete());
+        dispatch(databaseDelete(token));
         dispatch(databaseImportStart());
-        axiosInstance.post('admin/wine-list/import', wineData)
+        axiosInstance.post('admin/wine-list/import', wineData, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(resp => {
                 console.log(resp.data.wines)
                 dispatch(databaseImportSucces(resp.data.wines))

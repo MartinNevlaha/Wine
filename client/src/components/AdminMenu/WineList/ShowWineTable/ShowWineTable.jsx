@@ -19,7 +19,7 @@ class ShowAddedWine extends Component {
         chossenHeaderId: 'id'
     }
     componentDidMount() {
-        this.props.onFetchWineList();
+        this.props.onFetchWineList(this.props.token);
     }
     componentDidUpdate() {
         console.log('update')
@@ -91,13 +91,14 @@ class ShowAddedWine extends Component {
 const mapStateToProps = state => {
     return {
         wineList: state.wineList.wine,
+        token: state.adminAuth.token
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onSortWineBy: (sortByProp) => dispatch(action.sortWineBy(sortByProp)),
-        onFetchWineList: () => dispatch(action.fetchWineList()),
+        onFetchWineList: (token) => dispatch(action.fetchWineList(token)),
     }
 }
 

@@ -3,10 +3,9 @@ import React from 'react';
 import NavItem from '../NavItem/NavItem';
 import classes from './NavItems.module.css';
 
-const isAdminAuth = false;
 const isDegustator = false;
 
-const navItems = () => {
+const navItems = (props) => {
     let navItems = (
         <React.Fragment>
             <NavItem link="/" exact >Domov</NavItem>
@@ -14,13 +13,13 @@ const navItems = () => {
             <NavItem link="/about">O aplikácii</NavItem>
         </React.Fragment>
     );
-    if (isAdminAuth) {
+    if (props.isAdminAuth) {
         navItems = (
         <React.Fragment>
             <NavItem link="/adminzone" exact>Admin Zóna</NavItem>
             <NavItem link="/results">Výsledky</NavItem>
             <NavItem link="/about">O aplikácii</NavItem>
-            <NavItem link="/" exact>Odhlásiť sa</NavItem>
+            <NavItem link="/logout" exact>Odhlásiť sa</NavItem>
         </React.Fragment>
         );
     }
@@ -30,7 +29,7 @@ const navItems = () => {
             <NavItem link="/rating" exact>Hodnotenie</NavItem>
             <NavItem link="/results">Výsledky</NavItem>
             <NavItem link="/about">O aplikácii</NavItem>
-            <NavItem link="/" exact>Odhlásiť sa</NavItem>
+            <NavItem link="/logout" exact>Odhlásiť sa</NavItem>
         </React.Fragment>
         );
     }

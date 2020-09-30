@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import classes from './Layout.module.css';
 import NavBar from '../../components/Navigation/NavBar/NavBar';
@@ -9,7 +10,7 @@ class Layout extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavBar />
+                <NavBar isAdminAuth={this.props.isAdminAuth}/>
                 <main className={this.props.location.pathname === "/rating" ? classes.BackgroundDeg : classes.BackgroundApp }>
                     {this.props.children}
                 </main>
@@ -17,5 +18,10 @@ class Layout extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        isAdminAuth: state.adminAuth.token !== null && state.adminAuth.isValid
+    }
+}
 
-export default withRouter(Layout);
+export default connect(mapStateToProps)(withRouter(Layout));

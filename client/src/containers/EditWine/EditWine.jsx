@@ -85,7 +85,7 @@ class EditWine extends Component {
         }    
     }
     componentDidMount() {
-        this.props.onFetchWineList();
+        this.props.onFetchWineList(this.props.token);
     }
     componentDidUpdate(prevProps) {
         if (this.props.wineList.isAddWineSucces !== prevProps.wineList.isAddWineSucces) {
@@ -130,12 +130,12 @@ class EditWine extends Component {
             character: this.state.inputs.character.value,
             //isEditable: false
         }
-        this.props.onAddWine(data)
+        this.props.onAddWine(data, this.props.token)
     }
     deleteWineHandler = (_id) => {
         const oldWineList = this.props.wineList.wine;
         const newWineList = oldWineList.filter(wine => !(wine._id === _id))
-        this.props.onDeleteWine(_id, newWineList)
+        this.props.onDeleteWine(_id, newWineList, this.props.token)
         this.toggleModalHandler();
     }
     deleteWineStartHandler = (_id) => {
@@ -206,7 +206,10 @@ class EditWine extends Component {
     }
     sendImportedWineList = () => {
         this.toggleModalHandler();
-        this.props.onDatabaseImport(this.state.importWineList.wineListData)
+        this.props.onDatabaseImport(this.state.importWineList.wineListData, this.props.token)
+    }
+    databaseDeleteHandler = () => {
+        this.props.onDatabaseDelete(this.props.token)
     }
     render () {
         let modalContent =
@@ -217,7 +220,7 @@ class EditWine extends Component {
                 <Button clicked={
                     !this.state.isDtbDeletePress ? 
                     () => this.deleteWineHandler(this.state.deleteDbID)
-                    : this.props.onDatabaseDelete}>Ano</Button>
+                    : this.databaseDeleteHandler}>Ano</Button>
             </div>
         </React.Fragment>;
         if (this.props.wineList.importingDb) {
@@ -266,6 +269,7 @@ class EditWine extends Component {
                 deleteStart={this.deleteWineStartHandler}
                 edit={this.editWineHandler}
                 save={this.props.onSaveEditWine}
+                token={this.props.token}
                 colorOptions={this.state.inputs.color.options}
                 characterOptions={this.state.inputs.character.options}
                 sortWine={this.props.onSortWineBy}
@@ -278,20 +282,21 @@ class EditWine extends Component {
 
 const mapStateToProps = state => {
     return {
-        wineList: state.wineList
+        wineList: state.wineList,
+        token: state.adminAuth.token,
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onAddWine: (data) => dispatch(action.addWine(data)),
-        onFetchWineList: () => dispatch(action.fetchWineList()),
-        onDeleteWine: (idDb, updatedWineList) => dispatch(action.deleteWine(idDb, updatedWineList)),
+        onAddWine: (data, token) => dispatch(action.addWine(data, token)),
+        onFetchWineList: (token) => dispatch(action.fetchWineList(token)),
+        onDeleteWine: (idDb, updatedWineList, token) => dispatch(action.deleteWine(idDb, updatedWineList, token)),
         onEditWine: (choosenWineData) => dispatch(action.editWine(choosenWineData)),
-        onSaveEditWine: (idDb, index, editedWineData) => dispatch(action.saveEditWine(idDb, index, editedWineData)),
+        onSaveEditWine: (idDb, index, editedWineData, token) => dispatch(action.saveEditWine(idDb, index, editedWineData, token)),
         onSortWineBy: (sortByProp) => dispatch(action.sortWineBy(sortByProp)),
-        onDatabaseDelete: () => dispatch(action.databaseDelete()),
+        onDatabaseDelete: (token) => dispatch(action.databaseDelete(token)),
         onDatabaseImportInit: () => dispatch(action.databaseImportInit()),
-        onDatabaseImport: (wineList) => dispatch(action.databaseImport(wineList))
+        onDatabaseImport: (wineList, token) => dispatch(action.databaseImport(wineList, token))
     }
 }
 
