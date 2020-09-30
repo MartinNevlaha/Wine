@@ -19,7 +19,7 @@ const navItems = (props) => {
             <NavItem link="/adminzone" exact>Admin Zóna</NavItem>
             <NavItem link="/results">Výsledky</NavItem>
             <NavItem link="/about">O aplikácii</NavItem>
-            <NavItem link="/logout" exact>Odhlásiť sa</NavItem>
+            <NavItem link="/logout" >Odhlásiť sa</NavItem>
         </React.Fragment>
         );
     }
@@ -29,7 +29,7 @@ const navItems = (props) => {
             <NavItem link="/rating" exact>Hodnotenie</NavItem>
             <NavItem link="/results">Výsledky</NavItem>
             <NavItem link="/about">O aplikácii</NavItem>
-            <NavItem link="/logout" exact>Odhlásiť sa</NavItem>
+            <NavItem link="/logout" >Odhlásiť sa</NavItem>
         </React.Fragment>
         );
     }

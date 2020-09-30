@@ -6,6 +6,7 @@ import './App.css';
 import Layout from './hoc/Layout/Layout';
 import EntryLogin from './containers/EntryLogin/EntryLogin';
 import AdminLogin from './components/Login/AdminLogin/AdminLogin';
+import Logout from './components/Logout/Logout';
 import Spinner from './components/UI/Spinner/Spinner';
 
 //lazy loading components
@@ -33,6 +34,7 @@ function App(props) {
       <Switch>
         <Route path="/about" />
         <Route path="/results" />
+        <Route path="/logout" component={Logout}/>
         <Route path="/edit-deg-group" render={()=><Suspense fallback={<Spinner />}><EditDegGroups /></Suspense>} />
         <Route path="/deglist" render={()=><Suspense fallback={<Spinner />}><ShowDegList /></Suspense>} />
         <Route path="/edit-degustator" render={()=><Suspense fallback={<Spinner />}><EditDegustator /></Suspense>} />
@@ -48,6 +50,7 @@ function App(props) {
     routes = (
       <Switch>
         <Route path="/about" />
+        <Route path="/logout" component={Logout}/>
         <Route path="/results" />
         <Route path="/rating" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />
         <Route path="/" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />

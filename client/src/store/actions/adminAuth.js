@@ -18,7 +18,7 @@ export const adminLoginSuccess = (token, adminId, role) => {
     }
 };
 
-export const adminLogOut = () => {
+export const adminLogout = () => {
     return {
         type: actionTypes.ADMIN_LOGOUT
     }
@@ -27,7 +27,7 @@ export const adminLogOut = () => {
 export const checkAuthTimeout = (exp) => {
     return dispatch => {
         setTimeout(()=> {
-            dispatch(adminLogOut())
+            dispatch(adminLogout())
         }, exp * 1000)
     }
 }

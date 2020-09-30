@@ -3,7 +3,8 @@ export {
  } from './degAuth';
 
  export {
-    adminLogin
+    adminLogin,
+    adminLogout
  } from './adminAuth';
 
 export {

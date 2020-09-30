@@ -32,11 +32,12 @@ const adminLoginFailled = (state, action) => {
 
 const adminLogout = (state, action) => {
     return updateObj(state, {
-        token: null,
         adminId: null,
-        isValid: false
+        token: null,
+        isValid: false,
     })
 }
+
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
