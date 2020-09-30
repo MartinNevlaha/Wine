@@ -17,7 +17,7 @@ exports.adminLogin = async (req, res, next) => {
     try {
         const loadedAdmin = await Admin.findOne({name: name});
         if (!loadedAdmin) {
-            const error = new Error("Nesprávne meno")
+            const error = new Error("Nesprávne prihlasovacie meno")
             error.statusCode = 401;
             return next(error);
         }

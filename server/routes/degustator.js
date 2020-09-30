@@ -1,13 +1,20 @@
 const router = require('express').Router();
-
+const { body } = require('express-validator');
+ 
 const degustatorControler = require('../controllers/degustator');
+const degLogin = require('../controllers/degLogin');
+
+const { isDegustatorAuth } = require('../middleware/isAuth');
 
 const finalSum = require('../middleware/finalSum');
 
-router.post('/results', finalSum, degustatorControler.postResult);
+router.post('/results', isDegustatorAuth, finalSum, degustatorControler.postResult);
 
-router.get('/wine-list/:wineId', degustatorControler.getWineInfo);
+router.get('/wine-list/:wineId', isDegustatorAuth, degustatorControler.getWineInfo);
 
-router.post('/login')
+router.post('/login', [
+    body('surname').trim().notEmpty().isString().isLength({ min: 3 }),
+    body('passwod').trim().notEmpty().isLength({ min:4 })
+], degLogin.degustatorLogin);
 
 module.exports = router;
