@@ -45,8 +45,7 @@ function App(props) {
         <Redirect to="/" />
     </Switch>
     );
-  }
-  if (isDegustatorAuth) {
+  } else if (isDegustatorAuth) {
     routes = (
       <Switch>
         <Route path="/about" />
