@@ -13,8 +13,8 @@ router.post('/results', isDegustatorAuth, finalSum, degustatorControler.postResu
 router.get('/wine-list/:wineId', isDegustatorAuth, degustatorControler.getWineInfo);
 
 router.post('/login', [
-    body('surname').trim().notEmpty().isString().isLength({ min: 3 }),
-    body('passwod').trim().notEmpty().isLength({ min:4 })
+    body('name').trim().notEmpty().isString().isLength({ min: 3 }),
+    body('password').trim().notEmpty().isLength({ min:4 })
 ], degLogin.degustatorLogin);
 
 module.exports = router;

@@ -14,7 +14,7 @@ const adminLoginStart = (state, action) => {
 }
 
 const adminLoginSuccess = (state, action) => {
-    let isAdminValid = action.role === 'admin' && action.token !== null;
+    const isAdminValid = action.role === 'admin' && action.token !== null;
     return updateObj(state, {
         loading: false,
         adminId: action.adminId,
@@ -22,7 +22,7 @@ const adminLoginSuccess = (state, action) => {
         isValid: isAdminValid        
     })
 }
-
+    
 const adminLoginFailled = (state, action) => {
     return updateObj(state, {
         error: action.error,

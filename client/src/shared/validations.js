@@ -1,9 +1,5 @@
 import validate from 'validate.js';
 
-export const isDegLoginValid = (value) => {
-    return validate.isNumber(+value) && value.length <= 2;
-}
-
 export const isRatingValid = (results, eliminateStatus) => {
     if (eliminateStatus) {
         return true;
@@ -26,10 +22,10 @@ export const isString = (string) => {
     return validate.isString(string) && string.length > 0
 }
 
-export const isAdminNameValid = (string) => {
+export const isInputNameValid = (string) => {
     return validate.isString(string) && string.length > 3;
 }
 
-export const isAdminPassValid = (string) => {
+export const isInputPassValid = (string) => {
     return validate.isString(string) && string.length > 5
 }

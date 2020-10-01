@@ -1,5 +1,7 @@
 export { 
-    degustatorLogged,
+    degLogin,
+    degLogout,
+    degAuthCheckState
  } from './degAuth';
 
  export {

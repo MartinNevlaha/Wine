@@ -1,76 +1,112 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import classes from './DegustatorLogin.module.css';
 import Button from '../../UI/Button/Button';
 import WineGlass from '../../UI/WineGlass/WineGlass';
-import UserInput from '../../UserInput/UserInput';
+import LoginUserInput from '../../UserInput/UserInput';
+import Spinner from '../../UI/Spinner/Spinner';
+import { isInputNameValid, isInputPassValid } from '../../../shared/validations';
+import * as action from '../../../store/actions/index';
+
 
 class DegustatorLogin extends Component {
     // state only for rendering components
     state = {
-        commisionNumber: {
-            labelName: 'Komisia číslo',
+        degName: {
+            labelName: 'Prihlasovacie meno degustátora',
             inputType: 'text',
-            placeholder: 'Číslo komisie',
-            validationConfig: {
-                required: true,
-                maxLenght: 2,
-                isNumeric: true
-            }
+            placeholder: 'Prihlasovacie meno',
+            value: '',
+            valid: false
         },
-        degustatorNumber: {
-            labelName: 'Degustátor číslo',
+        password: {
+            labelName: 'Heslo',
             inputType: 'text',
-            placeholder: 'Číslo degustátora',
-            validationConfig: {
-                required: true,
-                maxLenght: 2,
-                isNumeric: true
-            }
+            placeholder: 'Heslo degustátora',
+            value: '',
+            valid: false
         }
     }
-
-
+    validationInput = (key, value) => {
+        if (key === 'degName') {
+            return isInputNameValid(value);
+        } else {
+            return isInputPassValid(value)
+        }
+    }
+    getDegInputHandler = (e, key) => {
+        this.setState({
+            ...this.state,
+            [key]: {
+                ...this.state[key],
+                value: e.target.value,
+                valid: this.validationInput(key, e.target.value)
+            }
+        })
+    }
+    degLoginHandler = () => {
+        const degData = {
+            name: this.state.degName.value,
+            password: this.state.password.value
+        }
+        this.props.onDeglogin(degData);
+    };
     render() {
-        const userInputs = [];
+        let userInput = [];
         for (let key in this.state) {
-            userInputs.push({
+            userInput.push({
                 id: key,
-                config: this.state[key]
+                ...this.state[key]
             })
         }
-        let loginDegustatorForm = (userInputs.map(userInput => {
-            let value = null;
-            let getValue = null;
-            if (userInput.id === 'commisionNumber') {
-                value = this.props.commisonValue;
-                getValue = this.props.getCommisionNumber;
-            } else {
-                value = this.props.degustatorValue;
-                getValue = this.props.getDegustatorNumber;
-            }
+        let loginDegustatorForm = userInput.map(input => {
             return (
-                <UserInput
-                key={userInput.id}
-                labelName={userInput.config.labelName}
-                inputType={userInput.config.inputType}
-                placeholder={userInput.config.placeholder}
-                value={value}
-                change={getValue}
-                >{userInput.config.labelName}</UserInput>);
-        }));
+                <LoginUserInput 
+                key={input.id}
+                id={input.id}
+                labelName={input.labelName}
+                inputType={input.inputType}
+                name={input.labelName}
+                placeholder={input.placeholder}
+                value={input.value}
+                change={this.getDegInputHandler}
+            >{input.labelName}</LoginUserInput>
+            );
+        })
+        let errorMessage = null;
+        if (this.props.error) {
+            errorMessage = (
+                <p style={{color: "red"}}>
+                    {`Kód chyby: ${this.props.error.code}: ${this.props.error.message}`}
+                </p>
+            );
+        }
         return (
             <div className={classes.DegLogin}>
                 <WineGlass />
+                {this.props.loading ? <Spinner/> :
                 <div className={classes.LoginContainer}>
                     {loginDegustatorForm}
+                    {errorMessage}
                     <Button 
-                    clicked={this.props.degustatorLogin}
-                    disabled={!this.props.isValid}>Prihlásiť</Button>
-                </div>
+                    clicked={this.degLoginHandler}
+                    disabled={!(this.state.password.valid && this.state.degName.valid)}>Prihlásiť</Button>
+                </div>}
             </div>
         );
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        onDeglogin: (degData) => dispatch(action.degLogin(degData))
+    }
+};
+const mapStateToProps = state => {
+    return {
+        loading: state.degAuth.loading,
+        error: state.degAuth.error
+    }
+}
 
-export default DegustatorLogin;
+export default connect(mapStateToProps, mapDispatchToProps)(DegustatorLogin);

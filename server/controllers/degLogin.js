@@ -13,12 +13,12 @@ exports.degustatorLogin = async (req, res, next) => {
         error.statusCode = 422;
         return next(error);
     }
-    const {surname, password} = req.body;
+    const {name, password} = req.body;
     try {
-        const degustator = await Degustator.findOne({surname: surname}) 
+        const degustator = await Degustator.findOne({surname: name}).populate('group')
         if (!degustator) {
             const error = new Error('Nesprávne prihlasovacie meno');
-            error.statusCode = 422;
+            error.statusCode = 401;
             return next(error);
         }
         const isPasswordValid = await bcrypt.compare(password, degustator.password);
@@ -27,9 +27,14 @@ exports.degustatorLogin = async (req, res, next) => {
             error.statusCode = 401;
             return next(error);
         }
+
+        console.log(degustator, degustator.group.groupName)
         const token = jwt.sign({
             degId: degustator._id,
-            role: degustator.role
+            role: degustator.role,
+            degNumber: degustator.id,
+            group: degustator.group.groupName,
+            groupId: degustator.group._id
         }, DEGUSTATOR_JWT_SECRET, {expiresIn: '12h'})
         res.status(200).json({
             message: "Degustator prihlásený",

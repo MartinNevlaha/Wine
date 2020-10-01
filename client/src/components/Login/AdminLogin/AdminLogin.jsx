@@ -6,7 +6,7 @@ import WineGlass from '../../UI/WineGlass/WineGlass';
 import classes from './AdminLogin.module.css';
 import Button from '../../UI/Button/Button';
 import Spinner from '../../UI/Spinner/Spinner';
-import {isAdminNameValid, isAdminPassValid} from '../../../shared/validations';
+import {isInputNameValid, isInputPassValid} from '../../../shared/validations';
 import * as action from '../../../store/actions/index';
 
 class AdminLogin extends Component {
@@ -28,9 +28,9 @@ class AdminLogin extends Component {
     }
     validationInput = (key, value) => {
         if (key === 'adminName') {
-            return isAdminNameValid(value)
+            return isInputNameValid(value)
         } else {
-            return isAdminPassValid(value)
+            return isInputPassValid(value)
         }
     }
     getAdminInputHandler = (e, key) => {
@@ -42,13 +42,6 @@ class AdminLogin extends Component {
                 valid: this.validationInput(key, e.target.value)
             }
         })
-    }
-    adminLoginHandler = () => {
-        const adminData = {
-            name: this.state.adminName.value,
-            password: this.state.adminPassword.value
-        };
-        this.props.onAdminLogin(adminData);
     }
 
     adminLoginHandler = () => {
