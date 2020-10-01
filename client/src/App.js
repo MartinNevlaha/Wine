@@ -19,11 +19,10 @@ const EditDegustator = React.lazy(()=> import('./containers/EditDegustator/EditD
 const ShowDegList = React.lazy(()=>import('./components/AdminMenu/DegustatorList/ShowDegList/ShowDegList'));
 const EditDegGroups = React.lazy(()=> import('./containers/EditDegGroups/EditDegGroups'));
 
-const isDegustatorAuth = false;
-
 function App(props) {
   useEffect(() => {
-    props.onAutoLogin()
+    props.onAdminAutoLogin();
+    props.onDegAutoLogin();
   })
   let routes = (
     <Switch>
@@ -49,7 +48,7 @@ function App(props) {
         <Redirect to="/" />
     </Switch>
     );
-  } else if (isDegustatorAuth) {
+  } else if (props.isDegustatorAuth) {
     routes = (
       <Switch>
         <Route path="/about" />
@@ -73,12 +72,14 @@ function App(props) {
 
 const mapStateToProps = state => {
   return {
-      isAdminAuth: state.adminAuth.token !== null && state.adminAuth.isValid
+      isAdminAuth: state.adminAuth.token !== null && state.adminAuth.isValid,
+      isDegustatorAuth: state.degAuth.token !== null && state.degAuth.isValid
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAutoLogin: () => dispatch(action.adminAuthCheckState())
+    onAdminAutoLogin: () => dispatch(action.adminAuthCheckState()),
+    onDegAutoLogin: () => dispatch(action.degAuthCheckState())
   }
 }
 

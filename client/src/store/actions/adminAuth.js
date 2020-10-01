@@ -68,12 +68,14 @@ export const adminAuthCheckState = () => {
             dispatch(adminLogout());
         } else {
             const decodedToken = jwt_decode(token);
-            const actualTime = Date.now() / 1000;
-            if (decodedToken.exp > actualTime) {
-                const { adminId, role } = decodedToken;
-                dispatch(adminLoginSuccess(token, adminId, role))
-                const remainTime = decodedToken.exp - actualTime;
-                dispatch(checkAuthTimeout(remainTime))
+            if (decodedToken.role === 'admin') {
+                const actualTime = Date.now() / 1000;
+                if (decodedToken.exp > actualTime) {
+                    const { adminId, role } = decodedToken;
+                    dispatch(adminLoginSuccess(token, adminId, role))
+                    const remainTime = decodedToken.exp - actualTime;
+                    dispatch(checkAuthTimeout(remainTime))
+                }
             }
         }   
     };

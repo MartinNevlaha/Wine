@@ -43,8 +43,9 @@ const isDegustatorAuth = (req, res, next) => {
             return next(error);
         }
         const decodedToken = jwt.verify(token, DEGUSTATOR_JWT_SECRET);
-        if (decodedToken.role = 'degustator') {
-            const error = new Error("Neoprávený prístup, vyžaduje sa prístup ADMINA");
+        console.log(decodedToken)
+        if (decodedToken.role != 'degustator') {
+            const error = new Error("Neoprávený prístup, vyžaduje sa prístup Degustátora");
             error.statusCode = 401;
             return next(error);
         }

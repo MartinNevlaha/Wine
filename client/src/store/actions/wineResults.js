@@ -73,11 +73,16 @@ export const fetchWineInfoFailled = (error) => {
     }
 }
 
-export const fetchWineInfo = (wineId) => {
+export const fetchWineInfo = (wineId, token) => {
+    console.log(token)
     return dispatch => {
         setTimeout(()=>{
             dispatch(fetchWineInfoStart())
-            axiosInstance.get(`/degustator/wine-list/${wineId}`)
+            axiosInstance.get(`/degustator/wine-list/${wineId}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(resp => {
                     dispatch(fetchWineInfoSucces(resp.data.wine))
                 })

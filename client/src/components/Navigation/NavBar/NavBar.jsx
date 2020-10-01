@@ -7,7 +7,9 @@ import classes from './NavBar.module.css';
 const navBar = (props) => (
     <nav className={classes.NavBar}>
         <Logo />
-        <NavItems isAdminAuth={props.isAdminAuth}/>
+        <NavItems 
+        isAdminAuth={props.isAdminAuth}
+        isDegAuth={props.isDegAuth}/>
     </nav>
 )
 

@@ -3,8 +3,6 @@ import React from 'react';
 import NavItem from '../NavItem/NavItem';
 import classes from './NavItems.module.css';
 
-const isDegustator = false;
-
 const navItems = (props) => {
     let navItems = (
         <React.Fragment>
@@ -22,8 +20,7 @@ const navItems = (props) => {
             <NavItem link="/logout" >Odhlásiť sa</NavItem>
         </React.Fragment>
         );
-    }
-    if (isDegustator) {
+    } else if (props.isDegAuth) {
         navItems = (
         <React.Fragment>
             <NavItem link="/rating" exact>Hodnotenie</NavItem>

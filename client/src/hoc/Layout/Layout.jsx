@@ -10,7 +10,7 @@ class Layout extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavBar isAdminAuth={this.props.isAdminAuth}/>
+                <NavBar isAdminAuth={this.props.isAdminAuth} isDegAuth={this.props.isDegAuth}/>
                 <main className={this.props.location.pathname === "/rating" ? classes.BackgroundDeg : classes.BackgroundApp }>
                     {this.props.children}
                 </main>
@@ -20,6 +20,7 @@ class Layout extends Component {
 }
 const mapStateToProps = state => {
     return {
+        isDegAuth: state.degAuth.token !== null && state.degAuth.isValid,
         isAdminAuth: state.adminAuth.token !== null && state.adminAuth.isValid
     }
 }

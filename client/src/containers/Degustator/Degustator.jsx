@@ -57,7 +57,7 @@ class Degustator extends Component {
         if (isIdValid(e.target.value)) {
             this.props.onWineIdHandler(+e.target.value)
             this.setState({isWineIdValid: isIdValid(e.target.value)})
-            this.props.onFetchWineInfo(+e.target.value)
+            this.props.onFetchWineInfo(+e.target.value, this.props.token)
         }
     };
     generateBtn (btnValues, btnType) {
@@ -137,7 +137,8 @@ const mapStateToProps = state => {
         loading: state.wineResults.loading,
         sending: state.wineResults.sending,
         fetching: state.wineResults.fetching,
-        wineInfo: state.wineResults.wineInfo
+        wineInfo: state.wineResults.wineInfo,
+        token: state.degAuth.token
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -146,7 +147,7 @@ const mapDispatchToProps = dispatch => {
         onWineIdHandler: (id) => dispatch(action.getWineId(id)),
         onResultSendInit: () => dispatch(action.resultsSendInit()),
         onResultSendCanceled: () => dispatch(action.resultsSendCanceled()),
-        onFetchWineInfo: (wineId) => dispatch(action.fetchWineInfo(wineId))
+        onFetchWineInfo: (wineId, token) => dispatch(action.fetchWineInfo(wineId, token))
     }
 }
 

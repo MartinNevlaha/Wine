@@ -9,6 +9,8 @@ class Logout extends Component {
     componentDidMount() {
         if (this.props.isAdminLogged) {
             this.props.onAdminLogout();
+        } else if (this.props.isDegLogged) {
+            this.props.onDegLogout();
         }
     }
     render() {
@@ -17,12 +19,14 @@ class Logout extends Component {
 };
 const mapStateToProps = state => {
     return {
-        isAdminLogged: state.adminAuth.token !== null && state.adminAuth.isValid
+        isAdminLogged: state.adminAuth.token !== null && state.adminAuth.isValid,
+        isDegLogged: state.degAuth.token !== null && state.degAuth.isValid
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onAdminLogout: () => dispatch(action.adminLogout())
+        onAdminLogout: () => dispatch(action.adminLogout()),
+        onDegLogout: () => dispatch(action.degLogout())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logout);

@@ -74,12 +74,14 @@ export const degAuthCheckState = () => {
             dispatch(degLogout());
         } else {
             const decodedToken = jwt_decode(token);
-            const actualTime = Date.now() / 1000;
+            if (decodedToken.role === 'degustator') {
+                const actualTime = Date.now() / 1000;
             if (decodedToken.exp > actualTime) {
                 const { degId, role, degNumber } = decodedToken;
                 dispatch(degLoginSuccess(token, degId, role, degNumber))
                 const remainTime = decodedToken.exp - actualTime;
                 dispatch(checkAuthTimeout(remainTime))
+            }
             }
         }   
     };

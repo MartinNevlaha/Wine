@@ -28,7 +28,6 @@ exports.degustatorLogin = async (req, res, next) => {
             return next(error);
         }
 
-        console.log(degustator, degustator.group.groupName)
         const token = jwt.sign({
             degId: degustator._id,
             role: degustator.role,
