@@ -22,7 +22,7 @@ class DegustatorLogin extends Component {
         },
         password: {
             labelName: 'Heslo',
-            inputType: 'text',
+            inputType: 'password',
             placeholder: 'Heslo degustátora',
             value: '',
             valid: false

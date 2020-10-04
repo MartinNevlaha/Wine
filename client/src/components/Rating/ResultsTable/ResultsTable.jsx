@@ -35,7 +35,7 @@ class ResultsTable extends Component {
         return (
             <div className={classes.ResultsTable}>
             <h2>Priebežný výsledok</h2>
-            <p>Skupina: <span style={{fontWeight:"bold"}}>{this.props.degInfo.commisionNumber}</span></p>
+            <p>Skupina: <span style={{fontWeight:"bold"}}>{this.props.degInfo.group}</span></p>
             <p>Číslo degustátora: <span style={{fontWeight:"bold"}}>{this.props.degInfo.degustatorNumber}</span></p>
             <Checkbox 
             checked={this.props.eliminated}

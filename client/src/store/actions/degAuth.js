@@ -77,8 +77,8 @@ export const degAuthCheckState = () => {
             if (decodedToken.role === 'degustator') {
                 const actualTime = Date.now() / 1000;
             if (decodedToken.exp > actualTime) {
-                const { degId, role, degNumber } = decodedToken;
-                dispatch(degLoginSuccess(token, degId, role, degNumber))
+                const { degId, role, degNumber, group, groupId } = decodedToken;
+                dispatch(degLoginSuccess(token, degId, role, degNumber, group, groupId))
                 const remainTime = decodedToken.exp - actualTime;
                 dispatch(checkAuthTimeout(remainTime))
             }

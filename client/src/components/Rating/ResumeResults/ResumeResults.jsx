@@ -31,8 +31,7 @@ class ResumeResults extends Component {
                 results: this.props.sendData.results
             }
         }
-        console.log(data)
-        this.props.onSendWineResult(data);
+        this.props.onSendWineResult(data, this.props.token);
         this.props.reset();
     };
 
@@ -49,10 +48,14 @@ class ResumeResults extends Component {
         );
     };
 }
-
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        onSendWineResult: (data) => dispatch(action.resultsSend(data))
+        token: state.degAuth.token
     }
 };
-export default connect(null, mapDispatchToProps)(ResumeResults);
+const mapDispatchToProps = dispatch => {
+    return {
+        onSendWineResult: (data, token) => dispatch(action.resultsSend(data, token))
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ResumeResults);

@@ -20,7 +20,7 @@ class AdminLogin extends Component {
         },
         adminPassword: {
             labelName: 'Admin heslo',
-            inputType: 'text',
+            inputType: 'password',
             placeholder: 'Heslo',
             value: '',
             valid: false

@@ -39,10 +39,14 @@ export const resetResults = () => {
     }
 }
 
-export const resultsSend = (data) => {
+export const resultsSend = (data, token) => {
     return dispatch => {
         dispatch(resultsSendStart());
-        axiosInstance.post('degustator/results', data)
+        axiosInstance.post('degustator/results', data, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => {
                 dispatch(resultsSendSucces(response.data.name, data));
                 dispatch(resetResults())
