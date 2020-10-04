@@ -18,12 +18,13 @@ class AdminLogin extends Component {
             value: '',
             valid: false
         },
-        adminPassword: {
+        password: {
             labelName: 'Admin heslo',
             inputType: 'password',
             placeholder: 'Heslo',
             value: '',
-            valid: false
+            valid: false,
+            isShow: false
         }
     }
     validationInput = (key, value) => {
@@ -47,9 +48,21 @@ class AdminLogin extends Component {
     adminLoginHandler = () => {
         const adminData = {
             name: this.state.adminName.value,
-            password: this.state.adminPassword.value
+            password: this.state.password.value
         }
         this.props.onAdminLogin(adminData);
+    }
+
+    toogleShowPwHandler = () => {
+        const typeInput = !this.state.password.isShow ? 'text' : 'password';
+        this.setState({
+            ...this.state,
+            password: {
+                ...this.state.password,
+                isShow: !this.state.password.isShow,
+                inputType: typeInput
+            }
+        })
     }
 
     render() {
@@ -70,6 +83,8 @@ class AdminLogin extends Component {
                 name={input.labelName}
                 placeholder={input.placeholder}
                 value={input.value}
+                isPwShowed={this.state.password.isShow}
+                tooglePwShow={this.toogleShowPwHandler}
                 change={this.getAdminInputHandler}
             >{input.labelName}</LoginUserInput>
             );
@@ -92,7 +107,7 @@ class AdminLogin extends Component {
                 <Button
                 clicked={this.adminLoginHandler}
                 disabled={!(this.state.adminName.valid && 
-                    this.state.adminPassword.valid)}
+                    this.state.password.valid)}
                 >Prihlásiť</Button>
                 </div>}
             </div>

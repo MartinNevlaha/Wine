@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 import classes from './UserInput.module.css';
 
@@ -6,13 +8,21 @@ class UserInput extends Component {
     
     render () {
         let inputType = (
-            <input 
-            className={classes.UserInput}
-            type={this.props.inputType} 
-            placeholder={this.props.placeholder} 
-            onChange={(e) => this.props.change(e, this.props.id)}
-            value={this.props.value}
-            />
+            <div className={classes.InputContainer}>
+                <input 
+                className={classes.UserInput}
+                type={this.props.inputType} 
+                placeholder={this.props.placeholder} 
+                onChange={(e) => this.props.change(e, this.props.id)}
+                value={this.props.value || ''}
+                />
+                {this.props.id === 'password' &&
+                <FontAwesomeIcon 
+                className={classes.Icon}
+                cursor="pointer"
+                onClick={this.props.tooglePwShow}
+                icon={this.props.isPwShowed ? faEye : faEyeSlash}/>}
+            </div>
         ); 
         if (this.props.inputType === "select") {
             let options = this.props.options;

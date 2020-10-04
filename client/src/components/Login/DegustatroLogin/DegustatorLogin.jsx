@@ -25,7 +25,8 @@ class DegustatorLogin extends Component {
             inputType: 'password',
             placeholder: 'Heslo degustátora',
             value: '',
-            valid: false
+            valid: false,
+            isShow: false
         }
     }
     validationInput = (key, value) => {
@@ -52,6 +53,18 @@ class DegustatorLogin extends Component {
         }
         this.props.onDeglogin(degData);
     };
+    toogleShowPwHandler = () => {
+        const typeInput = !this.state.password.isShow ? 'text' : 'password';
+        this.setState({
+            ...this.state,
+            password: {
+                ...this.state.password,
+                isShow: !this.state.password.isShow,
+                inputType: typeInput
+            }
+        })
+    }
+
     render() {
         let userInput = [];
         for (let key in this.state) {
@@ -70,6 +83,8 @@ class DegustatorLogin extends Component {
                 name={input.labelName}
                 placeholder={input.placeholder}
                 value={input.value}
+                tooglePwShow={this.toogleShowPwHandler}
+                isPwShowed={this.state.password.isShow}
                 change={this.getDegInputHandler}
             >{input.labelName}</LoginUserInput>
             );
