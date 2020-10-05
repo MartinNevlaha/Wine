@@ -12,7 +12,7 @@ import Back from '../../../UI/Back/Back';
 
 class ShowAddedWine extends Component {
     state = {
-        tableHeadNames: ['Číslo vína', 'Názov vina', 'Farba vína', 'Charakter vína', 'Výrobca vína', 'Ročník vína' ],
+        tableHeadNames: ['Číslo vína', 'Názov vína', 'Farba vína', 'Charakter vína', 'Výrobca vína', 'Ročník vína' ],
         tableHeadIds: ['id', 'name', 'color', 'character', 'producer', 'vintage'],
         searchValue: '',
         headerValue: 'Číslo vína',

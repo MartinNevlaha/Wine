@@ -18,6 +18,7 @@ const ShowWineList = React.lazy(()=> import('./components/AdminMenu/WineList/Sho
 const EditDegustator = React.lazy(()=> import('./containers/EditDegustator/EditDegustator'));
 const ShowDegList = React.lazy(()=>import('./components/AdminMenu/DegustatorList/ShowDegList/ShowDegList'));
 const EditDegGroups = React.lazy(()=> import('./containers/EditDegGroups/EditDegGroups'));
+const DegResults = React.lazy(()=> import('./containers/DegResults/DegResults'));
 
 function App(props) {
   useEffect(() => {
@@ -53,7 +54,7 @@ function App(props) {
       <Switch>
         <Route path="/about" />
         <Route path="/logout" component={Logout}/>
-        <Route path="/results" />
+        <Route path="/results" render={()=><Suspense fallback={<Spinner/>}><DegResults /></Suspense>}/>
         <Route path="/rating" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />
         <Route path="/" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />
         <Redirect to="/" />

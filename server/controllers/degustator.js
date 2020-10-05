@@ -90,7 +90,8 @@ exports.getResults = async (req, res, next) => {
         }
         res.status(200).json({
             message: "Výsledky načítané",
-            results: degustator.results
+            results: degustator.results,
+            degName: degustator.name + " " + degustator.surname
         })
     } catch (error) {
         if(!error.statusCode) {
