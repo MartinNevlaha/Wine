@@ -51,7 +51,7 @@ const isDegustatorAuth = (req, res, next) => {
         }
         req.userData = {
             degId: decodedToken.degId,
-            role: decodedToken.role
+            role: decodedToken.role,
         }
         next();
     } catch (err) {

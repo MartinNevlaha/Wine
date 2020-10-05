@@ -7,10 +7,12 @@ const degLogin = require('../controllers/degLogin');
 const { isDegustatorAuth } = require('../middleware/isAuth');
 
 const finalSum = require('../middleware/finalSum');
-
-router.post('/results', isDegustatorAuth, finalSum, degustatorControler.postResult);
+// doplň validáciu
+router.post('/results', isDegustatorAuth, finalSum, degustatorControler.postResult); 
 
 router.get('/wine-list/:wineId', isDegustatorAuth, degustatorControler.getWineInfo);
+
+router.get('/results', isDegustatorAuth, degustatorControler.getResults);
 
 router.post('/login', [
     body('name').trim().notEmpty().isString().isLength({ min: 3 }),

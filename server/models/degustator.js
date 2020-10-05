@@ -29,7 +29,10 @@ const postDegustator = new Schema({
         type: String,
         default: 'degustator',
     },
-    results: [] // doplnit
+    results: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Result'
+    }]
 
 }, {timestamps: true});
 

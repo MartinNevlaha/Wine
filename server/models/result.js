@@ -14,7 +14,11 @@ const postResult = new Schema({
     degId: {
         type: Schema.Types.ObjectId,
         ref: 'Degustator',
-        //required: true
+        required: true
+    },
+    groupId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Group'
     },
     eliminated: {
         type: Boolean,
