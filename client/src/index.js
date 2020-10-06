@@ -18,6 +18,7 @@ import wineResultsReducer from './store/reducers/wineResults';
 import wineListReducer from './store/reducers/wineList';
 import degListReducer from './store/reducers/degList';
 import degGroupsReducer from './store/reducers/degGroups';
+import degResultsReducer from './store/reducers/degResults';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   wineResults: wineResultsReducer,
   wineList: wineListReducer,
   degList: degListReducer,
-  degGroups: degGroupsReducer
+  degGroups: degGroupsReducer,
+  degResults: degResultsReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

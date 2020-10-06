@@ -66,3 +66,7 @@ export {
     deleteGroupsCanceled,
     deleteGroups
 } from './degGroups';
+
+export {
+    fetchDegResults
+} from './degResults';

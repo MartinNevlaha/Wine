@@ -19,8 +19,16 @@ exports.postResult = async(req, res, next) => {
         wineCategory, 
         totalSum, 
         results} = req.body;
+
     try {
+        const wine = await Wine.findOne({id: wineId})
+        if (!wine) {
+            const error = new Error('Nemožem uložiť hodnotenie pre toto číslo vína')
+            error.statusCode = 404;
+            return next(error);
+        }
         const result = new Result({
+            wineDbId: wine._id,
             degId,
             groupId,
             wineId,
@@ -31,12 +39,6 @@ exports.postResult = async(req, res, next) => {
             results
         });
         await result.save();
-        const wine = await Wine.findOne({id: wineId})
-        if (!wine) {
-            const error = new Error('Nemožem uložiť hodnotenie pre toto číslo vína')
-            error.statusCode = 404;
-            return next(error);
-        }
         wine.results.push(result);
         await wine.save();
         degustator.results.push(result);
@@ -81,17 +83,39 @@ exports.getWineInfo = async (req, res, next) => {
 
 exports.getResults = async (req, res, next) => {
     const {degId} = req.userData;
+    const populateQuery = {
+        path: 'results',
+        model: "Result",
+        populate: {
+            path: 'wineDbId',
+            model: 'Wine'
+        }
+    }
     try {
-        const degustator = await Degustator.findById(degId).populate('results');
+        const degustator = await Degustator.findById(degId).populate(populateQuery);
         if (!degustator) {
             const error = new Error('Nemožem načitať udaje pre degustátora');
             error.statusCode = 404;
             return next(error);
         }
+        const updateResults = degustator.results.map(result => {
+            return {
+                _id: result._id,
+                wineInfo: {
+                    wineId: result.wineId,
+                    color: result.wineDbId.color,
+                    character: result.wineDbId.character
+                },
+                eliminated: result.eliminated ? 'Eliminované' : '-',
+                wineCategory: result.wineCategory,
+                totalSum: result.totalSum
+            }
+        })    
+        
         res.status(200).json({
             message: "Výsledky načítané",
-            results: degustator.results,
-            degName: degustator.name + " " + degustator.surname
+            results: updateResults,
+            degName: degustator.name + " " + degustator.surname,
         })
     } catch (error) {
         if(!error.statusCode) {

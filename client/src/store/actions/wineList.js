@@ -61,13 +61,13 @@ export const fetchWineListFailed = (error) => {
 
 export const fetchWineList = (token) => {
     return dispatch => {
+        dispatch(fetchWineListStart());
         axiosInstance.get('admin/wine-list', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         })
             .then(resp => {
-                dispatch(fetchWineListStart());
                 const wineListData = [];
                 for (let key in resp.data.wines) {
                     wineListData.push({
