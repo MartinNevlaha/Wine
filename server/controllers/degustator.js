@@ -124,3 +124,32 @@ exports.getResults = async (req, res, next) => {
         return next(error);
     }
 };
+
+exports.getResult = async (req, res, next) => {
+    const resultId = req.params.resultId;
+    const {degId} = req.userData;
+    try {
+        const result = await Result.findOne({degId: degId, _id: resultId}).populate("wineDbId");
+        if (!result) {
+            const error = new Error('Nemožem načitať udaje pre danné víno');
+            error.statusCode = 404;
+            return next(error);
+        }
+        res.status(200).json({
+            wineInfo: {
+                wineId: result.wineId,
+                color: result.wineDbId.color,
+                character: result.wineDbId.character
+            },
+            message: "Podrobné výsledky načítané",
+            result: result.results,
+            totalSum: result.totalSum,
+            wineCategory: result.wineCategory
+        })
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        return next(error);
+    }
+};

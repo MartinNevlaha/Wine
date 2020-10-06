@@ -21,7 +21,9 @@ class Results extends Component {
             </td>);
         })
         let results = this.props.results.map(result => (
-            <tr key={result._id} id={result._id}>
+            <tr 
+            key={result._id} 
+            id={result._id}>
                 <td>{result.wineInfo.wineId}</td>
                 <td>{result.wineInfo.color}</td>
                 <td>{result.wineInfo.character}</td>

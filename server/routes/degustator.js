@@ -14,6 +14,8 @@ router.get('/wine-list/:wineId', isDegustatorAuth, degustatorControler.getWineIn
 
 router.get('/results', isDegustatorAuth, degustatorControler.getResults);
 
+router.get('/result/:resultId', isDegustatorAuth, degustatorControler.getResult);
+
 router.post('/login', [
     body('name').trim().notEmpty().isString().isLength({ min: 3 }),
     body('password').trim().notEmpty().isLength({ min:4 })

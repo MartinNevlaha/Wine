@@ -12,6 +12,10 @@
 td {
     padding: 10px 15px;
 }
+tr:hover {
+    border: 1px solid white;
+    cursor: pointer;
+}
 tr:nth-child(2n-1) {
     background-color: rgba(26, 24, 24, 0.589);
 }
