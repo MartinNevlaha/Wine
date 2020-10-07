@@ -68,5 +68,7 @@ export {
 } from './degGroups';
 
 export {
-    fetchDegResults
+    fetchDegResults,
+    fetchDegResultById,
+    closeDetailResult
 } from './degResults';

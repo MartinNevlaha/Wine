@@ -9,16 +9,16 @@
     margin-top: 10px; 
     margin-bottom: 20px;
 }
-td {
+.ResultsTable td {
     padding: 10px 15px;
 }
-tr:hover {
+.ResultsTable tr:hover {
     border: 1px solid white;
     cursor: pointer;
 }
-tr:nth-child(2n-1) {
+.ResultsTable tr:nth-child(2n-1) {
     background-color: rgba(26, 24, 24, 0.589);
 }
-span {
+.ResultsTable span {
     padding: 0 3px;
 }

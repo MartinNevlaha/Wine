@@ -41,7 +41,7 @@ class ResumeResults extends Component {
                 <h4>Vaše hodnotenie:</h4>
                 <p>Víno číslo: {this.props.sendData.wineId}</p>
                 <WineGlass />
-                <ResumeTable sendData={this.props.sendData} />
+                <ResumeTable data={this.props.sendData} />
                 <Button clicked={this.props.closeModal}>Upraviť</Button>
                 <Button clicked={this.sendResult}>Odoslať</Button>
             </React.Fragment>

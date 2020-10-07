@@ -129,20 +129,16 @@ exports.getResult = async (req, res, next) => {
     const resultId = req.params.resultId;
     const {degId} = req.userData;
     try {
-        const result = await Result.findOne({degId: degId, _id: resultId}).populate("wineDbId");
+        const result = await Result.findOne({degId: degId, _id: resultId}).populate();
         if (!result) {
             const error = new Error('Nemožem načitať udaje pre danné víno');
             error.statusCode = 404;
             return next(error);
         }
         res.status(200).json({
-            wineInfo: {
-                wineId: result.wineId,
-                color: result.wineDbId.color,
-                character: result.wineDbId.character
-            },
             message: "Podrobné výsledky načítané",
-            result: result.results,
+            results: result.results,
+            eliminated: result.eliminated,
             totalSum: result.totalSum,
             wineCategory: result.wineCategory
         })

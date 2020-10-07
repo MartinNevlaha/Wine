@@ -12,46 +12,46 @@ class ResumeTable extends Component {
             <tr className={classes.GrayBack}>
                 <td rowSpan="2">Vzhlad</td>
                 <td>Čírosť</td>
-                <td>{this.props.sendData.results.lookClarity}</td> 
+                <td>{this.props.data.results.lookClarity}</td> 
             </tr>
             <tr className={classes.GrayBack}>
                 <td>Vzhľad mimo čírosť</td>
-                <td>{this.props.sendData.results.lookOutOfClarity}</td>
+                <td>{this.props.data.results.lookOutOfClarity}</td>
             </tr>
             <tr>
                 <td rowSpan="3">Vôňa</td>
                 <td>Čistota</td>
-                <td>{this.props.sendData.results.smellPurity}</td>
+                <td>{this.props.data.results.smellPurity}</td>
             </tr>
             <tr>
                 <td>Pozitívna intenzita</td>
-                <td>{this.props.sendData.results.smellPossitiveIntesity}</td>
+                <td>{this.props.data.results.smellPossitiveIntesity}</td>
             </tr>
             <tr>
                 <td>Kvalita</td>
-                <td>{this.props.sendData.results.smellQuality}</td>
+                <td>{this.props.data.results.smellQuality}</td>
             </tr>
             <tr className={classes.GrayBack}>
                 <td rowSpan="4">Chuť</td>
                 <td>Čístota</td>
-                <td>{this.props.sendData.results.tastePurity}</td>
+                <td>{this.props.data.results.tastePurity}</td>
             </tr>
             <tr className={classes.GrayBack}>
                 <td>Pozitívna intenzita</td>
-                <td>{this.props.sendData.results.tastePossitiveIntesity}</td>
+                <td>{this.props.data.results.tastePossitiveIntesity}</td>
             </tr>
             <tr className={classes.GrayBack}>
                 <td>Harmonická perzistencia</td>
-                <td>{this.props.sendData.results.tasteHarmonicPersistence}</td>
+                <td>{this.props.data.results.tasteHarmonicPersistence}</td>
             </tr>
             <tr className={classes.GrayBack}>
                 <td>Kvalita</td>
-                <td>{this.props.sendData.results.tasteQuality}</td>
+                <td>{this.props.data.results.tasteQuality}</td>
             </tr>
             <tr>
                 <td></td>
                 <td>Celkový dojem</td>
-                <td>{this.props.sendData.results.generalImpresion}</td>
+                <td>{this.props.data.results.generalImpresion}</td>
             </tr>
         </tbody>
         </table>
@@ -60,17 +60,17 @@ class ResumeTable extends Component {
                 <tr>
                     <td></td>
                     <td>Kategoria vina</td>
-                    <td>{this.props.sendData.wineCategory}</td>
+                    <td>{this.props.data.wineCategory}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Spolu bodov</td>
-                    <td>{this.props.sendData.totalSum}</td>
+                    <td>{this.props.data.totalSum}</td>
                 </tr>
             </tbody>
         </table>
     </React.Fragment>);
-    if (this.props.sendData.eliminated) {
+    if (this.props.data.eliminated) {
         results= <p>Víno ste eliminovali</p>
     }
         return results;

@@ -5,7 +5,6 @@ import { faSort } from '@fortawesome/free-solid-svg-icons'
 import classes from './Results.module.css';
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 
-
 class Results extends Component {
     state = {
         tableHeadNames: ['Číslo vína', 'Farba vína', 'Charakter vína', 'Eliminované', 'Kategória vína', 'Celkový súčet']
@@ -22,6 +21,7 @@ class Results extends Component {
         })
         let results = this.props.results.map(result => (
             <tr 
+            onClick={() => this.props.fetchDetailResult(result._id, this.props.token)}
             key={result._id} 
             id={result._id}>
                 <td>{result.wineInfo.wineId}</td>
