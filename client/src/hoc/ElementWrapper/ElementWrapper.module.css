@@ -106,3 +106,23 @@
     margin: 20px 20px;
     background-color: rgba(173, 121, 129, 0.603);
 }
+.ResulWrapper {
+    width: 80%;
+    height: 70vh;
+    border: 1px solid white;
+    border-radius: 8px;
+    margin: 20px 20px;
+    background-color: rgba(173, 121, 129, 0.603);
+    overflow: scroll;
+}
+.ResulWrapper::-webkit-scrollbar {
+    width: .3rem;
+}
+.ResulWrapper::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.ResulWrapper::-webkit-scrollbar-thumb {
+    background-color: white;
+    outline: 2px solid black;
+    border-radius: 8px;
+}

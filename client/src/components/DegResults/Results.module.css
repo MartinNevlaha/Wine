@@ -9,10 +9,15 @@
     margin-top: 10px; 
     margin-bottom: 20px;
 }
+
 .ResultsTable td {
     padding: 10px 15px;
 }
-.ResultsTable tr:hover {
+
+.ResultsTableBody td {
+    padding: 10px 15px;
+}
+.ResultsTableBody tr:hover {
     border: 1px solid white;
     cursor: pointer;
 }
