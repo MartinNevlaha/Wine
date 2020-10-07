@@ -52,6 +52,11 @@ class AdminLogin extends Component {
         }
         this.props.onAdminLogin(adminData);
     }
+    onEnterPressHandler = (e) => {
+        if (e.key === "Enter") {
+            this.adminLoginHandler();
+        }
+    };
 
     toogleShowPwHandler = () => {
         const typeInput = !this.state.password.isShow ? 'text' : 'password';
@@ -86,6 +91,7 @@ class AdminLogin extends Component {
                 isPwShowed={this.state.password.isShow}
                 tooglePwShow={this.toogleShowPwHandler}
                 change={this.getAdminInputHandler}
+                onKeyPress={this.onEnterPressHandler}
             >{input.labelName}</LoginUserInput>
             );
         })

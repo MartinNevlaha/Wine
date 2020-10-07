@@ -27,7 +27,7 @@ function App(props) {
   })
   let routes = (
     <Switch>
-      <Route path="/about" />
+      <Route path="/author" />
       <Route path="/adminzone" render={()=><Suspense fallback={<Spinner />}><AdminLogin /></Suspense>}/>
       <Route path="/" exact component={EntryLogin} />
       <Redirect to="/" /> 
@@ -36,7 +36,7 @@ function App(props) {
   if (props.isAdminAuth) {
     routes = (
       <Switch>
-        <Route path="/about" />
+        <Route path="/author" />
         <Route path="/results" />
         <Route path="/logout" component={Logout}/>
         <Route path="/edit-deg-group" render={()=><Suspense fallback={<Spinner />}><EditDegGroups /></Suspense>} />
@@ -52,7 +52,7 @@ function App(props) {
   } else if (props.isDegustatorAuth) {
     routes = (
       <Switch>
-        <Route path="/about" />
+        <Route path="/author" />
         <Route path="/logout" component={Logout}/>
         <Route path="/results" render={()=><Suspense fallback={<Spinner/>}><DegResults /></Suspense>}/>
         <Route path="/rating" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />

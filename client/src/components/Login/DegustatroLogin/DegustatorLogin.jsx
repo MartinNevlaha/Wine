@@ -53,6 +53,11 @@ class DegustatorLogin extends Component {
         }
         this.props.onDeglogin(degData);
     };
+    onEnterPressHandler = (e) => {
+        if (e.key === 'Enter') {
+            this.degLoginHandler()
+        }
+    }
     toogleShowPwHandler = () => {
         const typeInput = !this.state.password.isShow ? 'text' : 'password';
         this.setState({
@@ -86,6 +91,7 @@ class DegustatorLogin extends Component {
                 tooglePwShow={this.toogleShowPwHandler}
                 isPwShowed={this.state.password.isShow}
                 change={this.getDegInputHandler}
+                onKeyPress={this.onEnterPressHandler}
             >{input.labelName}</LoginUserInput>
             );
         })
