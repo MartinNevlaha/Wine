@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const adminWineRoutes = require('./routes/adminWine');
 const adminDegRoutes = require('./routes/adminDeg');
@@ -33,6 +34,8 @@ app.use('/admin', adminDegGroupsRoutes);
 app.use('/admin', loginAdminRoutes)
 app.use('/degustator', degustatorRoutes);
 
+app.use(helmet());
+
 //Error handler
 app.use((error, req, res, next) => {
     const status = error.statusCode || 500;
@@ -49,7 +52,7 @@ mongoose.connect(MONGO_DB_URI, {
 })
     .then(() => {
         app.listen(PORT);
-        inicializeAdmin(); // inicialised admin only first time
+        inicializeAdmin(); // inicialised admin, only first time
         console.log(`Connect to DB succes and server listen on ${PORT}`)
 
     })
