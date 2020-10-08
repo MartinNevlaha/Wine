@@ -54,6 +54,7 @@ const fetchWineInfoSucces = (state, action) => {
     })
     return updateObj(state, {
         fetching: false,
+        loading: false,
         wineInfo: wineInfo
     })
 }
