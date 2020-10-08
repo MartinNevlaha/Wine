@@ -54,11 +54,12 @@ class Degustator extends Component {
         })})
     };
     getWineIdHandler = (e) => {
-        if (isIdValid(e.target.value)) {
-            this.props.onWineIdHandler(+e.target.value)
-            this.setState({isWineIdValid: isIdValid(e.target.value)})
-            this.props.onFetchWineInfo(+e.target.value, this.props.token)
+        this.props.onWineIdHandler(e.target.value)
+        this.setState({isWineIdValid: isIdValid(e.target.value)})
+        if (e.target.value) {
+            this.props.onFetchWineInfo(e.target.value, this.props.token)
         }
+        
     };
     generateBtn (btnValues, btnType) {
         return btnValues.map((btn, index) => {
@@ -125,6 +126,7 @@ class Degustator extends Component {
                 totalSum={this.props.results.totalSum}
                 wineCategory = {this.props.results.wineCategory}
                 isWineIdValid={this.state.isWineIdValid}
+                idError={this.props.wineInfo.error}
                 />
             </ElementWrapper>
         );

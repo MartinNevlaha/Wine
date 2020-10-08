@@ -72,7 +72,7 @@ export const fetchWineInfoSucces = (wineInfoData) => {
 
 export const fetchWineInfoFailled = (error) => {
     return {
-        type: actionTypes.FETCH_WINE_LIST_FAIL,
+        type: actionTypes.FETCH_WINE_INFO_FAIL,
         error: error
     }
 }
@@ -90,7 +90,13 @@ export const fetchWineInfo = (wineId, token) => {
                 .then(resp => {
                     dispatch(fetchWineInfoSucces(resp.data.wine))
                 })
-                .catch(error => dispatch(fetchWineInfoFailled(error)))
+                .catch(err => {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchWineInfoFailled(error))
+                })
         }, 1000)
     }
 }

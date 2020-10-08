@@ -9,7 +9,8 @@ const initialState = {
     fetching: false,
     wineInfo: {
         color: null,
-        character: null
+        character: null,
+        error: null
     }
 }
 const resultsSendInit = (state, action) => {
@@ -37,13 +38,19 @@ const resultsSendCanceled = (state, action) => {
 }
 
 const fetchWineInfoStart = (state, action) => {
-    return updateObj(state, {fetching: true})
+    const errorNull = updateObj(state.wineInfo, {error: null})
+    return updateObj(state, {
+        fetching: true,
+        loading: true,
+        wineInfo: errorNull
+    })
 }
 
 const fetchWineInfoSucces = (state, action) => {
-    const wineInfo = updateObj(state.winInfo, {
+    const wineInfo = updateObj(state.wineInfo, {
         color: action.data.color,
-        character: action.data.character
+        character: action.data.character,
+        error: null 
     })
     return updateObj(state, {
         fetching: false,
@@ -52,7 +59,13 @@ const fetchWineInfoSucces = (state, action) => {
 }
 
 const fetchWineInfoFailled = (state, action) => {
-    return updateObj(state, {fetching: false})
+    console.log(action.error)
+    const errorTrue = updateObj(state.wineInfo, {error: action.error})
+    return updateObj(state, {
+        fetching: false, 
+        loading: false,
+        wineInfo: errorTrue
+    })
 }
 const reducer = (state = initialState, action) => {
     switch ( action.type ) {

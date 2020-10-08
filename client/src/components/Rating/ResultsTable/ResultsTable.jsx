@@ -45,11 +45,11 @@ class ResultsTable extends Component {
             <DegComment getComment={this.getCommentHandler}/>
             <ResultsValidator 
             isRatingValid={isRatingValid(this.props.results, this.props.eliminated)}
-            isWineIdValid={this.props.isWineIdValid}
+            isWineIdValid={this.props.isWineIdValid && !this.props.idError}
             />
             <Button 
             clicked = {this.submitComment}
-            disabled={!this.props.isWineIdValid || !isRatingValid(this.props.results, this.props.eliminated)}>Odoslať</Button>
+            disabled={!(this.props.isWineIdValid && !this.props.idError) || !isRatingValid(this.props.results, this.props.eliminated)}>Odoslať</Button>
         </div>
         );
     }    
