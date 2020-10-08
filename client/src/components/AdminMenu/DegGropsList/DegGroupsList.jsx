@@ -12,7 +12,7 @@ const degustatorGroup = (props) => (
         <FontAwesomeIcon icon={faUsers} size="5x"/>
         <div className={classes.BtnContainer}>
             <Button clicked={props.clicked}>Uprav skupiny</Button>
-            <Button>Zobraz skupiny</Button>
+            <Button clicked={props.clicked}>Zobraz skupiny</Button>
         </div>
     </ElementWrapper>
 );

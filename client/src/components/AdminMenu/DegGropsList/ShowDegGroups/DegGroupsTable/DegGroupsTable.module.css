@@ -1,0 +1,11 @@
+.GroupsContainer {
+    margin: 0 auto;
+    margin-top: 0.725rem;
+    width: 90%;
+    background-color: rgba(128, 128, 128, 0.336);
+    border: 1px solid white;
+    border-radius: 8px;
+    -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.83);
+    -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.83);
+    box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.83);
+}

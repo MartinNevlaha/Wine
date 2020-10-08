@@ -18,6 +18,7 @@ const ShowWineList = React.lazy(()=> import('./components/AdminMenu/WineList/Sho
 const EditDegustator = React.lazy(()=> import('./containers/EditDegustator/EditDegustator'));
 const ShowDegList = React.lazy(()=>import('./components/AdminMenu/DegustatorList/ShowDegList/ShowDegList'));
 const EditDegGroups = React.lazy(()=> import('./containers/EditDegGroups/EditDegGroups'));
+const ShowDegGroups = React.lazy(()=> import('./components/AdminMenu/DegGropsList/ShowDegGroups/ShowDegGroups'));
 const DegResults = React.lazy(()=> import('./containers/DegResults/DegResults'));
 
 function App(props) {
@@ -39,6 +40,7 @@ function App(props) {
         <Route path="/author" />
         <Route path="/results" />
         <Route path="/logout" component={Logout}/>
+        <Route path="/deg-groups" render={()=><Suspense fallback={<Spinner />}><ShowDegGroups /></Suspense>} />
         <Route path="/edit-deg-group" render={()=><Suspense fallback={<Spinner />}><EditDegGroups /></Suspense>} />
         <Route path="/deglist" render={()=><Suspense fallback={<Spinner />}><ShowDegList /></Suspense>} />
         <Route path="/edit-degustator" render={()=><Suspense fallback={<Spinner />}><EditDegustator /></Suspense>} />
@@ -56,7 +58,7 @@ function App(props) {
         <Route path="/logout" component={Logout}/>
         <Route path="/results" render={()=><Suspense fallback={<Spinner/>}><DegResults /></Suspense>}/>
         <Route path="/rating" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />
-        <Route path="/" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />
+        <Route path="/" exact render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />
         <Redirect to="/" />
       </Switch>
     );

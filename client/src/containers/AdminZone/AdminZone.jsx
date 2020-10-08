@@ -21,7 +21,9 @@ class AdminZone extends Component {
             this.props.history.push('/deglist')
         } else if (adminChoose === 'Uprav skupiny') {
             this.props.history.push('/edit-deg-group')
-        } 
+        } else if (adminChoose === 'Zobraz skupiny') {
+            this.props.history.push('/deg-groups')
+        }
     }
 
     render() {

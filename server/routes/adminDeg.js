@@ -8,16 +8,16 @@ router.get('/degustator-list', isAdminAuth, adminDegConroller.getAllDeg);
 
 router.post('/degustator-list', isAdminAuth, [
     body('id').trim().not().isEmpty().isNumeric().isLength({ max: 3 }),
-    body('name').trim().trim().not().isEmpty().isString(),
-    body('surname').trim().trim().not().isEmpty().isString()
+    body('name').trim().not().isEmpty().isString(),
+    body('surname').trim().not().isEmpty().isString()
 ], adminDegConroller.createDeg);
 
 router.delete('/degustator-list', isAdminAuth, adminDegConroller.deleteAllDegustators);
 
 router.put('/degustator-list/:degId', isAdminAuth, [
     body('id').trim().not().isEmpty().isNumeric().isLength({ max: 3 }),
-    body('name').trim().trim().not().isEmpty().isString(),
-    body('surname').trim().trim().not().isEmpty().isString()
+    body('name').trim().not().isEmpty().isString(),
+    body('surname').trim().not().isEmpty().isString()
 ], adminDegConroller.editDegustator);
 
 router.delete('/degustator-list/:degId', isAdminAuth, adminDegConroller.deleteDeg);
@@ -25,8 +25,8 @@ router.delete('/degustator-list/:degId', isAdminAuth, adminDegConroller.deleteDe
 router.post('/degustator-list/import', isAdminAuth, [
     body().isArray(),
     body('*.id').trim().not().isEmpty().isNumeric().isLength({ max: 3 }),
-    body('*.name').trim().trim().not().isEmpty().isString(),
-    body('*.surname').trim().trim().not().isEmpty().isString()
+    body('*.name').trim().not().isEmpty().isString(),
+    body('*.surname').trim().not().isEmpty().isString()
 ], adminDegConroller.importDegs);
 
 module.exports = router;
