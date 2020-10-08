@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
 import DegGroupsTable from './DegGroupsTable/DegGroupsTable';
+import Back from '../../../UI/Back/Back';
 import * as action from '../../../../store/actions/index';
 
 class ShowDegGroups extends Component {
@@ -15,6 +16,7 @@ class ShowDegGroups extends Component {
         <DegGroupsTable key={index} group={gr}/>)
         return (
             <ElementWrapper wrapperType="ElementWrapper">
+                <Back />
                 <ElementWrapper wrapperType="FullWidthWrapper">
                     <h4>Skupiny degustátorov</h4>
                     {groups}
