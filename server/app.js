@@ -5,8 +5,10 @@ const helmet = require('helmet');
 const adminWineRoutes = require('./routes/adminWine');
 const adminDegRoutes = require('./routes/adminDeg');
 const adminDegGroupsRoutes = require('./routes/adminDegGroups');
+const adminOsInfoRoutes = require('./routes/adminOsInfo');
 const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
+
 
 const inicializeAdmin = require('./utils/initializeAdmin');
 
@@ -31,6 +33,7 @@ app.use((req, res, next) => {
 app.use('/admin', adminWineRoutes);
 app.use('/admin', adminDegRoutes);
 app.use('/admin', adminDegGroupsRoutes);
+app.use('/admin', adminOsInfoRoutes);
 app.use('/admin', loginAdminRoutes)
 app.use('/degustator', degustatorRoutes);
 
