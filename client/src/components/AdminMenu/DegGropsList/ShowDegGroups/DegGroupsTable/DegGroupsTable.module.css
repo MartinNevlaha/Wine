@@ -1,11 +1,35 @@
 .GroupsContainer {
     margin: 0 auto;
-    margin-top: 0.725rem;
+    margin-top: 1.5rem;
     width: 90%;
-    background-color: rgba(128, 128, 128, 0.336);
+    background-color: rgba(22, 22, 22, 0.336);
     border: 1px solid white;
     border-radius: 8px;
     -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.83);
     -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.83);
     box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.83);
+}
+
+.GroupsTable {
+    width: 90%;
+    text-align: center;
+    color: white;
+    background-color: rgb(87, 20, 20);
+    border-collapse: collapse;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.GroupsTable thead {
+    border-bottom: 1px solid white;
+}
+.GroupsTable td {
+    padding: 10px 15px;
+}
+.GroupsTable tr:nth-child(2n-1) {
+    background-color: rgba(26, 24, 24, 0.589);
+}
+.GroupsTable span {
+    padding: 0 3px;
 }

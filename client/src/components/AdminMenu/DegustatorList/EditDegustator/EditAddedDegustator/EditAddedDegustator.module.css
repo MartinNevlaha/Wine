@@ -9,16 +9,18 @@
     margin-top: 10px; 
     margin-bottom: 20px;
 }
-
-td {
+.EditAddedDegustator thead {
+    border-bottom: 1px solid white;
+}
+.EditAddedDegustator td {
     padding: 10px 15px;
 }
-span {
+.EditAddedDegustator span {
     padding: 0 3px;
 }
-tr:nth-child(2n-1) {
+.EditAddedDegustator tr:nth-child(2n-1) {
     background-color: rgba(26, 24, 24, 0.589);
 }
-input {
+.EditAddedDegustator input {
     width: 100%;
 }

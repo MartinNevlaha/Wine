@@ -9,12 +9,15 @@
     margin-top: 10px; 
     margin-bottom: 20px;
 }
-td {
+.ShowWineTable td {
     padding: 10px 15px;
 }
-tr:nth-child(2n-1) {
+.ShowWineTable thead {
+    border-bottom: 1px solid white;
+}
+.ShowWineTable tr:nth-child(2n-1) {
     background-color: rgba(26, 24, 24, 0.589);
 }
-span {
+.ShowWineTable span {
     padding: 0 3px;
 }

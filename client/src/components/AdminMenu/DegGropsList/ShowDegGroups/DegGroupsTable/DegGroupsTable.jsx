@@ -15,10 +15,10 @@ const DegGroupsTable = props => {
     return (
     <div className={classes.GroupsContainer}>
         <h4>Skupina {props.group.groupName}</h4>
-        <table>
+        <table className={classes.GroupsTable}>
             <thead>
                 <tr>
-                    <td>Id</td>
+                    <td>Id degustátora</td>
                     <td>Meno</td>
                     <td>Priezvysko</td>
                 </tr>
