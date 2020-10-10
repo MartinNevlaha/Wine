@@ -1,11 +1,17 @@
 import React from 'react';
 
-import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
+import classes from './ViewSystemInfo.module.css';
 
 const ViewSystemInfo = props => {
     return (
-        <div>
-            ViewSystemInfo
+        <div className={classes.SystemInfo}>
+            <h4>Informácie o systéme (server)</h4>
+            <ul>
+                <li>Operačný systém: {props.systemData.opSystem}</li>
+                <li>Cpu: {props.systemData.cpuInfo}</li>
+                <li>Celková pamäť: {props.systemData.totalRAM}/MB</li>
+                <li>Voľná pamäť: {props.systemData.freeRAM}/MB</li>
+            </ul>
         </div>
     );
 }

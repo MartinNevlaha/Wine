@@ -72,3 +72,7 @@ export {
     fetchDegResultById,
     closeDetailResult
 } from './degResults';
+
+export {
+    fetchSystemInfo
+} from './SystemInfo';
