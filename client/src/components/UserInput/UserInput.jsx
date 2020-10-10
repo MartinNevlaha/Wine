@@ -15,7 +15,7 @@ class UserInput extends Component {
                 placeholder={this.props.placeholder} 
                 onChange={(e) => this.props.change(e, this.props.id)}
                 value={this.props.value || ''}
-                onKeyPress={(e) => this.props.onKeyPress(e)}
+                onKeyPress={this.props.id ==='password' ? (e) => this.props.onKeyPress(e): null}
                 />
                 {this.props.id === 'password' &&
                 <FontAwesomeIcon 

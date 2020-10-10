@@ -39,7 +39,7 @@ exports.getOsInfo = async (req, res, next) => {
         res.status(200).json({
             message: "Systémové informácie načítané",
             infoData: systemInfo,
-            dbInfo: {
+            dbData: {
                 numOfWine: totalNumberOfWine,
                 numOfDeg: totalNumberOfDeg,
                 numOfGroups: totalNumberOfGroups,

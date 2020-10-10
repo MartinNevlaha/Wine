@@ -7,10 +7,11 @@ export const fetchSystemInfoStart = () => {
     }
 }
 
-export const fetchSystemInfoSuccess = (sysInfoData) => {
+export const fetchSystemInfoSuccess = (sysInfoData, dbData) => {
     return {
         type: actionTypes.FETCH_SYSTEM_INFO_SUCCESS,
-        sysInfoData
+        sysInfoData,
+        dbData
     }
 }
 
@@ -29,7 +30,37 @@ export const fetchSystemInfo = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(resp => dispatch(fetchSystemInfoSuccess(resp.data.infoData)))
+            .then(resp => dispatch(fetchSystemInfoSuccess(resp.data.infoData, resp.data.dbData)))
             .catch(err => dispatch(fetchSystemInfoFailled(err)))
     }
 }   
+
+export const completeResetDbStart = () => {
+    return {
+        type: actionTypes.COM_RESET_DB_START
+    }
+}
+export const completeResetDbSuccess = () => {
+    return {
+        type: actionTypes.COM_RESET_DB_SUCCESS
+    }
+}
+export const completeResetDbFailled = (error) => {
+    return {
+        type: actionTypes.COM_RESET_DB_FAIL,
+        error: error
+    }
+}
+
+export const completeResetDb = (token) => {
+    return dispatch => {
+        dispatch(completeResetDbStart());
+        axiosInstance.delete('/admin/reset-db', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(completeResetDbSuccess()))
+        .catch(err => dispatch(completeResetDbFailled(err)))
+    }
+}

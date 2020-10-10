@@ -4,7 +4,8 @@ import { updateObj } from '../../shared/utility';
 const initialState = {
     infoData: {},
     loading: false,
-    error: null
+    error: null,
+    dbData: {}
 }
 const fetchSystemInfoStart = (state, action) => {
     return updateObj(state, {
@@ -16,7 +17,8 @@ const fetchSystemInfoSuccess = (state, action) => {
     return updateObj(state, {
         loading: false,
         error: null,
-        infoData: action.sysInfoData
+        infoData: action.sysInfoData,
+        dbData: action.dbData
     })
 }
 const fetchSystemInfoFailled = (state, action) => {
@@ -25,6 +27,26 @@ const fetchSystemInfoFailled = (state, action) => {
         error: action.error
     })
 }
+const completeResetDbStart = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null
+    })
+}
+const completeResetDbSuccess = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null,
+        dbData: {}
+    })
+}
+const completeResetDbFail = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_SYSTEM_INFO_START:
@@ -33,6 +55,12 @@ const reducer = (state = initialState, action) => {
             return fetchSystemInfoSuccess(state, action)
         case actionTypes.FETCH_SYSTEM_INFO_FAIL:
             return fetchSystemInfoFailled(state, action)
+        case actionTypes.COM_RESET_DB_START:
+            return completeResetDbStart(state, action);
+        case actionTypes.COM_RESET_DB_SUCCESS:
+            return completeResetDbSuccess(state, action);
+        case actionTypes.COM_RESET_DB_FAIL:
+            return completeResetDbFail(state, action);
         default:
             return state;
     }
