@@ -1,5 +1,10 @@
 const si = require('systeminformation');
 
+const Wine = require('../models/wine');
+const Degustator = require('../models/degustator');
+const Result = require('../models/result');
+const Group = require('../models/degGroup');
+
 exports.getOsInfo = async (req, res, next) => {
     try {   
         const cpu = await si.cpu();
@@ -11,9 +16,35 @@ exports.getOsInfo = async (req, res, next) => {
             totalRAM: (+memory.total/1000000).toFixed(0),
             freeRAM: (+memory.free/1000000).toFixed(0)
         }
+        const totalNumberOfWine = await Wine.countDocuments({});
+        if (!totalNumberOfWine) {
+            const error = new Error('Nemožem načitať údaje vín')
+            error.statusCode = 404;
+        }
+        const totalNumberOfDeg = await Degustator.countDocuments({});
+        if (!totalNumberOfWine) {
+            const error = new Error('Nemožem načitať údaje degustátorov')
+            error.statusCode = 404;
+        }
+        const totalNumberOfGroups = await Group.countDocuments({});
+        if (!totalNumberOfWine) {
+            const error = new Error('Nemožem načitať údaje skupín degustátorov')
+            error.statusCode = 404;
+        }
+        const totalNumberOfResults = await Result.countDocuments({});
+        if (!totalNumberOfWine) {
+            const error = new Error('Nemožem načitať údaje výsledkov')
+            error.statusCode = 404;
+        }
         res.status(200).json({
             message: "Systémové informácie načítané",
-            infoData: systemInfo
+            infoData: systemInfo,
+            dbInfo: {
+                numOfWine: totalNumberOfWine,
+                numOfDeg: totalNumberOfDeg,
+                numOfGroups: totalNumberOfGroups,
+                numOfResults: totalNumberOfResults
+            }
         })
     } catch (error) {
         if(!error.statusCode) {
