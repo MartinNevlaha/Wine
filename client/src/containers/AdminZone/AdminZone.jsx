@@ -6,7 +6,7 @@ import WineList from '../../components/AdminMenu/WineList/WineList';
 import DegustatorList from '../../components/AdminMenu/DegustatorList/DegustatorList';
 import DegustatorGroup from '../../components/AdminMenu/DegGropsList/DegGroupsList';
 import WineResults from '../../components/AdminMenu/WineResults/WineResults';
-import DatabaseMenu from '../../components/AdminMenu/DatabaseMenu/DatabaseMenu';
+import SystemMenu from '../../components/AdminMenu/SystemMenu/SystemMenu';
 
 class AdminZone extends Component {
     
@@ -23,6 +23,8 @@ class AdminZone extends Component {
             this.props.history.push('/edit-deg-group')
         } else if (adminChoose === 'Zobraz skupiny') {
             this.props.history.push('/deg-groups')
+        } else if (adminChoose ==="Zobraz Systémové info") {
+            this.props.history.push('/system-info')
         }
     }
 
@@ -33,7 +35,7 @@ class AdminZone extends Component {
                 <DegustatorList clicked={this.clickHandler}/>
                 <DegustatorGroup clicked={this.clickHandler}/>
                 <WineResults />
-                <DatabaseMenu />
+                <SystemMenu clicked={this.clickHandler}/>
             </ElementWrapper>
             );
     }
