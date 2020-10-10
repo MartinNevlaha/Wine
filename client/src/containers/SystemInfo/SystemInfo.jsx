@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import ViewSystemInfo from '../../components/AdminMenu/SystemMenu/ViewSystemInfo/ViewSystemInfo';
 import * as action from '../../store/actions/index';
+import Back from '../../components/UI/Back/Back';
 
 class SystemInfo extends Component {
     componentDidMount() {
@@ -13,7 +14,8 @@ class SystemInfo extends Component {
     render() {
         console.log(this.props.systemInfo.infoData)
         return (
-            <ElementWrapper>
+            <ElementWrapper wrapperType="ElementWrapper">
+                <Back />
                 <ViewSystemInfo systemData={this.props.systemInfo.infoData}/>
             </ElementWrapper>
         )
