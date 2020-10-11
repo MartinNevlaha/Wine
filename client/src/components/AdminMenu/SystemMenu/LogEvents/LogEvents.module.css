@@ -1,0 +1,15 @@
+.LogEvents {
+    margin-top: 20px;
+    width: 85%;
+    height: 50vh;
+    background-color: black;
+    color: green;
+    text-align: left;
+    padding: 5px 15px;
+    border-radius: 8px;
+    border: 1px solid white;
+    overflow: hidden;
+}
+.LogEvents h4 {
+    text-align: center;
+}

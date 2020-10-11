@@ -6,6 +6,7 @@ import ViewSystemInfo from '../../components/AdminMenu/SystemMenu/ViewSystemInfo
 import * as action from '../../store/actions/index';
 import Back from '../../components/UI/Back/Back';
 import DbInfo from '../../components/AdminMenu/SystemMenu/DbInfo/DbInfo';
+import LogEvents from '../../components/AdminMenu/SystemMenu/LogEvents/LogEvents';
 import DeleteDesision from '../../components/AdminMenu/DeleteDesision/DeleteDesision';
 
 class SystemInfo extends Component {
@@ -44,6 +45,7 @@ class SystemInfo extends Component {
                 <Back />
                 <ViewSystemInfo systemData={this.props.systemInfo.infoData}/>
                 <DbInfo dbData={this.props.systemInfo.dbData} modalOpen={this.modalOpen}/>
+                <LogEvents />
             </ElementWrapper>
         )
     }

@@ -18,7 +18,7 @@ const postLogStream = rfs.createStream('postResults.log', {
 })
 
 const accessLogStream = rfs.createStream('access.log', {
-    interval: '1d',
+    interval: '31d',
     path: path.join(__dirname, 'logs')
 })
 
