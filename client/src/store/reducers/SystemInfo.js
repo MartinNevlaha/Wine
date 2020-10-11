@@ -35,7 +35,7 @@ const completeResetDbStart = (state, action) => {
 }
 const completeResetDbSuccess = (state, action) => {
     return updateObj(state, {
-        loading: true,
+        loading: false,
         error: null,
         dbData: {}
     })

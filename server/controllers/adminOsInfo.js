@@ -53,3 +53,20 @@ exports.getOsInfo = async (req, res, next) => {
             return next(error);
     }
 };
+
+exports.resetDb = async (req, res, next) => {
+    try {
+        await Wine.deleteMany({});
+        await Degustator.deleteMany({});
+        await Group.deleteMany({});
+        await Result.deleteMany({});
+        res.status(200).json({
+            message: "Databaza kompletne vymazaná"
+        })
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+            }
+            return next(error);
+    }
+}

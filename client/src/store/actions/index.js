@@ -74,5 +74,6 @@ export {
 } from './degResults';
 
 export {
-    fetchSystemInfo
+    fetchSystemInfo,
+    completeResetDb
 } from './SystemInfo';

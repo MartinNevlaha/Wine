@@ -11,29 +11,25 @@ import DeleteDesision from '../../components/AdminMenu/DeleteDesision/DeleteDesi
 class SystemInfo extends Component {
     state = {
         isModalShow: false,
-        adminChoose: null
     }
     componentDidMount() {
         this.props.onFetchSystemInfo(this.props.token)
     }
-    modalOpen = (adminChoose) => {
+    modalOpen = () => {
         this.setState({
             isModalShow: true,
-            adminChoose: adminChoose
         })
     }
     modalClose = () => {
         this.setState({
             isModalShow: false,
-            adminChoose: null
         })
     }
     submitHandler = () => {
-        
         this.setState({
             isModalShow: false,
-            adminChoose: null
         })
+        this.props.onResetDb(this.props.token)
     }
 
     render() {
@@ -61,6 +57,7 @@ const mapStateTopProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchSystemInfo: (token) => dispatch(action.fetchSystemInfo(token)),
+        onResetDb: (token) => dispatch(action.completeResetDb(token))
     }
 }
 

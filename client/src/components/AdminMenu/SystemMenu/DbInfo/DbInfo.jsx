@@ -8,9 +8,9 @@ const DbInfo = props => {
         <div className={classes.DbInfo}>
             <h4>Informácie o databáze</h4>
             <ul>
-                <li>Počet vín v DB: {props.dbData.numOfWine}</li>
-                <li>Počet degustatorov v DB: {props.dbData.numOfDeg}</li>
-                <li>Počet skupín degustatorov v DB: {props.dbData.numOfGroups}</li>
+                <li>Počet vín v DB: {props.dbData.numOfWine || "0"}</li>
+                <li>Počet degustatorov v DB: {props.dbData.numOfDeg || "0"}</li>
+                <li>Počet skupín degustatorov v DB: {props.dbData.numOfGroups || "0"}</li>
                 <li>Počet výsledkov v DB: {props.dbData.numOfResults}</li>
             </ul>
             <Button clicked={props.modalOpen}>RESET DB</Button>

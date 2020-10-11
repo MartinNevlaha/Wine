@@ -40,7 +40,7 @@ export const completeResetDbStart = () => {
         type: actionTypes.COM_RESET_DB_START
     }
 }
-export const completeResetDbSuccess = () => {
+export const completeDbResetSuccess = () => {
     return {
         type: actionTypes.COM_RESET_DB_SUCCESS
     }
@@ -60,7 +60,7 @@ export const completeResetDb = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(completeResetDbSuccess()))
+        .then(resp => dispatch(completeDbResetSuccess()))
         .catch(err => dispatch(completeResetDbFailled(err)))
     }
 }
