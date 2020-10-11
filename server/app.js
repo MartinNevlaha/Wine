@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
+const morgan = require('morgan');
+const path = require('path');
+const rfs = require('rotating-file-stream');
 
 const adminWineRoutes = require('./routes/adminWine');
 const adminDegRoutes = require('./routes/adminDeg');
@@ -9,9 +12,17 @@ const adminOsInfoRoutes = require('./routes/adminOsInfo');
 const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
 
+const postLogStream = rfs.createStream('postResults.log', {
+    interval: '1d',
+    path: path.join(__dirname, 'logs')
+})
+
+const accessLogStream = rfs.createStream('access.log', {
+    interval: '1d',
+    path: path.join(__dirname, 'logs')
+})
 
 const inicializeAdmin = require('./utils/initializeAdmin');
-
 
 //ENV Variables
 const MONGO_DB_URI = 'mongodb://127.0.0.1:27017/wine';
@@ -29,6 +40,18 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(helmet());
+app.use(morgan('combined', {
+    stream: postLogStream,
+    skip: function(req, res) {
+        return !(req.originalUrl === '/degustator/results' && req.method === "POST");
+    }
+}));
+app.use(morgan('combined', {
+    stream: accessLogStream
+}));
+
+
 //routes
 app.use('/admin', adminWineRoutes);
 app.use('/admin', adminDegRoutes);
@@ -37,7 +60,7 @@ app.use('/admin', adminOsInfoRoutes);
 app.use('/admin', loginAdminRoutes)
 app.use('/degustator', degustatorRoutes);
 
-app.use(helmet());
+
 
 //Error handler
 app.use((error, req, res, next) => {

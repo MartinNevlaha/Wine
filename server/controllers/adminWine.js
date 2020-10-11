@@ -138,7 +138,6 @@ exports.importWines = async (req, res, next) => {
             error.statusCode = 500;
             return next(error);
         }
-        console.log(wines)
         res.status(201).json({
             message: "Import vín uspešný",
             wines: wines
