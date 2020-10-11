@@ -225,7 +225,6 @@ export const databaseImportFailed = (error) => {
 
 export const databaseImport = (wineData, token) => {
     return dispatch => {
-        dispatch(databaseDelete(token));
         dispatch(databaseImportStart());
         axiosInstance.post('admin/wine-list/import', wineData, {
             headers: {

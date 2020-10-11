@@ -126,6 +126,12 @@ exports.importWines = async (req, res, next) => {
     }
     const importedData = req.body;
     try {
+        const deleted = await Wine.deleteMany({});
+        if (!deleted) {
+            const error = new Error('Nepodarilo sa vymazať databazu vín pred importom')
+            error.statusCode = 500;
+            return next(error);
+        }
         const wines = await Wine.insertMany(importedData);
         if (!wines) {
             const error = new Error("Nepodarilo sa importovat danné údaje");

@@ -109,7 +109,6 @@ export const databaseDegImportFailled = (error) => {
 };
 export const databaseDegImport = (degData, token) => {
     return dispatch => {
-        dispatch(databaseDegDelete(token));
         dispatch(databaseDegImportStart());
         axiosInstance.post('admin/degustator-list/import', degData, {
             headers: {
@@ -117,7 +116,6 @@ export const databaseDegImport = (degData, token) => {
             }
         })
             .then(resp => {
-                console.log(resp.data.degustators)
                 dispatch(databaseDegImportSucces(resp.data.degustators))
             })
             .catch(error => dispatch(databaseDegImportFailled(error)))
@@ -211,7 +209,6 @@ export const saveEditDeg = (_id, index, editedDegData, token) => {
             }
         })
             .then(resp => {
-                console.log(resp.data)
                 editedDegData._id = _id;
                 dispatch(saveEditDegSucces(editedDegData, index));
             })

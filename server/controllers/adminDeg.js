@@ -87,14 +87,12 @@ exports.editDegustator = async (req, res, next) => {
             return next(error);
         }
         const password = generatePassword(surname, id);
-        console.log(password)
         const updatedPw = await bcrypt.hash(password, 12);
         deg.id = id;
         deg.name = name;
         deg.surname = surname;
         deg.password = updatedPw;
         const updatedDeg = await deg.save();
-        console.log(updatedDeg);
         res.status(200).json({
             message: "Degustátor bol aktualizovaný",
             _id: updatedDeg._id
@@ -160,6 +158,12 @@ exports.importDegs = async (req, res, next) => {
         }
     }))
     try {
+        const deleted = await Degustator.deleteMany({});
+        if (!deleted) {
+            const error = new Error('Nepodarilo sa vymazať databázu degustátorov pred importom');
+            error.statusCode = 500;
+            return next(error);
+        }
         const degs = await Degustator.insertMany(importedData);
         if (!degs) {
             const error = new Error("Nepodarilo sa importovať danné údaje");
