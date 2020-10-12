@@ -1,7 +1,6 @@
 const si = require('systeminformation');
 const fs = require('fs');
-const path = require('path');
-
+path = require('path');
 
 const Wine = require('../models/wine');
 const Degustator = require('../models/degustator');
@@ -72,5 +71,11 @@ exports.resetDb = async (req, res, next) => {
             }
             return next(error);
     }
+}
+
+exports.downloadLogs = (req, res, next) => {
+    const logsFile = path.join(__dirname, '../', 'logs/postResults.log')
+    console.log(logsFile)
+    res.status(200).download(logsFile);
 }
 
