@@ -77,10 +77,13 @@ mongoose.connect(MONGO_DB_URI, {
     useCreateIndex: true
 })
     .then(() => {
-        app.listen(PORT);
+        const server = app.listen(PORT);
         inicializeAdmin(); // inicialised admin, only first time
+        const io = require('./socket').init(server);
+        io.on('connect', socket => {
+            console.log('Socket.io: client connected');
+        })
         console.log(`Connect to DB succes and server listen on ${PORT}`)
-
     })
     .catch(err => {
         console.log('Connect to DB failled', err)

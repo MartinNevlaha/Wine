@@ -1,3 +1,6 @@
+const timestamp = require('time-stamp');
+const io = require('../socket');
+
 const Result = require('../models/result');
 const Wine = require('../models/wine');
 const Degustator = require('../models/degustator');
@@ -51,6 +54,17 @@ exports.postResult = async(req, res, next) => {
         }
         group.results.push(result);
         await group.save();
+        io.getIO().emit('post-log', { action: 'create', 
+            log: {
+                time: timestamp('YYYY/MM/DD/HH:mm:ss'),
+                group: group.groupName,
+                degId: degustator.id,
+                wine: wineId,
+                eliminated: eliminated ? "Áno" : 'Nie',
+                wineCategory: wineCategory || 'eliminované',
+                totalSum: totalSum || 'eliminované'
+            }
+        })
         res.status(201).json({message: 'Hodnotenie poslané'})
     } catch (error) {
         if(!error.statusCode) {
