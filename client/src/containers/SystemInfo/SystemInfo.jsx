@@ -45,7 +45,7 @@ class SystemInfo extends Component {
                 <Back />
                 <ViewSystemInfo systemData={this.props.systemInfo.infoData}/>
                 <DbInfo dbData={this.props.systemInfo.dbData} modalOpen={this.modalOpen}/>
-                <LogEvents />
+                <LogEvents token={this.props.token}/>
             </ElementWrapper>
         )
     }

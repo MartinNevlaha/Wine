@@ -75,7 +75,12 @@ exports.resetDb = async (req, res, next) => {
 
 exports.downloadLogs = (req, res, next) => {
     const logsFile = path.join(__dirname, '../', 'logs/postResults.log')
-    console.log(logsFile)
-    res.status(200).download(logsFile);
+    res.status(200).download(logsFile, function (err){
+        if (err) {
+            const error = new Error('Súbor sa nedá stiahnuť')
+            error.statusCode = 404;
+            return next(error)
+        }
+    });
 }
 

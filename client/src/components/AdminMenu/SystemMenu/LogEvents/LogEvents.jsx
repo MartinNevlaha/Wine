@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 
+import DownloadLog from './DownloadLog/DownloadLog';
 import classes from './LogEvents.module.css';
 
 class LogEvents extends Component {
@@ -27,9 +28,12 @@ class LogEvents extends Component {
         víno: ${log.wine}, eliminované: ${log.eliminated}, kategoria vína: ${log.wineCategory}, 
         hodnotenie: ${log.totalSum}`}</p>)
         return (
-            <div className={classes.LogEvents}>
-                <h4>POST logs from server</h4>
-                {logs}
+            <div className={classes.LogContainer}>
+                <div className={classes.Logs}>
+                    <h4>POST logs from server</h4>
+                    {logs}
+                </div>
+                <DownloadLog token={this.props.token} />
             </div>
         )
     }
