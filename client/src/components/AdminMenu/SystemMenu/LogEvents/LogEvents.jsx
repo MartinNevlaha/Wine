@@ -29,8 +29,8 @@ class LogEvents extends Component {
         hodnotenie: ${log.totalSum}`}</p>)
         return (
             <div className={classes.LogContainer}>
+                <h4>POST logs from server</h4>
                 <div className={classes.Logs}>
-                    <h4>POST logs from server</h4>
                     {logs}
                 </div>
                 <DownloadLog token={this.props.token} />

@@ -14,7 +14,7 @@ const DownloadLog = props => {
     }
     return (
             <Button clicked={downloadFile}>
-                Stiahnuť log
+                Stiahnuť kompletný log
             </Button>
         )
 }

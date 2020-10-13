@@ -1,11 +1,17 @@
 const timestamp = require('time-stamp');
 const io = require('../socket');
 const path = require('path');
+const fs = require('fs');
 
 const Result = require('../models/result');
 const Wine = require('../models/wine');
 const Degustator = require('../models/degustator');
 const Group = require('../models/degGroup');
+
+const logFile = path.join(__dirname, '../', 'logs/post_log.log')
+const logger = fs.createWriteStream(logFile, {
+    flags: "a"
+});
 
 exports.postResult = async(req, res, next) => {
     const {degId} = req.userData;
@@ -55,8 +61,7 @@ exports.postResult = async(req, res, next) => {
         }
         group.results.push(result);
         await group.save();
-        io.getIO().emit('post-log', { action: 'create', 
-            log: {
+        const log = {
                 time: timestamp('YYYY/MM/DD/HH:mm:ss'),
                 group: group.groupName,
                 degId: degustator.id,
@@ -64,8 +69,11 @@ exports.postResult = async(req, res, next) => {
                 eliminated: eliminated ? "Áno" : 'Nie',
                 wineCategory: wineCategory || 'eliminované',
                 totalSum: totalSum || 'eliminované'
-            }
+        }
+        io.getIO().emit('post-log', { action: 'create', 
+            log: log
         })
+        logger.write(`${log.time} skupina: ${log.group} degustátor: ${log.degId} víno: ${log.wine} eliminované: ${log.eliminated} kategoria vína: ${log.wineCategory} hodnotenie: ${log.totalSum} \n`);
         res.status(201).json({message: 'Hodnotenie poslané'})
     } catch (error) {
         if(!error.statusCode) {

@@ -12,11 +12,6 @@ const adminOsInfoRoutes = require('./routes/adminOsInfo');
 const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
 
-const postLogStream = rfs.createStream('postResults.log', {
-    interval: '1d',
-    path: path.join(__dirname, 'logs')
-})
-
 const accessLogStream = rfs.createStream('access.log', {
     interval: '31d',
     path: path.join(__dirname, 'logs')
@@ -41,12 +36,6 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet());
-app.use(morgan('combined', {
-    stream: postLogStream,
-    skip: function(req, res) {
-        return !(req.originalUrl === '/degustator/results' && req.method === "POST");
-    }
-}));
 app.use(morgan('combined', {
     stream: accessLogStream
 }));

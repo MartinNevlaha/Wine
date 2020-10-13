@@ -8,7 +8,7 @@
     padding: 5px 15px;
     border-radius: 8px;
     border: 1px solid white;
-    overflow: hidden;
+    
 }
 .LogContainer h4 {
     text-align: center;
@@ -16,5 +16,17 @@
 .Logs {
     text-align: left;
     width: 100%;
-    height: 85%;
+    height: 75%;
+    overflow: scroll;
+}
+.Logs::-webkit-scrollbar {
+    width: .5rem;
+}
+.Logs::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.Logs::-webkit-scrollbar-thumb {
+    background-color: white;
+    outline: 2px solid black;
+    border-radius: 8px;
 }
