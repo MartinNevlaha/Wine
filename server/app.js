@@ -49,8 +49,6 @@ app.use('/admin', adminOsInfoRoutes);
 app.use('/admin', loginAdminRoutes)
 app.use('/degustator', degustatorRoutes);
 
-
-
 //Error handler
 app.use((error, req, res, next) => {
     const status = error.statusCode || 500;
