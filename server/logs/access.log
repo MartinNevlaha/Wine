@@ -70,3 +70,5 @@
 ::1 - - [14/Oct/2020:17:42:54 +0000] "GET /admin/final-results/groups HTTP/1.1" 200 2303 "-" "PostmanRuntime/7.26.5"
 ::1 - - [14/Oct/2020:17:43:18 +0000] "GET /admin/final-results/groups HTTP/1.1" 200 416 "-" "PostmanRuntime/7.26.5"
 ::1 - - [14/Oct/2020:17:52:08 +0000] "GET /admin/final-results/group/5f831072e8af84252df4dcc3 HTTP/1.1" 200 1668 "-" "PostmanRuntime/7.26.5"
+::1 - - [14/Oct/2020:18:12:22 +0000] "GET /admin/final-results/degustator/5f83106ae8af84252df4dcc1 HTTP/1.1" 404 194 "-" "PostmanRuntime/7.26.5"
+::1 - - [14/Oct/2020:18:12:55 +0000] "GET /admin/final-results/degustator/5f83106ae8af84252df4dcc1 HTTP/1.1" 200 1691 "-" "PostmanRuntime/7.26.5"

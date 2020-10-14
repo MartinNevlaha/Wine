@@ -1,6 +1,7 @@
 const Wine = require('../models/wine');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
+const Degustator = require('../models/degustator');
 
 exports.getFinalResults = async (req, res, next) => {
     const sendConfig = 'id name color character producer vintage wineCategory finalResult'
@@ -80,26 +81,6 @@ exports.getDetailedResults = async (req, res, next) => {
     }
 };
 
-exports.getGroupFinalResults = async (req, res, next) => {
-    try {
-        const group = await Group.find({}, '-results');
-        if (!group) {
-            const error = new Error('Nemôžem načítať dáta skupín');
-            error.statusCode = 404;
-            return next(error);
-        }
-        res.json({
-            message: 'Výsledky načítané',
-            results: group
-        })
-    } catch (error) {
-        if(!error.statusCode) {
-            error.statusCode = 500;
-        }
-        next(error);
-    }
-};
-
 exports.getFinalResultsByGroup = async (req, res, next) => {
     const groupId = req.params.groupId;
     try {
@@ -118,6 +99,24 @@ exports.getFinalResultsByGroup = async (req, res, next) => {
             error.statusCode = 500;
         }
         next(error);
+    }
+}
+
+exports.getFinalResultsByDeg = async (req, res, next) => {
+    const degId = req.params.degId;
+    try {
+        const deg = await Degustator.findById(degId).populate('results');
+        if (!deg) {
+            const error = new Error('Nemožem načítat výsledky pre tohto degustátora');
+            error.statusCode = 404;
+            return next(error);
+        }
+        res.json({
+            message: 'Výsledky pre tohto degustátora boli načítané',
+            results: deg.results
+        })
+    } catch (error) {
+        
     }
 }
 
