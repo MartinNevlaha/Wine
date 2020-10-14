@@ -159,7 +159,7 @@ exports.getResult = async (req, res, next) => {
     const resultId = req.params.resultId;
     const {degId} = req.userData;
     try {
-        const result = await Result.findOne({degId: degId, _id: resultId}).populate();
+        const result = await Result.findOne({degId: degId, _id: resultId});
         if (!result) {
             const error = new Error('Nemožem načitať udaje pre danné víno');
             error.statusCode = 404;
