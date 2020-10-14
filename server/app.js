@@ -9,6 +9,7 @@ const adminWineRoutes = require('./routes/adminWine');
 const adminDegRoutes = require('./routes/adminDeg');
 const adminDegGroupsRoutes = require('./routes/adminDegGroups');
 const adminOsInfoRoutes = require('./routes/adminOsInfo');
+const adminFinalResultsRoutes = require('./routes/adminFinalResults');
 const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
 
@@ -46,7 +47,8 @@ app.use('/admin', adminWineRoutes);
 app.use('/admin', adminDegRoutes);
 app.use('/admin', adminDegGroupsRoutes);
 app.use('/admin', adminOsInfoRoutes);
-app.use('/admin', loginAdminRoutes)
+app.use('/admin', adminFinalResultsRoutes)
+app.use('/admin', loginAdminRoutes);
 app.use('/degustator', degustatorRoutes);
 
 //Error handler
