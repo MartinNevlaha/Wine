@@ -37,9 +37,11 @@ router.delete('/wine-list', isAdminAuth,  adminWineController.deleteAllWines);
 router.post('/wine-list/import', isAdminAuth, [
     body().isArray(),
     body('*.id').trim().not().isEmpty().isNumeric().isLength({ max:3 }),
+    body('*.competitiveCategory').trim().notEmpty().isString(),
     body('*.name').trim().trim().not().isEmpty().isString(),
     body('*.producer').trim().trim().not().isEmpty().isString(),
     body('*.vintage').trim().not().isEmpty().isNumeric().isLength({min:4, max:4}),
+    body('*.clasification').trim().notEmpty().isString(),
     body('*.color').trim().not().isEmpty().isString(),
     body('*.character').trim().not().isEmpty().isString()
 ], adminWineController.importWines);
