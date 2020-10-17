@@ -199,11 +199,13 @@ class EditWine extends Component {
         for (let key in importedWinelist) {
             let wine = {
                 id: +importedWinelist[key][0],
-                name: importedWinelist[key][1],
-                color: importedWinelist[key][2],
-                character: importedWinelist[key][3],
-                producer: importedWinelist[key][4],
-                vintage: +importedWinelist[key][5]
+                competitiveCategory: importedWinelist[key][1],
+                name: importedWinelist[key][2],
+                clasification: importedWinelist[key][3],
+                color: importedWinelist[key][4],
+                character: importedWinelist[key][5],
+                producer: importedWinelist[key][6],
+                vintage: +importedWinelist[key][7]
             }
             wineList.push(wine);
         }
