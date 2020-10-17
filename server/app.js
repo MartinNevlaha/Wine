@@ -10,8 +10,10 @@ const adminDegRoutes = require('./routes/adminDeg');
 const adminDegGroupsRoutes = require('./routes/adminDegGroups');
 const adminOsInfoRoutes = require('./routes/adminOsInfo');
 const adminFinalResultsRoutes = require('./routes/adminFinalResults');
+const adminSettingsRoutes = require('./routes/adminSettings');
 const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
+
 
 const accessLogStream = rfs.createStream('access.log', {
     interval: '31d',
@@ -19,6 +21,8 @@ const accessLogStream = rfs.createStream('access.log', {
 })
 
 const inicializeAdmin = require('./utils/initializeAdmin');
+const inicializeDefaultSetting = require('./utils/inicializeDefaultSettings');
+const inicializeDefaultSettins = require('./utils/inicializeDefaultSettings');
 
 //ENV Variables
 const MONGO_DB_URI = 'mongodb://127.0.0.1:27017/wine';
@@ -43,6 +47,7 @@ app.use(morgan('combined', {
 
 
 //routes
+app.use('/admin', adminSettingsRoutes);
 app.use('/admin', adminWineRoutes);
 app.use('/admin', adminDegRoutes);
 app.use('/admin', adminDegGroupsRoutes);
@@ -68,6 +73,7 @@ mongoose.connect(MONGO_DB_URI, {
     .then(() => {
         const server = app.listen(PORT);
         inicializeAdmin(); // inicialised admin, only first time
+        inicializeDefaultSettins();
         const io = require('./socket').init(server);
         io.on('connect', socket => {
             console.log('Socket.io: client connected');
