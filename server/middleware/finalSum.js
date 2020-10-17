@@ -1,4 +1,5 @@
 const Wine = require('../models/wine');
+const Setting = require('../models/settings');
 
 module.exports = async (req, res, next) => {
     if (!req.body.eliminated) {
@@ -12,8 +13,18 @@ module.exports = async (req, res, next) => {
                 error.statusCode = 404;
                 return next(error)
             }
+            const settins = await Setting.find();
+            if (!settins) {
+                const error = new Error('Nemôžem načítať nastavenia degustácie');
+                error.statusCode = 404;
+                return next(error)
+            }
             wine.totalResults.push(actualSum)
             const lengOfArray = wine.totalResults.length;
+            if (settins[0].isValuesEliminated && lengOfArray > 3) {
+                console.log('ideme počitat bez hodnot')
+                
+            }
             const sumOfarray = wine.totalResults.reduce((prevValue, nextValue) => prevValue + nextValue, 0); 
             const averageResults = (sumOfarray / lengOfArray).toFixed(2);
             wine.finalResult = averageResults;
