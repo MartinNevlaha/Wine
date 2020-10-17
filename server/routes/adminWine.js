@@ -14,16 +14,18 @@ router.post('/wine-list', isAdminAuth, [
     body('name').trim().not().isEmpty().isString(),
     body('producer').trim().not().isEmpty().isString(),
     body('vintage').trim().not().isEmpty().isNumeric().isLength({min:4, max:4}),
+    body('clasification').trim().notEmpty().isString(),
     body('color').trim().not().isEmpty().isString(),
     body('character').trim().not().isEmpty().isString()
 ], adminWineController.createWine);
 
 router.put('/wine-list/:wineId', isAdminAuth, [
     body('id').trim().not().isEmpty().isNumeric().isLength({ max:3 }),
-    body('id').trim().notEmpty().isString(),
+    body('competitiveCategory').trim().notEmpty().isString(),
     body('name').trim().not().isEmpty().isString(),
     body('producer').trim().not().isEmpty().isString(),
     body('vintage').trim().not().isEmpty().isNumeric().isLength({min:4, max:4}),
+    body('clasification').trim().notEmpty().isString(),
     body('color').trim().not().isEmpty().isString(),
     body('character').trim().not().isEmpty().isString()
 ], adminWineController.editWine);

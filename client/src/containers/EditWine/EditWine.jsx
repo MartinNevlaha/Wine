@@ -60,19 +60,26 @@ class EditWine extends Component {
                     value: '',
                     valid: false,
                 },
+                clasification: {
+                    labelName: 'Klasifikácia',
+                    inputType: "select",
+                    placeholder: "",
+                    options: ["tiché", "šumivé"],
+                    value: 'tiché'
+                },
                 color: {
                     labelName: "Farba vína",
                     inputType: "select",
                     placeholder: "",
                     options: ["Červené", "Biele", "Ružové"],
-                    value: 'Červené',
+                    value: 'Červené'
                 },
                 character: {
                     labelName: "Charakter vína",
                     inputType: "select",
                     placeholder: "",
                     options: ["Suché", "Polosuché", "Polosladké", "Sladké", "Ostatné"],
-                    value: 'Suché',
+                    value: 'Suché'
                 }
             },
             isModalShow: false,
@@ -82,8 +89,8 @@ class EditWine extends Component {
                 header: 'Číslo vína',
                 headerStateName: 'id',
                 searchValue: '',
-                searchBarOpt: ["Číslo vína", "Súťažná kategória","Názov vína", "Farba vína", "Charakter vína", "Výrobca vína", "Ročník vína", ],
-                searchBarStateNames: ["id", 'competitiveCategory','name', 'color', 'character', 'producer', 'vintage', ]
+                searchBarOpt: ["Číslo vína", "Súťažná kategória","Názov vína", "Klasifikácia", "Farba vína", "Charakter vína", "Výrobca vína", "Ročník vína", ],
+                searchBarStateNames: ["id", 'competitiveCategory','name', 'clasification','color', 'character', 'producer', 'vintage', ]
             },
             importWineList: {
                 length: null,
@@ -97,7 +104,6 @@ class EditWine extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.wineList.isAddWineSucces !== prevProps.wineList.isAddWineSucces) {
             this.setState(this.initialState);
-            console.log('add')
         } else if (this.props.wineList.isDeleteDbInProces !== prevProps.wineList.isDeleteDbInProces) {
             this.setState(this.initialState)
         }
@@ -134,6 +140,7 @@ class EditWine extends Component {
             name: this.state.inputs.name.value,
             producer: this.state.inputs.producer.value,
             vintage: +this.state.inputs.vintage.value,
+            clasification: this.state.inputs.clasification.value,
             color: this.state.inputs.color.value,
             character: this.state.inputs.character.value,
         }
@@ -279,6 +286,7 @@ class EditWine extends Component {
                 token={this.props.token}
                 colorOptions={this.state.inputs.color.options}
                 characterOptions={this.state.inputs.character.options}
+                clasificationOptions={this.state.inputs.clasification.options}
                 sortWine={this.props.onSortWineBy}
                 />
                 <Back />

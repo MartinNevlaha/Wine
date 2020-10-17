@@ -28,7 +28,7 @@ exports.createWine = async (req, res, next) => {
         error.statusCode = 422;
         return next(error) ;
     }
-    const {id, competitiveCategory, name, producer, vintage, color, character} = req.body;
+    const {id, competitiveCategory, name, producer, vintage, clasification, color, character} = req.body;
     try {
         const wine = new Wine ({
             id,
@@ -36,6 +36,7 @@ exports.createWine = async (req, res, next) => {
             name,
             producer,
             vintage,
+            clasification,
             color,
             character
         });
@@ -60,7 +61,7 @@ exports.editWine = async (req, res, next) => {
         return next(error) ;
     }
     const wineId = req.params.wineId;
-    const {id, competitiveCategory, name, color, character, producer, vintage} = req.body;
+    const {id, competitiveCategory, name, clasification, color, character, producer, vintage} = req.body;
     try {
         const wine = await Wine.findById(wineId);
         if (!wine) {
@@ -69,8 +70,9 @@ exports.editWine = async (req, res, next) => {
             return next(error);
         }
         wine.id = id;
-        wine.competitiveCategory = competitiveCategory,
+        wine.competitiveCategory = competitiveCategory;
         wine.name = name;
+        wine.clasification = clasification;
         wine.color = color;
         wine.character = character;
         wine.producer = producer;

@@ -24,6 +24,10 @@ const postWine = new Schema({
         type: Number,
         required: true
     },
+    clasification: {
+        type: String,
+        required: true
+    },
     color: {
         type: String,
         required: true

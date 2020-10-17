@@ -12,8 +12,8 @@ import Back from '../../../UI/Back/Back';
 
 class ShowAddedWine extends Component {
     state = {
-        tableHeadNames: ['Číslo vína', 'Súťažná kategória', 'Názov vína', 'Farba vína', 'Charakter vína', 'Výrobca vína', 'Ročník vína' ],
-        tableHeadIds: ['id', 'competitiveCategory', 'name', 'color', 'character', 'producer', 'vintage'],
+        tableHeadNames: ['Číslo vína', 'Súťažná kategória', 'Názov vína', 'Klasifikácia vína','Farba vína', 'Charakter vína', 'Výrobca vína', 'Ročník vína' ],
+        tableHeadIds: ['id', 'competitiveCategory', 'name', 'clasification', 'color', 'character', 'producer', 'vintage'],
         searchValue: '',
         headerValue: 'Číslo vína',
         chossenHeaderId: 'id'
@@ -54,6 +54,7 @@ class ShowAddedWine extends Component {
                 <td>{wine.id}</td>
                 <td>{wine.competitiveCategory}</td>
                 <td>{wine.name}</td>
+                <td>{wine.clasification}</td>
                 <td>{wine.color}</td>
                 <td>{wine.character}</td>
                 <td>{wine.producer}</td>
@@ -62,7 +63,7 @@ class ShowAddedWine extends Component {
             )
         return (
             <ElementWrapper wrapperType="ElementWrapper">
-                {wineList.length ? 
+                {this.props.wineList.length ? 
                     <ElementWrapper wrapperType="FullWidthWrapper">   
                     <h4>Zoznam súťažných vin</h4>
                     <SearchBar 

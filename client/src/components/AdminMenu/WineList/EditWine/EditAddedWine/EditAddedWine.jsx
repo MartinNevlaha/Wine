@@ -26,6 +26,8 @@ class EditAddedWine extends Component {
             competitiveCategoryTouch: false,
             name: '',
             nameTouch: false,
+            clasification: '',
+            clasificationTouch: false,
             color: '',
             colorTouch: false,
             character: '',
@@ -52,6 +54,7 @@ class EditAddedWine extends Component {
             id: editedWineData.id,
             competitiveCategory: editedWineData.competitiveCategory,
             name: editedWineData.name,
+            clasification: editedWineData.clasification,
             color: editedWineData.color,
             character: editedWineData.character,
             producer: editedWineData.producer,
@@ -81,6 +84,7 @@ class EditAddedWine extends Component {
                         <td>{wine.id}</td>
                         <td>{wine.competitiveCategory}</td>
                         <td>{wine.name}</td>
+                        <td>{wine.clasification}</td>
                         <td>{wine.color}</td>
                         <td>{wine.character}</td>
                         <td>{wine.producer}</td>
@@ -117,11 +121,23 @@ class EditAddedWine extends Component {
                         />
                     </td>
                     <td>
-                    <input 
-                        type="text"
-                        defaultValue={wine.name}
-                        onChange={(e) => this.getValueHandler(e, 'name')}
-                        />
+                        <input 
+                            type="text"
+                            defaultValue={wine.name}
+                            onChange={(e) => this.getValueHandler(e, 'name')}
+                            />
+                    </td>
+                    <td>
+                        <select
+                        type="select"
+                        onChange={(e) => this.getValueHandler(e, 'clasification')}
+                        defaultValue={wine.clasification}>
+                        {this.props.clasificationOptions.map(opt=>
+                            <option key={opt}>
+                                {opt}
+                            </option>
+                        )}
+                        </select>
                     </td>
                     <td>
                     <select 
@@ -204,6 +220,13 @@ class EditAddedWine extends Component {
                             icon={faSort}
                             cursor="pointer" 
                             onClick={() => this.props.sortWine("name")}/>
+                        </td>
+                        <td>
+                            <span>Klasifikácia vína</span>
+                            <FontAwesomeIcon 
+                            icon={faSort}
+                            cursor="pointer" 
+                            onClick={() => this.props.sortWine("clasification")}/>
                         </td>
                         <td>
                             <span>Farba vína</span>
