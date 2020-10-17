@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import RatingSetting from '../../components/AdminMenu/DegustationSettings/RatingSetting/RatingSetting';
 import * as action from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Back from '../../components/UI/Back/Back';
 
 class DegustationSetting extends Component {
     state = {
@@ -37,17 +39,22 @@ class DegustationSetting extends Component {
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper"> 
-                <RatingSetting 
-                getValueHandler={this.getValueHandler}
-                input={this.state.input}
-                save={this.saveSettingHandler}/>
+                <Back />
+                {this.props.loading ? <Spinner /> : 
+                    <RatingSetting 
+                    getValueHandler={this.getValueHandler}
+                    input={this.state.input}
+                    save={this.saveSettingHandler}/>
+                }
             </ElementWrapper>
         );
     }
 }
 const mapStateToProps = state => {
     return {
-        token: state.adminAuth.token
+        token: state.adminAuth.token,
+        loading: state.systemSettins.loading,
+        isSaveSuccess: state.systemSettins.isSaveSucces
     }
 }
 const mapDispatchToProps = dispatch => {

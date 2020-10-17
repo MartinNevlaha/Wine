@@ -3,19 +3,32 @@ import { updateObj } from '../../shared/utility';
 
 const initialState = {
     loading: false,
-    error: null
+    error: null,
+    isSaveSucces: false
 }
 
 const saveSettingsStart = (state, action) => {
-    return updateObj(state, {loading: true, error: null})
+    return updateObj(state, {
+        loading: true, 
+        error: null,
+        isSaveSucces: false
+    })
 }
 
 const saveSettingsSuccess = (state, action) => {
-    return updateObj(state, {loading: false, error: null})
+    return updateObj(state, {
+        loading: false, 
+        error: null,
+        isSaveSucces: true
+    })
 }
 
 const saveSettingsFailled = (state, action) => {
-    return updateObj(state, {loading: false, error: action.error})
+    return updateObj(state, {
+        loading: false, 
+        error: action.error,
+        isSaveSucces: false
+    })
 }
 
 const reducer = (state = initialState, action) => {
