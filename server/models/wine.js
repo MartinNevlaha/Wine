@@ -8,6 +8,10 @@ const postWine = new Schema({
         required: true,
         unique: true
     },
+    competitiveCategory: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true

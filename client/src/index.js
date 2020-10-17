@@ -21,8 +21,8 @@ import degGroupsReducer from './store/reducers/degGroups';
 import degResultsReducer from './store/reducers/degResults';
 import adminSystemInfoReducer from './store/reducers/SystemInfo';
 
-//const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
-const composeEnhancers = compose;
+const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+//const composeEnhancers = compose;
 
 const rootReducer = combineReducers({
   adminAuth: adminAuthReducer,

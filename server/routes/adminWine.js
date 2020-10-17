@@ -10,8 +10,9 @@ router.get('/wine-list', isAdminAuth, adminWineController.getAllWine)
 
 router.post('/wine-list', isAdminAuth, [
     body('id').trim().not().isEmpty().isNumeric().isLength({ max:3 }),
-    body('name').trim().trim().not().isEmpty().isString(),
-    body('producer').trim().trim().not().isEmpty().isString(),
+    body('competitiveCategory').trim().notEmpty().isString(),
+    body('name').trim().not().isEmpty().isString(),
+    body('producer').trim().not().isEmpty().isString(),
     body('vintage').trim().not().isEmpty().isNumeric().isLength({min:4, max:4}),
     body('color').trim().not().isEmpty().isString(),
     body('character').trim().not().isEmpty().isString()
@@ -19,8 +20,9 @@ router.post('/wine-list', isAdminAuth, [
 
 router.put('/wine-list/:wineId', isAdminAuth, [
     body('id').trim().not().isEmpty().isNumeric().isLength({ max:3 }),
-    body('name').trim().trim().not().isEmpty().isString(),
-    body('producer').trim().trim().not().isEmpty().isString(),
+    body('id').trim().notEmpty().isString(),
+    body('name').trim().not().isEmpty().isString(),
+    body('producer').trim().not().isEmpty().isString(),
     body('vintage').trim().not().isEmpty().isNumeric().isLength({min:4, max:4}),
     body('color').trim().not().isEmpty().isString(),
     body('character').trim().not().isEmpty().isString()

@@ -12,8 +12,8 @@ import Back from '../../../UI/Back/Back';
 
 class ShowAddedWine extends Component {
     state = {
-        tableHeadNames: ['Číslo vína', 'Názov vína', 'Farba vína', 'Charakter vína', 'Výrobca vína', 'Ročník vína' ],
-        tableHeadIds: ['id', 'name', 'color', 'character', 'producer', 'vintage'],
+        tableHeadNames: ['Číslo vína', 'Súťažná kategória', 'Názov vína', 'Farba vína', 'Charakter vína', 'Výrobca vína', 'Ročník vína' ],
+        tableHeadIds: ['id', 'competitiveCategory', 'name', 'color', 'character', 'producer', 'vintage'],
         searchValue: '',
         headerValue: 'Číslo vína',
         chossenHeaderId: 'id'
@@ -52,6 +52,7 @@ class ShowAddedWine extends Component {
         let wineList = filteredWineList.map(wine =>
             <tr key={wine._id}>
                 <td>{wine.id}</td>
+                <td>{wine.competitiveCategory}</td>
                 <td>{wine.name}</td>
                 <td>{wine.color}</td>
                 <td>{wine.character}</td>

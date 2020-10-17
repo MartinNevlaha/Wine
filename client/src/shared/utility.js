@@ -20,6 +20,8 @@ export const searchIdetificator = (e, tableHeadName, tableHeadId) => {
         chossenHeadId = tableHeadId[4] 
     } else if (chossenHeader === tableHeadName[5]) {
         chossenHeadId = tableHeadId[5] 
+    } else if (chossenHeader === tableHeadName[6]) {
+        chossenHeadId = tableHeadId[6] 
     }
     return [chossenHeader, chossenHeadId]
 };

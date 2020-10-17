@@ -32,6 +32,13 @@ class EditWine extends Component {
                     value: '',
                     valid: false,
                 },
+                competitiveCategory: {
+                    labelName: 'Súťažná kategória',
+                    inputType: 'text',
+                    placeholder: 'Súťažná kategória',
+                    value: '',
+                    valid: false
+                },
                 name: {
                     labelName: "Názov vína",
                     inputType: "text",
@@ -57,14 +64,14 @@ class EditWine extends Component {
                     labelName: "Farba vína",
                     inputType: "select",
                     placeholder: "",
-                    options: ["Červené", "Biele"],
+                    options: ["Červené", "Biele", "Ružové"],
                     value: 'Červené',
                 },
                 character: {
                     labelName: "Charakter vína",
                     inputType: "select",
                     placeholder: "",
-                    options: ["Suché", "Polosuché", "Polosladké", "Sladké"],
+                    options: ["Suché", "Polosuché", "Polosladké", "Sladké", "Ostatné"],
                     value: 'Suché',
                 }
             },
@@ -75,8 +82,8 @@ class EditWine extends Component {
                 header: 'Číslo vína',
                 headerStateName: 'id',
                 searchValue: '',
-                searchBarOpt: ["Číslo vína", "Názov vína", "Farba vína", "Charakter vína", "Výrobca vína", "Ročník vína", ],
-                searchBarStateNames: ["id", 'name', 'color', 'character', 'producer', 'vintage', ]
+                searchBarOpt: ["Číslo vína", "Súťažná kategória","Názov vína", "Farba vína", "Charakter vína", "Výrobca vína", "Ročník vína", ],
+                searchBarStateNames: ["id", 'competitiveCategory','name', 'color', 'character', 'producer', 'vintage', ]
             },
             importWineList: {
                 length: null,
@@ -123,12 +130,12 @@ class EditWine extends Component {
     addWineHandler = () => {
         const data = {
             id: +this.state.inputs.id.value,
+            competitiveCategory: this.state.inputs.competitiveCategory.value,
             name: this.state.inputs.name.value,
             producer: this.state.inputs.producer.value,
             vintage: +this.state.inputs.vintage.value,
             color: this.state.inputs.color.value,
             character: this.state.inputs.character.value,
-            //isEditable: false
         }
         this.props.onAddWine(data, this.props.token)
     }

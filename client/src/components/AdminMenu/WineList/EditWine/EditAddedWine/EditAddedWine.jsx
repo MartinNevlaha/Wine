@@ -22,6 +22,8 @@ class EditAddedWine extends Component {
         return {
             id: '',
             idTouch: false,
+            competitiveCategory: '',
+            competitiveCategoryTouch: false,
             name: '',
             nameTouch: false,
             color: '',
@@ -48,6 +50,7 @@ class EditAddedWine extends Component {
         };
         const sendData = {
             id: editedWineData.id,
+            competitiveCategory: editedWineData.competitiveCategory,
             name: editedWineData.name,
             color: editedWineData.color,
             character: editedWineData.character,
@@ -76,6 +79,7 @@ class EditAddedWine extends Component {
                 return (
                     <tr key={wine._id}>
                         <td>{wine.id}</td>
+                        <td>{wine.competitiveCategory}</td>
                         <td>{wine.name}</td>
                         <td>{wine.color}</td>
                         <td>{wine.character}</td>
@@ -103,6 +107,13 @@ class EditAddedWine extends Component {
                         type="number"
                         defaultValue={wine.id}
                         onChange={(e) => this.getValueHandler(e, 'id')}
+                        />
+                    </td>
+                    <td>
+                        <input 
+                        type="text"
+                        defaultValue={wine.competitiveCategory}
+                        onChange={e => this.getValueHandler(e, 'competitiveCategory')}
                         />
                     </td>
                     <td>
@@ -179,6 +190,13 @@ class EditAddedWine extends Component {
                             icon={faSort}
                             cursor="pointer" 
                             onClick={() => this.props.sortWine("id")}/>
+                        </td>
+                        <td>
+                            <span>Súťažná kategória</span>
+                            <FontAwesomeIcon 
+                            icon={faSort}
+                            cursor="pointer" 
+                            onClick={() => this.props.sortWine("competitiveCategory")}/>
                         </td>
                         <td>
                             <span>Názov vína</span>

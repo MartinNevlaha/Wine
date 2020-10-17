@@ -145,7 +145,6 @@ export const saveEditWineSucces = (editedWineData, index) => {
 };
 
 export const saveEditWine = (_id, index, editedWineData, token) => {
-    
     return dispatch => {
         dispatch(saveEditWineStart());
         axiosInstance.put('admin/wine-list/' + _id, editedWineData, {
@@ -155,6 +154,7 @@ export const saveEditWine = (_id, index, editedWineData, token) => {
         })
             .then(response => {
                 editedWineData._id = _id;
+                console.log(response)
                 dispatch(saveEditWineSucces(editedWineData, index));
             })
             .catch(error => saveEditWineFailed(error))
