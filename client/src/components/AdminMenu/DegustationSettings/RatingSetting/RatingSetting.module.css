@@ -1,0 +1,15 @@
+.RatingSetting {
+    width: 25%;
+    height: auto;
+    background-color: rgba(173, 121, 129, 0.603);
+    margin: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid white;
+}
+
+.RatingSetting li {
+    padding: 5px;
+}
+.RatingSetting label {
+    margin: 0 50px;
+}

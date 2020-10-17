@@ -21,6 +21,7 @@ const EditDegGroups = React.lazy(()=> import('./containers/EditDegGroups/EditDeg
 const ShowDegGroups = React.lazy(()=> import('./components/AdminMenu/DegGropsList/ShowDegGroups/ShowDegGroups'));
 const DegResults = React.lazy(()=> import('./containers/DegResults/DegResults'));
 const SystemInfo = React.lazy(() => import('./containers/SystemInfo/SystemInfo'));
+const DegustationSetting = React.lazy(() => import('./containers/DegustationSetting/DegustationSetting'));
 
 function App(props) {
   useEffect(() => {
@@ -48,6 +49,7 @@ function App(props) {
         <Route path="/edit-degustator" render={()=><Suspense fallback={<Spinner />}><EditDegustator /></Suspense>} />
         <Route path="/winelist" render={()=><Suspense fallback={<Spinner />}><ShowWineList /></Suspense>} />
         <Route path="/editwine" render={()=><Suspense fallback={<Spinner />}><EditWine /></Suspense>} />
+        <Route path="/degustation-setting" render={()=><Suspense fallback={<Spinner />}><DegustationSetting /></Suspense>} />
         <Route path="/adminzone" render={()=><Suspense fallback={<Spinner />}><AdminZone /></Suspense>} />
         <Route path="/" exact render={()=><Suspense fallback={<Spinner />}><AdminZone /></Suspense>}/>
         <Redirect to="/" />

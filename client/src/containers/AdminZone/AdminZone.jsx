@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
+import DegustationSettings from '../../components/AdminMenu/DegustationSettings/DegustationSettings';
 import WineList from '../../components/AdminMenu/WineList/WineList';
 import DegustatorList from '../../components/AdminMenu/DegustatorList/DegustatorList';
 import DegustatorGroup from '../../components/AdminMenu/DegGropsList/DegGroupsList';
@@ -25,12 +26,15 @@ class AdminZone extends Component {
             this.props.history.push('/deg-groups')
         } else if (adminChoose ==="Zobraz Systémové info") {
             this.props.history.push('/system-info')
+        } else if (adminChoose ==="Uprav nastavenia") {
+            this.props.history.push('/degustation-setting')
         }
     }
 
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
+                <DegustationSettings clicked={this.clickHandler}/>
                 <WineList clicked={this.clickHandler} />
                 <DegustatorList clicked={this.clickHandler}/>
                 <DegustatorGroup clicked={this.clickHandler}/>
