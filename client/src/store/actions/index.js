@@ -77,3 +77,7 @@ export {
     fetchSystemInfo,
     completeResetDb
 } from './SystemInfo';
+
+export {
+    saveSettings
+} from './systemSettings'

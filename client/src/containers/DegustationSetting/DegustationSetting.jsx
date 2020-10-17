@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import RatingSetting from '../../components/AdminMenu/DegustationSettings/RatingSetting/RatingSetting';
+import * as action from '../../store/actions/index';
 
 class DegustationSetting extends Component {
     state = {
@@ -26,7 +28,10 @@ class DegustationSetting extends Component {
         })
     }
     saveSettingHandler = () => {
-        console.log(this.state.input.isEliminateCutValues)
+        const setting = {
+            isValuesEliminated: this.state.input.isEliminateCutValues
+        }
+        this.props.onSaveSettings(setting, this.props.token);
     }
 
     render() {
@@ -40,5 +45,14 @@ class DegustationSetting extends Component {
         );
     }
 }
-
-export default DegustationSetting;
+const mapStateToProps = state => {
+    return {
+        token: state.adminAuth.token
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onSaveSettings: (setting, token) => dispatch(action.saveSettings(setting, token))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps) (DegustationSetting);
