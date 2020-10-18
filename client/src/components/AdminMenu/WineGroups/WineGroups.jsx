@@ -11,7 +11,7 @@ const WineGroups = props => (
         <h4>Priraď vína do skupín</h4>
         <FontAwesomeIcon icon={faWineBottle} size="5x"/>
         <div className={classes.BtnContainer}>
-            <Button>Pridaj vína do skupín</Button>
+            <Button clicked={props.clicked}>Pridaj vína do skupín</Button>
             <Button>Zobraz roztriedenie</Button>
         </div>
     </ElementWrapper>

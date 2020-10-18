@@ -11,17 +11,18 @@ import Spinner from './components/UI/Spinner/Spinner';
 import * as action from './store/actions/index';
 
 //lazy loading components
-const Degustator = React.lazy(()=> import ('./containers/Degustator/Degustator'));
-const AdminZone = React.lazy(()=> import ('./containers/AdminZone/AdminZone'));
-const EditWine = React.lazy(()=> import ('./containers//EditWine/EditWine'));
-const ShowWineList = React.lazy(()=> import('./components/AdminMenu/WineList/ShowWineTable/ShowWineTable'));
-const EditDegustator = React.lazy(()=> import('./containers/EditDegustator/EditDegustator'));
-const ShowDegList = React.lazy(()=>import('./components/AdminMenu/DegustatorList/ShowDegList/ShowDegList'));
-const EditDegGroups = React.lazy(()=> import('./containers/EditDegGroups/EditDegGroups'));
-const ShowDegGroups = React.lazy(()=> import('./components/AdminMenu/DegGropsList/ShowDegGroups/ShowDegGroups'));
-const DegResults = React.lazy(()=> import('./containers/DegResults/DegResults'));
+const Degustator = React.lazy(() => import ('./containers/Degustator/Degustator'));
+const AdminZone = React.lazy(() => import ('./containers/AdminZone/AdminZone'));
+const EditWine = React.lazy(() => import ('./containers//EditWine/EditWine'));
+const ShowWineList = React.lazy(() => import('./components/AdminMenu/WineList/ShowWineTable/ShowWineTable'));
+const EditDegustator = React.lazy(() => import('./containers/EditDegustator/EditDegustator'));
+const ShowDegList = React.lazy(() => import('./components/AdminMenu/DegustatorList/ShowDegList/ShowDegList'));
+const EditDegGroups = React.lazy(() => import('./containers/EditDegGroups/EditDegGroups'));
+const ShowDegGroups = React.lazy(() => import('./components/AdminMenu/DegGropsList/ShowDegGroups/ShowDegGroups'));
+const DegResults = React.lazy(() => import('./containers/DegResults/DegResults'));
 const SystemInfo = React.lazy(() => import('./containers/SystemInfo/SystemInfo'));
 const DegustationSetting = React.lazy(() => import('./containers/DegustationSetting/DegustationSetting'));
+const WineGroups = React.lazy(() => import('./containers/WineGroups/WineGroups'));
 
 function App(props) {
   useEffect(() => {
@@ -43,6 +44,7 @@ function App(props) {
         <Route path="/results" />
         <Route path="/logout" component={Logout}/>
         <Route path="/system-info" render={()=><Suspense fallback={<Spinner />}><SystemInfo /></Suspense>} />
+        <Route path="/wine-groups" render={()=><Suspense fallback={<Spinner />}><WineGroups /></Suspense>} />
         <Route path="/deg-groups" render={()=><Suspense fallback={<Spinner />}><ShowDegGroups /></Suspense>} />
         <Route path="/edit-deg-group" render={()=><Suspense fallback={<Spinner />}><EditDegGroups /></Suspense>} />
         <Route path="/deglist" render={()=><Suspense fallback={<Spinner />}><ShowDegList /></Suspense>} />
