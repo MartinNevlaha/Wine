@@ -8,6 +8,7 @@ import DegustatorList from '../../components/AdminMenu/DegustatorList/Degustator
 import DegustatorGroup from '../../components/AdminMenu/DegGropsList/DegGroupsList';
 import WineResults from '../../components/AdminMenu/WineResults/WineResults';
 import SystemMenu from '../../components/AdminMenu/SystemMenu/SystemMenu';
+import WineGroups from '../../components/AdminMenu/WineGroups/WineGroups';
 
 class AdminZone extends Component {
     
@@ -38,6 +39,7 @@ class AdminZone extends Component {
                 <WineList clicked={this.clickHandler} />
                 <DegustatorList clicked={this.clickHandler}/>
                 <DegustatorGroup clicked={this.clickHandler}/>
+                <WineGroups />
                 <WineResults />
                 <SystemMenu clicked={this.clickHandler}/>
             </ElementWrapper>
