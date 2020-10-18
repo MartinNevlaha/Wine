@@ -80,4 +80,8 @@ export {
 
 export {
     saveSettings
-} from './systemSettings'
+} from './systemSettings';
+
+export {
+    fetchEditWineGroups
+} from './wineGroups';
