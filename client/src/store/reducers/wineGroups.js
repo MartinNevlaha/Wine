@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObj} from '../../shared/utility';
+import updateArray from 'react-addons-update';
 
 const initialState = {
     wineList: [],
@@ -27,6 +28,19 @@ const fetchEditWineGroupsFailled = (state, action) => {
     })
 }
 
+const wineGroupChanged = (state, action) => {
+    const index = state.wineList.indexOf(action.choosenWineData);
+    return updateArray(state, {
+        wineList: {
+            [index]: {
+                isTouch: {$set: true},
+                group: {$set: action.groupDbId}
+            }
+        }
+    })
+}
+
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_EDIT_WINE_GROUP_START:
@@ -35,6 +49,8 @@ const reducer = (state = initialState, action) => {
             return fetchEditWineGroupsSuccess(state, action);
         case actionTypes.FETCH_EDIT_WINE_GROUP_FAIL:
             return fetchEditWineGroupsFailled(state, action);
+        case actionTypes.WINE_GROUP_CHANGED:
+            return wineGroupChanged(state, action);
         default:
             return state;
     }

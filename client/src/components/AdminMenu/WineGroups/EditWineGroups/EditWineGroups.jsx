@@ -4,6 +4,7 @@ import { faSort } from '@fortawesome/free-solid-svg-icons';
 
 import classes from './EditWineGroups.module.css';
 import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
+import Button from '../../../UI/Button/Button';
 
 const EditWineGroup = props => {
     const wineList = props.wines.map(wine => (
@@ -19,9 +20,12 @@ const EditWineGroup = props => {
             <td>
                 <select 
                 type="select"
+                onChange={e => props.getGroup(e, wine._id)}
+                defaultValue={props.defaultGroup}
                 >
                     {props.groups.map(opt => 
-                        <option key={opt._id}>
+                        <option key={opt._id}
+                        id={opt._id}>
                             {opt.groupName}
                         </option>    
                     )}
@@ -31,6 +35,7 @@ const EditWineGroup = props => {
     ))
     return (
         <ElementWrapper wrapperType='FullWidthWrapper'>
+            <h4>Priradenie vín do degustačných skupín</h4>
             <table className={classes.ShowWines}>
                 <thead>
                     <tr>
@@ -96,7 +101,8 @@ const EditWineGroup = props => {
                 <tbody>
                     {wineList}
                 </tbody>
-        </table>
+            </table>
+            <Button>Ulož</Button>
         </ElementWrapper>
     )
 }

@@ -34,7 +34,8 @@ export const fetchEditWineGroups = (token) => {
             const wines = resp.data.wines.map(wine => {
                 return {
                     ...wine,
-                    group: null
+                    group: null,
+                    isTouch: false
                 }
             })
             const groups = resp.data.groups.map(group => {
@@ -46,5 +47,13 @@ export const fetchEditWineGroups = (token) => {
             dispatch(fetchEditWineGroupsSuccess(wines, groups))
         })
         .catch(err => dispatch(fetchEditWineGroupsFailled(err)))
+    }
+}
+
+export const wineGroupChanged = (choosenWineData, groupDbId) => {
+    return {
+        type: actionTypes.WINE_GROUP_CHANGED,
+        choosenWineData,
+        groupDbId
     }
 }

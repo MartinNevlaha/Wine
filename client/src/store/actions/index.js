@@ -83,5 +83,6 @@ export {
 } from './systemSettings';
 
 export {
-    fetchEditWineGroups
+    fetchEditWineGroups,
+    wineGroupChanged
 } from './wineGroups';
