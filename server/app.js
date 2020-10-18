@@ -13,7 +13,7 @@ const adminFinalResultsRoutes = require('./routes/adminFinalResults');
 const adminSettingsRoutes = require('./routes/adminSettings');
 const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
-
+const adminWineGroupsRoutes = require('./routes/adminWineGroups');
 
 const accessLogStream = rfs.createStream('access.log', {
     interval: '31d',
@@ -21,7 +21,6 @@ const accessLogStream = rfs.createStream('access.log', {
 })
 
 const inicializeAdmin = require('./utils/initializeAdmin');
-const inicializeDefaultSetting = require('./utils/inicializeDefaultSettings');
 const inicializeDefaultSettins = require('./utils/inicializeDefaultSettings');
 
 //ENV Variables
@@ -48,6 +47,7 @@ app.use(morgan('combined', {
 
 //routes
 app.use('/admin', adminSettingsRoutes);
+app.use('/admin', adminWineGroupsRoutes);
 app.use('/admin', adminWineRoutes);
 app.use('/admin', adminDegRoutes);
 app.use('/admin', adminDegGroupsRoutes);
