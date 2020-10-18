@@ -1,2 +1,5 @@
 ::1 - - [18/Oct/2020:10:04:42 +0000] "OPTIONS /admin/degustator-groups HTTP/1.1" 200 20 "http://localhost:3000/deg-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
 ::1 - - [18/Oct/2020:10:04:42 +0000] "GET /admin/degustator-groups HTTP/1.1" 200 2354 "http://localhost:3000/deg-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
+::1 - - [18/Oct/2020:10:24:00 +0000] "OPTIONS /admin/degustator-groups HTTP/1.1" 200 20 "http://localhost:3000/deg-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
+::1 - - [18/Oct/2020:10:24:00 +0000] "GET /admin/degustator-groups HTTP/1.1" 304 - "http://localhost:3000/deg-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
+::1 - - [18/Oct/2020:10:24:02 +0000] "GET /admin/degustator-groups HTTP/1.1" 304 - "http://localhost:3000/edit-deg-group" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
