@@ -31,8 +31,18 @@ export const fetchEditWineGroups = (token) => {
             }
         })
         .then(resp => {
-            const wines = resp.data.wines;
-            const groups = resp.data.groups;
+            const wines = resp.data.wines.map(wine => {
+                return {
+                    ...wine,
+                    group: null
+                }
+            })
+            const groups = resp.data.groups.map(group => {
+                return {
+                    ...group,
+                    wines: []
+                }
+            });
             dispatch(fetchEditWineGroupsSuccess(wines, groups))
         })
         .catch(err => dispatch(fetchEditWineGroupsFailled(err)))

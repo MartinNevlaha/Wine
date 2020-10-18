@@ -10,7 +10,7 @@ class WineGroups extends Component {
     componentDidMount() {
         this.props.onFetchWineEditGroups(this.props.token)
     }
-
+    
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
