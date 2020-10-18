@@ -21,12 +21,15 @@ module.exports = async (req, res, next) => {
             }
             wine.totalResults.push(actualSum)
             const lengOfArray = wine.totalResults.length;
-            if (settins[0].isValuesEliminated && lengOfArray > 3) {
-                console.log('ideme počitat bez hodnot')
-                
-            }
             const sumOfarray = wine.totalResults.reduce((prevValue, nextValue) => prevValue + nextValue, 0); 
-            const averageResults = (sumOfarray / lengOfArray).toFixed(2);
+            let averageResults;
+            if (settins[0].isValuesEliminated && lengOfArray > 2) {
+                const min = Math.min(...wine.totalResults);
+                const max = Math.max(...wine.totalResults);
+                averageResults = ((sumOfarray - min - max) / (lengOfArray-2)).toFixed(2);
+            } else {
+                averageResults = (sumOfarray / lengOfArray).toFixed(2);
+            }
             wine.finalResult = averageResults;
             if (averageResults >= 90) {
                 wineCategory = wineRating[0];
