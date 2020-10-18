@@ -7,12 +7,17 @@ import EditWineGroups from '../../components/AdminMenu/WineGroups/EditWineGroups
 import * as action from '../../store/actions/index';
 
 class WineGroups extends Component {
+    componentDidMount() {
+        this.props.onFetchWineEditGroups(this.props.token)
+    }
 
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <Back />
-                <EditWineGroups />
+                <EditWineGroups 
+                wines={this.props.wineGroups.wineList}
+                groups={this.props.wineGroups.degGroups}/>
             </ElementWrapper>
         )
     }

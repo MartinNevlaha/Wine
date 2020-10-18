@@ -30,7 +30,11 @@ export const fetchEditWineGroups = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => console.log(resp))
+        .then(resp => {
+            const wines = resp.data.wines;
+            const groups = resp.data.groups;
+            dispatch(fetchEditWineGroupsSuccess(wines, groups))
+        })
         .catch(err => dispatch(fetchEditWineGroupsFailled(err)))
     }
 }

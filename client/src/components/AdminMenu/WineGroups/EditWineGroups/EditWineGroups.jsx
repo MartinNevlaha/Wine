@@ -6,7 +6,29 @@ import classes from './EditWineGroups.module.css';
 import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
 
 const EditWineGroup = props => {
-    
+    const wineList = props.wines.map(wine => (
+        <tr key={wine._id}>
+            <td>{wine.id}</td>
+            <td>{wine.competitiveCategory}</td>
+            <td>{wine.name}</td>
+            <td>{wine.clasification}</td>
+            <td>{wine.color}</td>
+            <td>{wine.character}</td>
+            <td>{wine.producer}</td>
+            <td>{wine.vintage}</td>
+            <td>
+                <select 
+                type="select"
+                >
+                    {props.groups.map(opt => 
+                        <option key={opt._id}>
+                            {opt.groupName}
+                        </option>    
+                    )}
+                </select>
+            </td>
+        </tr>
+    ))
     return (
         <ElementWrapper wrapperType='FullWidthWrapper'>
             <table className={classes.ShowWines}>
@@ -72,7 +94,7 @@ const EditWineGroup = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {wineList}
                 </tbody>
         </table>
         </ElementWrapper>
