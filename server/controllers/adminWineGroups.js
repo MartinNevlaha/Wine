@@ -34,9 +34,19 @@ exports.saveWineGroups = async (req, res, next) => {
     try {
         await wineGroupsData.forEach( async (wine) => {
             const saveWine = await Wine.findById(wine._id);
+            if (!saveWine) {
+                const error = new Error(`Nemôžem uložiť dáta pre id vína ${wine.id}`);
+                error.statusCode = 404;
+                return next(error)
+            }
             saveWine.group = wine.group;
             await saveWine.save();
             const saveGroup = await Group.findById(wine.group);
+            if (!saveGroup) {
+                const error = new Error(`Nemôžem uložiť dáta pre degustačnú skupinu ${wine.group}`);
+                error.statusCode = 404;
+                return next(error)
+            }
             saveGroup.wines.push(wine._id);
             await saveGroup.save();
         })

@@ -330,3 +330,5 @@
 ::1 - - [19/Oct/2020:16:06:58 +0000] "OPTIONS /admin/wine-groups-edit HTTP/1.1" 200 12 "http://localhost:3000/wine-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
 ::1 - - [19/Oct/2020:16:07:39 +0000] "OPTIONS /admin/wine-groups-edit HTTP/1.1" 200 12 "http://localhost:3000/wine-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
 ::1 - - [19/Oct/2020:16:08:29 +0000] "OPTIONS /admin/wine-groups-edit HTTP/1.1" 200 12 "http://localhost:3000/wine-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
+::1 - - [19/Oct/2020:16:32:48 +0000] "OPTIONS /admin/wine-groups-edit HTTP/1.1" 200 12 "http://localhost:3000/wine-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
+::1 - - [19/Oct/2020:16:32:48 +0000] "GET /admin/wine-groups-edit HTTP/1.1" 200 3811 "http://localhost:3000/wine-groups" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
