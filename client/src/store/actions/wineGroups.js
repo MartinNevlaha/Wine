@@ -34,16 +34,15 @@ export const fetchEditWineGroups = (token) => {
             const wines = resp.data.wines.map(wine => {
                 return {
                     ...wine,
-                    group: null,
                     isTouch: false
                 }
             })
-            const groups = resp.data.groups.map(group => {
-                return {
-                    ...group,
-                    wines: []
-                }
-            });
+            const epmtyGroup = {
+                _id: '',
+                groupName: '',
+            }
+            const groups = resp.data.groups;
+            groups.unshift(epmtyGroup)
             dispatch(fetchEditWineGroupsSuccess(wines, groups))
         })
         .catch(err => dispatch(fetchEditWineGroupsFailled(err)))

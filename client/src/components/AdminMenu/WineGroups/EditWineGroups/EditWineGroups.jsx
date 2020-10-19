@@ -21,7 +21,6 @@ const EditWineGroup = props => {
                 <select 
                 type="select"
                 onChange={e => props.getGroup(e, wine._id)}
-                defaultValue={props.defaultGroup}
                 >
                     {props.groups.map(opt => 
                         <option key={opt._id}
@@ -102,7 +101,7 @@ const EditWineGroup = props => {
                     {wineList}
                 </tbody>
             </table>
-            <Button>Ulož</Button>
+            <Button disabled={props.btnDisabled}>Ulož</Button>
         </ElementWrapper>
     )
 }

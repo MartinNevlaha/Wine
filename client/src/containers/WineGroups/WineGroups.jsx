@@ -10,19 +10,28 @@ class WineGroups extends Component {
     componentDidMount() {
         this.props.onFetchWineEditGroups(this.props.token)
     }
+
     getGroupHandler = (e, wineDbId) => {
         let index = e.target.selectedIndex;
         let el = e.target.childNodes[index];
         let groupDbId = el.getAttribute('id');
         const wineList = [...this.props.wineGroups.wineList];
         const choosenWineData = wineList.filter(wine => wine._id === wineDbId)[0]
-        this.props.onWineGroupChange(choosenWineData, groupDbId)
+        this.props.onWineGroupChange(choosenWineData, groupDbId);
     }
+    btnDisabled() {
+        const EmptyCheck = (val) => val.group;
+        let disabled = this.props.wineGroups.wineList.every(EmptyCheck);
+        return !disabled;
+    }
+
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <Back />
                 <EditWineGroups
+                btnDisabled={this.btnDisabled()}
+                defaultGroup={this.state}
                 wines={this.props.wineGroups.wineList}
                 groups={this.props.wineGroups.degGroups}
                 getGroup={this.getGroupHandler}/>

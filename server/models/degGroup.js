@@ -20,6 +20,10 @@ const postGroup = new Schema({
     results: [{
         type: Schema.Types.ObjectId,
         ref: 'Result'
+    }],
+    wines: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Wine'
     }]
 }, {timestamps: true});
 

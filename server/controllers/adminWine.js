@@ -38,7 +38,8 @@ exports.createWine = async (req, res, next) => {
             vintage,
             clasification,
             color,
-            character
+            character,
+            group: null
         });
         const response = await wine.save();
         res.status(201).json({
@@ -128,7 +129,12 @@ exports.importWines = async (req, res, next) => {
         error.statusCode = 422;
         return next(error) ;
     }
-    const importedData = req.body;
+    const importedData = req.body.map(wine => {
+        return {
+            ...wine,
+            group: null
+        }
+    })
     try {
         const deleted = await Wine.deleteMany({});
         if (!deleted) {

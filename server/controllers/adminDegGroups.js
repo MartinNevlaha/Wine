@@ -10,7 +10,12 @@ exports.createGroups = async (req, res, next) => {
         error.statusCode = 422;
         return next(error);
     }
-    const postData = req.body;
+    const postData = req.body.map(group => {
+        return {
+            ...group,
+            wines: []
+        }
+    });
     try {
         const emptyGroups = await Groups.deleteMany();
         if (!emptyGroups) {

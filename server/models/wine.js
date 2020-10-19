@@ -52,7 +52,11 @@ const postWine = new Schema({
         type: Number,
         min: 0,
         max: 100
-    }]
+    }],
+    group: {
+        type: Schema.Types.ObjectId,
+        ref: 'Group'
+    }
 }, {timestamps: true});
 
 module.exports = mongoose.model('Wine', postWine);
