@@ -24,17 +24,23 @@ class WineGroups extends Component {
         let disabled = this.props.wineGroups.wineList.every(EmptyCheck);
         return !disabled;
     }
+    savedWineGroupsHandler = () => {
+        console.log('je to napojene')
+    }
 
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <Back />
                 <EditWineGroups
+                save={this.savedWineGroupsHandler}
                 btnDisabled={this.btnDisabled()}
                 defaultGroup={this.state}
                 wines={this.props.wineGroups.wineList}
                 groups={this.props.wineGroups.degGroups}
-                getGroup={this.getGroupHandler}/>
+                getGroup={this.getGroupHandler}
+                sortWineGroups={this.props.onSortWineGroups}
+                />
             </ElementWrapper>
         )
     }
@@ -49,7 +55,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchWineEditGroups: (token) => dispatch(action.fetchEditWineGroups(token)),
-        onWineGroupChange: (choosenWineData, groupDbId) => dispatch(action.wineGroupChanged(choosenWineData, groupDbId))
+        onWineGroupChange: (choosenWineData, groupDbId) => dispatch(action.wineGroupChanged(choosenWineData, groupDbId)),
+        onSortWineGroups: (sortByProp) => dispatch(action.sortWineGroupsBy(sortByProp))
     }
 }
 

@@ -6,7 +6,8 @@ const initialState = {
     wineList: [],
     degGroups: [],
     loading: false,
-    error: null
+    error: null,
+    sortAmountUp: true,
 }
 
 const fetchEditWineGroupsStart = (state, action) => {
@@ -40,6 +41,16 @@ const wineGroupChanged = (state, action) => {
     })
 }
 
+const sortWineGroupsBy = (state, action) => {
+    const sortBy = action.sortByProp;
+    let sortedWineGroupsList = [];
+    state.sortAmountUp ? sortedWineGroupsList = [...state.wineList].sort((a ,b) => (a[sortBy] > b[sortBy] ) ? 1 : -1)
+    : sortedWineGroupsList = [...state.wineList].sort((a, b) => (a[sortBy] < b[sortBy] ) ? 1 : -1)
+    return updateObj(state, {
+        sortAmountUp: !state.sortAmountUp,
+        wineList: sortedWineGroupsList
+    })
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -51,6 +62,8 @@ const reducer = (state = initialState, action) => {
             return fetchEditWineGroupsFailled(state, action);
         case actionTypes.WINE_GROUP_CHANGED:
             return wineGroupChanged(state, action);
+        case actionTypes.SORT_WINE_GROUPS_BY:
+            return sortWineGroupsBy(state, action);
         default:
             return state;
     }

@@ -56,3 +56,10 @@ export const wineGroupChanged = (choosenWineData, groupDbId) => {
         groupDbId
     }
 }
+
+export const sortWineGroupsBy = (sortByProp) => {
+    return {
+        type: actionTypes.SORT_WINE_GROUPS_BY,
+        sortByProp: sortByProp
+    };
+};

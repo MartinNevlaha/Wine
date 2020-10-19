@@ -84,5 +84,6 @@ export {
 
 export {
     fetchEditWineGroups,
-    wineGroupChanged
+    wineGroupChanged,
+    sortWineGroupsBy
 } from './wineGroups';

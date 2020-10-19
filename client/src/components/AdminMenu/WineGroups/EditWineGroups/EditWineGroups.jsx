@@ -43,56 +43,56 @@ const EditWineGroup = props => {
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("id")}/>
+                            onClick={() => props.sortWineGroups("id")}/>
                         </td>
                         <td>
                             <span>Súťažná kategória</span>
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("competitiveCategory")}/>
+                            onClick={() => props.sortWineGroups("competitiveCategory")}/>
                         </td>
                         <td>
                             <span>Názov vína</span>
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("name")}/>
+                            onClick={() => props.sortWineGroups("name")}/>
                         </td>
                         <td>
                             <span>Klasifikácia vína</span>
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("clasification")}/>
+                            onClick={() => props.sortWineGroups("clasification")}/>
                         </td>
                         <td>
                             <span>Farba vína</span>
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("color")}/>
+                            onClick={() => props.sortWineGroups("color")}/>
                         </td>
                         <td>
                             <span>Charakter vína</span>
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("character")}/>
+                            onClick={() => props.sortWineGroups("character")}/>
                         </td>
                         <td>
                             <span>Výrobca vína</span>
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("producer")}/>
+                            onClick={() => props.sortWineGroups("producer")}/>
                         </td>
                         <td>
                             <span>Ročník vína</span>
                             <FontAwesomeIcon 
                             icon={faSort}
                             cursor="pointer" 
-                            onClick={() => this.props.sortWine("vintage")}/>
+                            onClick={() => props.sortWineGroups("vintage")}/>
                         </td>
                         <td>Pridaj do skupiny</td>
                     </tr>
@@ -101,7 +101,9 @@ const EditWineGroup = props => {
                     {wineList}
                 </tbody>
             </table>
-            <Button disabled={props.btnDisabled}>Ulož</Button>
+            <Button 
+            clicked={props.save}
+            disabled={props.btnDisabled}>Ulož</Button>
         </ElementWrapper>
     )
 }
