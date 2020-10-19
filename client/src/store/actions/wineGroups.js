@@ -63,3 +63,35 @@ export const sortWineGroupsBy = (sortByProp) => {
         sortByProp: sortByProp
     };
 };
+
+export const saveWineGroupsStart = () => {
+    return {
+        type: actionTypes.SAVE_WINE_GROUPS_START
+    }
+}
+
+export const saveWineGroupsSuccess = () => {
+    return {
+        type: actionTypes.SAVE_WINE_GROPS_SUCCESS,
+    }
+}
+
+export const saveWineGroupsFailled = (error) => {
+    return {
+        type: actionTypes.SAVE_WINE_GROUPS_FAIL,
+        error
+    }
+}
+
+export const saveWineGroups = (wineGroupsData ,token) => {
+    return dispatch => {
+        dispatch(saveWineGroupsStart());
+        axiosInstance.post('/admin/wine-groups-edit', wineGroupsData, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(saveWineGroupsSuccess()))
+        .catch(err => dispatch(saveWineGroupsFailled(err)))
+    }
+}

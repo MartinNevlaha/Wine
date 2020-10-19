@@ -52,6 +52,18 @@ const sortWineGroupsBy = (state, action) => {
     })
 }
 
+const saveWineGroupsStart = (state, action) => {
+    return updateObj(state, {loading: true, error: null})
+}
+
+const saveWineGroupsSuccess = (state, action) => {
+    return updateObj(state, {loading: false, error: null })
+}
+
+const saveWineGroupsFailled = (state, action) => {
+    return updateObj(state, {loading: false, error: action.error})
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_EDIT_WINE_GROUP_START:
@@ -64,6 +76,12 @@ const reducer = (state = initialState, action) => {
             return wineGroupChanged(state, action);
         case actionTypes.SORT_WINE_GROUPS_BY:
             return sortWineGroupsBy(state, action);
+        case actionTypes.SAVE_WINE_GROUPS_START:
+            return saveWineGroupsStart(state, action);
+        case actionTypes.SAVE_WINE_GROPS_SUCCESS:
+            return saveWineGroupsSuccess(state, action);
+        case actionTypes.SAVE_WINE_GROUPS_FAIL:
+            return saveWineGroupsFailled(state, action);
         default:
             return state;
     }

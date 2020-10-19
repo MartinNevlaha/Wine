@@ -27,3 +27,13 @@ exports.getEditGroup = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.saveWineGroups = async (req, res, next) => {
+    const wineGroupsData = req.body;
+    console.log(wineGroupsData)
+    try {
+        
+    } catch (error) {
+        
+    }
+}
