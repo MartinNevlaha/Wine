@@ -1,5 +1,6 @@
 const Wine = require('../models/wine');
 const Group = require('../models/degGroup');
+const wine = require('../models/wine');
 
 exports.getEditGroup = async (req, res, next) => {
     try {
@@ -30,10 +31,19 @@ exports.getEditGroup = async (req, res, next) => {
 
 exports.saveWineGroups = async (req, res, next) => {
     const wineGroupsData = req.body;
-    console.log(wineGroupsData)
     try {
-        
+        await wineGroupsData.forEach( async (wine) => {
+            const saveWine = await Wine.findById(wine._id);
+            saveWine.group = wine.group;
+            await saveWine.save();
+            const saveGroup = await Group.findById(wine.group);
+            saveGroup.wines.push(wine._id);
+            await saveGroup.save();
+        })
     } catch (error) {
-        
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
     }
 }

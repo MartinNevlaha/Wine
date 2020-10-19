@@ -86,7 +86,7 @@ export const saveWineGroupsFailled = (error) => {
 export const saveWineGroups = (wineGroupsData ,token) => {
     return dispatch => {
         dispatch(saveWineGroupsStart());
-        axiosInstance.post('/admin/wine-groups-edit', wineGroupsData, {
+        axiosInstance.put('/admin/wine-groups-edit', wineGroupsData, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

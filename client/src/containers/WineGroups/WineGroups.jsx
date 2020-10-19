@@ -28,11 +28,11 @@ class WineGroups extends Component {
         console.log('je to napojene')
         const wineGroupsData = this.props.wineGroups.wineList.map(wine => {
             return {
-                wine_id: wine._id,
+                _id: wine._id,
                 group: wine.group
             }
         })
-        console.log(wineGroupsData);
+        this.props.onSaveWineGroups(wineGroupsData, this.props.token);
     }
 
     render() {
@@ -63,7 +63,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchWineEditGroups: (token) => dispatch(action.fetchEditWineGroups(token)),
         onWineGroupChange: (choosenWineData, groupDbId) => dispatch(action.wineGroupChanged(choosenWineData, groupDbId)),
-        onSortWineGroups: (sortByProp) => dispatch(action.sortWineGroupsBy(sortByProp))
+        onSortWineGroups: (sortByProp) => dispatch(action.sortWineGroupsBy(sortByProp)),
+        onSaveWineGroups: (wineGroupsData, token) => dispatch(action.saveWineGroups(wineGroupsData, token))
     }
 }
 
