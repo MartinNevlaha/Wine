@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSort } from '@fortawesome/free-solid-svg-icons';
+import { faSort, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import classes from './EditWineGroups.module.css';
 import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
@@ -17,6 +17,7 @@ const EditWineGroup = props => {
             <td>{wine.character}</td>
             <td>{wine.producer}</td>
             <td>{wine.vintage}</td>
+            {props.isGroupEdited ?
             <td>
                 <select 
                 type="select"
@@ -30,6 +31,27 @@ const EditWineGroup = props => {
                     )}
                 </select>
             </td>
+            :<td>
+            <select 
+            type="select"
+            onChange={e => props.getGroup(e, wine._id)}
+            defaultValue={wine.group.groupName}
+            >
+                {props.groups.map(opt => 
+                    <option key={opt._id}
+                    id={opt._id}>
+                        {opt.groupName}
+                    </option>    
+                )}
+            </select>
+            </td>}
+            
+            {!props.isGroupEdited && 
+                <td>
+                    <FontAwesomeIcon 
+                    icon={faCheck}
+                    />
+                </td>}
         </tr>
     ))
     return (
@@ -95,6 +117,7 @@ const EditWineGroup = props => {
                             onClick={() => props.sortWineGroups("vintage")}/>
                         </td>
                         <td>Pridaj do skupiny</td>
+                        {!props.isGroupEdited && <td>Edituj</td>}
                     </tr>
                 </thead>
                 <tbody>
@@ -103,7 +126,7 @@ const EditWineGroup = props => {
             </table>
             <Button 
             clicked={props.save}
-            disabled={props.btnDisabled}>Ulož</Button>
+            disabled={props.isGroupEdited}>Ulož</Button>
         </ElementWrapper>
     )
 }

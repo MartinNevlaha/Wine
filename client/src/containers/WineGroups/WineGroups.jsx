@@ -5,8 +5,10 @@ import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import Back from '../../components/UI/Back/Back';
 import EditWineGroups from '../../components/AdminMenu/WineGroups/EditWineGroups/EditWineGroups';
 import * as action from '../../store/actions/index';
+import { isGroupEdited } from '../../shared/utility';
 
 class WineGroups extends Component {
+
     componentDidMount() {
         this.props.onFetchWineEditGroups(this.props.token)
     }
@@ -15,21 +17,22 @@ class WineGroups extends Component {
         let index = e.target.selectedIndex;
         let el = e.target.childNodes[index];
         let groupDbId = el.getAttribute('id');
+        const groupName = e.target.value;
         const wineList = [...this.props.wineGroups.wineList];
         const choosenWineData = wineList.filter(wine => wine._id === wineDbId)[0]
-        this.props.onWineGroupChange(choosenWineData, groupDbId);
+        this.props.onWineGroupChange(choosenWineData, groupDbId, groupName);
     }
-    btnDisabled() {
+    /*
+    isGroupEdited() {
         const EmptyCheck = (val) => val.group;
         let disabled = this.props.wineGroups.wineList.every(EmptyCheck);
         return !disabled;
-    }
+    }*/
     savedWineGroupsHandler = () => {
-        console.log('je to napojene')
         const wineGroupsData = this.props.wineGroups.wineList.map(wine => {
             return {
                 _id: wine._id,
-                group: wine.group
+                group: wine.group._id
             }
         })
         this.props.onSaveWineGroups(wineGroupsData, this.props.token);
@@ -41,7 +44,7 @@ class WineGroups extends Component {
                 <Back />
                 <EditWineGroups
                 save={this.savedWineGroupsHandler}
-                btnDisabled={this.btnDisabled()}
+                isGroupEdited={isGroupEdited(this.props.wineGroups.wineList)}
                 defaultGroup={this.state}
                 wines={this.props.wineGroups.wineList}
                 groups={this.props.wineGroups.degGroups}
@@ -62,7 +65,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchWineEditGroups: (token) => dispatch(action.fetchEditWineGroups(token)),
-        onWineGroupChange: (choosenWineData, groupDbId) => dispatch(action.wineGroupChanged(choosenWineData, groupDbId)),
+        onWineGroupChange: (choosenWineData, groupDbId, groupName) => dispatch(action.wineGroupChanged(choosenWineData, groupDbId, groupName)),
         onSortWineGroups: (sortByProp) => dispatch(action.sortWineGroupsBy(sortByProp)),
         onSaveWineGroups: (wineGroupsData, token) => dispatch(action.saveWineGroups(wineGroupsData, token))
     }

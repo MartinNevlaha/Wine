@@ -34,3 +34,9 @@ export const searchFilter = (oldList, filteredBy, filterValue) => {
             val[filteredBy].toString().toLowerCase().includes(filterValue.toLowerCase()))
     return filteredList;
 };
+
+export const isGroupEdited = (array) => {
+    const EmptyCheck = (val) => val.group;
+    let disabled = array.every(EmptyCheck);
+    return !disabled;
+}

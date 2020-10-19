@@ -35,7 +35,8 @@ const wineGroupChanged = (state, action) => {
         wineList: {
             [index]: {
                 isTouch: {$set: true},
-                group: {$set: action.groupDbId}
+                group: {
+                    $set: action.groupData}
             }
         }
     })

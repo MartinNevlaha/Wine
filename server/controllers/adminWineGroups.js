@@ -1,10 +1,17 @@
+const { validationResult } = require('express-validator');
+
 const Wine = require('../models/wine');
 const Group = require('../models/degGroup');
-const wine = require('../models/wine');
 
 exports.getEditGroup = async (req, res, next) => {
+    const populateQuery = {
+        path: 'group',
+        model: "Group",
+        select: 'groupName _id'
+    }
     try {
-        const wines = await Wine.find({}, '-results -totalResults -wineCategory -finalResult');
+        const wines = await Wine.find({}, 
+            '-results -totalResults -wineCategory -finalResult').populate(populateQuery);
         if (!wines) {
             const error = new Error("Nemôžem načítať dáta z DB");
             error.statusCode = 404;
@@ -30,8 +37,15 @@ exports.getEditGroup = async (req, res, next) => {
 }
 
 exports.saveWineGroups = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const error = new Error('Niektoré z poskytnutých dát sú nesprávne')
+        error.statusCode = 422;
+        return next(error);
+    }
     const wineGroupsData = req.body;
     try {
+
         await wineGroupsData.forEach( async (wine) => {
             const saveWine = await Wine.findById(wine._id);
             if (!saveWine) {
@@ -49,6 +63,9 @@ exports.saveWineGroups = async (req, res, next) => {
             }
             saveGroup.wines.push(wine._id);
             await saveGroup.save();
+        })
+        res.status(200).json({
+            message: 'dáta uložené'
         })
     } catch (error) {
         if(!error.statusCode) {
