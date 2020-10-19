@@ -26,6 +26,13 @@ class WineGroups extends Component {
     }
     savedWineGroupsHandler = () => {
         console.log('je to napojene')
+        const wineGroupsData = this.props.wineGroups.wineList.map(wine => {
+            return {
+                wine_id: wine._id,
+                group: wine.group
+            }
+        })
+        console.log(wineGroupsData);
     }
 
     render() {
