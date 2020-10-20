@@ -88,15 +88,18 @@ exports.getWineInfo = async (req, res, next) => {
     const degId = req.userData.degId;
     const groupId = req.userData.groupId;
     try {
+        const wineInGroups = await Wine.find({group: groupId}, '_id id');
+        console.log(wineInGroups)
+        //dorob
         const isAllreadyDegust = await Result.findOne({degId: degId, wineId: wineId});
         const wine = await Wine.findOne({id: wineId, group: groupId}, 'color character competitiveCategory vintage');
         if (!wine) {
             const error = new Error('Zadané číslo vína neexistuje, alebo nie je určené pre Vašu skupinu, zadajte iné')
-            error.statusCode = 404;
+            error.statusCode = 409;
             return next(error);
         }
         if (isAllreadyDegust) {
-            const error = new Error('Víno ste už hodnitili, zadajte prosím iné číslo vína');
+            const error = new Error('Víno ste už hodnotili, zadajte prosím iné číslo vína');
             error.statusCode = 409;
             return next(error);
         }

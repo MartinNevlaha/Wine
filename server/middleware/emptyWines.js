@@ -10,6 +10,11 @@ module.exports = async (req, res, next) => {
         }
         await groups.forEach(async group => {
             const groupToEmpty = await Group.findById(group._id);
+            if (!groupToEmpty) {
+                const error = new Error('Nemôžem uložiť priradenie vín do skupín');
+                error.statusCode = 404;
+                return next(error);
+            }
             groupToEmpty.wines = [];
             await groupToEmpty.save();
         })
