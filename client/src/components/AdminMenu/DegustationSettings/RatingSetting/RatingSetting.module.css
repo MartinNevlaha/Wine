@@ -13,3 +13,7 @@
 .RatingSetting label {
     margin: 0 50px;
 }
+.RatingSetting select {
+    text-align: center;
+    margin: 10px;
+}

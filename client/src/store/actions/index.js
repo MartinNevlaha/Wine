@@ -80,7 +80,8 @@ export {
 } from './SystemInfo';
 
 export {
-    saveSettings
+    saveSettings,
+    saveIsDegustationOpen
 } from './systemSettings';
 
 export {
