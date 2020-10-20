@@ -22,7 +22,7 @@ const isAdminAuth = (req, res, next) => {
         }
         req.userData = {
             adminId: decodedToken.adminId,
-            role: decodedToken.role
+            role: decodedToken.role,
         }
         next();
     } catch (err) {
@@ -51,6 +51,8 @@ const isDegustatorAuth = (req, res, next) => {
         req.userData = {
             degId: decodedToken.degId,
             role: decodedToken.role,
+            groupId: decodedToken.groupId,
+            group: decodedToken.group
         }
         next();
     } catch (err) {

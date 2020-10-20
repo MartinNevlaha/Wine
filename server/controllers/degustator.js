@@ -86,11 +86,12 @@ exports.postResult = async(req, res, next) => {
 exports.getWineInfo = async (req, res, next) => {
     const wineId = req.params.wineId;
     const degId = req.userData.degId;
+    const groupId = req.userData.groupId;
     try {
         const isAllreadyDegust = await Result.findOne({degId: degId, wineId: wineId});
-        const wine = await Wine.findOne({id: wineId}, 'color character');
+        const wine = await Wine.findOne({id: wineId, group: groupId}, 'color character competitiveCategory vintage');
         if (!wine) {
-            const error = new Error('Zadané číslo vína neexistuje, zadajte iné')
+            const error = new Error('Zadané číslo vína neexistuje, alebo nie je určené pre Vašu skupinu, zadajte iné')
             error.statusCode = 404;
             return next(error);
         }
