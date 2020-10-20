@@ -11,6 +11,9 @@ import Modal from '../../components/UI/Modal/Modal';
 import ResumeResults from '../../components/Rating/ResumeResults/ResumeResults';
 
 class Degustator extends Component {
+    componentDidMount() {
+
+    }
 
     constructor(props) {
         super(props);
@@ -104,6 +107,7 @@ class Degustator extends Component {
                     degInfo={this.props.degInfo}/>
                 </Modal>
                 <DegustationTable 
+                wineInGroups={this.props.wineInGroups}
                 wineIdValue={this.props.results.wineId}
                 getWineId={this.getWineIdHandler}
                 wineInfo={this.props.wineInfo}
@@ -140,6 +144,7 @@ const mapStateToProps = state => {
         sending: state.wineResults.sending,
         fetching: state.wineResults.fetching,
         wineInfo: state.wineResults.wineInfo,
+        wineInGroups: state.wineResults.wineInGroups,
         token: state.degAuth.token
     }
 }

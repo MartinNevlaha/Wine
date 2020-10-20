@@ -13,7 +13,8 @@ const initialState = {
         competitiveCategory: null,
         vintage: null,
         error: null
-    }
+    },
+    wineInGroups: null
 }
 const resultsSendInit = (state, action) => {
     return updateObj(state, { sending: true })
@@ -59,7 +60,7 @@ const fetchWineInfoSucces = (state, action) => {
     return updateObj(state, {
         fetching: false,
         loading: false,
-        wineInfo: wineInfo
+        wineInfo: wineInfo,
     })
 }
 

@@ -88,7 +88,7 @@ export const fetchWineInfo = (wineId, token) => {
                 }
             })
                 .then(resp => {
-                    dispatch(fetchWineInfoSucces(resp.data.wine))
+                    dispatch(fetchWineInfoSucces(resp.data.wine));
                 })
                 .catch(err => {
                     const error = {

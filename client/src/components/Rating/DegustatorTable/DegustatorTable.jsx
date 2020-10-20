@@ -9,6 +9,7 @@ const degustatorTable = (props) => (
         <h2>Hodnotenie vína</h2>
         <div className={classes.DegHeader}>
             <IdInput 
+            options={props.wineInGroups}
             getWineId={props.getWineId}
             value={props.wineIdValue} />
             {props.wineInfo.error && <p style={{color:"red", margin:"5px"}}>{props.wineInfo.error.message}</p>}

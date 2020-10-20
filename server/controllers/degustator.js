@@ -88,9 +88,6 @@ exports.getWineInfo = async (req, res, next) => {
     const degId = req.userData.degId;
     const groupId = req.userData.groupId;
     try {
-        const wineInGroups = await Wine.find({group: groupId}, '_id id');
-        console.log(wineInGroups)
-        //dorob
         const isAllreadyDegust = await Result.findOne({degId: degId, wineId: wineId});
         const wine = await Wine.findOne({id: wineId, group: groupId}, 'color character competitiveCategory vintage');
         if (!wine) {
@@ -105,7 +102,28 @@ exports.getWineInfo = async (req, res, next) => {
         }
         res.status(200).json({
             message: 'Víno načítané',
-            wine: wine
+            wine: wine,
+        })
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        return next(error);
+    }
+};
+
+exports.getWineInGroup = async (req, res, next) => {
+    const groupId = req.userData.groupId;
+    try {
+        const wineInGroup = await Wine.find({group: groupId}, '_id id');
+        if (!wineInGroup) {
+            const error = new Error('Nemôžem načitať vína pre skupinu degsutátora');
+            error.statusCode = 404;
+            return next(error);
+        }
+        res.status(200).json({
+            message: 'Dáta načítané',
+            wineInGroup: wineInGroup
         })
     } catch (error) {
         if(!error.statusCode) {
