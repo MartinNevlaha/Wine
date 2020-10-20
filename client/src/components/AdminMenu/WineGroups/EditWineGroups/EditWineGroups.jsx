@@ -117,7 +117,7 @@ const EditWineGroup = props => {
                             onClick={() => props.sortWineGroups("vintage")}/>
                         </td>
                         <td>Pridaj do skupiny</td>
-                        {!props.isGroupEdited && <td>Edituj</td>}
+                        {!props.isGroupEdited && <td>Kontrola</td>}
                     </tr>
                 </thead>
                 <tbody>

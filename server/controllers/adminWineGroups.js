@@ -44,8 +44,8 @@ exports.saveWineGroups = async (req, res, next) => {
         return next(error);
     }
     const wineGroupsData = req.body;
-    try {
 
+    try {
         await wineGroupsData.forEach( async (wine) => {
             const saveWine = await Wine.findById(wine._id);
             if (!saveWine) {
@@ -64,6 +64,7 @@ exports.saveWineGroups = async (req, res, next) => {
             saveGroup.wines.push(wine._id);
             await saveGroup.save();
         })
+
         res.status(200).json({
             message: 'dáta uložené'
         })
