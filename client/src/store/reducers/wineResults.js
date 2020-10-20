@@ -10,6 +10,8 @@ const initialState = {
     wineInfo: {
         color: null,
         character: null,
+        competitiveCategory: null,
+        vintage: null,
         error: null
     }
 }
@@ -50,6 +52,8 @@ const fetchWineInfoSucces = (state, action) => {
     const wineInfo = updateObj(state.wineInfo, {
         color: action.data.color,
         character: action.data.character,
+        competitiveCategory: action.data.competitiveCategory,
+        vintage: action.data.vintage,
         error: null 
     })
     return updateObj(state, {
@@ -60,8 +64,13 @@ const fetchWineInfoSucces = (state, action) => {
 }
 
 const fetchWineInfoFailled = (state, action) => {
-    console.log(action.error)
-    const errorTrue = updateObj(state.wineInfo, {error: action.error})
+    const errorTrue = updateObj(state.wineInfo, {
+        error: action.error,
+        color: null,
+        character: null,
+        competitiveCategory: null,
+        vintage: null,
+    })
     return updateObj(state, {
         fetching: false, 
         loading: false,

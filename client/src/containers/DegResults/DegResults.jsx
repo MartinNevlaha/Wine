@@ -14,7 +14,6 @@ class DegResults extends Component {
     componentDidMount() {
         this.props.onFetchDegResults(this.props.degInfo.token)
     }
-
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
