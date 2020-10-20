@@ -11,10 +11,6 @@ import Modal from '../../components/UI/Modal/Modal';
 import ResumeResults from '../../components/Rating/ResumeResults/ResumeResults';
 
 class Degustator extends Component {
-    componentDidMount() {
-
-    }
-
     constructor(props) {
         super(props);
         this.state = this.initialState
@@ -47,6 +43,9 @@ class Degustator extends Component {
             isWineIdValid: false
         }
     }
+    componentDidMount() {
+        this.props.onFetchWineInGroup(this.props.token)
+    }
     resetHandler = () => {
         this.setState(this.initialState)
     }
@@ -56,14 +55,13 @@ class Degustator extends Component {
             return indexClicked === index; 
         })})
     };
-    getWineIdHandler = (e) => {
+    getWineIdHandler = e => {
         this.props.onWineIdHandler(e.target.value)
         this.setState({isWineIdValid: isIdValid(e.target.value)})
         if (e.target.value) {
             this.props.onFetchWineInfo(e.target.value, this.props.token)
         }
-        
-    };
+    }
     generateBtn (btnValues, btnType) {
         return btnValues.map((btn, index) => {
             return (
@@ -154,7 +152,8 @@ const mapDispatchToProps = dispatch => {
         onWineIdHandler: (id) => dispatch(action.getWineId(id)),
         onResultSendInit: () => dispatch(action.resultsSendInit()),
         onResultSendCanceled: () => dispatch(action.resultsSendCanceled()),
-        onFetchWineInfo: (wineId, token) => dispatch(action.fetchWineInfo(wineId, token))
+        onFetchWineInfo: (wineId, token) => dispatch(action.fetchWineInfo(wineId, token)),
+        onFetchWineInGroup: (token) => dispatch(action.fetchWineInGroup(token))
     }
 }
 

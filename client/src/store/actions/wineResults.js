@@ -100,3 +100,44 @@ export const fetchWineInfo = (wineId, token) => {
         }, 1000)
     }
 }
+
+export const fetchWineInGroupStart = () => {
+    return {
+        type: actionTypes.FETCH_WINE_IN_GROUP_START
+    };
+};
+
+export const fetchWineInGroupSuccess = (wineInGroup) => {
+    return {
+        type: actionTypes.FETCH_WINE_IN_GROUP_SUCCESS,
+        wineInGroup
+    };
+};
+
+export const fetchWineInGroupFailled = (error) => {
+    return {
+        type: actionTypes.FETCH_WINE_IN_GROUP_FAIL,
+        error
+    };
+};
+
+export const fetchWineInGroup = (token) => {
+    return dispatch => {
+        dispatch(fetchWineInGroupStart());
+        axiosInstance.get('/degustator/wine-list-group', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => {
+            const wineInGroup = resp.data.wineInGroup;
+            const emptyOption = {
+                _id: 'empty',
+                id: ''
+            }
+            wineInGroup.unshift(emptyOption);
+            dispatch(fetchWineInGroupSuccess(wineInGroup))
+        })
+        .catch(err=> dispatch(fetchWineInGroupFailled(err)))
+    }
+}

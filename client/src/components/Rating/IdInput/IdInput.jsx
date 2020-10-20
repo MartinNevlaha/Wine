@@ -5,12 +5,17 @@ import classes from './IdInput.module.css';
 const idInput = (props) => (
     <div className={classes.IdInput}>
         <label >Číslo vína</label>
-        <select>
-
+        <select
+        onChange={e => props.getWineId(e)}
+        >
+            {props.options.map(opt => (
+                <option 
+                key={opt._id}
+                id={opt._id}>
+                    {opt.id}
+                </option>
+            ))}
         </select>
-        <input type="number" 
-        value={props.value}
-        onChange={(e)=>props.getWineId(e)} />
     </div>
 );
 

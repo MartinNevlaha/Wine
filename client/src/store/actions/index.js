@@ -21,7 +21,8 @@ export {
     resultsSend,
     resultsSendInit,
     resultsSendCanceled,
-    fetchWineInfo
+    fetchWineInfo,
+    fetchWineInGroup
 } from './wineResults';
 
 export {
