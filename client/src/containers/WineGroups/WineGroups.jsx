@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import Back from '../../components/UI/Back/Back';
@@ -22,12 +23,6 @@ class WineGroups extends Component {
         const choosenWineData = wineList.filter(wine => wine._id === wineDbId)[0]
         this.props.onWineGroupChange(choosenWineData, groupDbId, groupName);
     }
-    /*
-    isGroupEdited() {
-        const EmptyCheck = (val) => val.group;
-        let disabled = this.props.wineGroups.wineList.every(EmptyCheck);
-        return !disabled;
-    }*/
     savedWineGroupsHandler = () => {
         const wineGroupsData = this.props.wineGroups.wineList.map(wine => {
             return {
@@ -36,6 +31,7 @@ class WineGroups extends Component {
             }
         })
         this.props.onSaveWineGroups(wineGroupsData, this.props.token);
+        this.props.history.goBack();
     }
 
     render() {
@@ -71,4 +67,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WineGroups);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WineGroups));
