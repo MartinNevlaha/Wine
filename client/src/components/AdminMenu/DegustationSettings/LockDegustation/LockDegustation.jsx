@@ -21,7 +21,7 @@ const LockDegustation = props => (
         value={props.lock.value}
         change={props.getLockHandler}
         >Zamknúť / Odomkúť</UserInputFrom>
-        <Button clicked={props.save}>Ulož nastavenie</Button>
+        <Button clicked={props.saveIsLock}>Ulož nastavenie</Button>
     </div>
 );
 

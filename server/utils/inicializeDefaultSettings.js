@@ -5,7 +5,8 @@ const inicializeDefaultSettins = async () => {
         const setting = await Setting.find();
         if (!setting.length) {
             const defaultSetting = new Setting({
-                isValuesEliminated: true
+                isValuesEliminated: true,
+                isDegustationOpen: true
             })
             await defaultSetting.save();
         }

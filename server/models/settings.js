@@ -7,6 +7,11 @@ const postSetting = new Schema({
         type: Boolean,
         default: true,
         required: true
+    },
+    isDegustationOpen: {
+        type: Boolean,
+        default: true,
+        required: true
     }
 })
 

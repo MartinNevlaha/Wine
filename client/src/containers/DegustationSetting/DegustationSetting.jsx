@@ -68,7 +68,7 @@ class DegustationSetting extends Component {
                     <LockDegustation 
                     getLockHandler={this.getValueHandler}
                     lock={this.state.lock}
-                    save={this.saveSettingLockHandler}
+                    saveIsLock={this.saveSettingLockHandler}
                     />
                     </React.Fragment>
                 }
