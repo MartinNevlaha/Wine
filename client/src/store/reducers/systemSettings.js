@@ -36,14 +36,12 @@ const saveIsDegustationOpenStart = (state, action) => {
 const saveIsDegustationOpenSuccess = (state, action) => {
     return updateObj(state, {
         loading: false,
-        isSaveSucces: true,
         isDegustationOpen: action.isOpen
     })
 }
 const saveIsDegustationOpenFail = (state, action) => {
     return updateObj(state, {
         loading: false,
-        isSaveSucces: false,
     })
 }
 

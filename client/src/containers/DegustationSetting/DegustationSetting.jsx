@@ -10,25 +10,23 @@ import Back from '../../components/UI/Back/Back';
 
 class DegustationSetting extends Component {
     state = {
-        input: {
+        eliminatedValues: {
             id: 'input',
-            labelName: 'Systém vyhodnotenia',
-            inputType: 'select',
-            placeholder: '',
             options: ['Eliminácia krajných hodnôt', 'Bez elminácie krajných hodnôt'],
-            value: 'Eliminácia krajných hodnôt',
+            value: '',
             isTrue: true
         },
         lock: {
             id: 'lock',
-            labelName: 'Zamknutie degustácie',
-            inputType: 'select',
-            placeholder: '',
             options: ['Odomknúť degustáciu', 'Zamknúť degustáciu'],
-            value: 'Odomknúť',
+            value: '',
             isTrue: true
         }
     }
+    componentDidMount() {
+        this.props.onFetchSettings(this.props.token);
+    }
+
     getValueHandler = (e, id) => {
         console.log(id)
         let isTrue;
@@ -63,12 +61,14 @@ class DegustationSetting extends Component {
                     <React.Fragment>
                     <RatingSetting 
                     getValueHandler={this.getValueHandler}
-                    input={this.state.input}
-                    save={this.saveSettingValueHandler}/>
+                    eliminatedValues={this.state.eliminatedValues}
+                    save={this.saveSettingValueHandler}
+                    isValuesEliminated={this.props.isValuesEliminated}/>
                     <LockDegustation 
                     getLockHandler={this.getValueHandler}
                     lock={this.state.lock}
                     saveIsLock={this.saveSettingLockHandler}
+                    isDegustationOpen={this.props.isDegustationOpen}
                     />
                     </React.Fragment>
                 }
@@ -80,11 +80,13 @@ const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
         loading: state.systemSettins.loading,
-        isSaveSuccess: state.systemSettins.isSaveSucces
+        isValuesEliminated: state.systemSettins.isValuesEliminated,
+        isDegustationOpen: state.systemSettins.isDegustationOpen
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
+        onFetchSettings: (token) => dispatch(action.fetchSetting(token)),
         onSaveSettings: (setting, token) => dispatch(action.saveSettings(setting, token)),
         onSaveIsDegustationOpen: (isOpen, token) => dispatch(action.saveIsDegustationOpen(isOpen, token))
     }

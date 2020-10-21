@@ -1,26 +1,30 @@
 import React from 'react';
 
-import UserInputFrom from '../../../UserInput/UserInput';
 import Button from '../../../UI/Button/Button';
 import classes from '../RatingSetting/RatingSetting.module.css';
 
 const LockDegustation = props => (
     <div className={classes.RatingSetting}>
         <h4>Otvorenie / Zatvorenie degustácie</h4>
+        <p style={{color: "red"}}>Aktuálne nastavenie:  
+            {props.isDegustationOpen ? 
+            ' ' + props.lock.options[0] : 
+            ' ' + props.lock.options[1]}</p>
         <p>Možnosti výberu</p>
         <ul>
             <li>Odomknúť - Degustácia je otvorená jedotlivý degustátori môžu pridávať svoje hodnotenia. Administrátorské nastavenia vín, degustátorov, skupín sú naopak zamknuté</li>
             <li>Zamknúť - Degustácia je zamknutá žiadny degustátor nemôže pridávať hodnotenie, naopak všetky administrátorské možnosti sú odomknuté</li>
         </ul>
-        <UserInputFrom 
-        id={props.lock.id}
-        labelName={props.lock.labelName}
-        inputType={props.lock.inputType}
-        placeholder={props.lock.placeholder}
-        options={props.lock.options}
-        value={props.lock.value}
-        change={props.getLockHandler}
-        >Zamknúť / Odomkúť</UserInputFrom>
+        <select
+        type='select'
+        defaultValue={props.isDegustationOpen ? props.lock.options[0] : props.lock.options[1]}
+        onChange={e => props.getLockHandler(e, props.lock.id)}>
+            {props.lock.options.map(opt => (
+                <option key={opt}>
+                    {opt}
+                </option>
+            ))}
+        </select>
         <Button clicked={props.saveIsLock}>Ulož nastavenie</Button>
     </div>
 );

@@ -7,9 +7,10 @@ export const saveSettingsStart = () => {
     };
 };
 
-export const saveSettingsSuccess = () => {
+export const saveSettingsSuccess = (isValuesEliminated) => {
     return {
-        type: actionTypes.SAVE_SETTING_SUCCESS
+        type: actionTypes.SAVE_SETTING_SUCCESS,
+        isValuesEliminated
     };
 };
 
@@ -23,12 +24,12 @@ export const saveSettingsFailled = (error) => {
 export const saveSettings = (settings, token) => {
     return dispatch => {
         dispatch(saveSettingsStart());
-        axiosInstance.put('admin/degustation-settings', settings, {
+        axiosInstance.put('/admin/degustation-settings', settings, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(resp => dispatch(saveSettingsSuccess()))
+            .then(resp => dispatch(saveSettingsSuccess(resp.data.setting.isValuesEliminated)))
             .catch(err => dispatch(saveSettingsFailled(err)))
     }
 }
@@ -59,7 +60,9 @@ export const saveIsDegustationOpen = (isOpen, token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(saveIsDegustationOpenSuccess(resp.data.isOpen)))
+        .then(resp => {
+            dispatch(saveIsDegustationOpenSuccess(resp.data.setting.isDegustationOpen))
+        })
         .catch(err => dispatch(saveIsDegustationOpenFail(err)))
     }
 }
@@ -88,14 +91,16 @@ export const fetchSettingFailled = (error) => {
 export const fetchSetting = (token) => {
     return dispatch => {
         dispatch(fetchSettingStart());
-        axiosInstance.get('/degustation-settings', {
+        axiosInstance.get('admin/degustation-settings', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         })
         .then(resp => {
-        const {isValuesEliminated, isDegustationOpen} = resp.data.settings;
-        dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen))
+            console.log(resp.data.settings)
+            const {isValuesEliminated, isDegustationOpen} = resp.data.settings;
+
+            dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen))
         })
         .catch(err => dispatch(fetchSettingFailled(err)))
     }

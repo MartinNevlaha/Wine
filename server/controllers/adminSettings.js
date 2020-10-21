@@ -70,7 +70,7 @@ exports.getSettings = async (req, res, next) => {
         }
         res.status(200).json({
             message: 'Nastavenia načítané',
-            settings: settings
+            settings: settings[0]
         })
     } catch (error) {
         if(!error.statusCode) {
