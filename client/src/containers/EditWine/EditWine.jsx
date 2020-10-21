@@ -100,7 +100,6 @@ class EditWine extends Component {
     }
     componentDidMount() {
         this.props.onFetchWineList(this.props.token);
-        this.props.onFetchSystemSettings(this.props.token);
     }
 
     componentDidUpdate(prevProps) {
