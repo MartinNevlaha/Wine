@@ -1032,3 +1032,4 @@
 ::1 - - [21/Oct/2020:09:34:41 +0000] "OPTIONS /admin/degustation-setting-is-open HTTP/1.1" 200 3 "http://localhost:3000/degustation-setting" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
 ::1 - - [21/Oct/2020:09:34:41 +0000] "PUT /admin/degustation-setting-is-open HTTP/1.1" 200 151 "http://localhost:3000/degustation-setting" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4292.2 Safari/537.36"
 ::1 - - [21/Oct/2020:09:34:45 +0000] "GET /admin/degustation-settings HTTP/1.1" 200 143 "-" "PostmanRuntime/7.26.5"
+::1 - - [21/Oct/2020:10:21:04 +0000] "GET /admin/degustation-settings HTTP/1.1" 200 143 "-" "PostmanRuntime/7.26.5"

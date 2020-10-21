@@ -63,3 +63,40 @@ export const saveIsDegustationOpen = (isOpen, token) => {
         .catch(err => dispatch(saveIsDegustationOpenFail(err)))
     }
 }
+
+export const fetchSettingStart = () => {
+    return {
+        type: actionTypes.FETCH_SETTINGS_START
+    }
+}
+
+export const fetchSettingSuccess = (isValuesEliminated, isDegustationOpen) => {
+    return {
+        type: actionTypes.FETCH_SETTINGS_SUCCESS,
+        isValuesEliminated,
+        isDegustationOpen
+    }
+} 
+
+export const fetchSettingFailled = (error) => {
+    return {
+        type: actionTypes.FETCH_SETTINGS_FAIL,
+        error
+    }
+}
+
+export const fetchSetting = (token) => {
+    return dispatch => {
+        dispatch(fetchSettingStart());
+        axiosInstance.get('/degustation-settings', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => {
+        const {isValuesEliminated, isDegustationOpen} = resp.data.settings;
+        dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen))
+        })
+        .catch(err => dispatch(fetchSettingFailled(err)))
+    }
+}

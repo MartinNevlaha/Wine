@@ -4,7 +4,7 @@ import { updateObj } from '../../shared/utility';
 const initialState = {
     loading: false,
     error: null,
-    isSaveSucces: false,
+    isValuesEliminated: false,
     isDegustationOpen: false
 }
 
@@ -12,7 +12,6 @@ const saveSettingsStart = (state, action) => {
     return updateObj(state, {
         loading: true, 
         error: null,
-        isSaveSucces: false
     })
 }
 
@@ -20,7 +19,7 @@ const saveSettingsSuccess = (state, action) => {
     return updateObj(state, {
         loading: false, 
         error: null,
-        isSaveSucces: true
+        isValuesEliminated: action.isValuesEliminated
     })
 }
 
@@ -28,7 +27,6 @@ const saveSettingsFailled = (state, action) => {
     return updateObj(state, {
         loading: false, 
         error: action.error,
-        isSaveSucces: false
     })
 }
 
@@ -49,8 +47,33 @@ const saveIsDegustationOpenFail = (state, action) => {
     })
 }
 
+const fetchSystemSettingsStart = (state, action) => {
+    return updateObj(state, {
+        loading: true
+    })
+}
+const fetchSystemSettingsSucces = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        isDegustationOpen: action.isDegustationOpen,
+        isValuesEliminated: action.isValuesEliminated
+    })
+}
+
+const fetchSystemSettingsFail = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.FETCH_SETTINGS_START:
+            return fetchSystemSettingsStart(state, action);
+        case actionTypes.FETCH_SETTINGS_SUCCESS:
+            return fetchSystemSettingsSucces(state, action);
+        case actionTypes.FETCH_SETTINGS_FAIL:
+            return fetchSystemSettingsFail(state, action);
         case actionTypes.SAVE_SETTING_START:
             return saveSettingsStart(state, action);
         case actionTypes.SAVE_SETTING_SUCCESS:
