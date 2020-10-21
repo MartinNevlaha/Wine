@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
@@ -9,8 +10,12 @@ import DegustatorGroup from '../../components/AdminMenu/DegGropsList/DegGroupsLi
 import WineResults from '../../components/AdminMenu/WineResults/WineResults';
 import SystemMenu from '../../components/AdminMenu/SystemMenu/SystemMenu';
 import WineGroups from '../../components/AdminMenu/WineGroups/WineGroups';
+import * as action from '../../store/actions/index';
 
 class AdminZone extends Component {
+    componentDidMount() {
+        this.props.onFetchSystemSettings(this.props.token)
+    }
     
     clickHandler = (index, adminChoose, btnType) => {
         if (adminChoose === 'Uprav vína') {
@@ -38,15 +43,30 @@ class AdminZone extends Component {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <DegustationSettings clicked={this.clickHandler}/>
-                <WineList clicked={this.clickHandler} />
-                <DegustatorList clicked={this.clickHandler}/>
-                <DegustatorGroup clicked={this.clickHandler}/>
-                <WineGroups clicked={this.clickHandler}/>
+                {this.props.isDegustationOpen &&
+                <React.Fragment>
+                    <WineList clicked={this.clickHandler} />
+                    <DegustatorList clicked={this.clickHandler}/>
+                    <DegustatorGroup clicked={this.clickHandler}/>
+                    <WineGroups clicked={this.clickHandler}/>
+                 </React.Fragment>
+                }
                 <WineResults />
                 <SystemMenu clicked={this.clickHandler}/>
             </ElementWrapper>
             );
     }
 }
+const mapStateToProps = state => {
+    return {
+        isDegustationOpen: state.systemSettins.isDegustationOpen,
+        token: state.adminAuth.token
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchSystemSettings: (token) => dispatch(action.fetchSetting(token))
+    }
+}
 
-export default withRouter(AdminZone);
+export default  connect(mapStateToProps, mapDispatchToProps) (withRouter(AdminZone));

@@ -88,7 +88,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAdminAutoLogin: () => dispatch(action.adminAuthCheckState()),
-    onDegAutoLogin: () => dispatch(action.degAuthCheckState())
+    onDegAutoLogin: () => dispatch(action.degAuthCheckState()),
   }
 }
 

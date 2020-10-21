@@ -100,7 +100,9 @@ class EditWine extends Component {
     }
     componentDidMount() {
         this.props.onFetchWineList(this.props.token);
+        this.props.onFetchSystemSettings(this.props.token);
     }
+
     componentDidUpdate(prevProps) {
         if (this.props.wineList.isAddWineSucces !== prevProps.wineList.isAddWineSucces) {
             this.setState(this.initialState);
@@ -228,6 +230,7 @@ class EditWine extends Component {
         this.props.onDatabaseDelete(this.props.token)
     }
     render () {
+        console.log(this.props.isDegustationOpen)
         let modalContent =
         <React.Fragment>
             <p>Ste si istý ?</p>
@@ -253,6 +256,7 @@ class EditWine extends Component {
         
         return (
             <ElementWrapper wrapperType="ElementWrapper">
+                {this.props.isDegustationOpen && <p>Otvorena</p>}
                 <Modal
                 closeModal={this.toggleModalHandler} 
                 show={this.state.isModalShow}>
