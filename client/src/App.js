@@ -23,6 +23,7 @@ const DegResults = React.lazy(() => import('./containers/DegResults/DegResults')
 const SystemInfo = React.lazy(() => import('./containers/SystemInfo/SystemInfo'));
 const DegustationSetting = React.lazy(() => import('./containers/DegustationSetting/DegustationSetting'));
 const WineGroups = React.lazy(() => import('./containers/WineGroups/WineGroups'));
+const FinalResuls = React.lazy(() => import('./containers/FinalResults/FinalResults'));
 
 function App(props) {
   useEffect(() => {
@@ -41,8 +42,8 @@ function App(props) {
     routes = (
       <Switch>
         <Route path="/author" />
-        <Route path="/results" />
         <Route path="/logout" component={Logout}/>
+        <Route path="/results" render={()=><Suspense fallback={<Spinner />}><FinalResuls /></Suspense>} />
         <Route path="/system-info" render={()=><Suspense fallback={<Spinner />}><SystemInfo /></Suspense>} />
         <Route path="/wine-groups" render={()=><Suspense fallback={<Spinner />}><WineGroups /></Suspense>} />
         <Route path="/deg-groups" render={()=><Suspense fallback={<Spinner />}><ShowDegGroups /></Suspense>} />

@@ -36,6 +36,8 @@ class AdminZone extends Component {
             this.props.history.push('/degustation-setting')
         } else if (adminChoose ==="Pridaj vína do skupín") {
             this.props.history.push('/wine-groups')
+        } else if (adminChoose ==="Zobraz výsledky") {
+            this.props.history.push('/results')
         }
     }
 
@@ -54,7 +56,7 @@ class AdminZone extends Component {
                 clicked={this.clickHandler}/>
                 <WineGroups 
                 clicked={this.clickHandler}/>
-                <WineResults />
+                <WineResults clicked={this.clickHandler}/>
                 <SystemMenu clicked={this.clickHandler}/>
             </ElementWrapper>
             );
