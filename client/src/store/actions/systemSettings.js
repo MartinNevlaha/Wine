@@ -97,7 +97,6 @@ export const fetchSetting = (token) => {
             }
         })
         .then(resp => {
-            console.log(resp.data.settings)
             const {isValuesEliminated, isDegustationOpen} = resp.data.settings;
 
             dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen))
