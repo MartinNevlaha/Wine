@@ -12,7 +12,8 @@ const degustatorList = (props) => (
         <h4>Zoznam degustátorov</h4>
         <FontAwesomeIcon icon={faUser} size="5x" />
         <div className={classes.BtnContainer}>
-            <Button clicked={props.clicked}>Uprav degustátorov</Button>
+            {props.isDegustationOpen &&
+            <Button clicked={props.clicked}>Uprav degustátorov</Button>}
             <Button clicked={props.clicked}>Zobraz degustátorov</Button>
         </div>
     </ElementWrapper>

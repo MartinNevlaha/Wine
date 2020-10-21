@@ -11,7 +11,7 @@ const isDegustationLock = async (req, res, next) => {
         next();
     } catch (err) {
         const error = new Error("Chyba otvorenia degustácie kontaktuj administrátora");
-        error.statusCode = 401;
+        error.statusCode = 403;
         return next(error);
     }
 }

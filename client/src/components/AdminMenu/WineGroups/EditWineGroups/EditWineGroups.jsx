@@ -7,7 +7,54 @@ import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
 import Button from '../../../UI/Button/Button';
 
 const EditWineGroup = props => {
-    const wineList = props.wines.map(wine => (
+    let tableHead = null;
+    if (props.isDegustationOpen) {
+        tableHead = 
+            <React.Fragment>
+                <td>Pridaj do skupiny</td>
+                {!props.isGroupEdited && <td>Kontrola</td>}
+            </React.Fragment>;
+    }
+    const wineList = props.wines.map(wine => {
+        let addGroup = null;
+        if (props.isDegustationOpen) {
+            addGroup = 
+                <React.Fragment>
+                    {props.isGroupEdited ?
+                    <td>
+                        <select 
+                        type="select"
+                        onChange={e => props.getGroup(e, wine._id)}>
+                            {props.groups.map(opt => 
+                                <option key={opt._id}
+                                id={opt._id}>
+                                    {opt.groupName}
+                                </option>    
+                            )}
+                        </select>
+                    </td>
+                    :<td>
+                    <select 
+                    type="select"
+                    onChange={e => props.getGroup(e, wine._id)}
+                    defaultValue={wine.group.groupName}>
+                        {props.groups.map(opt => 
+                            <option key={opt._id}
+                            id={opt._id}>
+                                {opt.groupName}
+                            </option>    
+                        )}
+                    </select>
+                    </td>}
+                    {!props.isGroupEdited && 
+                    <td>
+                        <FontAwesomeIcon 
+                        icon={faCheck}/>
+                    </td>}
+        
+                </React.Fragment>
+        }
+        return (
         <tr key={wine._id}>
             <td>{wine.id}</td>
             <td>{wine.competitiveCategory}</td>
@@ -17,43 +64,10 @@ const EditWineGroup = props => {
             <td>{wine.character}</td>
             <td>{wine.producer}</td>
             <td>{wine.vintage}</td>
-            {props.isGroupEdited ?
-            <td>
-                <select 
-                type="select"
-                onChange={e => props.getGroup(e, wine._id)}
-                >
-                    {props.groups.map(opt => 
-                        <option key={opt._id}
-                        id={opt._id}>
-                            {opt.groupName}
-                        </option>    
-                    )}
-                </select>
-            </td>
-            :<td>
-            <select 
-            type="select"
-            onChange={e => props.getGroup(e, wine._id)}
-            defaultValue={wine.group.groupName}
-            >
-                {props.groups.map(opt => 
-                    <option key={opt._id}
-                    id={opt._id}>
-                        {opt.groupName}
-                    </option>    
-                )}
-            </select>
-            </td>}
-            
-            {!props.isGroupEdited && 
-                <td>
-                    <FontAwesomeIcon 
-                    icon={faCheck}
-                    />
-                </td>}
+            {addGroup}
         </tr>
-    ))
+            
+    )})
     return (
         <ElementWrapper wrapperType='FullWidthWrapper'>
             <h4>Priradenie vín do degustačných skupín</h4>
@@ -116,17 +130,18 @@ const EditWineGroup = props => {
                             cursor="pointer" 
                             onClick={() => props.sortWineGroups("vintage")}/>
                         </td>
-                        <td>Pridaj do skupiny</td>
-                        {!props.isGroupEdited && <td>Kontrola</td>}
+                        {tableHead}
                     </tr>
                 </thead>
                 <tbody>
                     {wineList}
                 </tbody>
             </table>
+            {props.isDegustationOpen &&
             <Button 
             clicked={props.save}
             disabled={props.isGroupEdited}>Ulož</Button>
+            }
         </ElementWrapper>
     )
 }

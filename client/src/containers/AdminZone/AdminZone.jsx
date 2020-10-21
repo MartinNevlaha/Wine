@@ -43,26 +43,31 @@ class AdminZone extends Component {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <DegustationSettings clicked={this.clickHandler}/>
-                {this.props.isDegustationOpen &&
-                <React.Fragment>
-                    <WineList clicked={this.clickHandler} />
-                    <DegustatorList clicked={this.clickHandler}/>
-                    <DegustatorGroup clicked={this.clickHandler}/>
-                    <WineGroups clicked={this.clickHandler}/>
-                 </React.Fragment>
-                }
+                <WineList 
+                isDegustationOpen={this.props.isDegustationOpen}
+                clicked={this.clickHandler} />
+                <DegustatorList 
+                isDegustationOpen={this.props.isDegustationOpen}
+                clicked={this.clickHandler}/>
+                <DegustatorGroup 
+                isDegustationOpen={this.props.isDegustationOpen}
+                clicked={this.clickHandler}/>
+                <WineGroups 
+                clicked={this.clickHandler}/>
                 <WineResults />
                 <SystemMenu clicked={this.clickHandler}/>
             </ElementWrapper>
             );
     }
 }
+
 const mapStateToProps = state => {
     return {
         isDegustationOpen: state.systemSettins.isDegustationOpen,
         token: state.adminAuth.token
     }
 }
+
 const mapDispatchToProps = dispatch => {
     return {
         onFetchSystemSettings: (token) => dispatch(action.fetchSetting(token))

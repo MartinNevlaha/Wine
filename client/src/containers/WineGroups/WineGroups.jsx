@@ -39,6 +39,7 @@ class WineGroups extends Component {
             <ElementWrapper wrapperType="ElementWrapper">
                 <Back />
                 <EditWineGroups
+                isDegustationOpen={this.props.isDegustationOpen}
                 save={this.savedWineGroupsHandler}
                 isGroupEdited={isGroupEdited(this.props.wineGroups.wineList)}
                 defaultGroup={this.state}
@@ -54,7 +55,8 @@ class WineGroups extends Component {
 const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
-        wineGroups: state.wineGroups
+        wineGroups: state.wineGroups,
+        isDegustationOpen: state.systemSettins.isDegustationOpen
     }
 }
 
