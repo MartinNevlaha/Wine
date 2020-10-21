@@ -15,6 +15,8 @@ const RatingSetting = props => (
             <li>Eliminácia krajných hodnôt - Vráti vážený priemer od degustátorov v skupinách po elimináci najlepšieho a najhoršieho hodnotenia</li>
             <li>Bez elminácie krajných hodnôt - Vráti vážený priemer všetkých hodnotení od degustátorov v skupinách</li>
         </ul>
+        <h5 style={{color: "red"}}>POZOR</h5>
+        <p style={{color: "red"}}>Nastavenia nemeniť počas prebiehajúcej degustácie</p>
         <select
         type='select'
         defaultValue={props.isValuesEliminated ? props.eliminatedValues.options[0] : props.eliminatedValues.options[1]}

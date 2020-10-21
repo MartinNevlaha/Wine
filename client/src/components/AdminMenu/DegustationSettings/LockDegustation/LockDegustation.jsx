@@ -8,13 +8,15 @@ const LockDegustation = props => (
         <h4>Otvorenie / Zatvorenie degustácie</h4>
         <p style={{color: "red"}}>Aktuálne nastavenie:  
             {props.isDegustationOpen ? 
-            ' ' + props.lock.options[0] : 
-            ' ' + props.lock.options[1]}</p>
+            ' Degustácia je otvorená' : 
+            ' Degustácia je zamknutá'}</p>
         <p>Možnosti výberu</p>
         <ul>
             <li>Odomknúť - Degustácia je otvorená jedotlivý degustátori môžu pridávať svoje hodnotenia. Administrátorské nastavenia vín, degustátorov, skupín sú naopak zamknuté</li>
             <li>Zamknúť - Degustácia je zamknutá žiadny degustátor nemôže pridávať hodnotenie, naopak všetky administrátorské možnosti sú odomknuté</li>
         </ul>
+        <h5 style={{color: "red"}}>POZOR</h5>
+        <p style={{color: "red"}}>Nastavenia nemeniť počas prebiehajúcej degustácie</p>
         <select
         type='select'
         defaultValue={props.isDegustationOpen ? props.lock.options[0] : props.lock.options[1]}
