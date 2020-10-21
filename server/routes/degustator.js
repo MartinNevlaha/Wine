@@ -5,20 +5,21 @@ const degustatorControler = require('../controllers/degustator');
 const degLogin = require('../controllers/degLogin');
 
 const { isDegustatorAuth } = require('../middleware/isAuth');
+const isDegustationLock = require('../middleware/isDegustationLock');
 
 const finalSum = require('../middleware/finalSum');
 // doplň validáciu
-router.post('/results', isDegustatorAuth, finalSum, degustatorControler.postResult); 
+router.post('/results', isDegustationLock, isDegustatorAuth, finalSum, degustatorControler.postResult); 
 
-router.get('/wine-list/:wineId', isDegustatorAuth, degustatorControler.getWineInfo);
+router.get('/wine-list/:wineId', isDegustationLock, isDegustatorAuth, degustatorControler.getWineInfo);
 
 router.get('/results', isDegustatorAuth, degustatorControler.getResults);
 
 router.get('/result/:resultId', isDegustatorAuth, degustatorControler.getResult);
 
-router.get('/wine-list-group', isDegustatorAuth, degustatorControler.getWineInGroup);
+router.get('/wine-list-group', isDegustationLock, isDegustatorAuth, degustatorControler.getWineInGroup);
 
-router.post('/login', [
+router.post('/login', isDegustationLock, [
     body('name').trim().notEmpty().isString().isLength({ min: 3 }),
     body('password').trim().notEmpty().isLength({ min:4 })
 ], degLogin.degustatorLogin);
