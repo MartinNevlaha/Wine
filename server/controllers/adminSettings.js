@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+
 const Setting = require('../models/settings');
 
 exports.setSettings = async (req, res, next) => {
@@ -50,6 +51,26 @@ exports.setIsDegustationOpen = async (req, res, next) => {
         res.status(200).json({
             message: 'nastavenia boli uspešne zmenené',
             setting: updatedSetting
+        })
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
+    }
+}
+
+exports.getSettings = async (req, res, next) => {
+    try {
+        const settings = await Setting.find();
+        if (!settings) {
+            const error = new Error("Nemôžem načítať nastavenia");
+            error.statusCode = 404;
+            return next(error);
+        }
+        res.status(200).json({
+            message: 'Nastavenia načítané',
+            settings: settings
         })
     } catch (error) {
         if(!error.statusCode) {

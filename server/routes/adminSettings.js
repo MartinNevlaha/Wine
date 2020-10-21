@@ -5,6 +5,8 @@ const adminSettingsController = require('../controllers/adminSettings');
 
 const { isAdminAuth } = require('../middleware/isAuth');
 
+router.get('/degustation-settings', isAdminAuth, adminSettingsController.getSettings);
+
 router.put('/degustation-settings', [
     body('isValuesEliminated').isBoolean()
 ], isAdminAuth, adminSettingsController.setSettings);
