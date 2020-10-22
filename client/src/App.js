@@ -24,6 +24,9 @@ const SystemInfo = React.lazy(() => import('./containers/SystemInfo/SystemInfo')
 const DegustationSetting = React.lazy(() => import('./containers/DegustationSetting/DegustationSetting'));
 const WineGroups = React.lazy(() => import('./containers/WineGroups/WineGroups'));
 const FinalResuls = React.lazy(() => import('./containers/FinalResults/FinalResults'));
+const ResultsByCategory = React.lazy(() => import('./components/AdminMenu/WineResults/ResultsByCategory/ResultsByCategory'));
+const ResultsByDegGroup = React.lazy(() => import('./components/AdminMenu/WineResults/ResultsByDegGroup/ResultsByDegGroup'));
+const ResultsByDegustator = React.lazy(()=> import('./components/AdminMenu/WineResults/ResultsByDegustator/ResultsByDegustator'));
 
 function App(props) {
   useEffect(() => {
@@ -43,6 +46,9 @@ function App(props) {
       <Switch>
         <Route path="/author" />
         <Route path="/logout" component={Logout}/>
+        <Route path="/results-by-degustator" render={()=><Suspense fallback={<Spinner />}><ResultsByDegustator /></Suspense>} />
+        <Route path="/results-by-deg-group" render={()=><Suspense fallback={<Spinner />}><ResultsByDegGroup /></Suspense>} />
+        <Route path="/results-by-category" render={()=><Suspense fallback={<Spinner />}><ResultsByCategory /></Suspense>} />
         <Route path="/results" render={()=><Suspense fallback={<Spinner />}><FinalResuls /></Suspense>} />
         <Route path="/system-info" render={()=><Suspense fallback={<Spinner />}><SystemInfo /></Suspense>} />
         <Route path="/wine-groups" render={()=><Suspense fallback={<Spinner />}><WineGroups /></Suspense>} />
