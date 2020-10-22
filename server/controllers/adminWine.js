@@ -1,5 +1,8 @@
 const Wine = require('../models/wine');
+const WineCategory = require('../models/wineCategory');
 const { validationResult } = require('express-validator');
+
+const autoCreateWineCategory = require('../utils/autoCreateWineCategory');
 
 exports.getAllWine = async (req, res, next) => {
     try {
@@ -42,6 +45,7 @@ exports.createWine = async (req, res, next) => {
             group: null
         });
         const response = await wine.save();
+        await autoCreateWineCategory(competitiveCategory);
         res.status(201).json({
             message: 'Víno úspešne pridané',
             _id: response._id
@@ -70,6 +74,7 @@ exports.editWine = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
+        await autoCreateWineCategory(competitiveCategory);
         wine.id = id;
         wine.competitiveCategory = competitiveCategory;
         wine.name = name;
@@ -113,6 +118,7 @@ exports.deleteWine = async (req, res ,next) => {
 exports.deleteAllWines = async (req, res, next) => {
     try {
         await Wine.deleteMany({});
+        await WineCategory.deleteMany({});
         res.status(200).json({message: "Databáza vín bola zmazaná"})
     } catch (error) {
         if(!error.statusCode) {
@@ -142,12 +148,25 @@ exports.importWines = async (req, res, next) => {
             error.statusCode = 500;
             return next(error);
         }
+        const categoryDelete = await WineCategory.deleteMany({});
+        if (!categoryDelete) {
+            const error = new Error('Nepodarilo sa vymazať databazu súťažných skupín vín pred importom')
+            error.statusCode = 500;
+            return next(error);
+        }
         const wines = await Wine.insertMany(importedData);
         if (!wines) {
             const error = new Error("Nepodarilo sa importovat danné údaje");
             error.statusCode = 500;
             return next(error);
         }
+        let category = [];
+        importedData.forEach(wine => {
+            category.push(wine.competitiveCategory)
+        });
+        uniqCategory = [...new Set(category)];
+        uniqCategory.forEach( async cat => autoCreateWineCategory(cat))
+        await autoCreateWineCategory(uniqCategory);
         res.status(201).json({
             message: "Import vín uspešný",
             wines: wines

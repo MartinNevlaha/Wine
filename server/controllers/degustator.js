@@ -15,13 +15,6 @@ const logger = fs.createWriteStream(logFile, {
 
 exports.postResult = async(req, res, next) => {
     const {degId} = req.userData;
-    const degustator = await Degustator.findById(degId);
-    const groupId = degustator.group;
-    if (!degustator) {
-        const error = new Error('Nemôžem uložiť hodnotenie ku degustátorovi');
-        error.statusCode = 404;
-        return next(error)
-    }
     const {
         wineId, 
         eliminated, 
@@ -29,8 +22,14 @@ exports.postResult = async(req, res, next) => {
         wineCategory, 
         totalSum, 
         results} = req.body;
-
     try {
+        const degustator = await Degustator.findById(degId);
+        if (!degustator) {
+            const error = new Error('Nemôžem uložiť hodnotenie ku degustátorovi');
+            error.statusCode = 404;
+            return next(error)
+        }
+        const groupId = degustator.group;
         const wine = await Wine.findOne({id: wineId})
         if (!wine) {
             const error = new Error('Nemožem uložiť hodnotenie pre toto číslo vína')
