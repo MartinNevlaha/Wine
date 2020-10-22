@@ -12,6 +12,10 @@ const postWine = new Schema({
         type: String,
         required: true
     },
+    competitiveCategoryId: {
+        type: Schema.Types.ObjectId,
+        ref: 'CompetitiveCategory'
+    },
     name: {
         type: String,
         required: true
@@ -56,10 +60,6 @@ const postWine = new Schema({
     group: {
         type: Schema.Types.ObjectId,
         ref: 'Group'
-    },
-    degustationComplete: {
-        type: Boolean,
-        default: false
     }
 }, {timestamps: true});
 

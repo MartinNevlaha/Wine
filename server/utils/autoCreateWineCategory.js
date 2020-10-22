@@ -1,15 +1,15 @@
-const WineCategory = require('../models/wineCategory');
+const CompetitiveCategory = require('../models/competitiveCategory');
 
-const autoCreateWineCategory = async competitiveCategory => {
+const autoCreateWineCategory = async (competitiveCategory) => {
     try {
-        const wineCategory = await WineCategory.findOne({categoryName: competitiveCategory});
+        const wineCategory = await CompetitiveCategory.findOne({categoryName: competitiveCategory});
         if (!wineCategory) {
-            const category = new WineCategory({
-                categoryName: competitiveCategory
+            const category = new CompetitiveCategory({
+                categoryName: competitiveCategory,
             })
-            await category.save()
+            return await category.save();
         }
-        return;
+        return wineCategory;
     } catch (error) {
         if(!error.statusCode) {
             error.statusCode = 500;

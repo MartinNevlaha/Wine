@@ -2,7 +2,6 @@ const Wine = require('../models/wine');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
 const Degustator = require('../models/degustator');
-const { populate } = require('../models/wine');
 
 exports.getFinalResultsByCategory = async (req, res, next) => {
     const category = req.params.category;

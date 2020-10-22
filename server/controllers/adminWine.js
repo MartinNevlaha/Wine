@@ -1,5 +1,5 @@
 const Wine = require('../models/wine');
-const WineCategory = require('../models/wineCategory');
+const CompetitiveCategory = require('../models/competitiveCategory');
 const { validationResult } = require('express-validator');
 
 const autoCreateWineCategory = require('../utils/autoCreateWineCategory');
@@ -33,19 +33,21 @@ exports.createWine = async (req, res, next) => {
     }
     const {id, competitiveCategory, name, producer, vintage, clasification, color, character} = req.body;
     try {
+        const createdCategory = await autoCreateWineCategory(competitiveCategory);
         const wine = new Wine ({
             id,
             competitiveCategory,
+            competitiveCategoryId: createdCategory._id,
             name,
             producer,
             vintage,
             clasification,
             color,
             character,
-            group: null
+            group: null,
         });
         const response = await wine.save();
-        await autoCreateWineCategory(competitiveCategory);
+        
         res.status(201).json({
             message: 'Víno úspešne pridané',
             _id: response._id
@@ -74,9 +76,10 @@ exports.editWine = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
-        await autoCreateWineCategory(competitiveCategory);
+        const createdCategory = await autoCreateWineCategory(competitiveCategory);
         wine.id = id;
         wine.competitiveCategory = competitiveCategory;
+        wine.competitiveCategoryId = createdCategory._id;
         wine.name = name;
         wine.clasification = clasification;
         wine.color = color;
@@ -118,7 +121,7 @@ exports.deleteWine = async (req, res ,next) => {
 exports.deleteAllWines = async (req, res, next) => {
     try {
         await Wine.deleteMany({});
-        await WineCategory.deleteMany({});
+        await CompetitiveCategory.deleteMany({});
         res.status(200).json({message: "Databáza vín bola zmazaná"})
     } catch (error) {
         if(!error.statusCode) {
@@ -148,7 +151,7 @@ exports.importWines = async (req, res, next) => {
             error.statusCode = 500;
             return next(error);
         }
-        const categoryDelete = await WineCategory.deleteMany({});
+        const categoryDelete = await CompetitiveCategory.deleteMany({});
         if (!categoryDelete) {
             const error = new Error('Nepodarilo sa vymazať databazu súťažných skupín vín pred importom')
             error.statusCode = 500;
@@ -165,8 +168,7 @@ exports.importWines = async (req, res, next) => {
             category.push(wine.competitiveCategory)
         });
         uniqCategory = [...new Set(category)];
-        uniqCategory.forEach( async cat => autoCreateWineCategory(cat))
-        await autoCreateWineCategory(uniqCategory);
+        await uniqCategory.forEach( async cat => autoCreateWineCategory(cat))
         res.status(201).json({
             message: "Import vín uspešný",
             wines: wines
