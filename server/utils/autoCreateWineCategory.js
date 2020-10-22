@@ -1,12 +1,13 @@
 const CompetitiveCategory = require('../models/competitiveCategory');
 
-const autoCreateWineCategory = async (competitiveCategory) => {
+const autoCreateWineCategoryAsync = async (competitiveCategory) => {
     try {
         const wineCategory = await CompetitiveCategory.findOne({categoryName: competitiveCategory});
-        if (!wineCategory) {
+        if (!wineCategory && wineCategory === null) {
             const category = new CompetitiveCategory({
                 categoryName: competitiveCategory,
             })
+            console.log(category)
             return await category.save();
         }
         return wineCategory;
@@ -14,8 +15,25 @@ const autoCreateWineCategory = async (competitiveCategory) => {
         if(!error.statusCode) {
             error.statusCode = 500;
         }
-        next(error);
+        console.log(error)
     }
 };
 
-module.exports = autoCreateWineCategory;
+const autoCreateWineCategory = (importedData) => {
+    let category = [];
+    importedData.forEach(wine => {
+        category.push(wine.competitiveCategory)
+    });
+    const uniqCategory = [...new Set(category)];
+    const updatedCategory = uniqCategory.map( catName => {
+        return {
+            categoryName: catName
+        }
+    })
+    return updatedCategory;
+}
+
+module.exports = {
+    autoCreateWineCategoryAsync,
+    autoCreateWineCategory
+};

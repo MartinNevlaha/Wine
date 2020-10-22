@@ -2,7 +2,10 @@ const Wine = require('../models/wine');
 const CompetitiveCategory = require('../models/competitiveCategory');
 const { validationResult } = require('express-validator');
 
-const autoCreateWineCategory = require('../utils/autoCreateWineCategory');
+const {
+    autoCreateWineCategoryAsync,
+    autoCreateWineCategory
+} = require('../utils/autoCreateWineCategory');
 
 exports.getAllWine = async (req, res, next) => {
     try {
@@ -33,7 +36,7 @@ exports.createWine = async (req, res, next) => {
     }
     const {id, competitiveCategory, name, producer, vintage, clasification, color, character} = req.body;
     try {
-        const createdCategory = await autoCreateWineCategory(competitiveCategory);
+        const createdCategory = await autoCreateWineCategoryAsync(competitiveCategory);
         const wine = new Wine ({
             id,
             competitiveCategory,
@@ -76,7 +79,7 @@ exports.editWine = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
-        const createdCategory = await autoCreateWineCategory(competitiveCategory);
+        const createdCategory = await autoCreateWineCategoryAsync(competitiveCategory);
         wine.id = id;
         wine.competitiveCategory = competitiveCategory;
         wine.competitiveCategoryId = createdCategory._id;
@@ -157,18 +160,31 @@ exports.importWines = async (req, res, next) => {
             error.statusCode = 500;
             return next(error);
         }
-        const wines = await Wine.insertMany(importedData);
+        const updatedCategory = autoCreateWineCategory(importedData);
+        const savedCategories = await CompetitiveCategory.insertMany(updatedCategory)
+        if (!savedCategories) {
+            const error = new Error("Nepodarilo sa importovat danné údaje");
+            error.statusCode = 500;
+            return next(error);
+        }
+        let updatedData = [];
+        importedData.forEach(wine => {
+            savedCategories.forEach(cat => {
+                if (wine.competitiveCategory === cat.categoryName) {
+                    updatedData.push({
+                        ...wine,
+                        competitiveCategoryId: cat._id
+                    }) 
+                }
+            })
+        })
+        const wines = await Wine.insertMany(updatedData);
         if (!wines) {
             const error = new Error("Nepodarilo sa importovat danné údaje");
             error.statusCode = 500;
             return next(error);
         }
-        let category = [];
-        importedData.forEach(wine => {
-            category.push(wine.competitiveCategory)
-        });
-        uniqCategory = [...new Set(category)];
-        await uniqCategory.forEach( async cat => autoCreateWineCategory(cat))
+
         res.status(201).json({
             message: "Import vín uspešný",
             wines: wines
