@@ -2,6 +2,7 @@ const Wine = require('../models/wine');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
 const Degustator = require('../models/degustator');
+const CompetitiveCategory = require('../models/competitiveCategory');
 
 exports.getFinalResultsByCategory = async (req, res, next) => {
     const category = req.params.category;
@@ -121,7 +122,31 @@ exports.getFinalResultsByDeg = async (req, res, next) => {
             results: deg.results
         })
     } catch (error) {
-        
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
+    }
+}
+
+exports.getWineCompetitionCategory = async (req, res, next) => {
+
+    try {
+        const competitiveCategory = await CompetitiveCategory.find({});
+        if (!competitiveCategory) {
+            const error = new Error('Nemôžem načítať sútažné skupiny');
+            error.statusCode = 404;
+            return next(error);
+        }
+        res.status(200).json({
+            message: 'Dáta načítané',
+            competitiveCategory: competitiveCategory
+        })
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
     }
 }
 

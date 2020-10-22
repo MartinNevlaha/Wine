@@ -50,7 +50,6 @@ exports.createWine = async (req, res, next) => {
             group: null,
         });
         const response = await wine.save();
-        
         res.status(201).json({
             message: 'Víno úspešne pridané',
             _id: response._id
@@ -80,6 +79,7 @@ exports.editWine = async (req, res, next) => {
             return next(error);
         }
         const createdCategory = await autoCreateWineCategoryAsync(competitiveCategory);
+        console.log(createdCategory);
         wine.id = id;
         wine.competitiveCategory = competitiveCategory;
         wine.competitiveCategoryId = createdCategory._id;
