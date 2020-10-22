@@ -2,19 +2,25 @@ const Wine = require('../models/wine');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
 const Degustator = require('../models/degustator');
+const { populate } = require('../models/wine');
 
-exports.getFinalResults = async (req, res, next) => {
-    const sendConfig = 'id name color character producer vintage wineCategory finalResult'
+exports.getFinalResultsByCategory = async (req, res, next) => {
+    const category = req.params.category;
+    const populateQuery = {
+        path: 'group',
+        model: 'Group',
+        select: '_id groupName'
+    }
     try {
-        const wines = await Wine.find({}, sendConfig).sort('finalResult');
+        const wines = await Wine.find({competitiveCategory: category}).populate(populateQuery);
         if (!wines) {
-            const error = new Error('Nemože načítať výsledky');
+            const error = new Error('Nemôžem načítať výsledky pre túto kategóriu');
             error.statusCode = 404;
             return next(error);
         }
-        res.json({
-            message: 'Výsledky načítané',
-            results: wines 
+        res.status(200).json({
+            message: 'Zoznam vín načítaný',
+            wines: wines
         })
     } catch (error) {
         if(!error.statusCode) {
