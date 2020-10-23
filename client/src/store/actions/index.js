@@ -91,3 +91,7 @@ export {
     sortWineGroupsBy,
     saveWineGroups
 } from './wineGroups';
+
+export {
+    fetchCompetitiveCategory
+} from './finalResults';
