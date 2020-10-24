@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import ResultsMenuComponent from '../../components/AdminMenu/WineResults/ResultsMenuComponents/ResultsMenuComponent';
 
 class FinalResults extends Component {
     state = {
         resultsMenu: ['Výsledky podľa súťažnej kategórie vín', "Výsledky podľa degustačnej skupiny", 'Výsledky podľa degustátora' ]
+    }
+    componentDidMount() {
+
     }
 
     clickHandler = (index) => {

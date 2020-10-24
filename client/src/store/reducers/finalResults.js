@@ -4,7 +4,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     competitiveCategory: [],
     loading: false,
-    error: null
+    error: null,
+    results: []
 }
 
 const fetchCompetitiveCategoryStart = (state, action) => {
@@ -15,7 +16,8 @@ const fetchCompetitiveCategorySuccess = (state, action) => {
     return updateObj(state, {
         loading: false, 
         error: null,
-        competitiveCategory: action.category
+        competitiveCategory: action.category,
+        results: action.results
     })
 };
 

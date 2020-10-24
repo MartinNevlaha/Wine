@@ -138,9 +138,16 @@ exports.getWineCompetitionCategory = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
+        const results = await Wine.find({competitiveCategoryId: competitiveCategory[0]._id}).populate('group');
+        if (!results) {
+            const error = new Error("Nemôžem načítať výsledky");
+            error.statusCode = 404;
+            return next(error);
+        }
         res.status(200).json({
             message: 'Dáta načítané',
-            competitiveCategory: competitiveCategory
+            competitiveCategory: competitiveCategory,
+            results: results
         })
     } catch (error) {
         if(!error.statusCode) {

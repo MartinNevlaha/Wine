@@ -21,9 +21,6 @@ class ShowAddedWine extends Component {
     componentDidMount() {
         this.props.onFetchWineList(this.props.token);
     }
-    componentDidUpdate() {
-        console.log('update')
-    }
     getSearchValueHandler = (e) => {
         this.setState({searchValue: e.target.value})
     }

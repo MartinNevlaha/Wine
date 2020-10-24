@@ -1,0 +1,10 @@
+.HeaderCategoryChoose {
+    text-align: left;
+    padding: 5px 10px;
+}
+.HeaderCategoryChoose label {
+    padding: 5px;
+}
+.HeaderCategoryChoose button {
+    margin: 10px;
+}

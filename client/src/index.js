@@ -22,6 +22,7 @@ import degResultsReducer from './store/reducers/degResults';
 import adminSystemInfoReducer from './store/reducers/SystemInfo';
 import systemSettingsReducer from './store/reducers/systemSettings';
 import wineGroupsReducer from './store/reducers/wineGroups';
+import finalResultsReducer from './store/reducers/finalResults';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 //const composeEnhancers = compose;
@@ -37,7 +38,8 @@ const rootReducer = combineReducers({
   degResults: degResultsReducer,
   systemInfo: adminSystemInfoReducer,
   systemSettins: systemSettingsReducer,
-  wineGroups: wineGroupsReducer
+  wineGroups: wineGroupsReducer,
+  finalResults: finalResultsReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

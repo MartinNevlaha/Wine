@@ -7,10 +7,11 @@ export const fetchCompetitiveCategoryStart = () => {
     };
 };
 
-export const fetchCompetitiveCategorySuccess = (category) => {
+export const fetchCompetitiveCategorySuccess = (category, results) => {
     return {
         type: actionTypes.FETCH_COMPETITVE_CATEGORY_SUCCESS,
-        category
+        category,
+        results
     };
 };
 
@@ -29,7 +30,7 @@ export const fetchCompetitiveCategory = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(fetchCompetitiveCategorySuccess(resp.data.competitiveCategory)))
+        .then(resp => dispatch(fetchCompetitiveCategorySuccess(resp.data.competitiveCategory, resp.data.results)))
         .catch(err => dispatch(fetchCompetitiveCategoryFail(err)))
     }
 }
