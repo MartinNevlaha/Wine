@@ -44,7 +44,7 @@ export const fetchWineResultsByComCategoryStart = () => {
 export const fetchWineResultsByComCategorySuccess = (results) => {
     return {
         type: actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_SUCCESS,
-        results
+        results,
     };
 };
 
@@ -74,10 +74,11 @@ export const fetchResultsByWineIdStart = () => {
     };
 };
 
-export const fetchResultsByWineIdSuccess = (results) => {
+export const fetchResultsByWineIdSuccess = (results, wineInfo) => {
     return {
         type: actionTypes.FETCH_RESULTS_BY_WINE_ID_SUCCESS,
-        results
+        results,
+        wineInfo
     }
 }
 
@@ -96,7 +97,7 @@ export const fetchResultsByWineId = (wineId, token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(fetchResultsByWineIdSuccess(resp.data.results)))
+        .then(resp => dispatch(fetchResultsByWineIdSuccess(resp.data.results, resp.data.wineInfo)))
         .catch(err => dispatch(fetchResultsByWineIdFail(err)))
     }
 }

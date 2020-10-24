@@ -1,0 +1,26 @@
+.TableResult {
+    width: 85%;
+    text-align: center;
+    color: white;
+    background-color: rgb(87, 20, 20);
+    border-collapse: collapse;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-top: 10px; 
+    margin-bottom: 20px;
+}
+
+.TableResult td {
+    padding: 10px 15px;
+}
+.TableResult thead {
+    border-bottom: 1px solid white;
+}
+.TableResult tr:nth-child(2n-1) {
+    background-color: rgba(26, 24, 24, 0.589);
+}
+
+.TableResult tbody tr:hover {
+    border: solid 1px white;
+    cursor: pointer;
+}

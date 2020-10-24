@@ -33,30 +33,28 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
 exports.getFinalResultsByWineId = async (req, res, next) => {
     const wineId = req.params.wineId
     const populateQuery = {
-        path: 'results',
-        model: 'Result',
-        select: 'degId wineId eliminated comment wineCategory totalSum',
-        populate: {
-            path: 'degId',
-            model: 'Degustator',
-            select: 'name surname',
-            populate: {
-                path: 'group',
-                model: 'Group',
-                select: 'groupName'
-            }
-        }
+        path: 'degId',
+        model: 'Degustator',
+        select: '_id id name surname',
     }
     try {
-        const results = await Wine.findById(wineId).populate(populateQuery);
+        const results = await Result.find({wineDbId: wineId}).populate(populateQuery)
         if (!results) {
-            const error = new Error('Nemôžem načítať dáta pre zvolené víno');
+            const error = new Error('Nemôžem načítať výsledky pre dané číslo vína');
             error.statusCode = 404;
             return next(error);
         }
-        res.json({
+
+        const wineInfo = await Wine.findById(wineId);
+        if (!wineInfo) {
+            const error = new Error('Nemôžem načítať výsledky pre dané číslo vína');
+            error.statusCode = 404;
+            return next(error);
+        }
+        res.status(200).json({
             message: "Výsledky načítané",
-            results: results.results
+            results: results,
+            wineInfo: wineInfo
         })
     } catch (error) {
         if(!error.statusCode) {

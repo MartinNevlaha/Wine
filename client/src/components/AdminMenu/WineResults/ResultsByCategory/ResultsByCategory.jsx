@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import * as action from '../../../../store/actions/index';
 import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
@@ -32,7 +33,7 @@ class ResultsByCategory extends Component {
         this.setState({selectedCategory: _id})
     }
     clickHandler= (_id) => {
-        this.props.onFetchResultsByWineId(_id, this.props.token)
+        this.props.history.push(`/results-by-wineId/${_id}`)
     }
     fetchResultsByComCategory = () => {
         this.props.onFetchResultsByComCategory(this.state.selectedCategory, this.props.token)
@@ -78,7 +79,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchCompetitiveCategory: (token) => dispatch(action.fetchCompetitiveCategory(token)),
         onFetchResultsByComCategory: (categoryId, token) => dispatch(action.fetchWineResultsByComCategory(categoryId, token)),
-        onFetchResultsByWineId: (wineId, token) => dispatch(action.fetchResultsByWineId(wineId, token))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ResultsByCategory);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(ResultsByCategory));

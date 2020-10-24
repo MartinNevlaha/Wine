@@ -1,0 +1,12 @@
+.InfoWine {
+    text-align: left;
+    border: 1px solid white;
+    width: 40%;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: rgb(87, 20, 20);
+    margin-left: 8%;
+}
+.InfoWine li {
+    list-style-type: none;
+}

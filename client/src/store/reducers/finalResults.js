@@ -6,7 +6,8 @@ const initialState = {
     loading: false,
     error: null,
     results: [],
-    resultByWineId: []
+    resultByWineId: [],
+    wineInfo: {}
 }
 
 const fetchCompetitiveCategoryStart = (state, action) => {
@@ -62,7 +63,8 @@ const fetchResultsByWineIdSuccess = (state, action) => {
     return updateObj(state, {
         loading: false,
         error: null,
-        resultByWineId: action.results
+        resultByWineId: action.results,
+        wineInfo: action.wineInfo 
     })
 }
 
