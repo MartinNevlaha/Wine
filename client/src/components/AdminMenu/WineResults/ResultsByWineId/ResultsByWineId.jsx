@@ -39,6 +39,7 @@ class ResultsByWineId extends Component {
                 result._id === this.state.wineId
             )
         }
+        console.log(detailedData)
 
         return (
             <ElementWrapper wrapperType="ElementWrapper">
@@ -46,7 +47,7 @@ class ResultsByWineId extends Component {
                 closeModal={this.closeModalHandler}>
                     <h4>Detailné zobrazenie hodnotenia vína</h4>
                     <WineGlass />
-                    {this.state.wineId && <ResumeTable data={detailedData[0]}/>}
+                    {this.state.wineId && <ResumeTable data={detailedData[0]} />}
                     <Button clicked={this.closeModalHandler}>Ok</Button>
                 </Modal>
                 <Back />
