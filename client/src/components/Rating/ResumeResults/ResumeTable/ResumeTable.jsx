@@ -69,6 +69,7 @@ class ResumeTable extends Component {
                 </tr>
             </tbody>
         </table>
+        {this.props.data.comment && <p>Koment degustátora: {this.props.data.comment}</p>}
     </React.Fragment>);
     if (this.props.data.eliminated) {
         results= <p>Víno ste eliminovali</p>
