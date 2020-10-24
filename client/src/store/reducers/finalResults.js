@@ -5,7 +5,8 @@ const initialState = {
     competitiveCategory: [],
     loading: false,
     error: null,
-    results: []
+    results: [],
+    resultByWineId: []
 }
 
 const fetchCompetitiveCategoryStart = (state, action) => {
@@ -28,6 +29,50 @@ const fetchCompetitiveCategoryFail = (state, action) => {
     })
 };
 
+const fetchWineResultsByComCategoryStart = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null
+    })
+}
+
+const fetchWineResultsByComCategorySuccess = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null,
+        results: action.results
+    })
+}
+
+const fetchWineResultsByComCategoryFailled = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: action.error
+    })
+}
+
+const fetchResultsByWineIdStart = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null
+    })
+}
+
+const fetchResultsByWineIdSuccess = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: null,
+        resultByWineId: action.results
+    })
+}
+
+const fetchResultsByWineIdFailled = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_COMPETITVE_CATEGORY_START:
@@ -36,6 +81,18 @@ const reducer = (state = initialState, action) => {
             return fetchCompetitiveCategorySuccess(state, action);
         case actionTypes.FETCH_COMPETITVE_CATEGORY_FAIL:
             return fetchCompetitiveCategoryFail(state, action);
+        case actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_START:
+            return fetchWineResultsByComCategoryStart(state, action);
+        case actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_SUCCESS:
+            return fetchWineResultsByComCategorySuccess(state, action);
+        case actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_FAIL:
+            return fetchWineResultsByComCategoryFailled(state, action);
+        case actionTypes.FETCH_RESULTS_BY_WINE_ID_START:
+            return fetchResultsByWineIdStart(state, action);
+        case actionTypes.FETCH_RESULTS_BY_WINE_ID_SUCCESS:
+            return fetchResultsByWineIdSuccess(state, action);
+        case actionTypes.FETCH_RESULTS_BY_WINE_ID_FAIL:
+            return fetchResultsByWineIdFailled(state, action);
         default:
             return state;
     }

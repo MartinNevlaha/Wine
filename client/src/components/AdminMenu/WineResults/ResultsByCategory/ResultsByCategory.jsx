@@ -10,8 +10,8 @@ import CategoryTable from './CategoryTable/CategoryTable';
 
 class ResultsByCategory extends Component {
     state = {
-        tableHeadNames: ['Číslo vína', 'Názov vína', 'Klasifikácia vína', 'Výrobca vína', 'Ročník vína', 'Bodové hodnotenie', 'Kategória vína', 'Kompletnosť hodnotenia' ],
-        tableHeadIds: ['id', 'name', 'clasification', 'producer', 'vintage', 'result', 'wineCategory'],
+        tableHeadNames: ['Číslo vína', 'Názov vína', 'Klasifikácia vína', 'Výrobca vína', 'Ročník vína', 'Degustačná skupina','Bodové hodnotenie', 'Kategória vína', 'Kompletnosť hodnotenia' ],
+        tableHeadIds: ['id', 'name', 'clasification', 'producer', 'vintage', 'degustationGroup','result', 'wineCategory'],
         searchValue: '',
         headerValue: 'Číslo vína',
         chossenHeaderId: 'id',
@@ -20,14 +20,23 @@ class ResultsByCategory extends Component {
     componentDidMount() {
         this.props.onFetchCompetitiveCategory(this.props.token)
     }
-
-    getCategoryHandler =(e) => {
+    getId(e) {
         let index = e.target.selectedIndex;
         let el = e.target.childNodes[index];
         let _id = el.getAttribute('id');
-        this.setState({selectedCategory: _id})
+        return _id;
     }
 
+    getCategoryHandler =(e) => {
+        const _id = this.getId(e)
+        this.setState({selectedCategory: _id})
+    }
+    clickHandler= (_id) => {
+        this.props.onFetchResultsByWineId(_id, this.props.token)
+    }
+    fetchResultsByComCategory = () => {
+        this.props.onFetchResultsByComCategory(this.state.selectedCategory, this.props.token)
+    }
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
@@ -46,10 +55,11 @@ class ResultsByCategory extends Component {
                         </option>
                     ))}
                         </select>
-                        <Button >Zobraz</Button>
+                        <Button clicked={this.fetchResultsByComCategory}>Zobraz</Button>
                     </div>
                     <CategoryTable 
                     results={this.props.results}
+                    clickHandler={this.clickHandler}
                     tableHead={this.state.tableHeadNames}
                     />
                 </ElementWrapper>
@@ -66,7 +76,9 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchCompetitiveCategory: (token) => dispatch(action.fetchCompetitiveCategory(token))
+        onFetchCompetitiveCategory: (token) => dispatch(action.fetchCompetitiveCategory(token)),
+        onFetchResultsByComCategory: (categoryId, token) => dispatch(action.fetchWineResultsByComCategory(categoryId, token)),
+        onFetchResultsByWineId: (wineId, token) => dispatch(action.fetchResultsByWineId(wineId, token))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ResultsByCategory);

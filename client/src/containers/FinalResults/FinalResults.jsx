@@ -8,9 +8,6 @@ class FinalResults extends Component {
     state = {
         resultsMenu: ['Výsledky podľa súťažnej kategórie vín', "Výsledky podľa degustačnej skupiny", 'Výsledky podľa degustátora' ]
     }
-    componentDidMount() {
-
-    }
 
     clickHandler = (index) => {
         console.log(index)

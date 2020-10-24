@@ -34,3 +34,69 @@ export const fetchCompetitiveCategory = (token) => {
         .catch(err => dispatch(fetchCompetitiveCategoryFail(err)))
     }
 }
+
+export const fetchWineResultsByComCategoryStart = () => {
+    return {
+        type: actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_START
+    };
+};
+
+export const fetchWineResultsByComCategorySuccess = (results) => {
+    return {
+        type: actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_SUCCESS,
+        results
+    };
+};
+
+export const fetchWineResultsByComCategoryFailled = (error) => {
+    return {
+        type: actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_START,
+        error
+    };
+};
+
+export const fetchWineResultsByComCategory = (category, token) => {
+    return dispatch => {
+        dispatch(fetchWineResultsByComCategoryStart());
+        axiosInstance.get(`/admin/final-results-by-category/${category}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(fetchWineResultsByComCategorySuccess(resp.data.results)))
+        .catch(err => dispatch(fetchWineResultsByComCategoryFailled(err)))
+    }
+}
+
+export const fetchResultsByWineIdStart = () => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_WINE_ID_START
+    };
+};
+
+export const fetchResultsByWineIdSuccess = (results) => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_WINE_ID_SUCCESS,
+        results
+    }
+}
+
+export const fetchResultsByWineIdFail = (error) => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_WINE_ID_FAIL,
+        error
+    }
+}
+
+export const fetchResultsByWineId = (wineId, token) => {
+    return dispatch => {
+        dispatch(fetchResultsByWineIdStart())
+        axiosInstance.get(`/admin/final-results/wine/${wineId}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(fetchResultsByWineIdSuccess(resp.data.results)))
+        .catch(err => dispatch(fetchResultsByWineIdFail(err)))
+    }
+}

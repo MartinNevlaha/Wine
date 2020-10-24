@@ -5,7 +5,7 @@ const adminFinalResultsController = require('../controllers/adminFinalResults');
 
 router.get('/final-results-category', isAdminAuth, adminFinalResultsController.getWineCompetitionCategory);
 
-router.get('/final-results-by-category/:category', isAdminAuth, adminFinalResultsController.getFinalResultsByCategory);
+router.get('/final-results-by-category/:categoryId', isAdminAuth, adminFinalResultsController.getFinalResultsByCategory);
 
 router.get('/final-results/wine/:wineId', isAdminAuth, adminFinalResultsController.getFinalResultsByWineId);
 

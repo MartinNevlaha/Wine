@@ -93,5 +93,7 @@ export {
 } from './wineGroups';
 
 export {
-    fetchCompetitiveCategory
+    fetchCompetitiveCategory,
+    fetchWineResultsByComCategory,
+    fetchResultsByWineId
 } from './finalResults';

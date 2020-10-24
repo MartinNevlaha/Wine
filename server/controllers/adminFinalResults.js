@@ -5,14 +5,14 @@ const Degustator = require('../models/degustator');
 const CompetitiveCategory = require('../models/competitiveCategory');
 
 exports.getFinalResultsByCategory = async (req, res, next) => {
-    const category = req.params.category;
+    const categoryId = req.params.categoryId;
     const populateQuery = {
         path: 'group',
         model: 'Group',
         select: '_id groupName'
     }
     try {
-        const wines = await Wine.find({competitiveCategory: category}).populate(populateQuery);
+        const wines = await Wine.find({competitiveCategoryId: categoryId}).sort({'finalResult': -1}).populate(populateQuery);
         if (!wines) {
             const error = new Error('Nemôžem načítať výsledky pre túto kategóriu');
             error.statusCode = 404;
@@ -20,7 +20,7 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
         }
         res.status(200).json({
             message: 'Zoznam vín načítaný',
-            wines: wines
+            results: wines
         })
     } catch (error) {
         if(!error.statusCode) {
@@ -138,7 +138,7 @@ exports.getWineCompetitionCategory = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
-        const results = await Wine.find({competitiveCategoryId: competitiveCategory[0]._id}).populate('group');
+        const results = await Wine.find({competitiveCategoryId: competitiveCategory[0]._id}).sort({"finalResult": -1}).populate('group');
         if (!results) {
             const error = new Error("Nemôžem načítať výsledky");
             error.statusCode = 404;
