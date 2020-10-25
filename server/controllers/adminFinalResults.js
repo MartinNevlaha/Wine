@@ -12,15 +12,18 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
         select: '_id groupName'
     }
     try {
-        const wines = await Wine.find({competitiveCategoryId: categoryId}).sort({'finalResult': -1}).populate(populateQuery);
+        const wines = await Wine.find({competitiveCategoryId: categoryId}).sort({'finalResult': -1}).lean().populate(populateQuery);
         if (!wines) {
             const error = new Error('Nemôžem načítať výsledky pre túto kategóriu');
             error.statusCode = 404;
             return next(error);
         }
+        const sortedWines = wines.map((wine, index) => {
+            return {...wine, place: index + 1}
+        })
         res.status(200).json({
             message: 'Zoznam vín načítaný',
-            results: wines
+            results: sortedWines
         })
     } catch (error) {
         if(!error.statusCode) {
@@ -136,16 +139,19 @@ exports.getWineCompetitionCategory = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
-        const results = await Wine.find({competitiveCategoryId: competitiveCategory[0]._id}).sort({"finalResult": -1}).populate('group');
+        const results = await Wine.find({competitiveCategoryId: competitiveCategory[0]._id}).sort({"finalResult": -1}).lean().populate('group');
         if (!results) {
             const error = new Error("Nemôžem načítať výsledky");
             error.statusCode = 404;
             return next(error);
         }
+        const sortedWines = results.map((wine, index) => {
+            return {...wine, place: index + 1}
+        })
         res.status(200).json({
             message: 'Dáta načítané',
             competitiveCategory: competitiveCategory,
-            results: results
+            results: sortedWines
         })
     } catch (error) {
         if(!error.statusCode) {

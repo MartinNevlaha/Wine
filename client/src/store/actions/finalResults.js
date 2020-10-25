@@ -8,17 +8,10 @@ export const fetchCompetitiveCategoryStart = () => {
 };
 
 export const fetchCompetitiveCategorySuccess = (category, results) => {
-    const sortedResults = results.map((res, index) => {
-        return {
-            ...res,
-            place: index +1
-        }
-    })
-    console.log(sortedResults)
     return {
         type: actionTypes.FETCH_COMPETITVE_CATEGORY_SUCCESS,
         category,
-        sortedResults
+        results
     };
 };
 
@@ -49,15 +42,9 @@ export const fetchWineResultsByComCategoryStart = () => {
 };
 
 export const fetchWineResultsByComCategorySuccess = (results) => {
-    const sortedResults = results.map((res, index) => {
-        return {
-            ...res,
-            place: index +1
-        }
-    })
     return {
         type: actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_SUCCESS,
-        sortedResults,
+        results,
     };
 };
 
