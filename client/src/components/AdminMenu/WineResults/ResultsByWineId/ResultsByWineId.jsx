@@ -56,7 +56,7 @@ class ResultsByWineId extends Component {
                 <WineInfo wineInfo={this.props.wineInfo}/>
                 <ResultsTable
                 tableHeads={this.state.tableHeads}>
-                    {this.props.results.map(result => {
+                    {this.props.results.map((result, index) => {
                     return (
                     <tr key ={result._id}
                     onClick={() => this.onClickHandler(result._id)}>

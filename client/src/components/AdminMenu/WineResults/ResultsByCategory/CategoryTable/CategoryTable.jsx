@@ -15,6 +15,7 @@ let resultsByCat = props.results.map(result =>
     key={result._id} 
     onClick={() => props.clickHandler(result._id, props.token)}
     >
+        <td>{result.place}</td>
         <td>{result.id}</td>
         <td>{result.name}</td>
         <td>{result.color} {result.character} {result.clasification}</td>

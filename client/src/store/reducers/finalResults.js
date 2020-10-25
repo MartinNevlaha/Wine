@@ -19,7 +19,7 @@ const fetchCompetitiveCategorySuccess = (state, action) => {
         loading: false, 
         error: null,
         competitiveCategory: action.category,
-        results: action.results
+        results: action.sortedResults
     })
 };
 
@@ -41,7 +41,7 @@ const fetchWineResultsByComCategorySuccess = (state, action) => {
     return updateObj(state, {
         loading: true,
         error: null,
-        results: action.results
+        results: action.sortedResults
     })
 }
 

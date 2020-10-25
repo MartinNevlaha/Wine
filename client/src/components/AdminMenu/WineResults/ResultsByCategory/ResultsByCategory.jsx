@@ -11,11 +11,7 @@ import CategoryTable from './CategoryTable/CategoryTable';
 
 class ResultsByCategory extends Component {
     state = {
-        tableHeadNames: ['Číslo vína', 'Názov vína', 'Klasifikácia vína', 'Výrobca vína', 'Ročník vína', 'Degustačná skupina','Bodové hodnotenie', 'Kategória vína', 'Kompletnosť hodnotenia' ],
-        tableHeadIds: ['id', 'name', 'clasification', 'producer', 'vintage', 'degustationGroup','result', 'wineCategory'],
-        searchValue: '',
-        headerValue: 'Číslo vína',
-        chossenHeaderId: 'id',
+        tableHeadNames: ['Poradie', 'Číslo vína', 'Názov vína', 'Klasifikácia vína', 'Výrobca vína', 'Ročník vína', 'Degustačná skupina','Bodové hodnotenie', 'Kategória vína', 'Kompletnosť hodnotenia' ],
         selectedCategory: null
     }
     componentDidMount() {
