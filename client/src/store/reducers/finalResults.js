@@ -8,7 +8,8 @@ const initialState = {
     results: [],
     resultByWineId: [],
     wineInfo: {},
-    degGroups: []
+    degGroups: [],
+    resultsByGroup: []
 }
 
 const fetchCompetitiveCategoryStart = (state, action) => {
@@ -87,6 +88,7 @@ const fetchDegGroupsResSuccess = (state, action) => {
         loading: false,
         error: null,
         degGroups: action.groups,
+        resultsByGroup: action.results
     })
 }
 

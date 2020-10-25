@@ -162,25 +162,33 @@ exports.getWineCompetitionCategory = async (req, res, next) => {
 }
 
 exports.getDegGroups = async (req, res, next) => {
-    const populateQuery = {
-        path: 'results',
-        model: 'Result',
-        populate: {
-            path: 'degId',
-            model: 'Degustator',
-            select: '_id name surname'
-        }
+    const populateQueryDeg = {
+        path: 'degId',
+        model: 'Degustator',
+        select: '_id id name surname',
+    }    
+    const populateQueryWine = {
+        path: 'wineDbId',
+        model: 'Wine',
+        select: 'id name clasification color character _id vintage producer'
     }
     try {
-        const groups = await Group.find({}, '_id groupName results').populate(populateQuery);
+        const groups = await Group.find({}, '_id groupName results');
         if (!groups) {
             const error = new Error('Nemôžem načítať skupiny')
             error.statusCode = 404;
             return next(error)
         }
+        const results = await Result.find({groupId: groups[0]._id}).populate(populateQueryDeg).populate(populateQueryWine);
+        if (!results) {
+            const error = new Error("Nemôžem načítať výsledky");
+            error.statusCode = 404;
+            return next(error);
+        }
         res.status(200).json({
             message: 'Dáta načítané',
-            groups: groups
+            groups: groups,
+            results: results
         })
     } catch (error) {
         

@@ -17,15 +17,11 @@ class ResultsByCategory extends Component {
     componentDidMount() {
         this.props.onFetchCompetitiveCategory(this.props.token)
     }
-    getId(e) {
+
+    getCategoryHandler =(e) => {
         let index = e.target.selectedIndex;
         let el = e.target.childNodes[index];
         let _id = el.getAttribute('id');
-        return _id;
-    }
-
-    getCategoryHandler =(e) => {
-        const _id = this.getId(e)
         this.setState({selectedCategory: _id})
     }
     clickHandler= (_id) => {

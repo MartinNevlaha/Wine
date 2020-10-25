@@ -108,10 +108,11 @@ export const fetchDegGroupsResStart = () => {
     }
 }
 
-export const fetchDegGroupsResSuccess = (groups) => {
+export const fetchDegGroupsResSuccess = (groups, results) => {
     return {
         type: actionTypes.FETCH_DEG_GROUPS_FINAL_RES_SUCCESS,
         groups,
+        results
     }
 }
 
@@ -130,7 +131,7 @@ export const fetchDegGroupsRes = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(fetchDegGroupsResSuccess(resp.data.groups)))
+        .then(resp => dispatch(fetchDegGroupsResSuccess(resp.data.groups, resp.data.results)))
         .catch(err => dispatch(fetchDegGroupsResFailled(err)))
     }
 }
