@@ -7,7 +7,8 @@ const initialState = {
     error: null,
     results: [],
     resultByWineId: [],
-    wineInfo: {}
+    wineInfo: {},
+    degGroups: []
 }
 
 const fetchCompetitiveCategoryStart = (state, action) => {
@@ -74,6 +75,27 @@ const fetchResultsByWineIdFailled = (state, action) => {
         error: action.error
     })
 }
+const fetchDegGroupsResStart = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null
+    })
+}
+
+const fetchDegGroupsResSuccess = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: null,
+        degGroups: action.groups,
+    })
+}
+
+const fetchDegGroupsResFailled = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -95,6 +117,12 @@ const reducer = (state = initialState, action) => {
             return fetchResultsByWineIdSuccess(state, action);
         case actionTypes.FETCH_RESULTS_BY_WINE_ID_FAIL:
             return fetchResultsByWineIdFailled(state, action);
+        case actionTypes.FETCH_DEG_GROUPS_FINAL_RES_START:
+            return fetchDegGroupsResStart(state, action);
+        case actionTypes.FETCH_DEG_GROUPS_FINAL_RES_SUCCESS:
+            return fetchDegGroupsResSuccess(state, action);
+        case actionTypes.FETCH_DEG_GROUPS_FINAL_RES_FAIL:
+            return fetchDegGroupsResFailled(state, action)
         default:
             return state;
     }

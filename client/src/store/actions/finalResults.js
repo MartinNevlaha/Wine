@@ -101,3 +101,36 @@ export const fetchResultsByWineId = (wineId, token) => {
         .catch(err => dispatch(fetchResultsByWineIdFail(err)))
     }
 }
+
+export const fetchDegGroupsResStart = () => {
+    return {
+        type: actionTypes.FETCH_DEG_GROUPS_FINAL_RES_START
+    }
+}
+
+export const fetchDegGroupsResSuccess = (groups) => {
+    return {
+        type: actionTypes.FETCH_DEG_GROUPS_FINAL_RES_SUCCESS,
+        groups,
+    }
+}
+
+export const fetchDegGroupsResFailled = (error) => {
+    return {
+        type: actionTypes.FETCH_DEG_GROUPS_FINAL_RES_FAIL,
+        error
+    }
+}
+
+export const fetchDegGroupsRes = (token) => {
+    return dispatch => {
+        dispatch(fetchDegGroupsResStart())
+        axiosInstance.get('/admin//final-results-groups', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(fetchDegGroupsResSuccess(resp.data.groups)))
+        .catch(err => dispatch(fetchDegGroupsResFailled(err)))
+    }
+}

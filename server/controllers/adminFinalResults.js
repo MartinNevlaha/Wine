@@ -161,3 +161,29 @@ exports.getWineCompetitionCategory = async (req, res, next) => {
     }
 }
 
+exports.getDegGroups = async (req, res, next) => {
+    const populateQuery = {
+        path: 'results',
+        model: 'Result',
+        populate: {
+            path: 'degId',
+            model: 'Degustator',
+            select: '_id name surname'
+        }
+    }
+    try {
+        const groups = await Group.find({}, '_id groupName results').populate(populateQuery);
+        if (!groups) {
+            const error = new Error('Nemôžem načítať skupiny')
+            error.statusCode = 404;
+            return next(error)
+        }
+        res.status(200).json({
+            message: 'Dáta načítané',
+            groups: groups
+        })
+    } catch (error) {
+        
+    }
+}
+

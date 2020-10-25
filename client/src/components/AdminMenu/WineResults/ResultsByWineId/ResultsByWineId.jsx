@@ -39,7 +39,6 @@ class ResultsByWineId extends Component {
                 result._id === this.state.wineId
             )
         }
-        console.log(detailedData)
 
         return (
             <ElementWrapper wrapperType="ElementWrapper">

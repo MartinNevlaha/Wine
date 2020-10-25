@@ -1,0 +1,11 @@
+.HeaderGroupChoose {
+    text-align: left;
+    padding: 5px 10px;
+}
+.HeaderGroupChoose label {
+    padding: 5px;
+    padding-left: 90px;
+}
+.HeaderGroupChoose button {
+    margin: 10px;
+}
