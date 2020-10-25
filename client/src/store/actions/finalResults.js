@@ -135,3 +135,36 @@ export const fetchDegGroupsRes = (token) => {
         .catch(err => dispatch(fetchDegGroupsResFailled(err)))
     }
 }
+
+export const fetchResultsByGroupStart = () => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_GROUP_START
+    }
+}
+
+export const fetchResultsByGroupSuccess = (results) => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_GROUP_SUCCESS,
+        results
+    }
+}
+
+export const fetchResultsByGroupFailled = (error) => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_GROUP_FAIL,
+        error
+    }
+}
+
+export const fetchResultsByGroup = (groupId, token) => {
+    return dispatch => {
+        dispatch(fetchResultsByGroupStart())
+        axiosInstance.get(`/admin/final-results/group/${groupId}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(fetchResultsByGroupSuccess(resp.data.results)))
+        .catch(err => dispatch(fetchResultsByGroupFailled(err)))
+    }
+}

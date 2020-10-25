@@ -9,8 +9,6 @@ router.get('/final-results-by-category/:categoryId', isAdminAuth, adminFinalResu
 
 router.get('/final-results/wine/:wineId', isAdminAuth, adminFinalResultsController.getFinalResultsByWineId);
 
-router.get('/final-results/result/:resultId', isAdminAuth, adminFinalResultsController.getDetailedResults);
-
 router.get('/final-results-groups', isAdminAuth, adminFinalResultsController.getDegGroups)
 
 router.get('/final-results/group/:groupId', isAdminAuth, adminFinalResultsController.getFinalResultsByGroup);

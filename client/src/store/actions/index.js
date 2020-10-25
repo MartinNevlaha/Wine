@@ -96,5 +96,6 @@ export {
     fetchCompetitiveCategory,
     fetchWineResultsByComCategory,
     fetchResultsByWineId,
-    fetchDegGroupsRes
+    fetchDegGroupsRes,
+    fetchResultsByGroup
 } from './finalResults';

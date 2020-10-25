@@ -34,6 +34,9 @@ class ResultsByDeGroup extends Component {
             wineId: _id
         })
     }
+    fetchResultByGroupHandler = () => {
+        this.props.onFetchResultsByGroup(this.state.selectedGroup, this.props.token)
+    }
     closeModalHandler = () => {
         this.setState({isModalOpen: false})
     }
@@ -61,7 +64,7 @@ class ResultsByDeGroup extends Component {
                             </option>
                         ))}
                             </select>
-                        <Button >Zobraz</Button>
+                        <Button clicked={this.fetchResultByGroupHandler}>Zobraz</Button>
                     </div>
                     <ResultsTable
                         tableHeads={this.state.tableHeads}>
@@ -101,7 +104,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchDegGroupsRes: (token) => dispatch(action.fetchDegGroupsRes(token))
+        onFetchDegGroupsRes: (token) => dispatch(action.fetchDegGroupsRes(token)),
+        onFetchResultsByGroup: (groupId, token) => dispatch(action.fetchResultsByGroup(groupId, token))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (withRouter(ResultsByDeGroup));;

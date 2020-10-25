@@ -67,39 +67,29 @@ exports.getFinalResultsByWineId = async (req, res, next) => {
     }
 }
 
-exports.getDetailedResults = async (req, res, next) => {
-    const resultId = req.params.resultId;
-    try {
-        const result = await Result.findById(resultId, 'results wineId eliminated comment wineCategory totalSum');
-        if (!result) {
-            const error = new Error('Nemôžem načítať detailné výsledky pre toto víno')
-            error.statusCode = 404;
-            return next(error);
-        }
-        res.json({
-            message: 'Detailné výsledky načítané',
-            result: result
-        })
-    } catch (error) {
-        if(!error.statusCode) {
-            error.statusCode = 500;
-        }
-        next(error);
-    }
-};
 
 exports.getFinalResultsByGroup = async (req, res, next) => {
     const groupId = req.params.groupId;
+    const populateQueryDeg = {
+        path: 'degId',
+        model: 'Degustator',
+        select: '_id id name surname',
+    }    
+    const populateQueryWine = {
+        path: 'wineDbId',
+        model: 'Wine',
+        select: 'id name clasification color character _id vintage producer'
+    }
     try {
-        const group = await Group.findById(groupId).populate('results');
-        if (!group) {
-            const error = new Error('Výsledky podľa skupín sa nepodarilo načítané');
+        const results = await Result.find({groupId: groupId}).populate(populateQueryDeg).populate(populateQueryWine);
+        if (!results) {
+            const error = new Error("Nemôžem načítať výsledky");
             error.statusCode = 404;
             return next(error);
         }
         res.json({
             message: 'Výsledky boli načítané',
-            results: group.results
+            results: results
         })
     } catch (error) {
         if(!error.statusCode) {

@@ -99,6 +99,27 @@ const fetchDegGroupsResFailled = (state, action) => {
     })
 }
 
+const fetchResultsByGroupStart = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: null
+    })
+}
+const fetchResultsByGroupSuccess = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: null,
+        resultsByGroup: action.results
+    })
+}
+
+const fetchResultsByGroupFailled = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_COMPETITVE_CATEGORY_START:
@@ -125,6 +146,12 @@ const reducer = (state = initialState, action) => {
             return fetchDegGroupsResSuccess(state, action);
         case actionTypes.FETCH_DEG_GROUPS_FINAL_RES_FAIL:
             return fetchDegGroupsResFailled(state, action)
+        case actionTypes.FETCH_RESULTS_BY_GROUP_START:
+            return fetchResultsByGroupStart(state, action);
+        case actionTypes.FETCH_RESULTS_BY_GROUP_SUCCESS:
+            return fetchResultsByGroupSuccess(state, action);
+        case actionTypes.FETCH_RESULTS_BY_GROUP_FAIL:
+            return fetchResultsByGroupFailled(state, action);
         default:
             return state;
     }
