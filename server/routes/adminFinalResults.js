@@ -13,6 +13,8 @@ router.get('/final-results-groups', isAdminAuth, adminFinalResultsController.get
 
 router.get('/final-results/group/:groupId', isAdminAuth, adminFinalResultsController.getFinalResultsByGroup);
 
+router.get('/final-results-degustators', isAdminAuth, adminFinalResultsController.getListOfDegustators)
+
 router.get('/final-results/degustator/:degId', isAdminAuth, adminFinalResultsController.getFinalResultsByDeg);
 
 module.exports = router;

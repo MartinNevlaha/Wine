@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import * as action from '../../../../store/actions/index';
 import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
@@ -57,46 +56,46 @@ class ResultsByDeGroup extends Component {
                     <Button clicked={this.closeModalHandler}>Ok</Button>
                 </Modal>
                 <Back />
-                    <ElementWrapper wrapperType="FullWidthWrapper">
-                        <h4>Výsledky vo vybranej degustačnej skupine</h4>
-                        <div className={classes.HeaderGroupChoose}>
-                                <label>Degustačná skupina</label>
-                                <select
-                                onChange={this.getGroupHandler}>
-                                {this.props.degGroups.map(cat => (
-                                <option 
-                                    key={cat._id}
-                                    id={cat._id}>
-                                    {cat.groupName}
-                                </option>
-                            ))}
-                                </select>
-                            <Button clicked={this.fetchResultByGroupHandler}>Zobraz</Button>
-                        </div>
-                        <ResultsTable
-                            tableHeads={this.state.tableHeads}>
-                            {this.props.results.map((result, index) => {
-                            return (
-                            <tr key ={result._id}
-                            onClick={() => this.onClickHandler(result._id)}>
-                                <td>{result.wineDbId.id}</td>
-                                <td>{result.wineDbId.name}</td>
-                                <td>
-                                    {`${result.wineDbId.color} 
-                                    ${result.wineDbId.character} 
-                                    ${result.wineDbId.clasification}`}
-                                </td>
-                                <td>{result.wineDbId.producer}</td>
-                                <td>{result.wineDbId.vintage}</td>
-                                <td>{result.degId.id}</td>
-                                <td>{`${result.degId.name} ${result.degId.surname}`}</td>
-                                <td>{result.eliminated ? "Áno" : 'Nie'}</td>
-                                <td>{result.wineCategory}</td>
-                                <td>{result.totalSum}</td>
-                            </tr>
-                            )
-                        })}
-                        </ResultsTable>
+                <ElementWrapper wrapperType="FullWidthWrapper">
+                    <h4>Výsledky vo vybranej degustačnej skupine</h4>
+                    <div className={classes.HeaderGroupChoose}>
+                            <label>Degustačná skupina</label>
+                            <select
+                            onChange={this.getGroupHandler}>
+                            {this.props.degGroups.map(cat => (
+                            <option 
+                                key={cat._id}
+                                id={cat._id}>
+                                {cat.groupName}
+                            </option>
+                        ))}
+                            </select>
+                        <Button clicked={this.fetchResultByGroupHandler}>Zobraz</Button>
+                    </div>
+                    <ResultsTable
+                        tableHeads={this.state.tableHeads}>
+                        {this.props.results.map((result, index) => {
+                        return (
+                        <tr key ={result._id}
+                        onClick={() => this.onClickHandler(result._id)}>
+                            <td>{result.wineDbId.id}</td>
+                            <td>{result.wineDbId.name}</td>
+                            <td>
+                                {`${result.wineDbId.color} 
+                                ${result.wineDbId.character} 
+                                ${result.wineDbId.clasification}`}
+                            </td>
+                            <td>{result.wineDbId.producer}</td>
+                            <td>{result.wineDbId.vintage}</td>
+                            <td>{result.degId.id}</td>
+                            <td>{`${result.degId.name} ${result.degId.surname}`}</td>
+                            <td>{result.eliminated ? "Áno" : 'Nie'}</td>
+                            <td>{result.wineCategory}</td>
+                            <td>{result.totalSum}</td>
+                        </tr>
+                        )
+                    })}
+                    </ResultsTable>
                 </ElementWrapper>
             </ElementWrapper>
         )
@@ -115,4 +114,4 @@ const mapDispatchToProps = dispatch => {
         onFetchResultsByGroup: (groupId, token) => dispatch(action.fetchResultsByGroup(groupId, token))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps) (withRouter(ResultsByDeGroup));;
+export default connect(mapStateToProps, mapDispatchToProps) (ResultsByDeGroup);

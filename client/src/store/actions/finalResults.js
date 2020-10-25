@@ -168,3 +168,70 @@ export const fetchResultsByGroup = (groupId, token) => {
         .catch(err => dispatch(fetchResultsByGroupFailled(err)))
     }
 }
+
+export const fetchListOfDegustatorsStart = () => {
+    return {
+        type: actionTypes.FETCH_LIST_OF_DEGUSTATORS_START
+    }
+}
+
+export const fetchListOfDegustatorsSuccess = (degustators, results) => {
+    return {
+        type: actionTypes.FETCH_LIST_OF_DEGUSTATORS_SUCCESS,
+        degustators,
+        results
+    }
+}
+
+export const fetchListOfDegustatorsFailled = (error) => {
+    return {
+        type: actionTypes.FETCH_LIST_OF_DEGUSTATORS_FAIL,
+        error
+    }
+}
+
+export const fetchListOfDegustators = (token) => {
+    return dispatch => {
+        dispatch(fetchListOfDegustatorsStart());
+        axiosInstance.get('/admin/final-results-degustators', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(fetchListOfDegustatorsSuccess(resp.data.degustators, resp.data.results)))
+        .catch(err => dispatch(fetchListOfDegustatorsFailled(err)))
+    }
+}
+
+export const fetchResultsByDegStart = () => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_DEG_START
+    }
+}
+
+export const fetchResultsByDegSuccess = (results) => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_DEG_SUCCESS,
+        results
+    }
+}
+
+export const fetchResultsByDegFailled = (error) => {
+    return {
+        type: actionTypes.FETCH_RESULTS_BY_GROUP_FAIL,
+        error
+    }
+}
+
+export const fetchResultsByDeg = (degId, token) => {
+    return dispatch => {
+        dispatch(fetchResultsByDegStart());
+        axiosInstance.get(`admin/final-results/degustator/${degId}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(fetchResultsByDegSuccess(resp.data.results)))
+        .catch(err => dispatch(fetchResultsByDegFailled(err)))
+    }
+}

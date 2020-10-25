@@ -97,5 +97,7 @@ export {
     fetchWineResultsByComCategory,
     fetchResultsByWineId,
     fetchDegGroupsRes,
-    fetchResultsByGroup
+    fetchResultsByGroup,
+    fetchListOfDegustators,
+    fetchResultsByDeg
 } from './finalResults';

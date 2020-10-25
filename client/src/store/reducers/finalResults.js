@@ -9,7 +9,9 @@ const initialState = {
     resultByWineId: [],
     wineInfo: {},
     degGroups: [],
-    resultsByGroup: []
+    resultsByGroup: [],
+    resultsByDeg: [],
+    degustators: []
 }
 
 const fetchCompetitiveCategoryStart = (state, action) => {
@@ -120,6 +122,50 @@ const fetchResultsByGroupFailled = (state, action) => {
     })
 }
 
+const fetchListOfDegustatorStart = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null
+    })
+}
+
+const fetchListOfDegustatorSuccess = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: null,
+        resultsByDeg: action.results,
+        degustators: action.degustators
+    })
+}
+
+const fetchListOfDegustatorFailled = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
+
+const fetchResultByDegStart = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null
+    })
+}
+
+const fetchResultsByDegSuccess = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: null,
+        resultsByDeg: action.results
+    })
+}
+const fetchResultByDegFailled = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_COMPETITVE_CATEGORY_START:
@@ -152,6 +198,18 @@ const reducer = (state = initialState, action) => {
             return fetchResultsByGroupSuccess(state, action);
         case actionTypes.FETCH_RESULTS_BY_GROUP_FAIL:
             return fetchResultsByGroupFailled(state, action);
+        case actionTypes.FETCH_LIST_OF_DEGUSTATORS_START:
+            return fetchListOfDegustatorStart(state, action);
+        case actionTypes.FETCH_LIST_OF_DEGUSTATORS_SUCCESS:
+            return fetchListOfDegustatorSuccess(state, action)
+        case actionTypes.FETCH_LIST_OF_DEGUSTATORS_FAIL:
+            return fetchListOfDegustatorFailled(state, action);
+        case actionTypes.FETCH_RESULTS_BY_DEG_START:
+            return fetchResultByDegStart(state, action);
+        case actionTypes.FETCH_RESULTS_BY_DEG_SUCCESS:
+            return fetchResultsByDegSuccess(state, action);
+        case actionTypes.FETCH_RESULTS_BY_DEG_FAIL:
+            return fetchResultByDegFailled(state, action);
         default:
             return state;
     }

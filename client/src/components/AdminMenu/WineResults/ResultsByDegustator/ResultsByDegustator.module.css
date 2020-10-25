@@ -1,0 +1,11 @@
+.HeaderDegustatorChoose {
+    text-align: left;
+    padding: 5px 10px;
+}
+.HeaderDegustatorChoose label {
+    padding: 5px;
+    padding-left: 90px;
+}
+.HeaderDegustatorChoose button {
+    margin: 10px;
+}

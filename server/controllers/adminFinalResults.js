@@ -101,16 +101,26 @@ exports.getFinalResultsByGroup = async (req, res, next) => {
 
 exports.getFinalResultsByDeg = async (req, res, next) => {
     const degId = req.params.degId;
+    const populateQueryDeg = {
+        path: 'degId',
+        model: 'Degustator',
+        select: '_id id name surname',
+    }    
+    const populateQueryWine = {
+        path: 'wineDbId',
+        model: 'Wine',
+        select: 'id name clasification color character _id vintage producer'
+    }
     try {
-        const deg = await Degustator.findById(degId).populate('results');
-        if (!deg) {
-            const error = new Error('Nemožem načítat výsledky pre tohto degustátora');
+        const results = await Result.find({degId: degId}).populate(populateQueryDeg).populate(populateQueryWine);
+        if (!results) {
+            const error = new Error("Nemôžem načítať výsledky");
             error.statusCode = 404;
             return next(error);
         }
         res.json({
             message: 'Výsledky pre tohto degustátora boli načítané',
-            results: deg.results
+            results: results
         })
     } catch (error) {
         if(!error.statusCode) {
@@ -181,7 +191,47 @@ exports.getDegGroups = async (req, res, next) => {
             results: results
         })
     } catch (error) {
-        
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
+    }
+}
+
+exports.getListOfDegustators = async (req, res, next) => {
+    const populateQueryDeg = {
+        path: 'degId',
+        model: 'Degustator',
+        select: '_id id name surname',
+    }    
+    const populateQueryWine = {
+        path: 'wineDbId',
+        model: 'Wine',
+        select: 'id name clasification color character _id vintage producer'
+    }
+    try {
+        const degustators = await Degustator.find({}, '_id id name surname group');
+        if (!degustators) {
+            const error = new Error('Nemôžem načítať degustátorov')
+            error.statusCode = 404;
+            return next(error)
+        }
+        const results = await Result.find({degId: degustators[0]._id}).populate(populateQueryDeg).populate(populateQueryWine);
+        if (!results) {
+            const error = new Error("Nemôžem načítať výsledky");
+            error.statusCode = 404;
+            return next(error);
+        }
+        res.status(200).json({
+            message: 'Degustátory načítaný',
+            degustators: degustators,
+            results: results
+        })
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
     }
 }
 
