@@ -14,6 +14,10 @@ const initialState = {
     degustators: []
 }
 
+const finalResultsErrorClear = (state, action) => {
+    return updateObj(state, {error: null})
+}
+
 const fetchCompetitiveCategoryStart = (state, action) => {
     return updateObj(state, {loading: true, error: null})
 };
@@ -210,6 +214,8 @@ const reducer = (state = initialState, action) => {
             return fetchResultsByDegSuccess(state, action);
         case actionTypes.FETCH_RESULTS_BY_DEG_FAIL:
             return fetchResultByDegFailled(state, action);
+        case actionTypes.FINAL_RESULTS_CLEAR_ERROR:
+            return finalResultsErrorClear(state, action);
         default:
             return state;
     }

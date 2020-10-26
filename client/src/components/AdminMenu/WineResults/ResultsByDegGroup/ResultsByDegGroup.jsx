@@ -10,6 +10,7 @@ import ResultsTable from '../ResultsTable/ResultsTable';
 import Modal from '../../../UI/Modal/Modal';
 import WineGlass from '../../../UI/WineGlass/WineGlass';
 import ResumeTable from '../../../Rating/ResumeResults/ResumeTable/ResumeTable';
+import Popup from '../../../UI/Popup/Popup';
 
 class ResultsByDeGroup extends Component {
     state = {
@@ -97,6 +98,9 @@ class ResultsByDeGroup extends Component {
                     })}
                     </ResultsTable>
                 </ElementWrapper>
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         )
     }
@@ -105,7 +109,8 @@ const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
         degGroups: state.finalResults.degGroups,
-        results: state.finalResults.resultsByGroup
+        results: state.finalResults.resultsByGroup,
+        error: state.finalResults.error
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -11,6 +11,7 @@ import ResumeTable from '../../../Rating/ResumeResults/ResumeTable/ResumeTable';
 import WineGlass from '../../../UI/WineGlass/WineGlass';
 import Button from '../../../UI/Button/Button';
 import Back from '../../../UI/Back/Back';
+import Popup from '../../../UI/Popup/Popup';
 
 class ResultsByWineId extends Component {
     state = {
@@ -69,6 +70,9 @@ class ResultsByWineId extends Component {
                 })}
                 </ResultsTable>
                 </ElementWrapper>
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         )
     }
@@ -78,7 +82,8 @@ const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
         results: state.finalResults.resultByWineId,
-        wineInfo: state.finalResults.wineInfo
+        wineInfo: state.finalResults.wineInfo,
+        error: state.finalResults.error
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -1,6 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 import axiosInstance from '../../axios-instance';
 
+export const finalResultsErrorClear = () => {
+    return {
+        type: actionTypes.FINAL_RESULTS_CLEAR_ERROR
+    }
+}
+
 export const fetchCompetitiveCategoryStart = () => {
     return {
         type: actionTypes.FETCH_COMPETITVE_CATEGORY_START
@@ -31,7 +37,19 @@ export const fetchCompetitiveCategory = (token) => {
             }
         })
         .then(resp => dispatch(fetchCompetitiveCategorySuccess(resp.data.competitiveCategory, resp.data.results)))
-        .catch(err => dispatch(fetchCompetitiveCategoryFail(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchCompetitiveCategoryFail(error))
+            }
+            dispatch(fetchCompetitiveCategoryFail(err))
+            setTimeout(()=>{
+                dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
     }
 }
 
@@ -64,7 +82,19 @@ export const fetchWineResultsByComCategory = (category, token) => {
             }
         })
         .then(resp => dispatch(fetchWineResultsByComCategorySuccess(resp.data.results)))
-        .catch(err => dispatch(fetchWineResultsByComCategoryFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchWineResultsByComCategoryFailled(error))
+            }
+            dispatch(fetchWineResultsByComCategoryFailled(err))
+            setTimeout(() => {
+                dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
     }
 }
 
@@ -98,7 +128,19 @@ export const fetchResultsByWineId = (wineId, token) => {
             }
         })
         .then(resp => dispatch(fetchResultsByWineIdSuccess(resp.data.results, resp.data.wineInfo)))
-        .catch(err => dispatch(fetchResultsByWineIdFail(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchResultsByWineIdFail(error))
+            }
+            dispatch(fetchResultsByWineIdFail(err))
+            setTimeout(()=>{
+                dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
     }
 }
 
@@ -132,7 +174,19 @@ export const fetchDegGroupsRes = (token) => {
             }
         })
         .then(resp => dispatch(fetchDegGroupsResSuccess(resp.data.groups, resp.data.results)))
-        .catch(err => dispatch(fetchDegGroupsResFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchDegGroupsResFailled(error))
+            }
+            dispatch(fetchDegGroupsResFailled(err))
+            setTimeout(()=>{
+                dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
     }
 }
 
@@ -165,7 +219,19 @@ export const fetchResultsByGroup = (groupId, token) => {
             }
         })
         .then(resp => dispatch(fetchResultsByGroupSuccess(resp.data.results)))
-        .catch(err => dispatch(fetchResultsByGroupFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchResultsByGroupFailled(error))
+            }
+            dispatch(fetchResultsByGroupFailled(err))
+            setTimeout(()=>{
+                dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
     }
 }
 
@@ -199,7 +265,19 @@ export const fetchListOfDegustators = (token) => {
             }
         })
         .then(resp => dispatch(fetchListOfDegustatorsSuccess(resp.data.degustators, resp.data.results)))
-        .catch(err => dispatch(fetchListOfDegustatorsFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchListOfDegustatorsFailled(error))
+            }
+            dispatch(fetchListOfDegustatorsFailled(err))
+            setTimeout(()=>{
+                dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
     }
 }
 
@@ -232,6 +310,18 @@ export const fetchResultsByDeg = (degId, token) => {
             }
         })
         .then(resp => dispatch(fetchResultsByDegSuccess(resp.data.results)))
-        .catch(err => dispatch(fetchResultsByDegFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchResultsByDegFailled(error))
+            }
+            dispatch(fetchResultsByDegFailled(err))
+            setTimeout(()=> {
+                dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
     }
 }

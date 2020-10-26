@@ -8,6 +8,7 @@ import Back from '../../../UI/Back/Back';
 import Button from '../../../UI/Button/Button';
 import classes from './ResultsCategory.module.css';
 import CategoryTable from './CategoryTable/CategoryTable';
+import Popup from '../../../UI/Popup/Popup';
 
 class ResultsByCategory extends Component {
     state = {
@@ -56,6 +57,9 @@ class ResultsByCategory extends Component {
                     tableHead={this.state.tableHeadNames}
                     />
                 </ElementWrapper>
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         )
     }
@@ -64,7 +68,8 @@ const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
         competitiveCategory: state.finalResults.competitiveCategory,
-        results: state.finalResults.results
+        results: state.finalResults.results,
+        error: state.finalResults.error
     }
 }
 const mapDispatchToProps = dispatch => {
