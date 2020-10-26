@@ -10,6 +10,10 @@ const initialState = {
     detailedResult: null
 }
 
+const degResultsClearError = (state, action) => {
+    return updateObj(state, {error: null})
+}
+
 const fetchDegResultsStart = (state, action) => {
     return updateObj(state, {loading: true, error: null})
 };
@@ -67,6 +71,8 @@ const reducer = (state = initialState, action) => {
             return fetchDegResultByIdFail(state, action);
         case actionTypes.CLOSE_DETAIL_RESULT:
             return closeDetailResult(state, action);
+        case actionTypes.DEG_RESULTS_CLEAR_ERROR:
+            return degResultsClearError(state, action);
         default:
             return state;
     }

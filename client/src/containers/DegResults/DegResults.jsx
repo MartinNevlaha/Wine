@@ -9,6 +9,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import ResumeTable from '../../components/Rating/ResumeResults/ResumeTable/ResumeTable';
 import WineGlass from '../../components/UI/WineGlass/WineGlass';
 import Button from '../../components/UI/Button/Button';
+import Popup from '../../components/UI/Popup/Popup';
 
 class DegResults extends Component {
     componentDidMount() {
@@ -36,6 +37,9 @@ class DegResults extends Component {
                 fetchDetailResult={this.props.onFetchDegResultById}
                 token={this.props.degInfo.token}
                 />
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         );
     }
@@ -44,7 +48,8 @@ class DegResults extends Component {
 const mapStateToProps = state => {
     return {
         degInfo: state.degAuth,
-        degResults: state.degResults
+        degResults: state.degResults,
+        error: state.degResults.error
     }
 }
 const mapDispatchToProps = dispatch => {

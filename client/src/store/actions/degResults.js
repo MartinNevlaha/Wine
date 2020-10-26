@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 
+export const degResultsClearError = () => {
+    return {
+        type: actionTypes.DEG_RESULTS_CLEAR_ERROR
+    }
+}
+
 export const fetchDegResultsStart = () => {
     return {
         type: actionTypes.FETCH_DEG_RESULTS_START
@@ -34,7 +40,19 @@ export const fetchDegResults = (token) => {
                 console.log(resp.data)
                 dispatch(fetchDegResultsSucces(resp.data.degName, resp.data.results))
             })
-            .catch(error => dispatch(fetchDegResultsFailled(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchDegResultsFailled(error))
+                }
+                dispatch(fetchDegResultsFailled(err))
+                setTimeout(() => {
+                    dispatch(degResultsClearError());
+                }, 2500)
+            })
     }
 }
 
@@ -69,7 +87,19 @@ export const fetchDegResultById = (_id, token) => {
             .then(resp => {
                 dispatch(fetchDegResultByIdSucces(resp.data))
             })
-            .catch(error => dispatch(fetchDegResultByIdFail(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchDegResultByIdFail(error))
+                }
+                dispatch(fetchDegResultByIdFail(err))
+                setTimeout(() => {
+                    dispatch(degResultsClearError())
+                }, 2500)
+            })
     }
 }
 
