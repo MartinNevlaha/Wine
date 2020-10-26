@@ -8,6 +8,7 @@ import LoginUserInput from '../../UserInput/UserInput';
 import Spinner from '../../UI/Spinner/Spinner';
 import { isInputNameValid, isInputPassValid } from '../../../shared/validations';
 import * as action from '../../../store/actions/index';
+import Popup from '../../UI/Popup/Popup';
 
 
 class DegustatorLogin extends Component {
@@ -95,25 +96,19 @@ class DegustatorLogin extends Component {
             >{input.labelName}</LoginUserInput>
             );
         })
-        let errorMessage = null;
-        if (this.props.error) {
-            errorMessage = (
-                <p style={{color: "red"}}>
-                    {`Kód chyby: ${this.props.error.code}: ${this.props.error.message}`}
-                </p>
-            );
-        }
         return (
             <div className={classes.DegLogin}>
                 <WineGlass />
                 {this.props.loading ? <Spinner/> :
                 <div className={classes.LoginContainer}>
                     {loginDegustatorForm}
-                    {errorMessage}
                     <Button 
                     clicked={this.degLoginHandler}
                     disabled={!(this.state.password.valid && this.state.degName.valid)}>Prihlásiť</Button>
                 </div>}
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </div>
         );
     }

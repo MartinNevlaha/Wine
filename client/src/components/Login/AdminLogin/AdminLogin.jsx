@@ -8,6 +8,7 @@ import Button from '../../UI/Button/Button';
 import Spinner from '../../UI/Spinner/Spinner';
 import {isInputNameValid, isInputPassValid} from '../../../shared/validations';
 import * as action from '../../../store/actions/index';
+import Popup from '../../UI/Popup/Popup';
 
 class AdminLogin extends Component {
     state = {
@@ -95,27 +96,21 @@ class AdminLogin extends Component {
             >{input.labelName}</LoginUserInput>
             );
         })
-        let errorMessage = null;
-        if (this.props.error) {
-            errorMessage = (
-                <p style={{color: "red"}}>
-                    {`Kód chyby: ${this.props.error.code}: ${this.props.error.message}`}
-                </p>
-            );
-        }
         return (
             <div className={classes.AdminLogin}>
                 <WineGlass />
                 {this.props.loading ? <Spinner /> :
                 <div className={classes.LoginContainer}>
                 {adminLoginForm}
-                {errorMessage}
                 <Button
                 clicked={this.adminLoginHandler}
                 disabled={!(this.state.adminName.valid && 
                     this.state.password.valid)}
                 >Prihlásiť</Button>
                 </div>}
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </div>
         );
     }

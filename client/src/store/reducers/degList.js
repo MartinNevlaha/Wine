@@ -12,12 +12,20 @@ const initialState = {
     isImportingDb: false,
     sortAmountUp: true,
     isDeletingDeg: false,
+    error: null
 };
+
+const degListErrorClear = (state, action) => {
+    return updateObj(state, {
+        error: null
+    })
+}
 
 const addDegStart = (state, action) => {
     return updateObj(state, {
         loadingAddDeg: true,
-        isAddDegSucces: false
+        isAddDegSucces: false,
+        error: null
     })
 };
 
@@ -35,7 +43,8 @@ const addDegSucces = (state, action) => {
 const addDegFailled = (state, action) => {
     return updateObj(state, {
         loadingAddDeg: false,
-        isAddDegSucces: false
+        isAddDegSucces: false,
+        error: action.error
     })
 };
 
@@ -50,7 +59,8 @@ const databaseDegDeleteCanceled = (state, action) => {
 const databaseDegDeleteStart = (state, action) => {
     return updateObj(state, {
         loading: true,
-        isDeletingDb: false
+        isDeletingDb: false,
+        error: null
     });
 };
 
@@ -62,7 +72,7 @@ const databaseDegDeleteSucces = (state, action) => {
 };
 
 const databaseDegDeleteFail = (state, action) => {
-    return updateObj(state, {loading: false});
+    return updateObj(state, {loading: false, error: action.error});
 };
 
 const databaseDegImportInit = (state, action) => {
@@ -76,7 +86,8 @@ const databaseDegImportCanceled = (state, action) => {
 const databaseDegImportStart = (state, action) => {
     return updateObj(state, {
         loading: true,
-        isImportingDb: false
+        isImportingDb: false,
+        error: null
     })
 };
 
@@ -88,11 +99,11 @@ const databaseDegImportSucces = (state, action) => {
 };
 
 const databaseDegImportFailled = (state, action) => {
-    return updateObj(state, {loading: false});
+    return updateObj(state, {loading: false, error: action.error});
 };
 
 const fetchDegListStart = (state, action) => {
-    return updateObj(state, {loading: true});
+    return updateObj(state, {loading: true, error: null});
 };
 
 const fetchDegListSucces = (state, action) => {
@@ -103,7 +114,7 @@ const fetchDegListSucces = (state, action) => {
 };
 
 const fetchDeglistFailled = (state, action) => {
-    return updateObj(state, {loading: false})
+    return updateObj(state, {loading: false, error: action.error})
 };
 
 const sortDegBy = (state, action) => {
@@ -129,7 +140,7 @@ const editDeg = (state, action) => {
 };
 
 const saveEditDegStart = (state, action) => {
-    return updateObj(state, {loading: true});
+    return updateObj(state, {loading: true, error: null});
 };
 
 const saveEditDegSucces = (state, action) => {
@@ -142,7 +153,7 @@ const saveEditDegSucces = (state, action) => {
 };
 
 const saveEditDegFailled = (state, action) => {
-    return updateObj(state, {loading: false});
+    return updateObj(state, {loading: false, error: action.error});
 };
 
 const deleteDegInit = (state, action) => {
@@ -156,7 +167,8 @@ const deleteDegCanceled = (state, action) => {
 const deleteDegStart = (state, action) => {
     return updateObj(state, {
         loading: true,
-        isDeletingDeg: false
+        isDeletingDeg: false,
+        error: null
     });
 };
 
@@ -171,7 +183,8 @@ const deleteDegSucces = (state, action) => {
 const deleteDegFailled = (state, action) => {
     return updateObj(state, {
         loading: false,
-        isDeletingDeg: false
+        isDeletingDeg: false,
+        error: action.error
     })
 }
 
@@ -229,6 +242,8 @@ const reducer = (state = initialState, action) => {
             return deleteDegSucces(state, action);
         case actionTypes.DELETE_DEG_FAIL:
             return deleteDegFailled(state, action);
+        case actionTypes.DEG_LIST_ERROR_CLEAR:
+            return degListErrorClear(state, action);
         default:
             return state;
     };

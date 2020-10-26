@@ -10,6 +10,7 @@ import DeleteDesision from '../../components/AdminMenu/DeleteDesision/DeleteDesi
 import ImportDesision from '../../components/AdminMenu/ImportDesision/ImportDesision';
 import EditAddedDeg from '../../components/AdminMenu/DegustatorList/EditDegustator/EditAddedDegustator/EditAddedDegustator';
 import { searchIdetificator } from '../../shared/utility';
+import Popup from '../../components/UI/Popup/Popup';
 import {
     isIdValid, 
     isString
@@ -222,6 +223,9 @@ class EditDegustator extends Component {
                 loading={this.props.degList.loading}
                 />
                 <Back />
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         );
     }
@@ -230,6 +234,7 @@ class EditDegustator extends Component {
 const mapStateToProps = state => {
     return {
         degList: state.degList,
+        error: state.degList.error,
         token: state.adminAuth.token
     };
 };

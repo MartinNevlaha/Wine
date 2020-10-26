@@ -35,6 +35,10 @@ const degLoginFailled = (state, action) => {
     })
 }
 
+const degLoginClearError = (state, action) => {
+    return updateObj(state, {error: null})
+}
+
 const degLogout = (state, action) => {
     return updateObj(state, {
         degId: null,
@@ -56,6 +60,8 @@ const reducer = (state = initialState, action) => {
             return degLoginFailled(state, action);
         case actionTypes.DEGUSTATOR_LOGOUT:
             return degLogout(state, action);
+        case actionTypes.DEGUSTATOR_LOGIN_CLEAR_ERROR:
+            return degLoginClearError(state, action)
         default:
             return state;
     }

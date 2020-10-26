@@ -5,6 +5,7 @@ import ElementWrapper from '../../../../hoc/ElementWrapper/ElementWrapper';
 import DegGroupsTable from './DegGroupsTable/DegGroupsTable';
 import Back from '../../../UI/Back/Back';
 import * as action from '../../../../store/actions/index';
+import Popup from '../../../UI/Popup/Popup';
 
 class ShowDegGroups extends Component {
     componentDidMount() {
@@ -21,6 +22,9 @@ class ShowDegGroups extends Component {
                     <h4>Skupiny degustátorov</h4>
                     {groups}
                 </ElementWrapper>
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         );
     }
@@ -29,7 +33,8 @@ class ShowDegGroups extends Component {
 const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
-        groups: state.degGroups.degGroups
+        groups: state.degGroups.degGroups,
+        error: state.degGroups.error
     }
 }
 

@@ -39,6 +39,12 @@ export const adminLoginFailled = (error) => {
         error
     }
 }
+ 
+export const adminLoginClearError = () => {
+    return {
+        type: actionTypes.ADMIN_LOGIN_CLEAR_ERROR,
+    }
+}
 
 export const adminLogin = (adminData) => {
     return dispatch => {
@@ -52,11 +58,17 @@ export const adminLogin = (adminData) => {
                 dispatch(checkAuthTimeout(decodedToken.exp - decodedToken.iat))
             })
             .catch(err => {
-                const error = {
-                    message: err.response.data.message,
-                    code: err.response.status
-                }
-                dispatch(adminLoginFailled(error));
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(adminLoginFailled(error));
+                } else {dispatch(adminLoginFailled(err))}
+
+                setTimeout(() => {
+                    dispatch(adminLoginClearError())
+                }, 2500)
             })
     }
 }

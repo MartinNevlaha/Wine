@@ -30,6 +30,12 @@ const adminLoginFailled = (state, action) => {
     })
 };
 
+const adminLoginClearError = (state, action) => {
+    return updateObj(state, {
+        error: null
+    })
+}
+
 const adminLogout = (state, action) => {
     return updateObj(state, {
         adminId: null,
@@ -49,6 +55,8 @@ const reducer = (state = initialState, action) => {
             return adminLoginFailled(state, action);
         case actionTypes.ADMIN_LOGOUT:
             return adminLogout(state, action);
+        case actionTypes.ADMIN_LOGIN_CLEAR_ERROR:
+            return adminLoginClearError(state, action)
         default:
             return state;
     }

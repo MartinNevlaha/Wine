@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 
+export const groupsErrorClear = () => {
+    return {
+        type: actionTypes.GROUPS_ERROR_CLEAR
+    }
+}
+
 export const createDegGroups = (degGroups) => {
     return {
         type: actionTypes.CREATE_DEG_GROUPS,
@@ -33,6 +39,7 @@ export const fetchDegListGroupFailled = (error) => {
     };
 };
 
+
 export const fetchDegListGroup = (token) => {
     return dispatch => {
         axiosInstance.get('admin/degustator-list', {
@@ -46,7 +53,19 @@ export const fetchDegListGroup = (token) => {
                 degListData.sort((a, b) => (a.id > b.id ) ? 1 : -1)
                 dispatch(fetchDegListGroupSucces(degListData));
             })
-            .catch(error => dispatch(fetchDegListGroupFailled(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchDegListGroupFailled(error))
+                }
+                dispatch(fetchDegListGroupFailled(err))
+                setTimeout(() => {
+                    dispatch(groupsErrorClear())
+                }, 2500)
+            })
     };
 };
 
@@ -67,6 +86,7 @@ export const saveDegGroupsFailled = (error) => {
         error: error
     }
 };
+
 export const saveDegGroups = (data, token) => {
     return dispatch => {
         dispatch(saveDegGroupsStart());
@@ -88,9 +108,18 @@ export const saveDegGroups = (data, token) => {
                 })
                 dispatch(saveDegGroupsSucces(createdGroups));
             })
-            .catch(error => {
-                console.log(error)
-                dispatch(saveDegGroupsFailled(error))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(saveDegGroupsFailled(error))
+                }
+                dispatch(saveDegGroupsFailled(err))
+                setTimeout(()=>{
+                    dispatch(groupsErrorClear())
+                }, 2500)
             })
     };
 };
@@ -138,6 +167,7 @@ export const fetchDegGroupsFailled = (error) => {
     };
 };
 
+
 export const fetchDegGroups = (token) => {
     return dispatch => {
         dispatch(fetchDegGroupsStart());
@@ -162,8 +192,18 @@ export const fetchDegGroups = (token) => {
                     dispatch(fetchDegListGroup(token));
                 }
             })
-            .catch(error => {
-                dispatch(fetchDegGroupsFailled(error))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchDegGroupsFailled(error))
+                }
+                dispatch(fetchDegGroupsFailled(err))
+                setTimeout(()=>{
+                    dispatch(groupsErrorClear())
+                }, 2500)
             }) 
     }
 }
@@ -199,6 +239,7 @@ export const deleteGroupsFailled = (error) => {
     };
 };
 
+
 export const deleteGroups = (token) => {
     return dispatch => {
         dispatch(deleteGroupsStart());
@@ -208,6 +249,18 @@ export const deleteGroups = (token) => {
             }
         })
             .then(res => dispatch(deleteGroupsSucces()))
-            .catch(err => dispatch(deleteGroupsFailled(err)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(deleteGroupsFailled(error))
+                }
+                dispatch(deleteGroupsFailled(err))
+                setTimeout(()=>{
+                    dispatch(groupsErrorClear())
+                }, 2500)
+            })
     }
 }

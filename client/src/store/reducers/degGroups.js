@@ -7,7 +7,8 @@ const initialState = {
     degGroups: [],
     loading: false,
     isDeleting: false,
-    isDeleteSucces: false
+    isDeleteSucces: false,
+    error: null
 };
 
 const createDegGroup = (state, action) => {
@@ -26,7 +27,7 @@ const minimalisedGroup = (state, action) => {
 };
 
 const fetchDegListGroupStart = (state, action) => {
-    return updateObj(state, {loading: true})
+    return updateObj(state, {loading: true, error: null})
 };
 
 const fetchDegListGroupSucces = (state, action) => {
@@ -37,11 +38,13 @@ const fetchDegListGroupSucces = (state, action) => {
 };
 
 const fetchDegListGroupFaileed = (state, action) => {
-    return updateObj(state, {loading: false})
+    return updateObj(state, {loading: false, error: action.error})
 };
 
+
+
 const saveDegGroupsStart = (state, action) => {
-    return updateObj(state, {loading: true})
+    return updateObj(state, {loading: true, error: null})
 };
 
 const saveDegGroupsSucces = (state, action) => {
@@ -52,7 +55,7 @@ const saveDegGroupsSucces = (state, action) => {
 };
 
 const saveDegGroupsFailled = (state, action) => {
-    return updateObj(state, {loading: false})
+    return updateObj(state, {loading: false, error: action.error})
 };
 
 
@@ -81,7 +84,7 @@ const dragFromGroup = (state, action) => {
     })
 }
 const fetchDegGroupsStart = (state, action) => {
-    return updateObj(state, {loading: true})
+    return updateObj(state, {loading: true, error: null})
 }
 
 const fetchDegGroupsSucces = (state, action) => {
@@ -92,8 +95,10 @@ const fetchDegGroupsSucces = (state, action) => {
 }
 
 const fetchDegGroupsFailled = (state, action) => {
-    return updateObj(state, {loading: false})
+    return updateObj(state, {loading: false, error: action.error})
 }
+
+
 
 const deleteGroupsInit = (state, action) => {
     return updateObj(state, {
@@ -110,6 +115,7 @@ const deleteGroupsStart = (state, action) => {
     return updateObj(state, {
         loading: true,
         isDeleting: false,
+        error: null
     })
 }
 
@@ -122,7 +128,11 @@ const deleteGroupsSucces = (state, action) => {
 }
 
 const deleteGroupsFailled = (state, action) => {
-    return updateObj(state, {loading: false})
+    return updateObj(state, {loading: false, error: action.error})
+}
+
+const groupsErrorClear = (state, action) => {
+    return updateObj(state, {error: null})
 }
 
 const reducer = (state = initialState, action) => {
@@ -154,7 +164,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_DEG_GROUPS_SUCCES:
             return fetchDegGroupsSucces(state, action);
         case actionTypes.FETCH_DEG_GROUPS_FAIL:
-            return fetchDegGroupsFailled(state, action);
+            return fetchDegGroupsFailled(state, action);;
         case actionTypes.DELETE_GROUPS_INIT:
             return deleteGroupsInit(state, action);
         case actionTypes.DELETE_GROUPS_CANCELED:
@@ -165,6 +175,8 @@ const reducer = (state = initialState, action) => {
             return deleteGroupsSucces(state, action);
         case actionTypes.DELETE_GROUPS_FAIL:
             return deleteGroupsFailled(state, action);
+        case actionTypes.GROUPS_ERROR_CLEAR:
+            return groupsErrorClear(state, action)
         default: 
             return state;
     };

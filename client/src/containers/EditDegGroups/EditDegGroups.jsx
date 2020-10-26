@@ -11,6 +11,7 @@ import DegList from '../../components/AdminMenu/DegGropsList/DegList/DegList';
 import Button from '../../components/UI/Button/Button';
 import Back from '../../components/UI/Back/Back';
 import DeleteDesision from '../../components/AdminMenu/DeleteDesision/DeleteDesision';
+import Popup from '../../components/UI/Popup/Popup';
 
 class EditDegGruops extends Component {
     constructor(props) {
@@ -129,6 +130,9 @@ class EditDegGruops extends Component {
         return (
             <ElemetWrapper wrapperType="ElementWrapper">
                 <Back />
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
                 {!this.props.degGroups.degListGroups.length && 
                 !this.props.degGroups.degGroups.length ?
                 <div>
@@ -181,6 +185,7 @@ class EditDegGruops extends Component {
 const mapStateToProps = state => {
     return {
         degGroups: state.degGroups,
+        error: state.degGroups.error,
         token: state.adminAuth.token
     }
 };

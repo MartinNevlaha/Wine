@@ -43,6 +43,11 @@ export const degLoginFailled = (error) => {
         error
     }
 }
+export const degLoginClearError = () => {
+    return {
+        type: actionTypes.DEGUSTATOR_LOGIN_CLEAR_ERROR,
+    }
+}
 
 export const degLogin = (degData) => {
     return dispatch => {
@@ -58,11 +63,18 @@ export const degLogin = (degData) => {
                 dispatch(checkAuthTimeout(decodedToken.exp - decodedToken.iat))
             })
             .catch(err => {
-                const error = {
-                    message: err.response.data.message,
-                    code: err.response.status
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(degLoginFailled(error));
+                } else {
+                    dispatch(degLoginFailled(err))
                 }
-                dispatch(degLoginFailled(error));
+                setTimeout(() => {
+                    dispatch(degLoginClearError())
+                }, 2500)
             })
     }
 }

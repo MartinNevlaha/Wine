@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 
+export const degListErrorClear = () => {
+    return {
+        type: actionTypes.DEG_LIST_ERROR_CLEAR
+    }
+}
+
 export const addDegStart = () => {
     return {
         type: actionTypes.ADD_DEGUSTATOR_START
@@ -32,8 +38,18 @@ export const addDegustator = (data, token) => {
             .then(response => {
                 dispatch(addDegSucces(response.data._id, data));
             })
-            .catch(error => {
-                dispatch(addDegFailled(error));
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(addDegFailled(error));
+                }
+                dispatch(addDegFailled(err));
+                setTimeout(() => {
+                    dispatch(degListErrorClear())
+                }, 2500)
             })
     };
 };
@@ -76,7 +92,19 @@ export const databaseDegDelete = (token) => {
             }
         })
             .then(response => dispatch(databaseDegDeleteSucces()))
-            .catch(error => dispatch(databaseDegDeleteFailled(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(databaseDegDeleteFailled(error))
+                }
+                dispatch(databaseDegDeleteFailled(err))
+                setTimeout(() => {
+                    dispatch(degListErrorClear())
+                }, 2500)
+            })
     };
 };
 
@@ -118,7 +146,19 @@ export const databaseDegImport = (degData, token) => {
             .then(resp => {
                 dispatch(databaseDegImportSucces(resp.data.degustators))
             })
-            .catch(error => dispatch(databaseDegImportFailled(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(databaseDegImportFailled(error))
+                }
+                dispatch(databaseDegImportFailled(err))
+                setTimeout(()=>{
+                    dispatch(degListErrorClear())
+                }, 2500)
+            })
     }
 }
 
@@ -160,8 +200,18 @@ export const fetchDegList = (token) => {
                 degListData.sort((a, b) => (a.id > b.id ) ? 1 : -1)
                 dispatch(fetchDegListSucces(degListData));
             })
-            .catch(error => {
-                dispatch(fetchDegListFailled(error));
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchDegListFailled(error));
+                }
+                dispatch(fetchDegListFailled(err));
+                setTimeout(()=> {
+                    dispatch(degListErrorClear())
+                }, 2500)
             })
     };
 };
@@ -212,7 +262,19 @@ export const saveEditDeg = (_id, index, editedDegData, token) => {
                 editedDegData._id = _id;
                 dispatch(saveEditDegSucces(editedDegData, index));
             })
-            .catch(error => saveEditDegFailled(error))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    saveEditDegFailled(error)
+                }
+                saveEditDegFailled(err)
+                setTimeout(()=>{
+                    dispatch(degListErrorClear())
+                }, 2500)
+            })
     };
 };
 
@@ -257,7 +319,19 @@ export const deleteDeg = (_id, updatedDegList, token) => {
             }
         })
             .then(res => dispatch(deleteDegSucces(updatedDegList)))
-            .catch(error => dispatch(deleteDegFailled(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(deleteDegFailled(error))
+                }
+                dispatch(deleteDegFailled(err))
+                setTimeout(()=>{
+                    dispatch(degListErrorClear());
+                }, 2500)
+            })
     };
 };
 
