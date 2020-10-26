@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 
+export const settingsClearError = () => {
+    return {
+        type: actionTypes.SETTINGS_CLEAR_ERROR
+    }
+} 
+
 export const saveSettingsStart = () => {
     return {
         type: actionTypes.SAVE_SETTING_START
@@ -30,7 +36,19 @@ export const saveSettings = (settings, token) => {
             }
         })
             .then(resp => dispatch(saveSettingsSuccess(resp.data.setting.isValuesEliminated)))
-            .catch(err => dispatch(saveSettingsFailled(err)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(saveSettingsFailled(error))
+                }
+                dispatch(saveSettingsFailled(err))
+                setTimeout(()=>{
+                    dispatch(settingsClearError())
+                }, 2500)
+            })
     }
 }
 
@@ -63,7 +81,19 @@ export const saveIsDegustationOpen = (isOpen, token) => {
         .then(resp => {
             dispatch(saveIsDegustationOpenSuccess(resp.data.setting.isDegustationOpen))
         })
-        .catch(err => dispatch(saveIsDegustationOpenFail(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(saveIsDegustationOpenFail(error))
+            }
+            dispatch(saveIsDegustationOpenFail(err))
+            setTimeout(() => {
+                dispatch(settingsClearError())
+            }, 2500)
+        })
     }
 }
 
@@ -101,6 +131,18 @@ export const fetchSetting = (token) => {
 
             dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen))
         })
-        .catch(err => dispatch(fetchSettingFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchSettingFailled(error))
+            }
+            dispatch(fetchSettingFailled(err))
+            setTimeout(()=>{
+                dispatch(settingsClearError())
+            }, 2500)
+        })
     }
 }

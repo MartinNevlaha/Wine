@@ -7,6 +7,7 @@ import LockDegustation from '../../components/AdminMenu/DegustationSettings/Lock
 import * as action from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Back from '../../components/UI/Back/Back';
+import Popup from '../../components/UI/Popup/Popup';
 
 class DegustationSetting extends Component {
     state = {
@@ -72,6 +73,9 @@ class DegustationSetting extends Component {
                     />
                     </React.Fragment>
                 }
+                 <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         );
     }
@@ -81,7 +85,8 @@ const mapStateToProps = state => {
         token: state.adminAuth.token,
         loading: state.systemSettins.loading,
         isValuesEliminated: state.systemSettins.isValuesEliminated,
-        isDegustationOpen: state.systemSettins.isDegustationOpen
+        isDegustationOpen: state.systemSettins.isDegustationOpen,
+        error: state.systemSettins.error
     }
 }
 const mapDispatchToProps = dispatch => {

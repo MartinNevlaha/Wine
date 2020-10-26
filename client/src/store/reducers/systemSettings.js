@@ -8,6 +8,12 @@ const initialState = {
     isDegustationOpen: false
 }
 
+const settingsClearError = (state, action) => {
+    return updateObj(state, {
+        error: null
+    })
+}
+
 const saveSettingsStart = (state, action) => {
     return updateObj(state, {
         loading: true, 
@@ -84,6 +90,8 @@ const reducer = (state = initialState, action) => {
             return saveIsDegustationOpenSuccess(state, action);
         case actionTypes.SAVE_IS_DEGUSTATION_OPEN_FAIL:
             return saveIsDegustationOpenFail(state, action);
+        case actionTypes.SETTINGS_CLEAR_ERROR:
+            return settingsClearError(state, action)
         default:
             return state;
     }
