@@ -2,6 +2,12 @@ import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 import { isGroupEdited } from '../../shared/utility';
 
+export const wineGroupsClearError = () => {
+    return {
+        type: actionTypes.WINE_GROUPS_CLEAR_ERROR
+    }
+}
+
 export const fetchEditWineGroupsStart = () => {
     return {
         type: actionTypes.FETCH_EDIT_WINE_GROUP_START
@@ -43,7 +49,19 @@ export const fetchEditWineGroups = (token) => {
             }
             dispatch(fetchEditWineGroupsSuccess(wines, groups))
         })
-        .catch(err => dispatch(fetchEditWineGroupsFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchEditWineGroupsFailled(error))
+            }
+            dispatch(fetchEditWineGroupsFailled(err))
+            setTimeout(()=>{
+                dispatch(wineGroupsClearError())
+            }, 2500)
+        })
     }
 }
 
@@ -94,6 +112,18 @@ export const saveWineGroups = (wineGroupsData ,token) => {
             }
         })
         .then(resp => dispatch(saveWineGroupsSuccess()))
-        .catch(err => dispatch(saveWineGroupsFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(saveWineGroupsFailled(error))
+            }
+            dispatch(saveWineGroupsFailled(err))
+            setTimeout(()=>{
+                dispatch(wineGroupsClearError());
+            }, 2500)
+        })
     }
 }

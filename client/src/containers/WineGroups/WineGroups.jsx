@@ -7,6 +7,7 @@ import Back from '../../components/UI/Back/Back';
 import EditWineGroups from '../../components/AdminMenu/WineGroups/EditWineGroups/EditWineGroups';
 import * as action from '../../store/actions/index';
 import { isGroupEdited } from '../../shared/utility';
+import Popup from '../../components/UI/Popup/Popup';
 
 class WineGroups extends Component {
 
@@ -48,6 +49,9 @@ class WineGroups extends Component {
                 getGroup={this.getGroupHandler}
                 sortWineGroups={this.props.onSortWineGroups}
                 />
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         )
     }
@@ -56,7 +60,8 @@ const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
         wineGroups: state.wineGroups,
-        isDegustationOpen: state.systemSettins.isDegustationOpen
+        isDegustationOpen: state.systemSettins.isDegustationOpen,
+        error: state.wineGroups.error
     }
 }
 
