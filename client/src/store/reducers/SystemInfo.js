@@ -7,6 +7,9 @@ const initialState = {
     error: null,
     dbData: {}
 }
+const systemInfoClearError = (state, action) => {
+    return updateObj(state, {error: null})
+}
 const fetchSystemInfoStart = (state, action) => {
     return updateObj(state, {
         loading: true,
@@ -16,7 +19,6 @@ const fetchSystemInfoStart = (state, action) => {
 const fetchSystemInfoSuccess = (state, action) => {
     return updateObj(state, {
         loading: false,
-        error: null,
         infoData: action.sysInfoData,
         dbData: action.dbData
     })
@@ -36,7 +38,6 @@ const completeResetDbStart = (state, action) => {
 const completeResetDbSuccess = (state, action) => {
     return updateObj(state, {
         loading: false,
-        error: null,
         dbData: {}
     })
 }
@@ -61,6 +62,8 @@ const reducer = (state = initialState, action) => {
             return completeResetDbSuccess(state, action);
         case actionTypes.COM_RESET_DB_FAIL:
             return completeResetDbFail(state, action);
+        case actionTypes.SYSTEM_INFO_CLEAR_ERROR:
+            return systemInfoClearError(state, action);
         default:
             return state;
     }

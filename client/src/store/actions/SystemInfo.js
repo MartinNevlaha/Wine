@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 
+export const systemInfoClearError = () => {
+    return {
+        type: actionTypes.SYSTEM_INFO_CLEAR_ERROR
+    }
+}
+
 export const fetchSystemInfoStart = () => {
     return {
         type: actionTypes.FETCH_SYSTEM_INFO_START 
@@ -31,7 +37,19 @@ export const fetchSystemInfo = (token) => {
             }
         })
             .then(resp => dispatch(fetchSystemInfoSuccess(resp.data.infoData, resp.data.dbData)))
-            .catch(err => dispatch(fetchSystemInfoFailled(err)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchSystemInfoFailled(error))
+                }
+                dispatch(fetchSystemInfoFailled(err))
+                setTimeout(() => {
+                    dispatch(systemInfoClearError())
+                }, 2500)
+            })
     }
 }   
 
@@ -61,6 +79,18 @@ export const completeResetDb = (token) => {
             }
         })
         .then(resp => dispatch(completeDbResetSuccess()))
-        .catch(err => dispatch(completeResetDbFailled(err)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(completeResetDbFailled(error))
+            }
+            dispatch(completeResetDbFailled(err))
+            setTimeout(()=>{
+                dispatch(systemInfoClearError())
+            }, 2500)
+        })
     }
 }

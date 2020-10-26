@@ -8,6 +8,7 @@ import Back from '../../components/UI/Back/Back';
 import DbInfo from '../../components/AdminMenu/SystemMenu/DbInfo/DbInfo';
 import LogEvents from '../../components/AdminMenu/SystemMenu/LogEvents/LogEvents';
 import DeleteDesision from '../../components/AdminMenu/DeleteDesision/DeleteDesision';
+import Popup from '../../components/UI/Popup/Popup';
 
 class SystemInfo extends Component {
     state = {
@@ -46,6 +47,9 @@ class SystemInfo extends Component {
                 <ViewSystemInfo systemData={this.props.systemInfo.infoData}/>
                 <DbInfo dbData={this.props.systemInfo.dbData} modalOpen={this.modalOpen}/>
                 <LogEvents token={this.props.token}/>
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         )
     }
@@ -53,7 +57,8 @@ class SystemInfo extends Component {
 const mapStateTopProps = state => {
     return {
         systemInfo: state.systemInfo,
-        token: state.adminAuth.token
+        token: state.adminAuth.token,
+        error: state.systemInfo.error
     }
 }
 const mapDispatchToProps = dispatch => {
