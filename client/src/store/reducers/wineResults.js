@@ -14,14 +14,19 @@ const initialState = {
         vintage: null,
         error: null
     },
-    wineInGroups: []
+    wineInGroups: [],
+    error: null
+}
+
+const resultsClearError = (state, action) => {
+    return updateObj(state, {error: null})
 }
 const resultsSendInit = (state, action) => {
     return updateObj(state, { sending: true })
 };
 
 const resultsSendStart = (state, action) => {
-    return updateObj(state, { loading: true });
+    return updateObj(state, { loading: true, error: null });
 };
 const resultsSendSucces = (state, action) => {
     return updateObj(state, { 
@@ -33,7 +38,8 @@ const resultsSendSucces = (state, action) => {
 const resultsSendFailed = (state, action) => {
     return updateObj(state, { 
         loading: false,
-        sending: false
+        sending: false,
+        error: action.error
     });
 };
 const resultsSendCanceled = (state, action) => {
@@ -122,6 +128,8 @@ const reducer = (state = initialState, action) => {
             return fetchWineInGroupSuccess(state, action);
         case actionTypes.FETCH_WINE_IN_GROUP_FAIL:
             return fetchWineInGroupsFailled(state, action);
+        case actionTypes.RESULT_CLEAR_ERROR:
+            return resultsClearError(state, action);
         default:
             return state;
     }

@@ -9,6 +9,7 @@ import * as action from '../../store/actions/index';
 import {isIdValid} from '../../shared/validations';
 import Modal from '../../components/UI/Modal/Modal';
 import ResumeResults from '../../components/Rating/ResumeResults/ResumeResults';
+import Popup from '../../components/UI/Popup/Popup';
 
 class Degustator extends Component {
     constructor(props) {
@@ -130,6 +131,9 @@ class Degustator extends Component {
                 isWineIdValid={this.state.isWineIdValid}
                 idError={this.props.wineInfo.error}
                 />
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         );
     }
@@ -143,7 +147,8 @@ const mapStateToProps = state => {
         fetching: state.wineResults.fetching,
         wineInfo: state.wineResults.wineInfo,
         wineInGroups: state.wineResults.wineInGroups,
-        token: state.degAuth.token
+        token: state.degAuth.token,
+        error: state.wineResults.error
     }
 }
 const mapDispatchToProps = dispatch => {

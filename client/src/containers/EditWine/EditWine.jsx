@@ -10,6 +10,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import DatabaseEdit from '../../components/AdminMenu/DatabaseEdit/DatabaseEdit';
 import { searchIdetificator } from '../../shared/utility';
 import Back from '../../components/UI/Back/Back';
+import Popup from '../../components/UI/Popup/Popup';
 import {
     isIdValid,
     isString,
@@ -295,6 +296,9 @@ class EditWine extends Component {
                 sortWine={this.props.onSortWineBy}
                 />
                 <Back />
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
             </ElementWrapper>
         );
     }
@@ -304,6 +308,7 @@ const mapStateToProps = state => {
     return {
         wineList: state.wineList,
         token: state.adminAuth.token,
+        error: state.wineList.error
     };
 };
 const mapDispatchToProps = dispatch => {

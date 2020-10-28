@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
 
+export const wineListErrorClear = () => {
+    return {
+        type: actionTypes.WINE_LIST_CLEAR_ERROR
+    }
+}
+
 export const addWineStart = () => {
     return {
         type: actionTypes.ADD_WINE_START
@@ -32,9 +38,18 @@ export const addWine = (data, token) => {
             .then(response => {
                 dispatch(addWineSucces(response.data._id, data));
             })
-            .catch(error => {
-                dispatch(addWineFailed(error));
-                console.log(error)
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(addWineFailed(error));
+                }
+                dispatch(addWineFailed(err));
+                setTimeout(()=>{
+                    dispatch(wineListErrorClear())
+                }, 2500)
             })
     }
 }
@@ -78,8 +93,18 @@ export const fetchWineList = (token) => {
                 wineListData.sort((a, b) => (a.id > b.id ) ? 1 : -1)
                 dispatch(fetchWineListSucces(wineListData));
             })
-            .catch(error => {
-                dispatch(fetchWineListFailed(error));
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(fetchWineListFailed(error));
+                }
+                dispatch(fetchWineListFailed(err));
+                setTimeout(()=>{
+                    dispatch(wineListErrorClear())
+                }, 2500);
             })
         };
 };
@@ -113,7 +138,17 @@ export const deleteWine = (_id, updatedWineList, token) => {
             }
         })
             .then(resp => dispatch(deleteWineSucces(updatedWineList)))
-            .catch(error => dispatch(deleteWineFailed(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(deleteWineFailed(error))
+                }
+                dispatch(deleteWineFailed(err))
+                setTimeout(wineListErrorClear())
+            })
     };
 };
 
@@ -154,10 +189,21 @@ export const saveEditWine = (_id, index, editedWineData, token) => {
         })
             .then(response => {
                 editedWineData._id = _id;
-                console.log(response)
                 dispatch(saveEditWineSucces(editedWineData, index));
             })
-            .catch(error => saveEditWineFailed(error))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    saveEditWineFailed(error)
+                }
+                saveEditWineFailed(err)
+                setTimeout(()=>{
+                    dispatch(wineListErrorClear())
+                }, 2500)
+            })
     };
 };
 
@@ -195,7 +241,19 @@ export const databaseDelete = (token) => {
             }
         })
             .then(response => dispatch(databaseDeleteSucces()))
-            .catch(error=> dispatch(databaseDeleteFailled(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(databaseDeleteFailled(error))
+                }
+                dispatch(databaseDeleteFailled(err))
+                setTimeout(()=>{
+                    dispatch(wineListErrorClear())
+                }, 2500)
+            })
     };
 };
 export const databaseImportInit = () => {
@@ -232,9 +290,20 @@ export const databaseImport = (wineData, token) => {
             }
         })
             .then(resp => {
-                console.log(resp.data.wines)
                 dispatch(databaseImportSucces(resp.data.wines))
             })
-            .catch(error => dispatch(databaseImportFailed(error)))
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(databaseImportFailed(error))
+                }
+                dispatch(databaseImportFailed(err))
+                setTimeout(()=>{
+                    dispatch(wineListErrorClear())
+                }, 2500)
+            })
     };
 };

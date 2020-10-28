@@ -2,6 +2,12 @@ import * as actionTypes from './actionTypes';
 
 import axiosInstance from '../../axios-instance'; 
 
+export const resultsClearError = () => {
+    return {
+        type: actionTypes.RESULT_CLEAR_ERROR
+    }
+};
+
 export const resultsSendInit = () => {
     return {
         type: actionTypes.RESULTS_SEND_INIT
@@ -51,8 +57,18 @@ export const resultsSend = (data, token) => {
                 dispatch(resultsSendSucces(response.data.name, data));
                 dispatch(resetResults())
             })
-            .catch(error => {
-                dispatch(resultsSendFailed(error));
+            .catch(err => {
+                if (err.response) {
+                    const error = {
+                        message: err.response.data.message,
+                        code: err.response.status
+                    }
+                    dispatch(resultsSendFailed(error));
+                }
+                dispatch(resultsSendFailed(err));
+                setTimeout(()=>{
+                    dispatch(resultsClearError());
+                }, 2500)
             })
     }
 }
@@ -91,11 +107,17 @@ export const fetchWineInfo = (wineId, token) => {
                     dispatch(fetchWineInfoSucces(resp.data.wine));
                 })
                 .catch(err => {
-                    const error = {
-                        message: err.response.data.message,
-                        code: err.response.status
+                    if (err.response) {
+                        const error = {
+                            message: err.response.data.message,
+                            code: err.response.status
+                        }
+                        dispatch(fetchWineInfoFailled(error))
                     }
-                    dispatch(fetchWineInfoFailled(error))
+                    dispatch(fetchWineInGroupFailled(err))
+                    setTimeout(()=>{
+                        dispatch(resultsClearError())
+                    }, 2500)
                 })
         }, 1000)
     }
@@ -138,6 +160,18 @@ export const fetchWineInGroup = (token) => {
             wineInGroup.unshift(emptyOption);
             dispatch(fetchWineInGroupSuccess(wineInGroup))
         })
-        .catch(err=> dispatch(fetchWineInGroupFailled(err)))
+        .catch(err=> {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(fetchWineInGroupFailled(error))
+            }
+            dispatch(fetchWineInGroupFailled(err));
+            setTimeout(()=>{
+                dispatch(resultsClearError())
+            }, 2500)
+        })
     }
 }

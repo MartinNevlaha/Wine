@@ -12,17 +12,26 @@ const initialState = {
     isAddWineSucces: false,
     sortAmountUp: true,
     importingDb: false,
+    error: null
 };
+const wineListErrorClear = (state, action) => {
+    return updateObj(state, {
+        error: null
+    })
+}
+
 const addWineStart = (state, action) => {
     return updateObj(state, { 
         loadingSend: true,
-        isAddWineSucces: false
+        isAddWineSucces: false,
+        error: null
     });
 };
 const addWineFailed = (state, action) => {
     return updateObj(state, { 
         loadingSend: false,
-        isAddWineSucces: false
+        isAddWineSucces: false,
+        error: action.error
     });
 };
 const addWineSucces = (state, action) => {
@@ -36,7 +45,10 @@ const addWineSucces = (state, action) => {
     });
 };
 const fetchWineListStart = (state, action) => {
-    return updateObj(state, { loadingFetch: true });
+    return updateObj(state, { 
+        loadingFetch: true,
+        error: null
+     });
 };
 const fetchWineListSucces = (state, action) => {
     return updateObj(state, {
@@ -45,19 +57,26 @@ const fetchWineListSucces = (state, action) => {
     });
 };
 const fetchWineListFailed = (state, action) => {
-    return updateObj(state, { loadingFetch: false })
+    return updateObj(state, { 
+        loadingFetch: false,
+        error: action.error
+     })
 };
 const deleteWineStart = (state, action) => {
-    return updateObj(state, { loadingFetch: true });
+    return updateObj(state, { 
+        loadingFetch: true,
+        error: null
+    });
 };
 const deleteWineSucces = (state, action) => {
     return updateObj(state, { 
         loadingFetch: false,
-        wine: action.wineListData
+        wine: action.wineListData,
+        error: null
     });
 };
 const deleteWineFailed = (state, action) => {
-    return updateObj(state, { loadingFetch: false });
+    return updateObj(state, { loadingFetch: false, error: null });
 };
 const editWine = (state, action) => {
     const index = state.wine.indexOf(action.choosenWineData);
@@ -70,7 +89,7 @@ const editWine = (state, action) => {
     });
 };
 const saveEditWineStart = (state, action) => {
-    return updateObj(state, { loadingSaveWine: true })
+    return updateObj(state, { loadingSaveWine: true, error: null })
 }
 const saveEditWineSucces = (state, action) => {
     return updateArray(state, {
@@ -81,7 +100,7 @@ const saveEditWineSucces = (state, action) => {
     });
 };
 const saveEditWineFailed = (state, action) => {
-    return updateObj(state, { loadingSaveWine: false });
+    return updateObj(state, { loadingSaveWine: false, error: action.error });
 }
 
 const sortWineBy = (state, action) => {
@@ -99,7 +118,8 @@ const sortWineBy = (state, action) => {
 const databaseDeleteStart = (state, action) => {
     return updateObj(state, {
         loading: true,
-        isDeleteDbInProces: true
+        isDeleteDbInProces: true,
+        error: null
     });
 };
 const databaseDeleteSucces = (state, action) => {
@@ -112,7 +132,8 @@ const databaseDeleteSucces = (state, action) => {
 const databaseDeleteFailled = (state, action) => {
     return updateObj(state, {
         loading: false,
-        isDeleteDbInProces: false
+        isDeleteDbInProces: false,
+        error: action.error
     });
 };
 
@@ -121,7 +142,7 @@ const databaseImportInit = (state, action) => {
 };
 
 const databaseImportStart = (state, action) => {
-    return updateObj(state, {loading: true});
+    return updateObj(state, {loading: true, error: null});
 };
 
 const databaseImportSucces = (state, action) => {
@@ -134,7 +155,8 @@ const databaseImportSucces = (state, action) => {
 const databaseImportFailled = (state, action) => {
     return updateObj(state, {
         loading: false,
-        importingDb: false
+        importingDb: false,
+        error: action.error
     });
 };
 
@@ -182,6 +204,8 @@ const reducer = (state = initialState, action) => {
             return databaseImportSucces(state, action);
         case actionTypes.DATABASE_IMOPORT_FAIL:
             return databaseImportFailled(state, action);
+        case actionTypes.WINE_LIST_CLEAR_ERROR:
+            return wineListErrorClear(state, action);
         default:
             return state;
     }
