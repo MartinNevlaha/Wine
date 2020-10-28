@@ -113,11 +113,12 @@ export const fetchWineInfo = (wineId, token) => {
                             code: err.response.status
                         }
                         dispatch(fetchWineInfoFailled(error))
+                    } else {
+                        dispatch(fetchWineInGroupFailled(err))
+                        setTimeout(()=>{
+                            dispatch(resultsClearError())
+                        }, 2500)
                     }
-                    dispatch(fetchWineInGroupFailled(err))
-                    setTimeout(()=>{
-                        dispatch(resultsClearError())
-                    }, 2500)
                 })
         }, 1000)
     }
