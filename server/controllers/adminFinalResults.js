@@ -1,3 +1,6 @@
+const Excel = require('exceljs');
+const path = require('path');
+
 const Wine = require('../models/wine');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
@@ -234,4 +237,67 @@ exports.getListOfDegustators = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.exportResults = async (req, res, next) => {
+    const categoryId = req.params.categoryId;
+    let workbook = new Excel.Workbook();
+    const populateQuery = {
+        path: 'group',
+        model: 'Group',
+        select: '_id groupName'
+    };
+    try {
+        const category = await CompetitiveCategory.findById(categoryId);
+        if (!category) {
+            const error = new Error('Nemôžem exportovať dáta');
+            error.statusCode = 500;
+            return next(error);
+        }
+        const exportFile = path.join(__dirname, '../', `export/result_${category.categoryName}.xlsx`)
+        let worksheet = workbook.addWorksheet(category.categoryName);
+        worksheet.columns = [
+            {header: 'Poradie', key: 'place'},
+            {header: 'Číslo', key: 'id'},
+            {header: 'Názov', key: 'name'},
+            {header: 'Farba', key: 'color'},
+            {header: 'Klasifikácia', key: 'clasification'},
+            {header: 'Charakter', key: 'character'},
+            {header: 'Ročník', key: 'vintage'},
+            {header: 'Degustačná skupina', key: 'degGroup'},
+            {header: 'Bodové hodnotenie', key: 'finalResult'},
+            {header: 'Kategoria vina', key: 'wineCategory'},
+        ];
+        worksheet.columns.forEach(column => {
+            column.width = column.header.length < 20 ? 20 : column.header.length
+        })
+        worksheet.getRow(1).font = {bold: true}
+        const results = await Wine.find({competitiveCategoryId: categoryId}).sort({'finalResult': -1}).lean().populate(populateQuery);
+        const dataToExport = results.map((res, index) => {
+            return {
+                place: index +1,
+                id: res.id,
+                name: res.name,
+                color: res.color,
+                clasification: res.clasification,
+                character: res.character,
+                vintage: res.vintage,
+                degGroup: res.group.groupName,
+                finalResult: res.finalResult,
+                wineCategory: res.wineCategory
+            }
+        })
+        dataToExport.forEach(result => {
+            worksheet.addRow({
+                ...result
+            })
+        })
+        workbook.xlsx.writeFile(exportFile);
+        
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
+    }
+};
 
