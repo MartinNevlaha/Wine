@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 
-import DownloadLog from './DownloadLog/DownloadLog';
+import DownloadFile from '../../DownloadFile/DownloadFile';
 import classes from './LogEvents.module.css';
 
 class LogEvents extends Component {
@@ -33,7 +33,12 @@ class LogEvents extends Component {
                 <div className={classes.Logs}>
                     {logs}
                 </div>
-                <DownloadLog token={this.props.token} />
+                <DownloadFile 
+                endPoint="download-logs"
+                fileName="postResults.log"
+                token={this.props.token}>
+                    Stahnuť kompletný log
+                </DownloadFile>
             </div>
         )
     }

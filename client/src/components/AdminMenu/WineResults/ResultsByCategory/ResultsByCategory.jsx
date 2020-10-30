@@ -9,6 +9,7 @@ import Button from '../../../UI/Button/Button';
 import classes from './ResultsCategory.module.css';
 import CategoryTable from './CategoryTable/CategoryTable';
 import Popup from '../../../UI/Popup/Popup';
+import DownloadFile from '../../DownloadFile/DownloadFile';
 
 class ResultsByCategory extends Component {
     state = {
@@ -50,6 +51,11 @@ class ResultsByCategory extends Component {
                     ))}
                         </select>
                         <Button clicked={this.fetchResultsByComCategory}>Zobraz</Button>
+                        <DownloadFile
+                        endPoint="final-results-export-by-cat"
+                        token={this.props.token}
+                        fileName="result_by_cat.xlsx"
+                        >Stiahnuť výsledky</DownloadFile>
                     </div>
                     <CategoryTable 
                     results={this.props.results}

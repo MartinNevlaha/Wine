@@ -62,7 +62,7 @@ module.exports = async (req, res, next) => {
                     ...result
                 })
             })
-            worksheet.columns.forEach((col, index)=>{
+            worksheet.columns.forEach( (col, index) => {
                 worksheet.getColumn(index + 1).alignment = {horizontal: "center"}
             })
             worksheet.eachRow({ includeEmpty: false }, function (row, rowNumber) {
@@ -78,19 +78,19 @@ module.exports = async (req, res, next) => {
                   worksheet.getCell(`${v}${rowNumber}`).border = {
                     top: {style: 'thin'},
                     bottom: {style: 'thin'},
-                    left: {style: 'none'},
-                    right: {style: 'none'}
+                    left: {style: 'thin'},
+                    right: {style: 'thin'}
                   }
                 })
               
                 worksheet.getCell(`F${rowNumber}`).border = {
                   top: {style: 'thin'},
-                  left: {style: 'none'},
+                  left: {style: 'thin'},
                   bottom: {style: 'thin'},
                   right: {style: 'thin'}
                 }
               })
-            workbook.xlsx.writeFile(exportFile);
+             workbook.xlsx.writeFile(exportFile)
         }) 
         return next();
     } catch (error) {

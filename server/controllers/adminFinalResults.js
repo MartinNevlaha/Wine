@@ -1,4 +1,6 @@
 const path = require('path');
+const Excel = require('exceljs');
+const fs = require('fs');
 
 const Wine = require('../models/wine');
 const Result = require('../models/result');
@@ -239,6 +241,7 @@ exports.getListOfDegustators = async (req, res, next) => {
 
 exports.exportResults = async (req, res, next) => {
     const exportFile = path.join(__dirname, '../', `export/result_by_cat.xlsx`)
+    console.log(exportFile)
     res.status(200).download(exportFile, (err) => {
         if (err) {
             const error = new Error('Súbor sa nedá stiahnuť')
@@ -247,4 +250,3 @@ exports.exportResults = async (req, res, next) => {
         }
     })
 };
-
