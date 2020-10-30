@@ -1,4 +1,3 @@
-const Excel = require('exceljs');
 const path = require('path');
 
 const Wine = require('../models/wine');

@@ -92,6 +92,7 @@ module.exports = async (req, res, next) => {
               })
             workbook.xlsx.writeFile(exportFile);
         }) 
+        return next();
     } catch (error) {
         if(!error.statusCode) {
             error.statusCode = 500;
