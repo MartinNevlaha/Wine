@@ -35,7 +35,6 @@ class SystemInfo extends Component {
     }
 
     render() {
-        console.log(this.props.systemInfo.infoData)
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <DeleteDesision 

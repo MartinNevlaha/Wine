@@ -60,6 +60,11 @@ const postWine = new Schema({
     group: {
         type: Schema.Types.ObjectId,
         ref: 'Group'
+    },
+    isComplete: {
+        type: Boolean,
+        default: false,
+        required: true
     }
 }, {timestamps: true});
 

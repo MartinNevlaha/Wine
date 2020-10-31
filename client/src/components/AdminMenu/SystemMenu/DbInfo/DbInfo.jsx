@@ -12,6 +12,7 @@ const DbInfo = props => {
                 <li>Počet degustatorov v DB: {props.dbData.numOfDeg || "0"}</li>
                 <li>Počet skupín degustatorov v DB: {props.dbData.numOfGroups || "0"}</li>
                 <li>Počet výsledkov v DB: {props.dbData.numOfResults}</li>
+                <li>Počet súťažných skupín v DB: {props.dbData.numOfComCat}</li>
             </ul>
             <Button clicked={props.modalOpen}>RESET DB</Button>
         </div>

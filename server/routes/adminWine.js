@@ -2,7 +2,6 @@ const express = require('express');
 const { body } = require('express-validator');
 
 const { isAdminAuth } = require('../middleware/isAuth');
-const isDegustationLock = require('../middleware/isDegustationLock');
 const adminWineController = require('../controllers/adminWine');
 
 const router = express.Router();

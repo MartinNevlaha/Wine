@@ -1,7 +1,6 @@
 const router = require('express').Router();
 
 const { isAdminAuth } = require('../middleware/isAuth');
-const createExportByCat = require('../middleware/createExportByCat');
 const adminFinalResultsController = require('../controllers/adminFinalResults');
 
 router.get('/final-results-category', isAdminAuth, adminFinalResultsController.getWineCompetitionCategory);

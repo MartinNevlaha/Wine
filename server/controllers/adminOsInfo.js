@@ -73,6 +73,7 @@ exports.resetDb = async (req, res, next) => {
         await Degustator.deleteMany({});
         await Group.deleteMany({});
         await Result.deleteMany({});
+        await CompetitiveCategory.deleteMany({});
         res.status(200).json({
             message: "Databaza kompletne vymazaná"
         })
