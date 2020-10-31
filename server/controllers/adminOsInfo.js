@@ -5,6 +5,7 @@ const Wine = require('../models/wine');
 const Degustator = require('../models/degustator');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
+const CompetitiveCategory = require('../models/competitiveCategory');
 
 exports.getOsInfo = async (req, res, next) => {
     try {   
@@ -21,21 +22,31 @@ exports.getOsInfo = async (req, res, next) => {
         if (!totalNumberOfWine) {
             const error = new Error('Nemožem načitať údaje vín')
             error.statusCode = 404;
+            return next(error);
         }
         const totalNumberOfDeg = await Degustator.countDocuments({});
         if (!totalNumberOfWine) {
             const error = new Error('Nemožem načitať údaje degustátorov')
             error.statusCode = 404;
+            return next(error);
         }
         const totalNumberOfGroups = await Group.countDocuments({});
         if (!totalNumberOfWine) {
             const error = new Error('Nemožem načitať údaje skupín degustátorov')
             error.statusCode = 404;
+            return next(error);
         }
         const totalNumberOfResults = await Result.countDocuments({});
         if (!totalNumberOfWine) {
             const error = new Error('Nemožem načitať údaje výsledkov')
             error.statusCode = 404;
+            return next(error);
+        }
+        const totalNumberOfCompetitiveCat = await CompetitiveCategory.countDocuments({});
+        if (!totalNumberOfCompetitiveCat) {
+            const error = new Error('Nemožem načítať údajne súťažných categorií');
+            error.statusCode = 404;
+            return next(error);
         }
         res.status(200).json({
             message: "Systémové informácie načítané",
@@ -44,7 +55,8 @@ exports.getOsInfo = async (req, res, next) => {
                 numOfWine: totalNumberOfWine,
                 numOfDeg: totalNumberOfDeg,
                 numOfGroups: totalNumberOfGroups,
-                numOfResults: totalNumberOfResults
+                numOfResults: totalNumberOfResults,
+                numOfComCat: totalNumberOfCompetitiveCat
             }
         })
     } catch (error) {
