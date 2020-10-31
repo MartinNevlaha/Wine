@@ -1,6 +1,5 @@
 const si = require('systeminformation');
-const fs = require('fs');
-path = require('path');
+const path = require('path');
 
 const Wine = require('../models/wine');
 const Degustator = require('../models/degustator');

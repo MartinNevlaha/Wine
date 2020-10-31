@@ -5,8 +5,8 @@ const Wine = require('../models/wine');
 const CompetitiveCategory = require('../models/competitiveCategory');
 
 module.exports = async (req, res, next) => {
-    const exportFile = path.join(__dirname, '../', `export/result_by_cat.xlsx`)
-    let workbook = new Excel.Workbook();
+    const exportFile = path.join(__dirname, '../', `export/result_by_cat.xlsx`);
+    const workbook = new Excel.stream.xlsx.WorkbookWriter();
     const populateQuery = {
         path: 'group',
         model: 'Group',
@@ -90,7 +90,7 @@ module.exports = async (req, res, next) => {
                   right: {style: 'thin'}
                 }
               })
-             workbook.xlsx.writeFile(exportFile)
+            await workbook.xlsx.writeFile(exportFile)
         }) 
         return next();
     } catch (error) {
