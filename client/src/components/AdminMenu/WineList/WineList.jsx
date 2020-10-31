@@ -11,7 +11,7 @@ const wineList = (props) => (
         <h4>Zoznam vín</h4>
         <FontAwesomeIcon icon={faWineGlass} size="5x" />
         <div className={classes.BtnContainer}>
-            {props.isDegustationOpen && 
+            {!props.isDegustationOpen && 
             <Button clicked={props.clicked}>Uprav vína</Button>}
             <Button clicked={props.clicked}>Zobraz vína</Button>
         </div>

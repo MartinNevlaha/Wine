@@ -81,7 +81,6 @@ export {
 
 export {
     saveSettings,
-    saveIsDegustationOpen,
     fetchSetting
 } from './systemSettings';
 

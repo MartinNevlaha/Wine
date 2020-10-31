@@ -5,6 +5,9 @@
     margin: 15px 20px;
     border-radius: 8px;
     border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .RatingSetting li {
@@ -15,5 +18,9 @@
 }
 .RatingSetting select {
     text-align: center;
-    margin: 10px;
+    margin: 20px 50px;
+
+}
+.RatingSetting input {
+    margin: 20px 50px;
 }

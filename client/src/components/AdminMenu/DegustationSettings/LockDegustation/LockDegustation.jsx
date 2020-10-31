@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Button from '../../../UI/Button/Button';
 import classes from '../RatingSetting/RatingSetting.module.css';
 
 const LockDegustation = props => (
@@ -27,7 +26,6 @@ const LockDegustation = props => (
                 </option>
             ))}
         </select>
-        <Button clicked={props.saveIsLock}>Ulož nastavenie</Button>
     </div>
 );
 

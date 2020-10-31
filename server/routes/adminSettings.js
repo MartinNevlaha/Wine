@@ -9,7 +9,7 @@ router.get('/degustation-settings', isAdminAuth, adminSettingsController.getSett
 
 router.put('/degustation-settings', [
     body('isValuesEliminated').isBoolean(),
-    body('isOpen').isBoolean(),
+    body('isDegustationOpen').isBoolean(),
     body('degustationName').trim().notEmpty().isString(),
     body('competitionChairman').trim().notEmpty().isString()
 ], isAdminAuth, adminSettingsController.setSettings);

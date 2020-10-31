@@ -11,7 +11,7 @@ const degustatorGroup = (props) => (
         <h4>Zoznam skupín degustátorov</h4>
         <FontAwesomeIcon icon={faUsers} size="5x"/>
         <div className={classes.BtnContainer}>
-            {props.isDegustationOpen &&
+            {!props.isDegustationOpen &&
             <Button clicked={props.clicked}>Uprav skupiny</Button>}
             <Button clicked={props.clicked}>Zobraz skupiny</Button>
         </div>

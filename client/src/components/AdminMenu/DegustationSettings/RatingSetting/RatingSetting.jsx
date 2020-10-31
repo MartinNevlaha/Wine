@@ -1,7 +1,6 @@
 import React from 'react';
 
 import classes from './RatingSetting.module.css';
-import Button from '../../../UI/Button/Button';
 
 const RatingSetting = props => (
     <div className={classes.RatingSetting}>
@@ -27,7 +26,6 @@ const RatingSetting = props => (
                 </option>
             ))}
         </select>
-        <Button clicked={props.save}>Ulož nastavenie</Button>
     </div>
 )
 

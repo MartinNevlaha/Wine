@@ -13,10 +13,14 @@ export const saveSettingsStart = () => {
     };
 };
 
-export const saveSettingsSuccess = (isValuesEliminated) => {
+export const saveSettingsSuccess = (settings) => {
+    const {isValuesEliminated, isDegustationOpen, degustationName, competitionChairman} = settings;
     return {
         type: actionTypes.SAVE_SETTING_SUCCESS,
-        isValuesEliminated
+        isValuesEliminated,
+        isDegustationOpen,
+        degustationName,
+        competitionChairman
     };
 };
 
@@ -28,6 +32,7 @@ export const saveSettingsFailled = (error) => {
 }
 
 export const saveSettings = (settings, token) => {
+    console.log(settings)
     return dispatch => {
         dispatch(saveSettingsStart());
         axiosInstance.put('/admin/degustation-settings', settings, {
@@ -35,7 +40,7 @@ export const saveSettings = (settings, token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(resp => dispatch(saveSettingsSuccess(resp.data.setting.isValuesEliminated)))
+            .then(resp => dispatch(saveSettingsSuccess(resp.data.setting)))
             .catch(err => {
                 if (err.response) {
                     const error = {
@@ -52,62 +57,19 @@ export const saveSettings = (settings, token) => {
     }
 }
 
-export const saveIsDegustationOpenStart = () => {
-    return {
-        type: actionTypes.SAVE_IS_DEGUSTATION_OPEN_START
-    }
-}
-export const saveIsDegustationOpenSuccess = (isOpen) => {
-    return {
-        type: actionTypes.SAVE_IS_DEGUSTATION_OPEN_SUCCESS,
-        isOpen
-    }
-}
-export const saveIsDegustationOpenFail = (error) => {
-    return {
-        type: actionTypes.SAVE_IS_DEGUSTATION_OPEN_FAIL,
-        error
-    }
-}
-
-export const saveIsDegustationOpen = (isOpen, token) => {
-    return dispatch => {
-        dispatch(saveIsDegustationOpenStart());
-        axiosInstance.put('/admin/degustation-setting-is-open', isOpen,{
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-        .then(resp => {
-            dispatch(saveIsDegustationOpenSuccess(resp.data.setting.isDegustationOpen))
-        })
-        .catch(err => {
-            if (err.response) {
-                const error = {
-                    message: err.response.data.message,
-                    code: err.response.status
-                }
-                dispatch(saveIsDegustationOpenFail(error))
-            }
-            dispatch(saveIsDegustationOpenFail(err))
-            setTimeout(() => {
-                dispatch(settingsClearError())
-            }, 2500)
-        })
-    }
-}
-
 export const fetchSettingStart = () => {
     return {
         type: actionTypes.FETCH_SETTINGS_START
     }
 }
 
-export const fetchSettingSuccess = (isValuesEliminated, isDegustationOpen) => {
+export const fetchSettingSuccess = (isValuesEliminated, isDegustationOpen, degustationName, competitionChairman) => {
     return {
         type: actionTypes.FETCH_SETTINGS_SUCCESS,
         isValuesEliminated,
-        isDegustationOpen
+        isDegustationOpen,
+        degustationName,
+        competitionChairman
     }
 } 
 
@@ -127,9 +89,9 @@ export const fetchSetting = (token) => {
             }
         })
         .then(resp => {
-            const {isValuesEliminated, isDegustationOpen} = resp.data.settings;
+            const {isValuesEliminated, isDegustationOpen, degustationName, competitionChairman} = resp.data.settings;
 
-            dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen))
+            dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen, degustationName, competitionChairman))
         })
         .catch(err => {
             if (err.response) {

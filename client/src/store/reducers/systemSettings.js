@@ -5,7 +5,9 @@ const initialState = {
     loading: false,
     error: null,
     isValuesEliminated: false,
-    isDegustationOpen: false
+    isDegustationOpen: false,
+    degustationName: '',
+    competitionChairman: ''
 }
 
 const settingsClearError = (state, action) => {
@@ -25,7 +27,10 @@ const saveSettingsSuccess = (state, action) => {
     return updateObj(state, {
         loading: false, 
         error: null,
-        isValuesEliminated: action.isValuesEliminated
+        isValuesEliminated: action.isValuesEliminated,
+        isDegustationOpen: action.isDegustationOpen,
+        degustationName: action.degustationName,
+        competitionChairman: action.competitionChairman
     })
 }
 
@@ -36,20 +41,6 @@ const saveSettingsFailled = (state, action) => {
     })
 }
 
-const saveIsDegustationOpenStart = (state, action) => {
-    return updateObj(state, {loading: true})
-}
-const saveIsDegustationOpenSuccess = (state, action) => {
-    return updateObj(state, {
-        loading: false,
-        isDegustationOpen: action.isOpen
-    })
-}
-const saveIsDegustationOpenFail = (state, action) => {
-    return updateObj(state, {
-        loading: false,
-    })
-}
 
 const fetchSystemSettingsStart = (state, action) => {
     return updateObj(state, {
@@ -60,7 +51,9 @@ const fetchSystemSettingsSucces = (state, action) => {
     return updateObj(state, {
         loading: false,
         isDegustationOpen: action.isDegustationOpen,
-        isValuesEliminated: action.isValuesEliminated
+        isValuesEliminated: action.isValuesEliminated,
+        degustationName: action.degustationName,
+        competitionChairman: action.competitionChairman
     })
 }
 
@@ -84,12 +77,6 @@ const reducer = (state = initialState, action) => {
             return saveSettingsSuccess(state, action);
         case actionTypes.SAVE_SETTING_FAIL:
             return saveSettingsFailled(state, action);
-        case actionTypes.SAVE_IS_DEGUSTATION_OPEN_START:
-            return saveIsDegustationOpenStart(state, action);
-        case actionTypes.SAVE_IS_DEGUSTATION_OPEN_SUCCESS:
-            return saveIsDegustationOpenSuccess(state, action);
-        case actionTypes.SAVE_IS_DEGUSTATION_OPEN_FAIL:
-            return saveIsDegustationOpenFail(state, action);
         case actionTypes.SETTINGS_CLEAR_ERROR:
             return settingsClearError(state, action)
         default:

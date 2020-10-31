@@ -8,20 +8,34 @@ import * as action from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Back from '../../components/UI/Back/Back';
 import Popup from '../../components/UI/Popup/Popup';
+import Button from '../../components/UI/Button/Button';
+import DegustationBasic from '../../components/AdminMenu/DegustationSettings/DegustationBasic/DegustationBasic';
 
 class DegustationSetting extends Component {
     state = {
         eliminatedValues: {
-            id: 'input',
+            id: 'eliminatedValues',
             options: ['Eliminácia krajných hodnôt', 'Bez elminácie krajných hodnôt'],
             value: '',
-            isTrue: true
+            isTrue: true,
+            isTouch: false
         },
         lock: {
             id: 'lock',
             options: ['Odomknúť degustáciu', 'Zamknúť degustáciu'],
             value: '',
-            isTrue: true
+            isTrue: true,
+            isTouch: false
+        },
+        degustationName: {
+            id: 'degustationName',
+            value: '',
+            isTouch: false
+        },
+        competitionChairman: {
+            id: 'competitionChairman',
+            value: '',
+            isTouch: false
         }
     }
     componentDidMount() {
@@ -31,7 +45,7 @@ class DegustationSetting extends Component {
     getValueHandler = (e, id) => {
         console.log(id)
         let isTrue;
-        if (id === "input") {
+        if (id === "eliminatedValues") {
             isTrue = e.target.value === "Eliminácia krajných hodnôt" ? true : false;
         } else if (id === 'lock') {
             isTrue = e.target.value === "Odomknúť degustáciu" ? true : false
@@ -41,17 +55,19 @@ class DegustationSetting extends Component {
             [id]: {
                 ...this.state[id],
                 value: e.target.value,
-                isTrue: isTrue
+                isTrue: isTrue,
+                isTouch: true
             }
         })
     }
     saveSettingValueHandler = () => {
-        const setting = {isValuesEliminated: this.state.input.isTrue}
+        const setting = {
+            isValuesEliminated: this.state.eliminatedValues.isTrue,
+            isDegustationOpen: this.state.lock.isTrue,
+            degustationName: this.state.degustationName.isTouch ? this.state.degustationName.value : this.props.actualDegName,
+            competitionChairman: this.state.competitionChairman.isTouch ? this.state.competitionChairman.value : this.props.actualChairman
+        }
         this.props.onSaveSettings(setting, this.props.token);
-    }
-    saveSettingLockHandler = () => {
-        const setting = { isOpen: this.state.lock.isTrue}
-        this.props.onSaveIsDegustationOpen(setting, this.props.token)
     }
     
     render() {
@@ -60,6 +76,10 @@ class DegustationSetting extends Component {
                 <Back />
                 {this.props.loading ? <Spinner /> : 
                     <React.Fragment>
+                    <DegustationBasic 
+                    actualChairman={this.props.actualChairman}
+                    actualDegName={this.props.actualDegName}
+                    getValueHandler={this.getValueHandler}/>
                     <RatingSetting 
                     getValueHandler={this.getValueHandler}
                     eliminatedValues={this.state.eliminatedValues}
@@ -73,6 +93,9 @@ class DegustationSetting extends Component {
                     />
                     </React.Fragment>
                 }
+                <div style={{width: '100%', height: 'auto'}}>
+                    <Button clicked={this.saveSettingValueHandler}>Ulož nastavenia</Button>
+                </div>
                  <Popup 
                 show={this.props.error}
                 message={this.props.error && this.props.error.message}/>
@@ -86,6 +109,8 @@ const mapStateToProps = state => {
         loading: state.systemSettins.loading,
         isValuesEliminated: state.systemSettins.isValuesEliminated,
         isDegustationOpen: state.systemSettins.isDegustationOpen,
+        actualDegName: state.systemSettins.degustationName,
+        actualChairman: state.systemSettins.competitionChairman,
         error: state.systemSettins.error
     }
 }
@@ -93,7 +118,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchSettings: (token) => dispatch(action.fetchSetting(token)),
         onSaveSettings: (setting, token) => dispatch(action.saveSettings(setting, token)),
-        onSaveIsDegustationOpen: (isOpen, token) => dispatch(action.saveIsDegustationOpen(isOpen, token))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (DegustationSetting);

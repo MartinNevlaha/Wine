@@ -8,7 +8,7 @@ import Button from '../../../UI/Button/Button';
 
 const EditWineGroup = props => {
     let tableHead = null;
-    if (props.isDegustationOpen) {
+    if (!props.isDegustationOpen) {
         tableHead = 
             <React.Fragment>
                 <td>Pridaj do skupiny</td>
@@ -17,7 +17,7 @@ const EditWineGroup = props => {
     }
     const wineList = props.wines.map(wine => {
         let addGroup = null;
-        if (props.isDegustationOpen) {
+        if (!props.isDegustationOpen) {
             addGroup = 
                 <React.Fragment>
                     {props.isGroupEdited ?
@@ -137,7 +137,7 @@ const EditWineGroup = props => {
                     {wineList}
                 </tbody>
             </table>
-            {props.isDegustationOpen &&
+            {!props.isDegustationOpen &&
             <Button 
             clicked={props.save}
             disabled={props.isGroupEdited}>Ulož</Button>
