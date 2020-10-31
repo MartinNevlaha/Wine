@@ -262,16 +262,18 @@ exports.exportResults = async (req, res, next) => {
     const populateQueryWine = {
         path: 'wineDbId',
         model: 'Wine',
-        select: 'id name clasification color character _id vintage producer'
+        select: 'id name clasification color character _id vintage producer competitiveCategory'
     }
     try {
         const categories = await CompetitiveCategory.find({});
         const groups = await Group.find({}, '_id groupName');
-        if (!categories || !groups) {
+        const completeResults = await Result.find({}).populate('wineDbId').populate('degId');
+        if (!categories || !groups || !completeResults ) {
             const error = new Error('Nemôžem exportovať dáta');
             error.statusCode = 500;
             return next(error);
         }
+        
         for await (let cat of categories) {
             let worksheet = workbook.addWorksheet(`skupina_${cat.categoryName}`);
             worksheet.columns = [
@@ -323,6 +325,8 @@ exports.exportResults = async (req, res, next) => {
             worksheet.columns = [
                 {header: 'Číslo Vína', key: 'id'},
                 {header: 'Názov', key: 'name'},
+                {header: 'Súťažná kategória', key: 'competitiveCategory'},
+                {header: 'Výrobca Vína', key: 'producer'},
                 {header: 'Farba', key: 'color'},
                 {header: 'Klasifikácia', key: 'clasification'},
                 {header: 'Charakter', key: 'character'},
@@ -347,6 +351,8 @@ exports.exportResults = async (req, res, next) => {
                 return {
                     id: result.wineId,
                     name: result.wineDbId.name,
+                    competitiveCategory: result.wineDbId.competitiveCategory,
+                    producer: result.wineDbId.producer,
                     color: result.wineDbId.color,
                     clasification: result.wineDbId.clasification,
                     character: result.wineDbId.character,
@@ -364,7 +370,72 @@ exports.exportResults = async (req, res, next) => {
                 }).commit()
             }
             worksheet.commit();
+        }        
+        let worksheet = workbook.addWorksheet('Complete_results');
+        worksheet.columns = [
+            {header: 'Číslo Vína', key: 'id'},
+            {header: 'Názov', key: 'name'},
+            {header: 'Výrobca Vína', key: 'producer'},
+            {header: 'Súťažná kategória', key: 'competitiveCategory'},
+            {header: 'Farba', key: 'color'},
+            {header: 'Klasifikácia', key: 'clasification'},
+            {header: 'Charakter', key: 'character'},
+            {header: 'Ročník', key: 'vintage'},
+            {header: 'Číslo degustátora', key: 'degNumber'},
+            {header: 'Meno degustátora', key: 'degName'},
+            {header: 'Eliminované', key: 'eliminated'},
+            {header: 'Bodové hodnotenie', key: 'finalResult'},
+            {header: 'Kategoria vina', key: 'wineCategory'},
+            {header: 'Koment', key: 'comment'},
+            {header: 'Vzhľad čírosť', key: 'lookClarity'},
+            {header: 'Vzhľad mimo čírosť', key: 'lookOutOfClarity'},
+            {header: 'Voňa čistota', key: 'smellPurity'},
+            {header: 'Voňa pozitívna intenzita', key: 'smellPossitiveIntesity'},
+            {header: 'Voňa kvalita', key: 'smellQuality'},
+            {header: 'Chuť čistota', key: 'tastePurity'},
+            {header: 'Chuť pozitívna intenzita', key: 'tastePossitiveIntesity'},
+            {header: 'Chuť harmonická perzistencia', key: 'tasteHarmonicPersistence'},
+            {header: 'Chuť kvalita', key: 'tasteQuality'},
+            {header: 'Celkový dojem', key: 'generalImpresion'}
+        ];
+        for (let column of worksheet.columns ) {
+            column.width = column.header.length < 20 ? 20 : column.header.length
         }
+        worksheet.getRow(1).font = {bold: true}
+        const dataToExport = completeResults.map(result => {
+            return {
+                id: result.wineId,
+                name: result.wineDbId.name,
+                producer: result.wineDbId.producer,
+                competitiveCategory: result.wineDbId.competitiveCategory,
+                color: result.wineDbId.color,
+                clasification: result.wineDbId.clasification,
+                character: result.wineDbId.character,
+                vintage: result.wineDbId.vintage,
+                degNumber: result.degId.id,
+                degName: `${result.degId.name} ${result.degId.surname}`,
+                eliminated: result.eliminated ? 'Ano': 'Nie',
+                finalResult: result.totalSum,
+                wineCategory: result.wineCategory,
+                comment: result.comment,
+                lookClarity: result.results.lookClarity,
+                lookOutOfClarity: result.results.lookOutOfClarity,
+                smellPurity: result.results.smellPurity,
+                smellPossitiveIntesity: result.results.smellPossitiveIntesity,
+                smellQuality: result.results.smellQuality,
+                tastePurity: result.results.tastePurity,
+                tastePossitiveIntesity: result.results.tastePossitiveIntesity,
+                tasteHarmonicPersistence: result.results.tasteHarmonicPersistence,
+                tasteQuality: result.results.tasteQuality,
+                generalImpresion: result.results.generalImpresion
+            }
+        })
+        for (let result of dataToExport) {
+            worksheet.addRow({
+                ...result
+            }).commit()
+        }
+        worksheet.commit();
         workbook.commit();
     } catch (error) {
         if(!error.statusCode) {
