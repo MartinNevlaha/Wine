@@ -11,6 +11,7 @@ import Modal from '../../../UI/Modal/Modal';
 import WineGlass from '../../../UI/WineGlass/WineGlass';
 import ResumeTable from '../../../Rating/ResumeResults/ResumeTable/ResumeTable';
 import Popup from '../../../UI/Popup/Popup';
+import DownloadFile from '../../DownloadFile/DownloadFile';
 
 class ResultsByDeGroup extends Component {
     state = {
@@ -72,6 +73,11 @@ class ResultsByDeGroup extends Component {
                         ))}
                             </select>
                         <Button clicked={this.fetchResultByGroupHandler}>Zobraz</Button>
+                        <DownloadFile
+                        endPoint="final-results-export-by-cat"
+                        token={this.props.token}
+                        fileName="result_by_cat.xlsx"
+                        >Stiahnuť kompletné výsledky</DownloadFile>
                     </div>
                     <ResultsTable
                         tableHeads={this.state.tableHeads}>

@@ -55,7 +55,7 @@ class ResultsByCategory extends Component {
                         endPoint="final-results-export-by-cat"
                         token={this.props.token}
                         fileName="result_by_cat.xlsx"
-                        >Stiahnuť výsledky</DownloadFile>
+                        >Stiahnuť kompletné výsledky</DownloadFile>
                     </div>
                     <CategoryTable 
                     results={this.props.results}

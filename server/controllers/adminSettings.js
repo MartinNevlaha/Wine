@@ -9,7 +9,7 @@ exports.setSettings = async (req, res, next) => {
         error.statusCode = 422;
         return next(error);
     }
-    const isEliminated = req.body.isValuesEliminated
+    const {isEliminated, isOpen, degustationName, competitionChairman} = req.body;
     try {
         const setting = await Setting.find(); 
         if (!setting) {
@@ -17,8 +17,11 @@ exports.setSettings = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
-        setting[0].isValuesEliminated = isEliminated
-        const updatedSetting = await setting[0].save();
+        setting.isValuesEliminated = isEliminated;
+        setting.isDegustationOpen = isOpen;
+        setting.degustationName = degustationName;
+        setting.competitionChairman = competitionChairman;
+        const updatedSetting = await setting.save();
         res.status(200).json({
             message: 'nastavenia boli uspešne zmenené',
             setting: updatedSetting

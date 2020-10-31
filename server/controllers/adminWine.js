@@ -79,7 +79,6 @@ exports.editWine = async (req, res, next) => {
             return next(error);
         }
         const createdCategory = await autoCreateWineCategoryAsync(competitiveCategory);
-        console.log(createdCategory);
         wine.id = id;
         wine.competitiveCategory = competitiveCategory;
         wine.competitiveCategoryId = createdCategory._id;

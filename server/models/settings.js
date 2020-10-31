@@ -12,7 +12,18 @@ const postSetting = new Schema({
         type: Boolean,
         default: true,
         required: true
+    },
+    degustationName: {
+        type: String,
+        default: 'Zmeniť',
+        require: true
+    },
+    competitionChairman: {
+        type: String,
+        default: 'Zmeniť',
+        required: true
     }
+
 })
 
 module.exports = mongoose.model('Setting', postSetting);
