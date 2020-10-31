@@ -249,14 +249,25 @@ exports.exportResults = async (req, res, next) => {
         useSharedString: false
     }
     const workbook = new Excel.stream.xlsx.WorkbookWriter(streamOption);
-    const populateQuery = {
+    const populateQueryCat = {
         path: 'group',
         model: 'Group',
         select: '_id groupName'
     };
+    const populateQueryDeg = {
+        path: 'degId',
+        model: 'Degustator',
+        select: '_id id name surname',
+    }    
+    const populateQueryWine = {
+        path: 'wineDbId',
+        model: 'Wine',
+        select: 'id name clasification color character _id vintage producer'
+    }
     try {
         const categories = await CompetitiveCategory.find({});
-        if (!categories) {
+        const groups = await Group.find({}, '_id groupName');
+        if (!categories || !groups) {
             const error = new Error('Nemôžem exportovať dáta');
             error.statusCode = 500;
             return next(error);
@@ -280,7 +291,7 @@ exports.exportResults = async (req, res, next) => {
                 column.width = column.header.length < 20 ? 20 : column.header.length
             }
             worksheet.getRow(1).font = {bold: true}
-            const results = await Wine.find({competitiveCategoryId: cat._id}).sort({'finalResult': -1}).lean().populate(populateQuery);
+            const results = await Wine.find({competitiveCategoryId: cat._id}).sort({'finalResult': -1}).lean().populate(populateQueryCat);
             if (!results) {
                 const error = new Error('Nepodarilo sa zapisať výsledky');
                 error.statusCode = 500;
@@ -307,7 +318,53 @@ exports.exportResults = async (req, res, next) => {
             }
             worksheet.commit()
         } 
-
+        for await (let group of groups) {
+            let worksheet = workbook.addWorksheet(`Degustacna_skupina_${group.groupName}`);
+            worksheet.columns = [
+                {header: 'Číslo Vína', key: 'id'},
+                {header: 'Názov', key: 'name'},
+                {header: 'Farba', key: 'color'},
+                {header: 'Klasifikácia', key: 'clasification'},
+                {header: 'Charakter', key: 'character'},
+                {header: 'Ročník', key: 'vintage'},
+                {header: 'Číslo degustátora', key: 'degNumber'},
+                {header: 'Meno degustátora', key: 'degName'},
+                {header: 'Eliminované', key: 'eliminated'},
+                {header: 'Bodové hodnotenie', key: 'finalResult'},
+                {header: 'Kategoria vina', key: 'wineCategory'},
+            ];
+            for (let column of worksheet.columns ) {
+                column.width = column.header.length < 20 ? 20 : column.header.length
+            }
+            worksheet.getRow(1).font = {bold: true};
+            const results = await Result.find({groupId: group._id}).populate(populateQueryDeg).populate(populateQueryWine);
+            if (!results) {
+                const error = new Error("Nemôžem načítať výsledky");
+                error.statusCode = 404;
+                return next(error);
+            }
+            const dataToExport = results.map(result => {
+                return {
+                    id: result.wineId,
+                    name: result.wineDbId.name,
+                    color: result.wineDbId.color,
+                    clasification: result.wineDbId.clasification,
+                    character: result.wineDbId.character,
+                    vintage: result.wineDbId.vintage,
+                    degNumber: result.degId.id,
+                    degName: `${result.degId.name} ${result.degId.surname}`,
+                    eliminated: result.eliminated ? 'Ano': 'Nie',
+                    finalResult: result.totalSum,
+                    wineCategory: result.wineCategory
+                }
+            })
+            for (let result of dataToExport) {
+                worksheet.addRow({
+                    ...result
+                }).commit()
+            }
+            worksheet.commit();
+        }
         workbook.commit();
     } catch (error) {
         if(!error.statusCode) {
