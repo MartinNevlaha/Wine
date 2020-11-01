@@ -24,7 +24,7 @@ let resultsByCat = props.results.map(result =>
         <td>{result.group.groupName}</td>
         <td>{result.finalResult}</td>
         <td>{result.wineCategory}</td>
-        <td><FontAwesomeIcon icon={faTimes} /></td>
+        <td><FontAwesomeIcon icon={result.isComplete ? faCheck : faTimes} /></td>
     </tr>)
     
     return (
