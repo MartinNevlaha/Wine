@@ -6,7 +6,7 @@ const inicializeDefaultSettins = async () => {
         if (!setting.length) {
             const defaultSetting = new Setting({
                 isValuesEliminated: true,
-                isDegustationOpen: true,
+                isDegustationOpen: false,
                 destationName: 'Zmeniť',
                 competitionChairman: 'Zmeniť',
             })

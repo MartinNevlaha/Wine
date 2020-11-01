@@ -8,6 +8,8 @@ const Wine = require('../models/wine');
 const Degustator = require('../models/degustator');
 const Group = require('../models/degGroup');
 
+const isDegCompleteChceck = require('../utils/isDegCompleteCheck');
+
 const logFile = path.join(__dirname, '../', 'logs/post_log.log')
 const logger = fs.createWriteStream(logFile, {
     flags: "a"
@@ -59,7 +61,9 @@ exports.postResult = async(req, res, next) => {
             return next(error);
         }
         group.results.push(result);
-        await group.save();
+        const savedGroup = await group.save();
+        const saveIsComplete = await isDegCompleteChceck(wineId, savedGroup.items)
+        await saveIsComplete.save();
         const log = {
                 time: timestamp('YYYY/MM/DD/HH:mm:ss'),
                 group: group.groupName,

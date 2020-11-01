@@ -1,4 +1,6 @@
 const Excel = require('exceljs');
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
 
 const Wine = require('../models/wine');
 const Result = require('../models/result');
