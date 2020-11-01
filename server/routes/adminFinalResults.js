@@ -7,8 +7,6 @@ router.get('/final-results-category', isAdminAuth, adminFinalResultsController.g
 
 router.get('/final-results-export-by-cat', isAdminAuth, adminFinalResultsController.exportResults); 
 
-router.get('/final-results-export-pdf/:wineId', adminFinalResultsController.exportPdf);
-
 router.get('/final-results-by-category/:categoryId', isAdminAuth, adminFinalResultsController.getFinalResultsByCategory);
 
 router.get('/final-results/wine/:wineId', isAdminAuth, adminFinalResultsController.getFinalResultsByWineId);

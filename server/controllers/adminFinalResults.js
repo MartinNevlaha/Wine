@@ -1,13 +1,11 @@
 const Excel = require('exceljs');
-const PDFDocument = require('pdfkit');
-const fs = require('fs');
-const path = require('path');
 
 const Wine = require('../models/wine');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
 const Degustator = require('../models/degustator');
 const CompetitiveCategory = require('../models/competitiveCategory');
+const SystemSetting = require('../models/settings');
 
 exports.getFinalResultsByCategory = async (req, res, next) => {
     const categoryId = req.params.categoryId;
@@ -448,24 +446,3 @@ exports.exportResults = async (req, res, next) => {
     }
 };
 
-exports.exportPdf = (req, res, next) => {
-    const wineId = req.params.wineId;
-    try {
-        
-    } catch (error) {
-        
-    }
-    const imageBack = path.join(__dirname, '../', '/assets', '/img', 'Deg_background.jpg' );
-    let pdfDoc = new PDFDocument;
-    pdfDoc.pipe(fs.createWriteStream('Sample.pdf'));
-    pdfDoc.image(imageBack, 0, 0);
-    pdfDoc.font('Times-Italic').fillColor('white').fontSize(40).text(`Názov sutaze`, {align: 'center'});
-    pdfDoc.font('Times-Italic').fillColor('white').fontSize(30).text('Udeľuje', {align: 'center'});
-    pdfDoc.font('Times-BoldItalic').fillColor('red').fontSize(100).text('DIPLOM', {align: "center"});
-    pdfDoc.font('Times-Italic').fillColor('white').fontSize(40).text(`...a ZLATÚ MEDAILU...`,{align: "center"});
-    pdfDoc.font('Times-Italic').fillColor('white').fontSize(40).text(`za 1. miesto v kategórii I`,{align: "center"});
-    pdfDoc.font('Times-Italic').fillColor('white').fontSize(40).text(`VÍNU:`);
-    pdfDoc.font('Times-Italic').fillColor('white').fontSize(40).text(`FRANKOVKA MODRA BLA VLA ALSDA:`,{align: "center"});
-    pdfDoc.font('Times-Italic').fillColor('white').fontSize(40).text(`VYROBCA VINA BLKA asdf`,{align: "center"});
-    pdfDoc.end();
-};
