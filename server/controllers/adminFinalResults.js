@@ -1,11 +1,15 @@
 const Excel = require('exceljs');
+const path = require('path');
+const fs = require('fs');
 
 const Wine = require('../models/wine');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
 const Degustator = require('../models/degustator');
 const CompetitiveCategory = require('../models/competitiveCategory');
-const SystemSetting = require('../models/settings');
+const Settings = require('../models/settings');
+
+const generatePdf = require('../utils/generatePdf');
 
 exports.getFinalResultsByCategory = async (req, res, next) => {
     const categoryId = req.params.categoryId;
@@ -446,3 +450,42 @@ exports.exportResults = async (req, res, next) => {
     }
 };
 
+exports.generatePdf = async (req, res, next) => {
+    const wineId = req.params.wineId;
+    const place = req.body.place;
+    try {
+        const settings = await Settings.find();
+        if (!settings) {
+            const error = new Error('Nemôžem načítať nastavenia')
+            error.statusCode = 404;
+            return next(error);
+        }
+        const wine = await Wine.findById(wineId);
+        if (!wine) {
+            const error = new Error('Nemôžem načítať údaje o víne')
+            error.statusCode = 404;
+            return next(error);
+        }
+        const date = new Date();
+        const dd = String(date.getDate()).padStart(2, "0");
+        const mm = String(date.getMonth() + 1).padStart(2, "0");
+        const yyyy = date.getFullYear();
+        const img = path.join(__dirname, '../', '/assets', 'template', 'splash.png');
+        const data = {
+            title: settings[0].degustationName,
+            place,
+            category: wine.competitiveCategory,
+            producer: wine.producer,
+            wine: `${wine.name}, ${wine.color} ${wine.character} ${wine.clasification}`,
+            date: `${dd}.${mm}.${yyyy}`,
+            chairman: settings[0].competitionChairman,
+            img
+        }
+        await generatePdf(data);
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error)
+    }
+};
