@@ -30,6 +30,7 @@ const PORT = 8080;
 const app = express();
 
 app.use(express.json()); // aplications/json
+app.use(express.static(path.join(__dirname, 'assets/template/')))
 
 //Handle CORS error
 app.use((req, res, next) => {

@@ -470,7 +470,6 @@ exports.generatePdf = async (req, res, next) => {
         const dd = String(date.getDate()).padStart(2, "0");
         const mm = String(date.getMonth() + 1).padStart(2, "0");
         const yyyy = date.getFullYear();
-        const img = path.join(__dirname, '../', '/assets', 'template', 'splash.png');
         const data = {
             title: settings[0].degustationName,
             place,
@@ -479,7 +478,6 @@ exports.generatePdf = async (req, res, next) => {
             wine: `${wine.name}, ${wine.color} ${wine.character} ${wine.clasification}`,
             date: `${dd}.${mm}.${yyyy}`,
             chairman: settings[0].competitionChairman,
-            img
         }
         await generatePdf(data);
     } catch (error) {
