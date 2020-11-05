@@ -17,7 +17,7 @@ const DownloadFile = props => {
         })
     }
     return (
-            <Button clicked={downloadFile}>
+            <Button clicked={downloadFile} disabled={props.isComplete}>
                 {props.children}
             </Button>
         )

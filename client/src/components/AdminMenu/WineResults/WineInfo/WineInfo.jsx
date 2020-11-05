@@ -24,6 +24,7 @@ const WineInfo = props => {
                 endPoint={`final-results-generate-cert/${props.wineInfo._id}`}
                 fileName={`cert_${props.wineInfo.id}.pdf`}
                 token={props.token}
+                isComplete={!props.wineInfo.isComplete}
                 >Generovať certifikát</Downloadfile>
             </div>
         </div>
