@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 const postCompetitiveCategory = new Schema ({
     categoryName: {
         type: String,
+    },
+    isFinalResultWrite: {
+        type: Boolean,
+        default: false
     }
 });
 

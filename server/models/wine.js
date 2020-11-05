@@ -65,6 +65,10 @@ const postWine = new Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    finalPlace: {
+        type: Number,
+        default: null
     }
 }, {timestamps: true});
 

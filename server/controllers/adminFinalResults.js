@@ -493,3 +493,36 @@ exports.generatePdf = async (req, res, next) => {
         next(error)
     }
 };
+
+exports.writeFinalResults = async (req, res, next) => {
+    const categoryId = req.params.categoryId;
+    try {
+        const wines = await Wine.find({competitiveCategoryId: categoryId}, '_id').sort({'finalResult': -1}).lean();
+        if (!wines) {
+            const error = new Error('Nemôžem načítať výsledky pre túto kategóriu');
+            error.statusCode = 404;
+            return next(error);
+        }
+        await wines.forEach(async (wine, index) => {
+            const updateWine = await Wine.findById(wine._id)
+            if (!updateWine) {
+                const error = new Error('Nemôžem načitať výsledky pre túto kategóriu');
+                error.statusCode = 404;
+                return next(error);
+            }
+            updateWine.finalPlace = index + 1;
+            await updateWine.save();
+        })
+        const competitiveCategory = await CompetitiveCategory.findById(categoryId);
+        competitiveCategory.isFinalResultWrite = true;
+        await competitiveCategory.save();
+        res.status(201).json({
+            message: 'Výsledky zápísané'
+        })
+    } catch (error) {
+        if(!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error)
+    }
+};
