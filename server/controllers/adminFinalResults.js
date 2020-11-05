@@ -452,7 +452,6 @@ exports.exportResults = async (req, res, next) => {
 
 exports.generatePdf = async (req, res, next) => {
     const wineId = req.params.wineId;
-    const place = req.body.place;
     try {
         const settings = await Settings.find();
         if (!settings) {
@@ -472,14 +471,21 @@ exports.generatePdf = async (req, res, next) => {
         const yyyy = date.getFullYear();
         const data = {
             title: settings[0].degustationName,
-            place,
+            place: 1,
             category: wine.competitiveCategory,
             producer: wine.producer,
             wine: `${wine.name}, ${wine.color} ${wine.character} ${wine.clasification}`,
             date: `${dd}.${mm}.${yyyy}`,
             chairman: settings[0].competitionChairman,
         }
-        await generatePdf(data);
+        const pdf = await generatePdf(data);
+        if (!pdf) {
+            const error = new Error('Nemôžem vytvoriť pdf súbor');
+            error.statusCode = 409;
+            return next(error);
+        }
+        res.contentType("application/pdf");
+        res.status(200).send(pdf);
     } catch (error) {
         if(!error.statusCode) {
             error.statusCode = 500;

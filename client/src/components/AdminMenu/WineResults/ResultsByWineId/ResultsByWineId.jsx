@@ -53,7 +53,9 @@ class ResultsByWineId extends Component {
                 <Back />
                 <ElementWrapper wrapperType="FullWidthWrapper">
                 <h4>Súhrn výsledkov</h4>
-                <WineInfo wineInfo={this.props.wineInfo}/>
+                <WineInfo 
+                token={this.props.token}
+                wineInfo={this.props.wineInfo}/>
                 <ResultsTable
                 tableHeads={this.state.tableHeads}>
                     {this.props.results.map((result, index) => {

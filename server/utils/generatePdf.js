@@ -9,7 +9,6 @@ const generatePdf = async (data) => {
     const template = handlebars.compile(templateHtml);
     const finalHtml = template(data);
 
-    const pdfPath = path.join(__dirname, '../', '/exports', `${data.place}.pdf`);
     const options = {
         format: 'A4',
         headerTemplate: "<p></p>",
@@ -21,7 +20,6 @@ const generatePdf = async (data) => {
         },
         printBackground: true,
         landscape: true,
-        path: pdfPath
     };
     const browser = await puppeteer.launch({
         args: ['--no-sandbox'],
@@ -31,8 +29,9 @@ const generatePdf = async (data) => {
     await page.goto(`data:text/html,${finalHtml}`, {
         waitUntil: 'networkidle0'
     })
-    await page.pdf(options);
+    const createdPdf = await page.pdf(options);
     await browser.close();
+    return createdPdf;
 };
 
 
