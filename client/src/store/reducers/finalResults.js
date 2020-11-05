@@ -11,7 +11,8 @@ const initialState = {
     degGroups: [],
     resultsByGroup: [],
     resultsByDeg: [],
-    degustators: []
+    degustators: [],
+    isFinalResultWrite: false
 }
 
 const finalResultsErrorClear = (state, action) => {
@@ -27,7 +28,8 @@ const fetchCompetitiveCategorySuccess = (state, action) => {
         loading: false, 
         error: null,
         competitiveCategory: action.category,
-        results: action.results
+        results: action.results,
+        isFinalResultWrite: action.isFinalResultWrite
     })
 };
 
@@ -49,7 +51,8 @@ const fetchWineResultsByComCategorySuccess = (state, action) => {
     return updateObj(state, {
         loading: true,
         error: null,
-        results: action.results
+        results: action.results,
+        isFinalResultWrite: action.isFinalResultWrite
     })
 }
 

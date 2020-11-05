@@ -35,8 +35,8 @@ export const searchFilter = (oldList, filteredBy, filterValue) => {
     return filteredList;
 };
 
-export const isGroupEdited = (array) => {
-    const EmptyCheck = (val) => val.group;
+export const isTrueCheck = (array, checkParam) => {
+    const EmptyCheck = (val) => val[checkParam];
     let disabled = array.every(EmptyCheck);
     return !disabled;
 }

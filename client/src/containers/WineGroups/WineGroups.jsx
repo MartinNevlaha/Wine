@@ -6,7 +6,7 @@ import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import Back from '../../components/UI/Back/Back';
 import EditWineGroups from '../../components/AdminMenu/WineGroups/EditWineGroups/EditWineGroups';
 import * as action from '../../store/actions/index';
-import { isGroupEdited } from '../../shared/utility';
+import { isTrueCheck } from '../../shared/utility';
 import Popup from '../../components/UI/Popup/Popup';
 
 class WineGroups extends Component {
@@ -42,7 +42,7 @@ class WineGroups extends Component {
                 <EditWineGroups
                 isDegustationOpen={this.props.isDegustationOpen}
                 save={this.savedWineGroupsHandler}
-                isGroupEdited={isGroupEdited(this.props.wineGroups.wineList)}
+                isGroupEdited={isTrueCheck(this.props.wineGroups.wineList, 'group')}
                 defaultGroup={this.state}
                 wines={this.props.wineGroups.wineList}
                 groups={this.props.wineGroups.degGroups}

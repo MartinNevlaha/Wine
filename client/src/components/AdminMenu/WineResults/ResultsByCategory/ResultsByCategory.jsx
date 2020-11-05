@@ -10,6 +10,7 @@ import classes from './ResultsCategory.module.css';
 import CategoryTable from './CategoryTable/CategoryTable';
 import Popup from '../../../UI/Popup/Popup';
 import DownloadFile from '../../DownloadFile/DownloadFile';
+import { isTrueCheck } from '../../../../shared/utility';
 
 class ResultsByCategory extends Component {
     state = {
@@ -38,6 +39,7 @@ class ResultsByCategory extends Component {
                 <Back />
                 <ElementWrapper wrapperType="FullWidthWrapper">
                     <h4>Výsledky podľa súťažnej categórie vín</h4>
+                    <p>Stav výsledkov: {this.props.isFinalResultWrite? 'Finálne výsledky': 'Priebežné'}</p>
                     <div className={classes.HeaderCategoryChoose}>
                         <label >Súťažná kategória vína</label>
                         <select
@@ -55,7 +57,11 @@ class ResultsByCategory extends Component {
                         endPoint="final-results-export-by-cat"
                         token={this.props.token}
                         fileName="result_by_cat.xlsx"
+                        isComplete={isTrueCheck(this.props.competitiveCategory, 'isFinalResultWrite')}
                         >Stiahnuť kompletné výsledky</DownloadFile>
+                        <Button
+                        disabled={isTrueCheck(this.props.results, 'isComplete')}
+                        >Zapísať výsledky skupiny</Button>
                     </div>
                     <CategoryTable 
                     results={this.props.results}
@@ -75,7 +81,8 @@ const mapStateToProps = state => {
         token: state.adminAuth.token,
         competitiveCategory: state.finalResults.competitiveCategory,
         results: state.finalResults.results,
-        error: state.finalResults.error
+        error: state.finalResults.error,
+        isFinalResultWrite: state.finalResults.isFinalResultWrite
     }
 }
 const mapDispatchToProps = dispatch => {

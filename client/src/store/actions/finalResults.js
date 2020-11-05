@@ -13,11 +13,12 @@ export const fetchCompetitiveCategoryStart = () => {
     };
 };
 
-export const fetchCompetitiveCategorySuccess = (category, results) => {
+export const fetchCompetitiveCategorySuccess = (category, results, isFinalResultWrite) => {
     return {
         type: actionTypes.FETCH_COMPETITVE_CATEGORY_SUCCESS,
         category,
-        results
+        results,
+        isFinalResultWrite
     };
 };
 
@@ -36,7 +37,7 @@ export const fetchCompetitiveCategory = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(fetchCompetitiveCategorySuccess(resp.data.competitiveCategory, resp.data.results)))
+        .then(resp => dispatch(fetchCompetitiveCategorySuccess(resp.data.competitiveCategory, resp.data.results, resp.data.isFinalResultWrite)))
         .catch(err => {
             if (err.response) {
                 const error = {
@@ -59,10 +60,11 @@ export const fetchWineResultsByComCategoryStart = () => {
     };
 };
 
-export const fetchWineResultsByComCategorySuccess = (results) => {
+export const fetchWineResultsByComCategorySuccess = (results, isFinalResultWrite) => {
     return {
         type: actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_SUCCESS,
         results,
+        isFinalResultWrite
     };
 };
 
@@ -81,7 +83,7 @@ export const fetchWineResultsByComCategory = (category, token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(fetchWineResultsByComCategorySuccess(resp.data.results)))
+        .then(resp => dispatch(fetchWineResultsByComCategorySuccess(resp.data.results, resp.data.isFinalResultWrite)))
         .catch(err => {
             if (err.response) {
                 const error = {

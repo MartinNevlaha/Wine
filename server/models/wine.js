@@ -66,7 +66,7 @@ const postWine = new Schema({
         default: false,
         required: true
     },
-    finalPlace: {
+    place: {
         type: Number,
         default: null
     }

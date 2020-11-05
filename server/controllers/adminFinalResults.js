@@ -1,6 +1,4 @@
 const Excel = require('exceljs');
-const path = require('path');
-const fs = require('fs');
 
 const Wine = require('../models/wine');
 const Result = require('../models/result');
@@ -19,18 +17,29 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
         select: '_id groupName'
     }
     try {
+        const competitiveCategories = await CompetitiveCategory.find({});
+        if (!competitiveCategories) {
+            const error = new Error('Nemôžem načítať kompletnosť hodnotenia')
+            error.statusCode = 404;
+            return next(error);
+        }
+        const competitiveCategory = competitiveCategories.filter(cat => cat._id === categoryId);
         const wines = await Wine.find({competitiveCategoryId: categoryId}).sort({'finalResult': -1}).lean().populate(populateQuery);
         if (!wines) {
             const error = new Error('Nemôžem načítať výsledky pre túto kategóriu');
             error.statusCode = 404;
             return next(error);
         }
-        const sortedWines = wines.map((wine, index) => {
-            return {...wine, place: index + 1}
-        })
+        let sortedWines = wines;
+        if (competitiveCategory.isFinalResultWrite === false) {
+            sortedWines = wines.map((wine, index) => {
+                return {...wine, place: index + 1}
+            })
+        }
         res.status(200).json({
             message: 'Zoznam vín načítaný',
-            results: sortedWines
+            results: sortedWines,
+            isFinalResultWrite: competitiveCategory.isFinalResultWrite
         })
     } catch (error) {
         if(!error.statusCode) {
@@ -152,13 +161,17 @@ exports.getWineCompetitionCategory = async (req, res, next) => {
             error.statusCode = 404;
             return next(error);
         }
-        const sortedWines = results.map((wine, index) => {
-            return {...wine, place: index + 1}
-        })
+        let sortedWines = results;
+        if (!competitiveCategory[0].isFinalResultWrite) {
+            sortedWines = results.map((wine, index) => {
+                return {...wine, place: index + 1}
+            })
+        }
         res.status(200).json({
             message: 'Dáta načítané',
             competitiveCategory: competitiveCategory,
-            results: sortedWines
+            results: sortedWines,
+            isFinalResultWrite: competitiveCategory[0].isFinalResultWrite
         })
     } catch (error) {
         if(!error.statusCode) {
@@ -510,7 +523,7 @@ exports.writeFinalResults = async (req, res, next) => {
                 error.statusCode = 404;
                 return next(error);
             }
-            updateWine.finalPlace = index + 1;
+            updateWine.place = index + 1;
             await updateWine.save();
         })
         const competitiveCategory = await CompetitiveCategory.findById(categoryId);

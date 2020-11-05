@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-instance';
-import { isGroupEdited } from '../../shared/utility';
+import { isTrueCheck } from '../../shared/utility';
 
 export const wineGroupsClearError = () => {
     return {
@@ -40,7 +40,7 @@ export const fetchEditWineGroups = (token) => {
         .then(resp => {
             const wines = resp.data.wines;
             const groups = resp.data.groups;
-            if (isGroupEdited(wines)) {
+            if (isTrueCheck(wines, 'group')) {
                 const epmtyGroup = {
                     _id: '',
                     groupName: '',
