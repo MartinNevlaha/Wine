@@ -77,9 +77,21 @@ mongoose.connect(MONGO_DB_URI, {
         const io = require('./socket').init(server);
         io.on('connect', socket => {
             console.log('Socket.io: client connected');
+            winston.log({
+                level: 'info',
+                message: 'Socket.io: client connected'
+            })
         })
         console.log(`Connect to DB succes and server listen on ${PORT}`)
+        winston.log({
+            level: 'info',
+            message: `Connect to DB succes and server listen on ${PORT}`
+        })
     })
     .catch(err => {
-        console.log('Connect to DB failled', err)
+        console.log('Connect to DB failled', err);
+        winston.error({
+            level: 'error',
+            message: `Connect to DB failled, due to: ${err}`,
+        })
     })

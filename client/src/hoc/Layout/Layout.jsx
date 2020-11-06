@@ -6,13 +6,24 @@ import classes from './Layout.module.css';
 import NavBar from '../../components/Navigation/NavBar/NavBar';
 
 class Layout extends Component {
-
+    state = {
+        windowWidth: window.innerWidth
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.resizeHandler);
+    }
+    componentWillUnmount() {
+        window.addEventListener('resize', this.resizeHandler)
+    }
+    resizeHandler = (e) => {
+        this.setState({windowWidth: window.innerWidth});
+    }
     render() {
         return (
             <React.Fragment>
                 <NavBar isAdminAuth={this.props.isAdminAuth} isDegAuth={this.props.isDegAuth}/>
                 <main className={this.props.location.pathname === "/rating" ? classes.BackgroundDeg : classes.BackgroundApp }>
-                    {this.props.children}
+                    {this.state.windowWidth >=1024 ? this.props.children : <h2>Táto aplikácia nie je dimenzovaná pre toto zariadenie</h2>}
                 </main>
             </React.Fragment>
         );

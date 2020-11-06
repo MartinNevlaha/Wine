@@ -1,1 +1,11 @@
-{"message":"500 - Cannot read property '_id' of undefined - undefined - /admin//final-results-groups - GET - ::1","level":"error"}
+{"message":"401 - Nesprávne prihlasovacie meno - undefined - /degustator/login - POST - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/9 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/10 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/1 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/2 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/3 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/10 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/9 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/8 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/6 - GET - ::1","level":"error"}
+{"message":"401 - Nesprávne heslo - undefined - /admin/login - POST - ::1","level":"error"}
