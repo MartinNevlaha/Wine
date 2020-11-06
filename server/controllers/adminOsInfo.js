@@ -1,5 +1,6 @@
 const si = require('systeminformation');
 const path = require('path');
+const fs = require('fs');
 
 const Wine = require('../models/wine');
 const Degustator = require('../models/degustator');
@@ -71,6 +72,7 @@ exports.getOsInfo = async (req, res, next) => {
 };
 
 exports.resetDb = async (req, res, next) => {
+    const logsFile = path.join(__dirname, '../', 'logs/post_log.log');
     try {
         await Wine.deleteMany({});
         await Degustator.deleteMany({});
@@ -79,6 +81,9 @@ exports.resetDb = async (req, res, next) => {
         await CompetitiveCategory.deleteMany({});
         await Setting.deleteMany({});
         await inicializedDefaultSettings();
+        if (fs.existsSync(logsFile)) {
+            fs.unlinkSync(logsFile);
+        }
         res.status(200).json({
             message: "Databaza kompletne vymazaná"
         })
