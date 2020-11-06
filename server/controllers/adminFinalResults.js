@@ -318,7 +318,7 @@ exports.exportResults = async (req, res, next) => {
             }
             const dataToExport = results.map((res, index) => {
                 return {
-                    place: index +1,
+                    place: res.place,
                     id: res.id,
                     name: res.name,
                     color: res.color,
