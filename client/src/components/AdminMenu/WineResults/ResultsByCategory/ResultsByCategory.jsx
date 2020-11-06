@@ -39,6 +39,7 @@ class ResultsByCategory extends Component {
         const catId = this.state.selectedCategory || this.props.competitiveCategory[0]._id;
         const index = this.props.competitiveCategory.findIndex(i => i._id === catId);
         this.props.onWriteFinalResults(catId, index, this.props.token)
+        this.setState({isModalShow: false})
     }
     toggleModalHandler = () => {
         this.setState({

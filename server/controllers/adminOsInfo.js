@@ -6,6 +6,9 @@ const Degustator = require('../models/degustator');
 const Result = require('../models/result');
 const Group = require('../models/degGroup');
 const CompetitiveCategory = require('../models/competitiveCategory');
+const Setting = require('../models/settings');
+
+const inicializedDefaultSettings = require('../utils/inicializeDefaultSettings');
 
 exports.getOsInfo = async (req, res, next) => {
     try {   
@@ -74,6 +77,8 @@ exports.resetDb = async (req, res, next) => {
         await Group.deleteMany({});
         await Result.deleteMany({});
         await CompetitiveCategory.deleteMany({});
+        await Setting.deleteMany({});
+        await inicializedDefaultSettings();
         res.status(200).json({
             message: "Databaza kompletne vymazaná"
         })

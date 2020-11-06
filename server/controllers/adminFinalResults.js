@@ -483,7 +483,7 @@ exports.generatePdf = async (req, res, next) => {
         const yyyy = date.getFullYear();
         const data = {
             title: settings[0].degustationName,
-            place: wine.finalPlace,
+            place: wine.place,
             category: wine.competitiveCategory,
             producer: wine.producer,
             wine: `${wine.name}, ${wine.color} ${wine.character} ${wine.clasification}`,
