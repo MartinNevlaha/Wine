@@ -53,7 +53,7 @@ export const degLogin = (degData) => {
     return dispatch => {
         dispatch(degLoginStart());
         console.log(degData)
-        axiosInstance.post('/degustator/login', degData)
+        axiosInstance.post('degustator/login', degData)
             .then(res => {
                 const decodedToken = jwt_decode(res.data.token);
                 console.log(decodedToken)

@@ -31,7 +31,7 @@ export const fetchSystemInfoFailled = (error) => {
 export const fetchSystemInfo = (token) => {
     return dispatch => {
         dispatch(fetchSystemInfoStart());
-        axiosInstance.get('/admin/system-info', {
+        axiosInstance.get('admin/system-info', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -73,7 +73,7 @@ export const completeResetDbFailled = (error) => {
 export const completeResetDb = (token) => {
     return dispatch => {
         dispatch(completeResetDbStart());
-        axiosInstance.delete('/admin/reset-db', {
+        axiosInstance.delete('admin/reset-db', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

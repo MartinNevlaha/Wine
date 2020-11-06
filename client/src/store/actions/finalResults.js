@@ -32,7 +32,7 @@ export const fetchCompetitiveCategoryFail = (error) => {
 export const fetchCompetitiveCategory = (token) => {
     return dispatch => {
         dispatch(fetchCompetitiveCategoryStart());
-        axiosInstance.get('/admin/final-results-category', {
+        axiosInstance.get('admin/final-results-category', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -79,7 +79,7 @@ export const fetchWineResultsByComCategoryFailled = (error) => {
 export const fetchWineResultsByComCategory = (category, token) => {
     return dispatch => {
         dispatch(fetchWineResultsByComCategoryStart());
-        axiosInstance.get(`/admin/final-results-by-category/${category}`, {
+        axiosInstance.get(`admin/final-results-by-category/${category}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -125,7 +125,7 @@ export const fetchResultsByWineIdFail = (error) => {
 export const fetchResultsByWineId = (wineId, token) => {
     return dispatch => {
         dispatch(fetchResultsByWineIdStart())
-        axiosInstance.get(`/admin/final-results/wine/${wineId}`, {
+        axiosInstance.get(`admin/final-results/wine/${wineId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -171,7 +171,7 @@ export const fetchDegGroupsResFailled = (error) => {
 export const fetchDegGroupsRes = (token) => {
     return dispatch => {
         dispatch(fetchDegGroupsResStart())
-        axiosInstance.get('/admin//final-results-groups', {
+        axiosInstance.get('admin//final-results-groups', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -216,7 +216,7 @@ export const fetchResultsByGroupFailled = (error) => {
 export const fetchResultsByGroup = (groupId, token) => {
     return dispatch => {
         dispatch(fetchResultsByGroupStart())
-        axiosInstance.get(`/admin/final-results/group/${groupId}`, {
+        axiosInstance.get(`admin/final-results/group/${groupId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -262,7 +262,7 @@ export const fetchListOfDegustatorsFailled = (error) => {
 export const fetchListOfDegustators = (token) => {
     return dispatch => {
         dispatch(fetchListOfDegustatorsStart());
-        axiosInstance.get('/admin/final-results-degustators', {
+        axiosInstance.get('admin/final-results-degustators', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -324,6 +324,53 @@ export const fetchResultsByDeg = (degId, token) => {
             dispatch(fetchResultsByDegFailled(err))
             setTimeout(()=> {
                 dispatch(finalResultsErrorClear())
+            }, 2500)
+        })
+    }
+}
+
+export const writeFinalResultsStart = () => {
+    return {
+        type: actionTypes.WRITE_FINAL_RESULTS_START,
+    }
+}
+
+export const writeFinalResultsSuccess = (updatedData, index) => {
+    return {
+        type: actionTypes.WRITE_FINAL_RESULTS_SUCCESS,
+        index,
+        updatedData
+    }
+}
+
+export const writeFinalResultsFail = (error) => {
+    return {
+        type: actionTypes.WRITE_FINAL_RESULTS_FAIL,
+        error
+    }
+}
+
+export const writeFinalResults = (catId, index, token) => {
+    const fakeData = null;
+    return dispatch => {
+        dispatch(writeFinalResultsStart());
+        axiosInstance.post('admin/final-results-write/' + catId, fakeData, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => dispatch(writeFinalResultsSuccess(resp.data.competitiveCategory, index)))
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.data.message,
+                    code: err.response.status
+                }
+                dispatch(writeFinalResultsFail(error));
+            }
+            dispatch(writeFinalResultsFail(err))
+            setTimeout(()=>{
+                dispatch(finalResultsErrorClear());
             }, 2500)
         })
     }

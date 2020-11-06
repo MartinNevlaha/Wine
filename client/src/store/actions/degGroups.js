@@ -91,7 +91,7 @@ export const saveDegGroups = (data, token) => {
     return dispatch => {
         dispatch(saveDegGroupsStart());
         //dispatch(deleteDegGroups());
-        axiosInstance.post('/admin/degustator-groups', data, {
+        axiosInstance.post('admin/degustator-groups', data, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

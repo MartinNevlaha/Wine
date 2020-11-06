@@ -32,7 +32,7 @@ export const fetchEditWineGroupsFailled = (error) => {
 export const fetchEditWineGroups = (token) => {
     return dispatch => {
         dispatch(fetchEditWineGroupsStart());
-        axiosInstance.get('/admin/wine-groups-edit', {
+        axiosInstance.get('admin/wine-groups-edit', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -106,7 +106,7 @@ export const saveWineGroupsFailled = (error) => {
 export const saveWineGroups = (wineGroupsData ,token) => {
     return dispatch => {
         dispatch(saveWineGroupsStart());
-        axiosInstance.put('/admin/wine-groups-edit', wineGroupsData, {
+        axiosInstance.put('admin/wine-groups-edit', wineGroupsData, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

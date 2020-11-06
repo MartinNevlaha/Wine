@@ -98,7 +98,7 @@ export const fetchWineInfo = (wineId, token) => {
     return dispatch => {
         setTimeout(()=>{
             dispatch(fetchWineInfoStart())
-            axiosInstance.get(`/degustator/wine-list/${wineId}`, {
+            axiosInstance.get(`degustator/wine-list/${wineId}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -147,7 +147,7 @@ export const fetchWineInGroupFailled = (error) => {
 export const fetchWineInGroup = (token) => {
     return dispatch => {
         dispatch(fetchWineInGroupStart());
-        axiosInstance.get('/degustator/wine-list-group', {
+        axiosInstance.get('degustator/wine-list-group', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

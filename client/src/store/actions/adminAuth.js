@@ -49,7 +49,7 @@ export const adminLoginClearError = () => {
 export const adminLogin = (adminData) => {
     return dispatch => {
         dispatch(adminLoginStart());
-        axiosInstance.post('/admin/login', adminData)
+        axiosInstance.post('admin/login', adminData)
             .then(res => {
                 const decodedToken = jwt_decode(res.data.token);
                 const { adminId, role } = decodedToken;

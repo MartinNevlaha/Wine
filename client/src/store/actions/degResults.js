@@ -31,7 +31,7 @@ export const fetchDegResultsFailled = (error) => {
 export const fetchDegResults = (token) => {
     return dispatch => {
         dispatch(fetchDegResultsStart());
-        axiosInstance.get('/degustator/results', {
+        axiosInstance.get('degustator/results', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -79,7 +79,7 @@ export const fetchDegResultByIdFail = (error) => {
 export const fetchDegResultById = (_id, token) => {
     return dispatch => {
         dispatch(fetchDegResultByIdStart());
-        axiosInstance.get(`/degustator/result/${_id}`, {
+        axiosInstance.get(`degustator/result/${_id}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

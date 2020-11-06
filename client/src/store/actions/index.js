@@ -98,5 +98,6 @@ export {
     fetchDegGroupsRes,
     fetchResultsByGroup,
     fetchListOfDegustators,
-    fetchResultsByDeg
+    fetchResultsByDeg,
+    writeFinalResults
 } from './finalResults';

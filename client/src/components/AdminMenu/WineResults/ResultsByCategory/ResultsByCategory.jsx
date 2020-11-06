@@ -11,11 +11,13 @@ import CategoryTable from './CategoryTable/CategoryTable';
 import Popup from '../../../UI/Popup/Popup';
 import DownloadFile from '../../DownloadFile/DownloadFile';
 import { isTrueCheck } from '../../../../shared/utility';
+import Modal from '../../../UI/Modal/Modal';
 
 class ResultsByCategory extends Component {
     state = {
         tableHeadNames: ['Poradie', 'Číslo vína', 'Názov vína', 'Klasifikácia vína', 'Výrobca vína', 'Ročník vína', 'Degustačná skupina','Bodové hodnotenie', 'Kategória vína', 'Kompletnosť hodnotenia' ],
-        selectedCategory: null
+        selectedCategory: null,
+        isModalShow: false
     }
     componentDidMount() {
         this.props.onFetchCompetitiveCategory(this.props.token)
@@ -33,13 +35,30 @@ class ResultsByCategory extends Component {
     fetchResultsByComCategory = () => {
         this.props.onFetchResultsByComCategory(this.state.selectedCategory, this.props.token)
     }
+    writeFinalResultsHandler = () => {
+        const catId = this.state.selectedCategory || this.props.competitiveCategory[0]._id;
+        const index = this.props.competitiveCategory.findIndex(i => i._id === catId);
+        this.props.onWriteFinalResults(catId, index, this.props.token)
+    }
+    toggleModalHandler = () => {
+        this.setState({
+            isModalShow: !this.state.isModalShow,
+        })
+    }
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <Back />
+                <Modal
+                show={this.state.isModalShow} 
+                closeModal={this.toggleModalHandler}>
+                    <p>Naozaj chcete zapísať výsledky do databázy ?</p>
+                    <Button clicked={this.toggleModalHandler}>Nie</Button>
+                    <Button clicked={this.writeFinalResultsHandler}>Ano</Button>
+                </Modal>
                 <ElementWrapper wrapperType="FullWidthWrapper">
                     <h4>Výsledky podľa súťažnej categórie vín</h4>
-                    <p>Stav výsledkov: {this.props.isFinalResultWrite? 'Finálne výsledky': 'Priebežné'}</p>
+                    <p>Stav výsledkov: {this.props.isFinalResultWrite? 'Finálne výsledky - zapísané': 'Priebežné výsledky - nezapísané'}</p>
                     <div className={classes.HeaderCategoryChoose}>
                         <label >Súťažná kategória vína</label>
                         <select
@@ -60,6 +79,7 @@ class ResultsByCategory extends Component {
                         isComplete={isTrueCheck(this.props.competitiveCategory, 'isFinalResultWrite')}
                         >Stiahnuť kompletné výsledky</DownloadFile>
                         <Button
+                        clicked={this.toggleModalHandler}
                         disabled={isTrueCheck(this.props.results, 'isComplete')}
                         >Zapísať výsledky skupiny</Button>
                     </div>
@@ -89,6 +109,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchCompetitiveCategory: (token) => dispatch(action.fetchCompetitiveCategory(token)),
         onFetchResultsByComCategory: (categoryId, token) => dispatch(action.fetchWineResultsByComCategory(categoryId, token)),
+        onWriteFinalResults: (catId, index, token) => dispatch(action.writeFinalResults(catId, index, token))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (withRouter(ResultsByCategory));

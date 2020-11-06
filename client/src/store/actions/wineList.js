@@ -27,7 +27,6 @@ export const addWineFailed = (error) => {
 };
 
 export const addWine = (data, token) => {
-    console.log(token)
     return dispatch => {
         dispatch(addWineStart());
         axiosInstance.post('admin/wine-list', data, {

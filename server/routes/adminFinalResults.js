@@ -21,6 +21,6 @@ router.get('/final-results-degustators', isAdminAuth, adminFinalResultsControlle
 
 router.get('/final-results/degustator/:degId', isAdminAuth, adminFinalResultsController.getFinalResultsByDeg);
 
-router.post('/final-results-write/:categoryId', adminFinalResultsController.writeFinalResults);
+router.post('/final-results-write/:categoryId', isAdminAuth, adminFinalResultsController.writeFinalResults);
 
 module.exports = router;

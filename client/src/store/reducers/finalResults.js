@@ -1,4 +1,5 @@
 import { updateObj } from '../../shared/utility';
+import updateArray from 'react-addons-update';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
@@ -173,6 +174,30 @@ const fetchResultByDegFailled = (state, action) => {
     })
 }
 
+const writeFinalResultsStart = (state, action) => {
+    return updateObj(state, {
+        loading: true,
+        error: null
+    })
+}
+
+const writeFinalResultsSuccess = (state, action) => {
+    const index = action.index
+    return updateArray(state, {
+        loading: {$set: false},
+        isFinalResultWrite: {$set: true},
+        competitiveCategory: {
+            [index]: {$set: action.updatedData}
+        }
+    })
+}
+const writeFinalResultsFail = (state, action) => {
+    return updateObj(state, {
+        loading: false,
+        error: action.error
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_COMPETITVE_CATEGORY_START:
@@ -219,6 +244,12 @@ const reducer = (state = initialState, action) => {
             return fetchResultByDegFailled(state, action);
         case actionTypes.FINAL_RESULTS_CLEAR_ERROR:
             return finalResultsErrorClear(state, action);
+        case actionTypes.WRITE_FINAL_RESULTS_START:
+            return writeFinalResultsStart(state, action);
+        case actionTypes.WRITE_FINAL_RESULTS_SUCCESS:
+            return writeFinalResultsSuccess(state, action);
+        case actionTypes.WRITE_FINAL_RESULTS_FAIL:
+            return writeFinalResultsFail(state, action);
         default:
             return state;
     }
