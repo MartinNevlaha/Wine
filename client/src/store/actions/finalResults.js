@@ -61,6 +61,7 @@ export const fetchWineResultsByComCategoryStart = () => {
 };
 
 export const fetchWineResultsByComCategorySuccess = (results, isFinalResultWrite) => {
+    console.log(isFinalResultWrite)
     return {
         type: actionTypes.FETCH_WINE_RESULTS_BY_COM_CATEGORY_SUCCESS,
         results,

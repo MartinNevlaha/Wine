@@ -17,13 +17,12 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
         select: '_id groupName'
     }
     try {
-        const competitiveCategories = await CompetitiveCategory.find({});
-        if (!competitiveCategories) {
+        const competitiveCat = await CompetitiveCategory.findById(categoryId);
+        if (!competitiveCat) {
             const error = new Error('Nemôžem načítať kompletnosť hodnotenia')
             error.statusCode = 404;
             return next(error);
         }
-        const competitiveCategory = competitiveCategories.filter(cat => cat._id === categoryId);
         const wines = await Wine.find({competitiveCategoryId: categoryId}).sort({'finalResult': -1}).lean().populate(populateQuery);
         if (!wines) {
             const error = new Error('Nemôžem načítať výsledky pre túto kategóriu');
@@ -31,7 +30,7 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
             return next(error);
         }
         let sortedWines = wines;
-        if (competitiveCategory.isFinalResultWrite === false) {
+        if (competitiveCat.isFinalResultWrite === false) {
             sortedWines = wines.map((wine, index) => {
                 return {...wine, place: index + 1}
             })
@@ -39,7 +38,7 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
         res.status(200).json({
             message: 'Zoznam vín načítaný',
             results: sortedWines,
-            isFinalResultWrite: competitiveCategory.isFinalResultWrite
+            isFinalResultWrite: competitiveCat.isFinalResultWrite
         })
     } catch (error) {
         if(!error.statusCode) {
