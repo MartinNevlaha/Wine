@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
-const rfs = require('rotating-file-stream');
 
 const adminWineRoutes = require('./routes/adminWine');
 const adminDegRoutes = require('./routes/adminDeg');
@@ -15,13 +14,11 @@ const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
 const adminWineGroupsRoutes = require('./routes/adminWineGroups');
 
-const accessLogStream = rfs.createStream('access.log', {
-    interval: '31d',
-    path: path.join(__dirname, 'logs')
-})
+const winston = require('./config/winston');
 
 const inicializeAdmin = require('./utils/initializeAdmin');
 const inicializeDefaultSettins = require('./utils/inicializeDefaultSettings');
+
 
 //ENV Variables
 const MONGO_DB_URI = 'mongodb://127.0.0.1:27017/wine';
@@ -42,7 +39,7 @@ app.use((req, res, next) => {
 
 app.use(helmet());
 app.use(morgan('combined', {
-    stream: accessLogStream
+    stream: winston.stream
 }));
 
 
@@ -62,7 +59,9 @@ app.use((error, req, res, next) => {
     const status = error.statusCode || 500;
     const message = error.message;
     const data = error.data;
-    res.status(status).json({message: message, data: data});
+    winston.error(`${status} - ${message} - ${data} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+    res.status(status)
+    res.json({message: message, data: data});
 })
 
 //Conect to db and start server
