@@ -39,7 +39,7 @@ class AdminZone extends Component {
             this.props.history.push('/edit-deg-group')
         } else if (adminChoose === 'Zobraz skupiny') {
             this.props.history.push('/deg-groups')
-        } else if (adminChoose ==="Zobraz Systémové info") {
+        } else if (adminChoose ==="Zobraz info") {
             this.props.history.push('/system-info')
         } else if (adminChoose ==="Uprav nastavenia") {
             this.props.history.push('/degustation-setting')
