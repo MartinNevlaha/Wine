@@ -10,7 +10,7 @@ import classes from './DegustatorList.module.css';
 const degustatorList = (props) => (
     <ElementWrapper wrapperType="SmallWrapper">
         <h4>Zoznam degustátorov</h4>
-        <FontAwesomeIcon icon={faUser} size="5x" />
+        <FontAwesomeIcon icon={faUser} size={props.windowWidth <=1300 ? '3x' : '5x'} />
         <div className={classes.BtnContainer}>
             {!props.isDegustationOpen &&
             <Button clicked={props.clicked}>Uprav degustátorov</Button>}

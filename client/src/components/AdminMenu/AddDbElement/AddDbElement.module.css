@@ -1,7 +1,26 @@
+.AddDbElementWine {
+    width: 50%;
+    height: 350px;
+    border: 1px solid white;
+    border-radius: 8px;
+    margin: 15px 20px;
+    background-color: rgba(173, 121, 129, 0.603);
+}
+.AddDbElement {
+    width: 25%;
+    height: 350px;
+    border: 1px solid white;
+    border-radius: 8px;
+    margin: 15px 20px;
+    background-color: rgba(173, 121, 129, 0.603);
+}
 .InputContainer {
     margin: auto;
-    width: 70%;
+    width: 90%;
+    height: 250px;
     display: flex;
-    flex-direction: column;    
-    text-align: center;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: column wrap;
+    align-content: stretch;
 }

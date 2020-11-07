@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import ElementWrapper from '../../../hoc/ElementWrapper/ElementWrapper';
 import UserInput from '../../UserInput/UserInput';
 import Spinner from '../../UI/Spinner/Spinner';
 import Button from '../../UI/Button/Button';
@@ -33,21 +32,22 @@ class AddDbElement extends Component {
         })
 
         return (
-            <ElementWrapper wrapperType="SmallWrapper">
+            <div className={this.props.componentType === 'AddWine' ? classes.AddDbElementWine : classes.AddDbElement}>
                 {this.props.componentType === 'AddDegustator'?
                 <h4>Pridaj degustátora</h4> 
                 : this.props.componentType ==='AddGroups' ? <h4> Vytvor skupiny</h4> 
                 : <h4>Pridaj súťažné víno</h4>}
                 <div className={classes.InputContainer}>
                     {this.props.loadingSend ? <Spinner /> : inputs}
-                    <Button 
+                </div>
+                <Button 
                     disabled={this.props.disabled}
                     clicked={this.props.add}>{this.props.componentType === 'AddDegustator'?
                     "Pridaj Degustátora" 
                     : this.props.componentType ==='AddGroups' ? "Vytvor skupiny"
-                    : 'Pridaj víno'}</Button>
-                </div>
-            </ElementWrapper>
+                    : 'Pridaj víno'}
+                </Button>
+            </div>
         );
     }
 }

@@ -9,7 +9,7 @@ import classes from './DegustationSettings.module.css';
 const DegustationSettings = props => (
     <ElementWrapper wrapperType="SmallWrapper">
         <h4>Základné nastavenia degustácie</h4>
-        <FontAwesomeIcon icon={faCogs} size="5x" />
+        <FontAwesomeIcon icon={faCogs} size={props.windowWidth <=1300 ? '3x' : '5x'} />
         <div className={classes.BtnContainer}>
             <Button clicked={props.clicked}>Uprav nastavenia</Button>
         </div>

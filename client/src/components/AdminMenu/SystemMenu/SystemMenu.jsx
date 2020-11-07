@@ -9,9 +9,9 @@ import classes from './SystemMenu.module.css';
 const databaseMenu = (props) => (
     <ElementWrapper wrapperType="SmallWrapper">
         <h4>System Info</h4>
-        <FontAwesomeIcon icon={faDatabase} size="5x" />
+        <FontAwesomeIcon icon={faDatabase} size={props.windowWidth <= 1300 ? '3x' : '5x'} />
         <div className={classes.BtnContainer}>
-            <Button clicked={props.clicked}>Zobraz Systémové info</Button>
+            <Button clicked={props.clicked}>Zobraz info</Button>
         </div>
     </ElementWrapper>
 );  

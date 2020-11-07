@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
@@ -13,10 +13,19 @@ import WineGroups from '../../components/AdminMenu/WineGroups/WineGroups';
 import * as action from '../../store/actions/index';
 
 class AdminZone extends Component {
-    componentDidMount() {
-        this.props.onFetchSystemSettings(this.props.token)
+    state = {
+        windowWidth: window.innerWidth
     }
-    
+    componentDidMount() {
+        this.props.onFetchSystemSettings(this.props.token);
+        window.addEventListener('resize', this.resizeHandler)
+    }
+    componentWillUnmount() {
+        window.addEventListener('resize', this.resizeHandler)
+    }
+    resizeHandler = (e) => {
+        this.setState({windowWidth: window.innerWidth});
+    }
     clickHandler = (index, adminChoose, btnType) => {
         if (adminChoose === 'Uprav vína') {
             this.props.history.push("/editwine")
@@ -44,20 +53,30 @@ class AdminZone extends Component {
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper">
-                <DegustationSettings clicked={this.clickHandler}/>
+                <DegustationSettings 
+                windowWidth={this.state.windowWidth}
+                clicked={this.clickHandler}/>
                 <WineList 
+                windowWidth={this.state.windowWidth}
                 isDegustationOpen={this.props.isDegustationOpen}
                 clicked={this.clickHandler} />
                 <DegustatorList 
+                windowWidth={this.state.windowWidth}
                 isDegustationOpen={this.props.isDegustationOpen}
                 clicked={this.clickHandler}/>
                 <DegustatorGroup 
+                windowWidth={this.state.windowWidth}
                 isDegustationOpen={this.props.isDegustationOpen}
                 clicked={this.clickHandler}/>
                 <WineGroups 
+                windowWidth={this.state.windowWidth}
                 clicked={this.clickHandler}/>
-                <WineResults clicked={this.clickHandler}/>
-                <SystemMenu clicked={this.clickHandler}/>
+                <WineResults 
+                windowWidth={this.state.windowWidth}
+                clicked={this.clickHandler}/>
+                <SystemMenu 
+                windowWidth={this.state.windowWidth}
+                clicked={this.clickHandler}/>
             </ElementWrapper>
             );
     }

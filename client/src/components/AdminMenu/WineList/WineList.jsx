@@ -9,7 +9,7 @@ import classes from './WineList.module.css';
 const wineList = (props) => (
     <ElementWrapper wrapperType="SmallWrapper">
         <h4>Zoznam vín</h4>
-        <FontAwesomeIcon icon={faWineGlass} size="5x" />
+        <FontAwesomeIcon icon={faWineGlass} size={props.windowWidth <=1300 ? '3x' : '5x'} />
         <div className={classes.BtnContainer}>
             {!props.isDegustationOpen && 
             <Button clicked={props.clicked}>Uprav vína</Button>}

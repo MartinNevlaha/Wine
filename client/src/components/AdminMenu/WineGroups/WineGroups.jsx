@@ -9,7 +9,7 @@ import classes from './WineGroups.module.css';
 const WineGroups = props => (
     <ElementWrapper wrapperType="SmallWrapper">
         <h4>Priraď vína do skupín</h4>
-        <FontAwesomeIcon icon={faWineBottle} size="5x"/>
+        <FontAwesomeIcon icon={faWineBottle} size={props.windowWidth <=1300 ? '3x' : '5x'} />
         <div className={classes.BtnContainer}>
             <Button clicked={props.clicked}>Pridaj vína do skupín</Button>
         </div>

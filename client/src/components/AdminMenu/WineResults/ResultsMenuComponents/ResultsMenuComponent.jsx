@@ -18,7 +18,7 @@ const ResultsMenuComponent = props => {
     return (
         <ElementWrapper wrapperType="SmallWrapper">
             <h4>{props.name}</h4>
-            <FontAwesomeIcon icon={icon} size="5x"/>
+            <FontAwesomeIcon icon={icon} size={props.windowWidth <=1300 ? '3x' : '5x'}/>
             <div className={classes.BtnContainer}>
                 <Button 
                 index={props.index}

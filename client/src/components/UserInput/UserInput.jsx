@@ -8,7 +8,7 @@ class UserInput extends Component {
     
     render () {
         let inputType = (
-            <div className={classes.InputContainer}>
+            <div className={classes.InputMainContainer}>
                 <input 
                 className={classes.UserInput}
                 type={this.props.inputType} 
@@ -29,6 +29,7 @@ class UserInput extends Component {
             let options = this.props.options;
             inputType = (
                 <select 
+                className={classes.UserSelect}
                 id={this.props.id} 
                 onChange={(e) => this.props.change(e, this.props.id)}
                 value={this.props.value}>
@@ -41,12 +42,12 @@ class UserInput extends Component {
             );
         }
         return (
-            <React.Fragment>
+            <div className={classes.InputWrapper}>
                 <label 
                 className={classes.UserLabel}
                 htmlFor={this.props.id}>{this.props.children}</label>
                 {inputType}
-            </React.Fragment>
+            </div>
         );
     }
 }

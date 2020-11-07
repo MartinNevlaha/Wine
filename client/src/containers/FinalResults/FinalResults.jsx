@@ -6,7 +6,17 @@ import ResultsMenuComponent from '../../components/AdminMenu/WineResults/Results
 
 class FinalResults extends Component {
     state = {
-        resultsMenu: ['Výsledky podľa súťažnej kategórie vín', "Výsledky podľa degustačnej skupiny", 'Výsledky podľa degustátora' ]
+        resultsMenu: ['Výsledky podľa súťažnej kategórie vín', "Výsledky podľa degustačnej skupiny", 'Výsledky podľa degustátora' ],
+        windowWidth: window.innerWidth
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.resizeHandler)
+    }
+    componentWillUnmount() {
+        window.addEventListener('resize', this.resizeHandler)
+    }
+    resizeHandler = (e) => {
+        this.setState({windowWidth: window.innerWidth});
     }
 
     clickHandler = (index) => {
@@ -27,6 +37,7 @@ class FinalResults extends Component {
             <ElementWrapper wrapperType="ElementWrapper">
                 {this.state.resultsMenu.map((resultComName, index) => 
                 <ResultsMenuComponent 
+                windowWidth={this.state.windowWidth}
                 key={resultComName}
                 clicked={this.clickHandler}
                 index={index}
