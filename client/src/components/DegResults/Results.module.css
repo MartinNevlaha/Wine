@@ -27,3 +27,8 @@
 .ResultsTable span {
     padding: 0 3px;
 }
+@media(max-width: 1300px) {
+    .ResultsTable {
+        font-size: small;
+    }
+}
