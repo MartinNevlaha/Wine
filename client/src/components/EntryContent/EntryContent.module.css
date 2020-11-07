@@ -6,11 +6,19 @@
     padding: 10px;
     border: 1px solid white;
     margin: 0 auto;
-    margin-top: 150px;
     font-style: normal;
 }
 .EntryContent ul {
     list-style-type: none;
     padding: 0;
     margin: 0 0 25px 0;
+}
+
+@media (max-width: 900px) {
+    .EntryContent {
+        font-size: small;
+    }
+    .EntryContent h2 {
+        font-size: 20px;
+    }
 }

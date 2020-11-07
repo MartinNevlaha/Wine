@@ -12,9 +12,7 @@ const entryContent = (props) => (
         Hodnotiaci porotca (Degustátor) vyberá vopred preddefinovné hodnoty 
         pre jednotlivé kategórie hodnotenia vína systém automaticky vyhodnocuje 
         hodnotené parametre a po skončení degustácie a vyplnení všetkých kategórií 
-        hodnotenia Degustátor môže odoslať finálne hodnotenie vína. Samotné 
-        hodnotenie vín je prístupné len hlavnému administrátorovi degustácie, ktorý 
-        vídí všetky výsledky hodnotenia vín a taktiež aj výsledkovú tabuľku vín.
+        hodnotenia Degustátor môže odoslať finálne hodnotenie vína.
         Systém taktiež automaticky zaraďuje víno podľa hodnotenia do nasledovných 
         kategórií:
         </p>
