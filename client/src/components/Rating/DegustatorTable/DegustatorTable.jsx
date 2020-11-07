@@ -12,7 +12,7 @@ const degustatorTable = (props) => (
             options={props.wineInGroups}
             getWineId={props.getWineId}
             value={props.wineIdValue} />
-            {props.wineInfo.error && <p style={{color:"red", margin:"5px"}}>{props.wineInfo.error.message}</p>}
+            {props.wineInfo.error && <p className={classes.WarnInfo}>{props.wineInfo.error.message}</p>}
             <WineInfo 
             isFetching={props.isFetching}
             wineInfo={props.wineInfo}/>

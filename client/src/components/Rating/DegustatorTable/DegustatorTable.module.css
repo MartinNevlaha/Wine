@@ -24,6 +24,10 @@
 .GrayBack {
     background-color: rgba(26, 24, 24, 0.589);
 }
+.WarnInfo {
+    color: red;
+    margin: 5px;
+}
 @media(max-width: 1300px) {
     .DegTable {
         font-size: small;
@@ -33,6 +37,9 @@
     }
     .DegTable button {
         font-size: 10px;
+    }
+    .WarnInfo {
+        font-size: small;
     }
 }
 @media (max-width: 800px) {
