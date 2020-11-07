@@ -24,3 +24,31 @@
 .EditAddedWine input {
     width: 100%;
 }
+@media(max-width: 1300px) {
+    .EditAddedWine {
+        font-size: small;
+    }
+    .EditAddedWine input {
+        font-size: 10px;
+        width: 80%;
+    }
+    .EditAddedWine select {
+        font-size: 10px;
+        width: 80%;
+    }
+}
+@media(max-width: 1084px) {
+    .EditAddedWine td {
+        padding: 8px 8px;
+    }
+}
+@media(max-width: 1084px) {
+    .EditAddedWine td {
+        padding: 5px 3px;
+    }
+}
+@media(max-width: 770px) {
+    .EditAddedWine {
+        font-size: 0.6875rem;
+    }
+}

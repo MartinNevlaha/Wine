@@ -7,7 +7,7 @@
     color: white;
 }
 .DBimport_loaded {
-    width: 80%;
+    width: 70%;
     padding: 5px;
     margin: 5px auto;
     border-radius: 8px;
@@ -26,4 +26,6 @@
     border-radius: 8px;
     border: 1px white solid;
 }
+
+
 

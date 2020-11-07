@@ -21,3 +21,17 @@
 .ShowWineTable span {
     padding: 0 3px;
 }
+
+@media(max-width: 1300px) {
+    .ShowWineTable {
+        font-size: small;
+    }
+}
+@media(max-width: 880px) {
+    .ShowWineTable {
+        font-size: 10px;
+    }
+    .ShowWineTable td {
+        padding: 8px 10px;
+    }
+}

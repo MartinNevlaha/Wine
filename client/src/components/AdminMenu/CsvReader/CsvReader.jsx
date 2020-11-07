@@ -21,6 +21,7 @@ class CsvReader extends Component {
     render() {
       return (
         <CSVReader
+          cssLabelClass="csv-reader-input"
           onDrop={this.csvLoadHandler}
           onError={this.handleOnError}
           progressBarColor='rgb(87, 20, 20)'

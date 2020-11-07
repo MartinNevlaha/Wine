@@ -127,3 +127,9 @@
     outline: 2px solid black;
     border-radius: 8px;
 }
+
+@media(max-width: 1300px) {
+    .SmallWrapper {
+        font-size: small;
+    }
+}
