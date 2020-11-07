@@ -14,3 +14,7 @@
 {"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/1 - GET - ::1","level":"error"}
 {"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/1 - GET - ::1","level":"error"}
 {"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/4 - GET - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/2 - GET - ::1","level":"error"}
+{"message":"403 - Degustácia je zatvorená, kontaktuj administrátora - undefined - /degustator/login - POST - ::1","level":"error"}
+{"message":"401 - Nesprávne heslo - undefined - /admin/login - POST - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/1 - GET - ::1","level":"error"}

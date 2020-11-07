@@ -5,7 +5,7 @@ import ResumeTable from './ResumeTable/ResumeTable';
 import WineGlass from '../../UI/WineGlass/WineGlass';
 import Button from '../../UI/Button/Button';
 import * as action from '../../../store/actions/index';
-
+import classes from './ResumeResults.module.css';
 
 class ResumeResults extends Component {
 
@@ -37,14 +37,14 @@ class ResumeResults extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div className={classes.ResTable}>
                 <h4>Vaše hodnotenie:</h4>
                 <p>Víno číslo: {this.props.sendData.wineId}</p>
                 <WineGlass />
                 <ResumeTable data={this.props.sendData} />
                 <Button clicked={this.props.closeModal}>Upraviť</Button>
                 <Button clicked={this.sendResult}>Odoslať</Button>
-            </React.Fragment>
+            </div>
         );
     };
 }
