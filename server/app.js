@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
+const compression = require('compression');
 
 const adminWineRoutes = require('./routes/adminWine');
 const adminDegRoutes = require('./routes/adminDeg');
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet());
+app.use(compression());
 app.use(morgan('combined', {
     stream: winston.stream
 }));
