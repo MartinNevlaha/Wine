@@ -12,3 +12,8 @@
     border-radius: 8px;
     cursor: pointer;
 }
+ @media(max-width: 950px) {
+    .NavItem a {
+        padding: 5px;
+    }
+ } 

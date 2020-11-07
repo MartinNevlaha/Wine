@@ -21,9 +21,9 @@ class Layout extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavBar isAdminAuth={this.props.isAdminAuth} isDegAuth={this.props.isDegAuth}/>
+                {this.state.windowWidth >= 700 && <NavBar isAdminAuth={this.props.isAdminAuth} isDegAuth={this.props.isDegAuth}/>}
                 <main className={this.props.location.pathname === "/rating" ? classes.BackgroundDeg : classes.BackgroundApp }>
-                    {this.state.windowWidth >=700 ? this.props.children : <h2 style={{margin: 150}}>Táto aplikácia nie je dimenzovaná pre toto zariadenie</h2>}
+                    {this.state.windowWidth >= 700 ? this.props.children : <h2>Táto aplikácia nie je dimenzovaná pre toto zariadenie !!!</h2>}
                 </main>
             </React.Fragment>
         );

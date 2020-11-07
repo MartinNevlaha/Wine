@@ -24,3 +24,22 @@
 .GrayBack {
     background-color: rgba(26, 24, 24, 0.589);
 }
+@media(max-width: 1300px) {
+    .DegTable {
+        font-size: small;
+    }
+    .DegContainer h2 {
+        font-size: 20px;
+    }
+    .DegTable button {
+        font-size: 10px;
+    }
+}
+@media (max-width: 800px) {
+    .DegTable {
+        font-size: 10px;
+    }
+    .DegContainer h2 {
+        font-size: 18px;
+    }
+}

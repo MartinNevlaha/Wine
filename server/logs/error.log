@@ -9,3 +9,6 @@
 {"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/8 - GET - ::1","level":"error"}
 {"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/6 - GET - ::1","level":"error"}
 {"message":"401 - Nesprávne heslo - undefined - /admin/login - POST - ::1","level":"error"}
+{"message":"401 - Nesprávne prihlasovacie meno - undefined - /admin/login - POST - ::1","level":"error"}
+{"message":"401 - Nesprávne heslo - undefined - /degustator/login - POST - ::1","level":"error"}
+{"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/1 - GET - ::1","level":"error"}

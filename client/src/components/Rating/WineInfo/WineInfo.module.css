@@ -6,3 +6,9 @@
 .WineInfo li {
     text-align: left;
 }
+
+@media(max-width: 1300px) {
+    .WineInfo {
+        font-size: small;
+    }
+}
