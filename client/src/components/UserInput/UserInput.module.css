@@ -4,7 +4,7 @@
     padding: 10px 0 0 0;
 }
 .UserInput {
-    width: 100%;
+    min-width: 100%;
     height: 1.5rem;
     border-radius: 0.5rem;
 }
@@ -19,4 +19,10 @@
 .Icon:hover {
     background-color: gray;
     border-radius: 8px;
+}
+
+@media(max-width: 900px) {
+    .UserLabel {
+        font-size: small;
+    }
 }

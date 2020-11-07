@@ -16,3 +16,8 @@
     flex-direction: column;    
     text-align: center;
 }
+@media(max-width: 1024px) {
+    .DegLogin {
+        width: 50%;
+    }
+}

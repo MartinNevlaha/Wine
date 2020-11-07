@@ -16,3 +16,9 @@
     flex-direction: column;    
     text-align: center;
 }
+
+@media(max-width: 1024px) {
+    .AdminLogin {
+        width: 50%;
+    }
+}
