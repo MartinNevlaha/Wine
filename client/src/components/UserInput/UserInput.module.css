@@ -26,7 +26,12 @@
 .InputWrapper {
     padding: 5px 0px;
     text-align: left;
-    width: 100%;
+    width: 90%;
+}
+.InputWrapperWine {
+    padding: 5px 20px;
+    text-align: left;
+    width: 80%;
 }
 
 @media(max-width: 900px) {

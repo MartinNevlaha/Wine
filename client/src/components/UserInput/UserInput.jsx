@@ -42,7 +42,7 @@ class UserInput extends Component {
             );
         }
         return (
-            <div className={classes.InputWrapper}>
+            <div className={this.props.componentType === 'AddWine' ? classes.InputWrapperWine : classes.InputWrapper}>
                 <label 
                 className={classes.UserLabel}
                 htmlFor={this.props.id}>{this.props.children}</label>

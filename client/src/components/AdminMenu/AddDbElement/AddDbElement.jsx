@@ -18,7 +18,8 @@ class AddDbElement extends Component {
         }
         let inputs = userInput.map(input => {
             return (
-                <UserInput 
+                <UserInput
+                    componentType={this.props.componentType}
                     key={input.id}
                     id={input.id}
                     labelName={input.config.labelName}
@@ -37,7 +38,7 @@ class AddDbElement extends Component {
                 <h4>Pridaj degustátora</h4> 
                 : this.props.componentType ==='AddGroups' ? <h4> Vytvor skupiny</h4> 
                 : <h4>Pridaj súťažné víno</h4>}
-                <div className={classes.InputContainer}>
+                <div className={this.props.componentType === 'AddWine' ? classes.InputContainerWine: classes.InputContainer}>
                     {this.props.loadingSend ? <Spinner /> : inputs}
                 </div>
                 <Button 
