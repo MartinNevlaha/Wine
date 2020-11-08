@@ -34,6 +34,7 @@ class LogEvents extends Component {
                     {logs}
                 </div>
                 <DownloadFile 
+                errorDownload={this.props.errorDownload}
                 endPoint="download-logs"
                 fileName="postResults.log"
                 token={this.props.token}>

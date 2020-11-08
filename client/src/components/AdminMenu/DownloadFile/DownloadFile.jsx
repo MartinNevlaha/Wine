@@ -14,6 +14,16 @@ const DownloadFile = props => {
         }).then(resp => {
             download(resp.data, `${props.fileName}`)
         })
+        .catch(err => {
+            if (err.response) {
+                const error = {
+                    message: err.response.statusText,
+                    code: err.response.status
+                }
+                props.errorDownload(error)
+            }
+            props.errorDownload(err)
+        })
     }
     return (
             <Button clicked={downloadFile} disabled={props.isComplete}>

@@ -13,6 +13,7 @@ import Popup from '../../components/UI/Popup/Popup';
 class SystemInfo extends Component {
     state = {
         isModalShow: false,
+        error: null
     }
     componentDidMount() {
         this.props.onFetchSystemInfo(this.props.token)
@@ -33,8 +34,22 @@ class SystemInfo extends Component {
         })
         this.props.onResetDb(this.props.token)
     }
+    errorDownloadHandler = (err) => {
+        this.setState({
+            error: err
+        })
+        setTimeout(()=>{
+            this.setState({error: null})
+        }, 2500)
+    }
 
     render() {
+        let errorMessage;
+        if (this.props.error) {
+            errorMessage = this.props.error.message
+        } else if (this.state.error) {
+            errorMessage = this.state.error.message
+        }
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <DeleteDesision 
@@ -45,10 +60,12 @@ class SystemInfo extends Component {
                 <Back />
                 <ViewSystemInfo systemData={this.props.systemInfo.infoData}/>
                 <DbInfo dbData={this.props.systemInfo.dbData} modalOpen={this.modalOpen}/>
-                <LogEvents token={this.props.token}/>
+                <LogEvents 
+                errorDownload={this.errorDownloadHandler}
+                token={this.props.token}/>
                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                show={this.props.error || this.state.error}
+                message={errorMessage}/>
             </ElementWrapper>
         )
     }
