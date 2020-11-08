@@ -17,7 +17,8 @@ class ResultsByCategory extends Component {
     state = {
         tableHeadNames: ['Poradie', 'Číslo vína', 'Názov vína', 'Klasifikácia vína', 'Výrobca vína', 'Ročník vína', 'Degustačná skupina','Bodové hodnotenie', 'Kategória vína', 'Kompletnosť hodnotenia' ],
         selectedCategory: null,
-        isModalShow: false
+        isModalShow: false,
+        error: null
     }
     componentDidMount() {
         this.props.onFetchCompetitiveCategory(this.props.token)
@@ -46,7 +47,22 @@ class ResultsByCategory extends Component {
             isModalShow: !this.state.isModalShow,
         })
     }
+    errorDownloadHandler = (err) => {
+        this.setState({
+            error: err
+        })
+        setTimeout(()=>{
+            this.setState({error: null})
+        }, 2500)
+    }
+
     render() {
+        let errorMessage;
+        if (this.props.error) {
+            errorMessage = this.props.error.message
+        } else if (this.state.error) {
+            errorMessage = this.state.error.message
+        }
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <Back />
@@ -74,6 +90,7 @@ class ResultsByCategory extends Component {
                         </select>
                         <Button clicked={this.fetchResultsByComCategory}>Zobraz</Button>
                         <DownloadFile
+                        errorDownload={this.errorDownloadHandler}
                         endPoint="final-results-export-by-cat"
                         token={this.props.token}
                         fileName="result_by_cat.xlsx"
@@ -91,8 +108,8 @@ class ResultsByCategory extends Component {
                     />
                 </ElementWrapper>
                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                show={this.props.error || this.state.error}
+                message={errorMessage}/>
             </ElementWrapper>
         )
     }
