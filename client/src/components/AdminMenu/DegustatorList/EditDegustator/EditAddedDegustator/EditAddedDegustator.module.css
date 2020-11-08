@@ -24,3 +24,8 @@
 .EditAddedDegustator input {
     width: 100%;
 }
+@media(max-width: 1300px) {
+    .EditAddedDegustator {
+        font-size: small;
+    }
+}

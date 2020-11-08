@@ -24,3 +24,18 @@
 .ShowWines input {
     width: 100%;
 }
+@media(max-width: 1300px) {
+    .ShowWines {
+        font-size: small;
+    }
+}
+@media(max-width: 960px) {
+    .ShowWines td {
+        padding: 8px 10px;
+    }
+}
+@media(max-width: 860px) {
+    .ShowWines td {
+        padding: 5px 3px;
+    }
+}

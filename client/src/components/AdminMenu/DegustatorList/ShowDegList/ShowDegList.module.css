@@ -21,3 +21,8 @@
 .ShowDegList span {
     padding: 0 3px;
 }
+@media(max-width: 1300px) {
+    .ShowDegList{
+        font-size: small;
+    }
+}

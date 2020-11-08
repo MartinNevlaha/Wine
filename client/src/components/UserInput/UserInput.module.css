@@ -38,4 +38,10 @@
     .UserLabel {
         font-size: small;
     }
+    .UserSelect {
+        font-size: 10;
+    }
+    .UserInput {
+        font-size: small;
+    }
 }
