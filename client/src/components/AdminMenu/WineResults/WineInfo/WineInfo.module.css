@@ -15,3 +15,8 @@
 .InfoWine li {
     list-style-type: none;
 }
+@media(max-width: 1300px) {
+    .InfoContainer{
+        font-size: small;
+    }
+}

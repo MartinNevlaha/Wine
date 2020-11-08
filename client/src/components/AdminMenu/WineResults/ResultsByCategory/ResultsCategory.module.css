@@ -9,3 +9,11 @@
 .HeaderCategoryChoose button {
     margin: 10px;
 }
+@media(max-width: 1300px) {
+    .HeaderCategoryChoose {
+        font-size: small;
+    }
+    .HeaderCategoryChoose select {
+        font-size: small;
+    }
+}

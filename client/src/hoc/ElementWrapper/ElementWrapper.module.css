@@ -133,3 +133,8 @@
         font-size: small;
     }
 }
+@media(max-width: 1040px) {
+    .FullWidthWrapper {
+        width: 90%;
+    }
+}

@@ -24,3 +24,8 @@
     border: solid 1px white;
     cursor: pointer;
 }
+@media(max-width: 1300px) {
+    .TableResult {
+        font-size: small;
+    }
+}

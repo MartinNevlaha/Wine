@@ -25,3 +25,29 @@
     border: 1px solid white;
     cursor: pointer;
 }
+@media(max-width: 1300px) {
+    .CategoryResultsTable{
+        font-size: small;
+    }
+}
+@media(max-width: 1184px) {
+    .CategoryResultsTable td {
+        padding: 8px 10px;
+    }
+}
+@media(max-width: 1040px) {
+    .CategoryResultsTable td {
+        padding: 5px 5px;
+    }
+    .CategoryResultsTable {
+        width: 95%;
+    }
+}
+@media(max-width: 900px) {
+    .CategoryResultsTable td {
+        padding: 5px 3px;
+    }
+    .CategoryResultsTable {
+        font-size: 10px;
+    }
+}
