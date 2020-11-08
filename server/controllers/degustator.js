@@ -11,7 +11,7 @@ const Group = require('../models/degGroup');
 const isDegCompleteChceck = require('../utils/isDegCompleteCheck');
 
 const logFile = path.join(__dirname, '../', 'logs/post_log.log')
-const logger = fs.createWriteStream(logFile, {
+const loggerPost = fs.createWriteStream(logFile, {
     flags: "a"
 });
 
@@ -76,7 +76,7 @@ exports.postResult = async(req, res, next) => {
         io.getIO().emit('post-log', { action: 'create', 
             log: log
         })
-        logger.write(`${log.time} skupina: ${log.group} degustátor: ${log.degId} víno: ${log.wine} eliminované: ${log.eliminated} kategoria vína: ${log.wineCategory} hodnotenie: ${log.totalSum} \n`);
+        loggerPost.write(`${log.time} skupina: ${log.group} degustátor: ${log.degId} víno: ${log.wine} eliminované: ${log.eliminated} kategoria vína: ${log.wineCategory} hodnotenie: ${log.totalSum} \n`);
         res.status(201).json({message: 'Hodnotenie poslané'})
     } catch (error) {
         if(!error.statusCode) {

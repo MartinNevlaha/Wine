@@ -9,3 +9,11 @@
 .HeaderGroupChoose button {
     margin: 10px;
 }
+@media(max-width: 1360px) {
+    .HeaderGroupChoose{
+        font-size: small;
+    }
+    .HeaderGroupChoose label, select {
+        font-size: small;
+    }
+}

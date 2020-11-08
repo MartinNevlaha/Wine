@@ -9,3 +9,11 @@
 .HeaderDegustatorChoose button {
     margin: 10px;
 }
+@media(max-width: 1300px) {
+    .HeaderDegustatorChoose{
+        font-size: small;
+    }
+    .HeaderDegustatorChoose select {
+        font-size: small;
+    }
+}

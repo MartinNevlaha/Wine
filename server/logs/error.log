@@ -19,3 +19,6 @@
 {"message":"401 - Nesprávne heslo - undefined - /admin/login - POST - ::1","level":"error"}
 {"message":"409 - Víno ste už hodnotili, zadajte prosím iné číslo vína - undefined - /degustator/wine-list/1 - GET - ::1","level":"error"}
 {"message":"403 - Degustácia je zatvorená, kontaktuj administrátora - undefined - /degustator/login - POST - ::1","level":"error"}
+{"message":"404 - Súbor sa nedá stiahnuť - undefined - /admin/download-logs - GET - ::1","level":"error"}
+{"message":"404 - Súbor sa nedá stiahnuť - undefined - /admin/download-logs - GET - ::1","level":"error"}
+{"message":"404 - Súbor sa nedá stiahnuť - undefined - /admin/download-logs - GET - ::1","level":"error"}

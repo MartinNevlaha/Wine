@@ -29,3 +29,21 @@
         font-size: small;
     }
 }
+@media(max-width: 1180px) {
+    .TableResult td {
+        padding: 8px 10px;
+    }
+}
+@media(max-width: 1060px) {
+    .TableResult td {
+        padding: 5px 5px;
+    }
+}
+@media(max-width: 860px) {
+    .TableResult td {
+        padding: 5px 3px;
+    }
+    .TableResult {
+        font-size: 10px;
+    }
+}
