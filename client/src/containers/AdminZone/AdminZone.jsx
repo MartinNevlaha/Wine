@@ -14,7 +14,7 @@ import * as action from '../../store/actions/index';
 
 class AdminZone extends Component {
     state = {
-        windowWidth: window.innerWidth
+        windowWidth: window.innerWidth,
     }
     componentDidMount() {
         this.props.onFetchSystemSettings(this.props.token);

@@ -1,0 +1,3 @@
+server/logs/error.log
+server/logs/post_log.log
+server/logs/app.log
