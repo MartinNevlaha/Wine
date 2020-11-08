@@ -13,3 +13,8 @@
 .SystemInfo li {
     padding: 5px;
 }
+@media(max-width: 1300px) {
+    .SystemInfo {
+        font-size: small;
+    }
+}

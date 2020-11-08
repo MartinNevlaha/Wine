@@ -13,3 +13,8 @@
 .DbInfo li {
     padding: 5px;
 }
+@media(max-width: 1300px) {
+    .DbInfo {
+        font-size: small;
+    }
+}
