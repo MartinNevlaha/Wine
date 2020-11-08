@@ -7,7 +7,6 @@ const autoCreateWineCategoryAsync = async (competitiveCategory) => {
             const category = new CompetitiveCategory({
                 categoryName: competitiveCategory,
             })
-            console.log(category)
             return await category.save();
         }
         return wineCategory;
@@ -15,7 +14,6 @@ const autoCreateWineCategoryAsync = async (competitiveCategory) => {
         if(!error.statusCode) {
             error.statusCode = 500;
         }
-        console.log(error)
     }
 };
 

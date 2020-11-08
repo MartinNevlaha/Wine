@@ -20,7 +20,6 @@ class FinalResults extends Component {
     }
 
     clickHandler = (index) => {
-        console.log(index)
         if (index === 0 ) {
             this.props.history.push('/results-by-category');
         } else if (index === 1) {

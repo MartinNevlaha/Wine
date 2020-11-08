@@ -78,7 +78,6 @@ mongoose.connect(MONGO_DB_URI, {
         inicializeDefaultSettins();
         const io = require('./socket').init(server);
         io.on('connect', socket => {
-            console.log('Socket.io: client connected');
             winston.log({
                 level: 'info',
                 message: 'Socket.io: client connected'

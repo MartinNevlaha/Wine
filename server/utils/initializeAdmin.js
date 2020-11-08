@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const Admin = require('../models/admin');
 
+const winston = require('../config/winston');
 
 const DEFAULT_ADMIN_NAME = 'Admin';
 const DEFAULT_ADMIN_PASSWORD = 'WineAdmin';
@@ -17,7 +18,10 @@ const inicializeAdmin = async () => {
             await defaultAdmin.save();
         }
     } catch (error) {
-        console.log('Nemôžem inicializovať admina v DB', error)
+        winston.log({
+            level: 'error',
+            message: 'Nemôžem inicializovať admina v DB' + error
+        })
     }
 } 
 

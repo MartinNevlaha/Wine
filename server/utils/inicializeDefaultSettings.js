@@ -1,4 +1,5 @@
 const Setting = require('../models/settings');
+const winston = require('../config/winston');
 
 const inicializeDefaultSettins = async () => {
     try {
@@ -13,7 +14,10 @@ const inicializeDefaultSettins = async () => {
             await defaultSetting.save();
         }
     } catch (error) {
-        console.log('Nemôžem inicializovať úvodné nastavenia degustácie', error)
+        winston.log({
+            level: 'error',
+            message: 'Nemôžem inicializovať úvodné nastavenia degustácie' + error
+        })
     }
 };
 

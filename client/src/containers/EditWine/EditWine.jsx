@@ -230,7 +230,6 @@ class EditWine extends Component {
         this.props.onDatabaseDelete(this.props.token)
     }
     render () {
-        console.log(this.props.isDegustationOpen)
         let modalContent =
         <React.Fragment>
             <p>Ste si istý ?</p>

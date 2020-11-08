@@ -52,11 +52,9 @@ export const degLoginClearError = () => {
 export const degLogin = (degData) => {
     return dispatch => {
         dispatch(degLoginStart());
-        console.log(degData)
         axiosInstance.post('degustator/login', degData)
             .then(res => {
                 const decodedToken = jwt_decode(res.data.token);
-                console.log(decodedToken)
                 const { degId, role, degNumber, group, groupId } = decodedToken;
                 localStorage.setItem('token', res.data.token);
                 dispatch(degLoginSuccess(res.data.token, degId, role, degNumber, group, groupId));

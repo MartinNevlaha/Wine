@@ -32,7 +32,6 @@ export const saveSettingsFailled = (error) => {
 }
 
 export const saveSettings = (settings, token) => {
-    console.log(settings)
     return dispatch => {
         dispatch(saveSettingsStart());
         axiosInstance.put('admin/degustation-settings', settings, {

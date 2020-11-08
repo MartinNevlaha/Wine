@@ -37,7 +37,6 @@ export const fetchDegResults = (token) => {
             }
         })
             .then(resp => {
-                console.log(resp.data)
                 dispatch(fetchDegResultsSucces(resp.data.degName, resp.data.results))
             })
             .catch(err => {

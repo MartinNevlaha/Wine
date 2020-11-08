@@ -43,7 +43,6 @@ class DegustationSetting extends Component {
     }
 
     getValueHandler = (e, id) => {
-        console.log(id)
         let isTrue;
         if (id === "eliminatedValues") {
             isTrue = e.target.value === "Eliminácia krajných hodnôt" ? true : false;

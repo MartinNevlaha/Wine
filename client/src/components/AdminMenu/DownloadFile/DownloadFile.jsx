@@ -12,7 +12,6 @@ const DownloadFile = props => {
             },
             responseType: 'blob'
         }).then(resp => {
-            console.log(resp.data)
             download(resp.data, `${props.fileName}`)
         })
     }

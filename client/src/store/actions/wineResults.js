@@ -94,7 +94,6 @@ export const fetchWineInfoFailled = (error) => {
 }
 
 export const fetchWineInfo = (wineId, token) => {
-    console.log(token)
     return dispatch => {
         setTimeout(()=>{
             dispatch(fetchWineInfoStart())
