@@ -60,3 +60,6 @@
 {"message":"404 - Súbor sa nedá stiahnuť - undefined - /admin/download-logs - GET - ::1","level":"error"}
 {"message":"404 - Súbor sa nedá stiahnuť - undefined - /admin/download-logs - GET - ::1","level":"error"}
 {"message":"404 - Súbor sa nedá stiahnuť - undefined - /admin/download-logs - GET - ::1","level":"error"}
+{"message":"403 - Degustácia je zatvorená, kontaktuj administrátora - undefined - /degustator/login - POST - ::1","level":"error"}
+{"message":"403 - Degustácia je zatvorená, kontaktuj administrátora - undefined - /degustator/login - POST - ::1","level":"error"}
+{"message":"401 - Nesprávne heslo - undefined - /admin/login - POST - ::1","level":"error"}

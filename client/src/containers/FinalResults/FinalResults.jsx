@@ -10,10 +10,13 @@ class FinalResults extends Component {
         windowWidth: window.innerWidth
     }
     componentDidMount() {
-        window.addEventListener('resize', this.resizeHandler)
+        window.addEventListener('resize', this.resizeHandler);
     }
     componentWillUnmount() {
-        window.addEventListener('resize', this.resizeHandler)
+        window.addEventListener('resize', this.resizeHandler);
+        this.setState = (state,callback)=>{//fix warn react issue
+            return;
+        };
     }
     resizeHandler = (e) => {
         this.setState({windowWidth: window.innerWidth});

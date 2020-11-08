@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
+import Button from '../../UI/Button/Button';
 
 import classes from './Popup.module.css';
 
@@ -16,6 +17,10 @@ class Popup extends Component {
                 <FontAwesomeIcon icon={faExclamation}/>
                 <h5>OOPSS !!!</h5>
                 <p>{this.props.message}</p>
+                {this.props.type === 'errorBoundary' && 
+                <Button clicked={this.props.resetErrorBoundary}>
+                Skús znovu
+                </Button>}
             </div>
         );
     } 
