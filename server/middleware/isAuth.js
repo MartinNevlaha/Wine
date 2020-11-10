@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const ADMIN_JWT_SECRET = 'Super%Secret%Admin/85615';
-const DEGUSTATOR_JWT_SECRET = 'Super%Secret%Degustator/sd54135';
+const ADMIN_JWT_SECRET = process.env.ADMIN_JWT_SECRET;
+const DEGUSTATOR_JWT_SECRET = process.env.DEGUSTATOR_JWT_SECRET;
 
 const isAdminAuth = (req, res, next) => {
     if (req.method === "OPTIONS") {

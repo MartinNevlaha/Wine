@@ -4,7 +4,7 @@ const { validationResult } = require('express-validator');
 
 const Degustator = require('../models/degustator');
 
-const DEGUSTATOR_JWT_SECRET = 'Super%Secret%Degustator/sd54135';
+const DEGUSTATOR_JWT_SECRET = process.env.DEGUSTATOR_JWT_SECRET;
 
 exports.degustatorLogin = async (req, res, next) => {
     const errors = validationResult(req);

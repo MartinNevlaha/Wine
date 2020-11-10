@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const Admin = require('../models/admin');
 
-const ADMIN_JWT_SECRET = 'Super%Secret%Admin/85615';
+const ADMIN_JWT_SECRET = process.env.ADMIN_JWT_SECRET;
 
 exports.adminLogin = async (req, res, next) => {
     const errors = validationResult(req);

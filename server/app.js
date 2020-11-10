@@ -4,6 +4,17 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
+const result = require('dotenv').config();
+
+const winston = require('./config/winston');
+
+if (result.error) {
+    winston.error({
+        level: 'error',
+        message: result.parsed
+    })
+}
+  
 
 const adminWineRoutes = require('./routes/adminWine');
 const adminDegRoutes = require('./routes/adminDeg');
@@ -15,35 +26,26 @@ const degustatorRoutes = require('./routes/degustator');
 const loginAdminRoutes = require('./routes/adminLogin');
 const adminWineGroupsRoutes = require('./routes/adminWineGroups');
 
-const winston = require('./config/winston');
+
 
 const inicializeAdmin = require('./utils/initializeAdmin');
 const inicializeDefaultSettins = require('./utils/inicializeDefaultSettings');
 
-
 //ENV Variables
-const MONGO_DB_URI = 'mongodb://127.0.0.1:27017/wine';
-const PORT = 8080;
+const MONGO_DB_URI = process.env.MONGO_DB_URI;
+const PORT = process.env.PORT;
 
 const app = express();
 
 app.use(express.json()); // aplications/json
-app.use(express.static(path.join(__dirname, 'assets/template/')))
-
-//Handle CORS error
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-});
+app.use(express.static(path.join(__dirname, 'assets/template/')));
+app.use(express.static(path.join('public')))
 
 app.use(helmet());
 app.use(compression());
 app.use(morgan('combined', {
     stream: winston.stream
 }));
-
 
 //routes
 app.use('/admin', adminSettingsRoutes);
@@ -55,6 +57,10 @@ app.use('/admin', adminOsInfoRoutes);
 app.use('/admin', adminFinalResultsRoutes)
 app.use('/admin', loginAdminRoutes);
 app.use('/degustator', degustatorRoutes);
+
+app.use((req, res, next) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+})
 
 //Error handler
 app.use((error, req, res, next) => {

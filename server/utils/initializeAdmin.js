@@ -3,8 +3,8 @@ const Admin = require('../models/admin');
 
 const winston = require('../config/winston');
 
-const DEFAULT_ADMIN_NAME = 'Admin';
-const DEFAULT_ADMIN_PASSWORD = 'WineAdmin';
+const DEFAULT_ADMIN_NAME = process.env.DEFAULT_ADMIN_NAME;
+const DEFAULT_ADMIN_PASSWORD = process.env.DEFAULT_ADMIN_PASSWORD;
 
 const inicializeAdmin = async () => {
     try {
