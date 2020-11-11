@@ -72,7 +72,7 @@ class DegustationSetting extends Component {
     render() {
         return (
             <ElementWrapper wrapperType="ElementWrapper"> 
-                <Back />
+                <Back pos='bottom'/>
                 {this.props.loading ? <Spinner /> : 
                     <React.Fragment>
                     <DegustationBasic 

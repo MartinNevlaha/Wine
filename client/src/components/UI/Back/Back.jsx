@@ -12,9 +12,15 @@ class Back extends Component {
         this.props.history.goBack();
     }
     render() {
+        let cls = classes.Back_top;
+        if (this.props.pos === 'bottom') {
+            cls = classes.Back_Bottom
+        } else if (this.props.pos === 'middle') {
+            cls = this.props.pos=classes.Back_mid
+        }
         return (
             <div 
-            className={classes.Back}
+            className={cls}
             onClick={this.goBack}
             >
                 <FontAwesomeIcon 
