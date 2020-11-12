@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import ResultsMenuComponent from '../../components/AdminMenu/WineResults/ResultsMenuComponents/ResultsMenuComponent';
+import Back from '../../components/UI/Back/Back';
 
 class FinalResults extends Component {
     state = {
@@ -37,6 +38,7 @@ class FinalResults extends Component {
         return (
             <React.Fragment>
             <ElementWrapper wrapperType="ElementWrapper">
+                <Back />
                 {this.state.resultsMenu.map((resultComName, index) => 
                 <ResultsMenuComponent 
                 windowWidth={this.state.windowWidth}
