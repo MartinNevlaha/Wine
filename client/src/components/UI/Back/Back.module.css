@@ -31,13 +31,19 @@
     box-shadow: 0 0 .55rem .55rem rgba(173, 121, 129, 0.5);
     background-color: transparent;
 }
-.Back p {
-    margin: 0;
-    padding: 10px 0;
-}
 .Back_top:hover,
 .Back_mid:hover,
 .Back_Bottom:hover {
     cursor: pointer;
     background-color: rgb(182, 24, 24);
+}
+@media(max-width: 1300px) {
+    .Back_top,
+    .Back_Bottom {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
