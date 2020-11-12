@@ -9,6 +9,7 @@ import * as action from '../../../../store/actions/index';
 import classes from './ShowWineTable.module.css';
 import { searchIdetificator, searchFilter } from '../../../../shared/utility';
 import Back from '../../../UI/Back/Back';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class ShowAddedWine extends Component {
     state = {
@@ -58,9 +59,8 @@ class ShowAddedWine extends Component {
                 <td>{wine.vintage}</td>
             </tr>
             )
-        return (
-            <ElementWrapper wrapperType="ElementWrapper">
-                {this.props.wineList.length ? 
+            let content = <React.Fragment>
+                    {this.props.wineList.length ? 
                     <ElementWrapper wrapperType="FullWidthWrapper">   
                     <h4>Zoznam súťažných vin</h4>
                     <SearchBar 
@@ -82,6 +82,13 @@ class ShowAddedWine extends Component {
                 </ElementWrapper> 
                 : <h4>Nebolo pridané žiadne víno</h4>}
                 <Back />
+                </React.Fragment>
+                if (this.props.loading) {
+                    content = <Spinner />
+                }
+        return (
+            <ElementWrapper wrapperType="ElementWrapper">
+                {content}
             </ ElementWrapper>
         );
     }
@@ -90,7 +97,8 @@ class ShowAddedWine extends Component {
 const mapStateToProps = state => {
     return {
         wineList: state.wineList.wine,
-        token: state.adminAuth.token
+        token: state.adminAuth.token,
+        loading: state.wineList.loading
     };
 };
 

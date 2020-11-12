@@ -11,6 +11,7 @@ import Modal from '../../../UI/Modal/Modal';
 import WineGlass from '../../../UI/WineGlass/WineGlass';
 import ResumeTable from '../../../Rating/ResumeResults/ResumeTable/ResumeTable';
 import Popup from '../../../UI/Popup/Popup';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class ResultsByDeGroup extends Component {
     state = {
@@ -73,6 +74,7 @@ class ResultsByDeGroup extends Component {
                             </select>
                         <Button clicked={this.fetchResultByGroupHandler}>Zobraz</Button>
                     </div>
+                    {this.props.loading ? <Spinner /> : 
                     <ResultsTable
                         tableHeads={this.state.tableHeads}>
                         {this.props.results.map((result, index) => {
@@ -97,6 +99,7 @@ class ResultsByDeGroup extends Component {
                         )
                     })}
                     </ResultsTable>
+                    }
                 </ElementWrapper>
                 <Popup 
                 show={this.props.error}
@@ -110,7 +113,8 @@ const mapStateToProps = state => {
         token: state.adminAuth.token,
         degGroups: state.finalResults.degGroups,
         results: state.finalResults.resultsByGroup,
-        error: state.finalResults.error
+        error: state.finalResults.error,
+        loading: state.finalResults.loading
     }
 }
 const mapDispatchToProps = dispatch => {

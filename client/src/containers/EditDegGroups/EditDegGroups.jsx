@@ -12,6 +12,7 @@ import Button from '../../components/UI/Button/Button';
 import Back from '../../components/UI/Back/Back';
 import DeleteDesision from '../../components/AdminMenu/DeleteDesision/DeleteDesision';
 import Popup from '../../components/UI/Popup/Popup';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class EditDegGruops extends Component {
     constructor(props) {
@@ -127,13 +128,8 @@ class EditDegGruops extends Component {
     }
 
     render() {
-        return (
-            <ElemetWrapper wrapperType="ElementWrapper">
-                <Back />
-                <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
-                {!this.props.degGroups.degListGroups.length && 
+        let content = <React.Fragment>
+            {!this.props.degGroups.degListGroups.length && 
                 !this.props.degGroups.degGroups.length ?
                 <div>
                     <h2>Nebol pridaný žiadny degustátor</h2>
@@ -177,6 +173,17 @@ class EditDegGruops extends Component {
                 : null}
                 </React.Fragment>
                 }
+        </React.Fragment>
+        if (this.props.loading) {
+            content = <Spinner />
+        }
+        return (
+            <ElemetWrapper wrapperType="ElementWrapper">
+                <Back />
+                <Popup 
+                show={this.props.error}
+                message={this.props.error && this.props.error.message}/>
+                {content}
             </ElemetWrapper>
         );
     }
@@ -186,7 +193,8 @@ const mapStateToProps = state => {
     return {
         degGroups: state.degGroups,
         error: state.degGroups.error,
-        token: state.adminAuth.token
+        token: state.adminAuth.token,
+        loading: state.degGroups.loading
     }
 };
 

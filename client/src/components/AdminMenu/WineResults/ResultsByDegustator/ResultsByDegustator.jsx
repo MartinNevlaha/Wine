@@ -11,6 +11,7 @@ import Modal from '../../../UI/Modal/Modal';
 import WineGlass from '../../../UI/WineGlass/WineGlass';
 import ResumeTable from '../../../Rating/ResumeResults/ResumeTable/ResumeTable';
 import Popup from '../../../UI/Popup/Popup';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class ResultsByDegustator extends Component {
     state = {
@@ -73,6 +74,7 @@ class ResultsByDegustator extends Component {
                             </select>
                         <Button clicked={this.fetchResultByDegustator}>Zobraz</Button>
                     </div>  
+                    {this.props.loading ? <Spinner/> : 
                     <ResultsTable
                         tableHeads={this.state.tableHeads}>
                         {this.props.results.map((result, index) => {
@@ -95,6 +97,7 @@ class ResultsByDegustator extends Component {
                         )
                     })}
                     </ResultsTable>
+                    }
                 </ElementWrapper>
                 <Popup 
                 show={this.props.error}
@@ -108,7 +111,8 @@ const mapStateToProps = state => {
         token: state.adminAuth.token,
         degustators: state.finalResults.degustators,
         results: state.finalResults.resultsByDeg,
-        error: state.finalResults.error
+        error: state.finalResults.error,
+        loading: state.finalResults.loading
     }
 }
 const mapDispatchToProps = dispatch => {

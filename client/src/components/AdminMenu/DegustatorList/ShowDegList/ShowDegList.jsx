@@ -9,6 +9,7 @@ import * as action from '../../../../store/actions/index';
 import classes from './ShowDegList.module.css';
 import Back from '../../../UI/Back/Back';
 import { searchIdetificator, searchFilter } from '../../../../shared/utility';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class ShowDegList extends Component {
     state = {
@@ -55,9 +56,8 @@ class ShowDegList extends Component {
                 <td>{deg.surname}</td>
             </tr>
         );
-        return (
-            <ElementWrapper wrapperType="ElementWrapper">
-                {degList.length ? 
+        let content = <React.Fragment>
+                  {degList.length ? 
                     <ElementWrapper wrapperType="FullWidthWrapper">
                     <h4>Zoznam degustátorov</h4>
                     <SearchBar 
@@ -79,6 +79,13 @@ class ShowDegList extends Component {
                 </ElementWrapper>
                 : <h3>Nebol pridaný žiadny degustátor</h3>}
                 <Back />
+            </React.Fragment>
+            if (this.props.loading) {
+                content = <Spinner />
+            }
+        return (
+            <ElementWrapper wrapperType="ElementWrapper">
+              {content}
             </ElementWrapper>
         );
     }
@@ -87,7 +94,8 @@ class ShowDegList extends Component {
 const mapStateToProps = state => {
     return {
         degList: state.degList.degustators,
-        token: state.adminAuth.token
+        token: state.adminAuth.token,
+        loading: state.degList.loading
     };
 };
 

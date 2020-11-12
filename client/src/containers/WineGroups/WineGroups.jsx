@@ -8,6 +8,7 @@ import EditWineGroups from '../../components/AdminMenu/WineGroups/EditWineGroups
 import * as action from '../../store/actions/index';
 import { isTrueCheck } from '../../shared/utility';
 import Popup from '../../components/UI/Popup/Popup';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class WineGroups extends Component {
 
@@ -36,8 +37,7 @@ class WineGroups extends Component {
     }
 
     render() {
-        return (
-            <ElementWrapper wrapperType="ElementWrapper">
+        let content = <React.Fragment>
                 <Back />
                 <EditWineGroups
                 isDegustationOpen={this.props.isDegustationOpen}
@@ -52,6 +52,13 @@ class WineGroups extends Component {
                 <Popup 
                 show={this.props.error}
                 message={this.props.error && this.props.error.message}/>
+            </React.Fragment>
+        if (this.props.loading) {
+            content = <Spinner />
+        }
+        return (
+            <ElementWrapper wrapperType="ElementWrapper">
+                {content}
             </ElementWrapper>
         )
     }
@@ -61,7 +68,8 @@ const mapStateToProps = state => {
         token: state.adminAuth.token,
         wineGroups: state.wineGroups,
         isDegustationOpen: state.systemSettins.isDegustationOpen,
-        error: state.wineGroups.error
+        error: state.wineGroups.error,
+        loading: state.wineGroups.loading
     }
 }
 

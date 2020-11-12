@@ -12,6 +12,7 @@ import WineGlass from '../../../UI/WineGlass/WineGlass';
 import Button from '../../../UI/Button/Button';
 import Back from '../../../UI/Back/Back';
 import Popup from '../../../UI/Popup/Popup';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class ResultsByWineId extends Component {
     state = {
@@ -56,6 +57,7 @@ class ResultsByWineId extends Component {
                 <WineInfo 
                 token={this.props.token}
                 wineInfo={this.props.wineInfo}/>
+                {this.props.loading ? <Spinner/> : 
                 <ResultsTable
                 tableHeads={this.state.tableHeads}>
                     {this.props.results.map((result, index) => {
@@ -71,6 +73,7 @@ class ResultsByWineId extends Component {
                     )
                 })}
                 </ResultsTable>
+                }
                 </ElementWrapper>
                 <Popup 
                 show={this.props.error}
@@ -85,7 +88,8 @@ const mapStateToProps = state => {
         token: state.adminAuth.token,
         results: state.finalResults.resultByWineId,
         wineInfo: state.finalResults.wineInfo,
-        error: state.finalResults.error
+        error: state.finalResults.error,
+        loading: state.finalResults.loading
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -12,6 +12,7 @@ import Popup from '../../../UI/Popup/Popup';
 import DownloadFile from '../../DownloadFile/DownloadFile';
 import { isTrueCheck } from '../../../../shared/utility';
 import Modal from '../../../UI/Modal/Modal';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class ResultsByCategory extends Component {
     state = {
@@ -101,11 +102,13 @@ class ResultsByCategory extends Component {
                         disabled={isTrueCheck(this.props.results, 'isComplete')}
                         >Zapísať výsledky skupiny</Button>
                     </div>
+                    {this.props.loading ? <Spinner /> : 
                     <CategoryTable 
                     results={this.props.results}
                     clickHandler={this.clickHandler}
                     tableHead={this.state.tableHeadNames}
                     />
+                    }
                 </ElementWrapper>
                 <Popup 
                 show={this.props.error || this.state.error}
@@ -120,7 +123,8 @@ const mapStateToProps = state => {
         competitiveCategory: state.finalResults.competitiveCategory,
         results: state.finalResults.results,
         error: state.finalResults.error,
-        isFinalResultWrite: state.finalResults.isFinalResultWrite
+        isFinalResultWrite: state.finalResults.isFinalResultWrite,
+        loading: state.finalResults.loading
     }
 }
 const mapDispatchToProps = dispatch => {
