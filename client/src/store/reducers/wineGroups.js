@@ -8,9 +8,14 @@ const initialState = {
     loading: false,
     error: null,
     sortAmountUp: true,
+    isSuccess: false,
+    message: null
 }
 const wineGroupsClearError = (state, action) => {
     return updateObj(state, {error: null})
+}
+const clearWineGroupsMessage = (state, action) => {
+    return updateObj(state, {isSuccess: false, message: null})
 }
 
 const fetchEditWineGroupsStart = (state, action) => {
@@ -61,7 +66,12 @@ const saveWineGroupsStart = (state, action) => {
 }
 
 const saveWineGroupsSuccess = (state, action) => {
-    return updateObj(state, {loading: false, error: null })
+    return updateObj(state, {
+        loading: false, 
+        error: null,
+        isSuccess: true,
+        message: action.message
+    })
 }
 
 const saveWineGroupsFailled = (state, action) => {
@@ -88,6 +98,8 @@ const reducer = (state = initialState, action) => {
             return saveWineGroupsFailled(state, action);
         case actionTypes.WINE_GROUPS_CLEAR_ERROR:
             return wineGroupsClearError(state, action);
+        case actionTypes.CLEAR_WINE_GROUPS_MESSAGE:
+            return clearWineGroupsMessage(state, action)
         default:
             return state;
     }

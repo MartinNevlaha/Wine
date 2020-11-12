@@ -7,6 +7,11 @@ export const groupsErrorClear = () => {
     }
 }
 
+export const clearDegGroupsMessage = () => {
+    return {
+        type: actionTypes.CLEAR_DEG_GROUPS_MESSAGE
+    }
+}
 export const createDegGroups = (degGroups) => {
     return {
         type: actionTypes.CREATE_DEG_GROUPS,
@@ -73,10 +78,11 @@ export const saveDegGroupsStart = () => {
     return {type: actionTypes.SAVE_DEG_GROUPS_START}
 };
 
-export const saveDegGroupsSucces = (data) => {
+export const saveDegGroupsSucces = (data, message) => {
     return {
         type: actionTypes.SAVE_DEG_GROUPS_SUCCES,
-        updatedGroups: data
+        updatedGroups: data,
+        message
     }
 }
 
@@ -90,7 +96,6 @@ export const saveDegGroupsFailled = (error) => {
 export const saveDegGroups = (data, token) => {
     return dispatch => {
         dispatch(saveDegGroupsStart());
-        //dispatch(deleteDegGroups());
         axiosInstance.post('admin/degustator-groups', data, {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -106,7 +111,10 @@ export const saveDegGroups = (data, token) => {
                     }
                     createdGroups.push(newGroup);
                 })
-                dispatch(saveDegGroupsSucces(createdGroups));
+                dispatch(saveDegGroupsSucces(createdGroups, resp.data.message));
+                setTimeout(()=>{
+                    dispatch(clearDegGroupsMessage())
+                }, 2500)
             })
             .catch(err => {
                 if (err.response) {

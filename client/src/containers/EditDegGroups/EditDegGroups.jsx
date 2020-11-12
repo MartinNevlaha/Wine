@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux'
 
 import ElemetWrapper from '../../hoc/ElementWrapper/ElementWrapper';
@@ -120,7 +119,6 @@ class EditDegGruops extends Component {
             }
         })
         this.props.onSaveDegGroups(postData, this.props.token);
-        this.props.history.goBack();
     }
 
     deleteGropsHandler = () => {
@@ -177,12 +175,20 @@ class EditDegGruops extends Component {
         if (this.props.loading) {
             content = <Spinner />
         }
+        let message;
+        if (this.props.error) {
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        }
         return (
             <ElemetWrapper wrapperType="ElementWrapper">
                 <Back />
                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.props.isSucces}
+                message={message}/>
                 {content}
             </ElemetWrapper>
         );
@@ -194,7 +200,9 @@ const mapStateToProps = state => {
         degGroups: state.degGroups,
         error: state.degGroups.error,
         token: state.adminAuth.token,
-        loading: state.degGroups.loading
+        loading: state.degGroups.loading,
+        succesMessage: state.degGroups.message,
+        isSucces: state.degGroups.isSucces
     }
 };
 
@@ -213,4 +221,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default  connect(mapStateToProps, mapDispatchToProps) (withRouter(EditDegGruops));
+export default  connect(mapStateToProps, mapDispatchToProps) (EditDegGruops);

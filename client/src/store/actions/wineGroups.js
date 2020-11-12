@@ -8,6 +8,12 @@ export const wineGroupsClearError = () => {
     }
 }
 
+export const clearWineGroupsMessage = () => {
+    return {
+        type: actionTypes.CLEAR_WINE_GROUPS_MESSAGE
+    }
+}
+
 export const fetchEditWineGroupsStart = () => {
     return {
         type: actionTypes.FETCH_EDIT_WINE_GROUP_START
@@ -90,9 +96,10 @@ export const saveWineGroupsStart = () => {
     }
 }
 
-export const saveWineGroupsSuccess = () => {
+export const saveWineGroupsSuccess = (message) => {
     return {
         type: actionTypes.SAVE_WINE_GROPS_SUCCESS,
+        message
     }
 }
 
@@ -111,7 +118,12 @@ export const saveWineGroups = (wineGroupsData ,token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(saveWineGroupsSuccess()))
+        .then(resp => {
+            dispatch(saveWineGroupsSuccess(resp.data.message))
+            setTimeout(()=>{
+                dispatch(clearWineGroupsMessage())
+            }, 2500)
+        })
         .catch(err => {
             if (err.response) {
                 const error = {

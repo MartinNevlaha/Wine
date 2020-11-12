@@ -8,12 +8,18 @@ const initialState = {
     loading: false,
     isDeleting: false,
     isDeleteSucces: false,
-    error: null
+    error: null,
+    message: null,
+    isSucces: false
 };
 
 const createDegGroup = (state, action) => {
     return updateObj(state, {degGroups: action.degGroups})
 };
+
+const clearDegGroupsMessage = (state, action) => {
+    return updateObj(state, {message: null, isSucces: false})
+}
 
 const minimalisedGroup = (state, action) => {
     const index = action.updatedGroup.index;
@@ -50,7 +56,9 @@ const saveDegGroupsStart = (state, action) => {
 const saveDegGroupsSucces = (state, action) => {
     return updateObj(state, {
         loading: false,
-        degGroups: action.updatedGroups
+        degGroups: action.updatedGroups,
+        message: action.message,
+        isSucces: true
     })
 };
 
@@ -177,6 +185,8 @@ const reducer = (state = initialState, action) => {
             return deleteGroupsFailled(state, action);
         case actionTypes.GROUPS_ERROR_CLEAR:
             return groupsErrorClear(state, action)
+        case actionTypes.CLEAR_DEG_GROUPS_MESSAGE:
+            return clearDegGroupsMessage(state, action)
         default: 
             return state;
     };

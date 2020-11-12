@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import Back from '../../components/UI/Back/Back';
@@ -33,10 +32,15 @@ class WineGroups extends Component {
             }
         })
         this.props.onSaveWineGroups(wineGroupsData, this.props.token);
-        this.props.history.goBack();
     }
 
     render() {
+        let message;
+        if (this.props.error) {
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        }
         let content = <React.Fragment>
                 <Back />
                 <EditWineGroups
@@ -50,8 +54,10 @@ class WineGroups extends Component {
                 sortWineGroups={this.props.onSortWineGroups}
                 />
                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.props.isSucces}
+                message={message}/>
             </React.Fragment>
         if (this.props.loading) {
             content = <Spinner />
@@ -69,7 +75,9 @@ const mapStateToProps = state => {
         wineGroups: state.wineGroups,
         isDegustationOpen: state.systemSettins.isDegustationOpen,
         error: state.wineGroups.error,
-        loading: state.wineGroups.loading
+        loading: state.wineGroups.loading,
+        isSucces: state.wineGroups.isSuccess,
+        succesMessage: state.wineGroups.message
     }
 }
 
@@ -82,4 +90,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WineGroups));
+export default connect(mapStateToProps, mapDispatchToProps)(WineGroups);
