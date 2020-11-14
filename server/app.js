@@ -39,7 +39,7 @@ const app = express();
 
 app.use(express.json()); // aplications/json
 app.use(express.static(path.join(__dirname, 'assets/template/')));
-//app.use(express.static(path.join('public')))
+app.use(express.static(path.join('public')))
 
 app.use(helmet());
 app.use(compression());
@@ -58,11 +58,11 @@ app.use('/admin', adminFinalResultsRoutes)
 app.use('/admin', loginAdminRoutes);
 app.use('/degustator', degustatorRoutes);
 
-/*
+
 app.use((req, res, next) => {
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 })
-*/
+
 //Error handler
 app.use((error, req, res, next) => {
     const status = error.statusCode || 500;
