@@ -41,7 +41,6 @@ class ResultsByWineId extends Component {
                 result._id === this.state.wineId
             )
         }
-
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <Modal show={this.state.isModalOpen}
@@ -86,7 +85,7 @@ class ResultsByWineId extends Component {
 const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
-        results: state.finalResults.resultByWineId,
+        results: state.finalResults.resultByWineId || [],
         wineInfo: state.finalResults.wineInfo,
         error: state.finalResults.error,
         loading: state.finalResults.loading
