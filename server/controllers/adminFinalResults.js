@@ -49,7 +49,7 @@ exports.getFinalResultsByCategory = async (req, res, next) => {
 }
 
 exports.getFinalResultsByWineId = async (req, res, next) => {
-    const wineId = req.params.wineId
+    const wineId = req.params.wineId;
     const populateQuery = {
         path: 'degId',
         model: 'Degustator',
