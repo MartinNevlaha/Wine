@@ -11,7 +11,7 @@ router.get('/final-results-generate-cert/:wineId', isAdminAuth, adminFinalResult
 
 router.get('/final-results-by-category/:categoryId', isAdminAuth, adminFinalResultsController.getFinalResultsByCategory);
 
-router.get('/final-results-by-wine/:wineId', isAdminAuth, adminFinalResultsController.getFinalResultsByWineId);
+router.get('/final-results-by-wineId/:wineId', isAdminAuth, adminFinalResultsController.getFinalResultsByWineId);
 
 router.get('/final-results-groups', isAdminAuth, adminFinalResultsController.getDegGroups);
 

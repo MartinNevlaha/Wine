@@ -48,7 +48,7 @@ function App(props) {
       <Switch>
         <Route path="/author" />
         <Route path="/logout" component={Logout}/>
-        <Route path="/results-by-wineId/:wineId" render={()=><Suspense fallback={<Spinner />}><ResultsByWineId /></Suspense>} />
+        <Route path="/admin/final-results-by-wineId/:wineId" render={()=><Suspense fallback={<Spinner />}><ResultsByWineId /></Suspense>} />
         <Route path="/results-by-degustator" render={()=><Suspense fallback={<Spinner />}><ResultsByDegustator /></Suspense>} />
         <Route path="/results-by-deg-group" render={()=><Suspense fallback={<Spinner />}><ResultsByDegGroup /></Suspense>} />
         <Route path="/results-by-category" render={()=><Suspense fallback={<Spinner />}><ResultsByCategory /></Suspense>} />
