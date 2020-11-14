@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import Button from '../UI/Button/Button';
+import classes from './ErrorBoundary.module.css';
+
 class ErrorBoundary extends Component {
     state = {
         error: null,
@@ -23,11 +26,11 @@ class ErrorBoundary extends Component {
         let {error, info} = this.state;
         if (error) {
             return (
-            <div>
+            <div className={classes.ErrorBoundary}>
                 <h1>Niečo sa pokazilo !!!</h1>
                 <h2>{error.toString()}</h2>
                 <pre>{info.componentStack}</pre>
-                <button onClick={this.resetHandler}>Skús znova</button>               
+                <Button clicked={this.resetHandler}>Skús znova</Button>               
             </div>
             )
         }

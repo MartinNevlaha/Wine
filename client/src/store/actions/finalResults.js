@@ -7,6 +7,7 @@ export const finalResultsErrorClear = () => {
     }
 }
 
+
 export const fetchCompetitiveCategoryStart = () => {
     return {
         type: actionTypes.FETCH_COMPETITVE_CATEGORY_START

@@ -14,6 +14,7 @@ server/logs/app.log
 
 # production
 /build
+/public
 
 # misc
 .DS_Store

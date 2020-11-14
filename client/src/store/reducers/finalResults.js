@@ -50,7 +50,7 @@ const fetchWineResultsByComCategoryStart = (state, action) => {
 
 const fetchWineResultsByComCategorySuccess = (state, action) => {
     return updateObj(state, {
-        loading: true,
+        loading: false,
         error: null,
         results: action.results,
         isFinalResultWrite: action.isFinalResultWrite

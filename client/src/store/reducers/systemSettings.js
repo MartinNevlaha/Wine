@@ -4,6 +4,8 @@ import { updateObj } from '../../shared/utility';
 const initialState = {
     loading: false,
     error: null,
+    isSucces: false,
+    message: null,
     isValuesEliminated: false,
     isDegustationOpen: false,
     degustationName: '',
@@ -13,6 +15,12 @@ const initialState = {
 const settingsClearError = (state, action) => {
     return updateObj(state, {
         error: null
+    })
+}
+const clearSystemSettingMessage = (state, action) => {
+    return updateObj(state, {
+        isSucces: false,
+        message: null
     })
 }
 
@@ -30,7 +38,9 @@ const saveSettingsSuccess = (state, action) => {
         isValuesEliminated: action.isValuesEliminated,
         isDegustationOpen: action.isDegustationOpen,
         degustationName: action.degustationName,
-        competitionChairman: action.competitionChairman
+        competitionChairman: action.competitionChairman,
+        isSucces: true,
+        message: action.message
     })
 }
 
@@ -78,7 +88,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SAVE_SETTING_FAIL:
             return saveSettingsFailled(state, action);
         case actionTypes.SETTINGS_CLEAR_ERROR:
-            return settingsClearError(state, action)
+            return settingsClearError(state, action);
+        case actionTypes.CLEAR_SYSTEM_SETTINGS_MESSAGE:
+            return clearSystemSettingMessage(state, action)
         default:
             return state;
     }

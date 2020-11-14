@@ -7,20 +7,27 @@ export const settingsClearError = () => {
     }
 } 
 
+export const clearSystemSettingMessage = () => {
+    return {
+        type: actionTypes.CLEAR_SYSTEM_SETTINGS_MESSAGE
+    }
+}
+
 export const saveSettingsStart = () => {
     return {
         type: actionTypes.SAVE_SETTING_START
     };
 };
 
-export const saveSettingsSuccess = (settings) => {
+export const saveSettingsSuccess = (settings, message) => {
     const {isValuesEliminated, isDegustationOpen, degustationName, competitionChairman} = settings;
     return {
         type: actionTypes.SAVE_SETTING_SUCCESS,
         isValuesEliminated,
         isDegustationOpen,
         degustationName,
-        competitionChairman
+        competitionChairman,
+        message
     };
 };
 
@@ -39,7 +46,12 @@ export const saveSettings = (settings, token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(resp => dispatch(saveSettingsSuccess(resp.data.setting)))
+            .then(resp => {
+                dispatch(saveSettingsSuccess(resp.data.setting, resp.data.message))
+                setTimeout(()=>{
+                    dispatch(clearSystemSettingMessage());
+                }, 2500)
+            })
             .catch(err => {
                 if (err.response) {
                     const error = {

@@ -70,6 +70,12 @@ class DegustationSetting extends Component {
     }
     
     render() {
+        let message;
+        if (this.props.error) {
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        }
         return (
             <ElementWrapper wrapperType="ElementWrapper"> 
                 <Back pos='bottom'/>
@@ -95,9 +101,11 @@ class DegustationSetting extends Component {
                 <div style={{width: '100%', height: 'auto'}}>
                     <Button clicked={this.saveSettingValueHandler}>Ulož nastavenia</Button>
                 </div>
-                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                <Popup 
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.props.isSucces}
+                message={message}/>
             </ElementWrapper>
         );
     }
@@ -110,7 +118,9 @@ const mapStateToProps = state => {
         isDegustationOpen: state.systemSettins.isDegustationOpen,
         actualDegName: state.systemSettins.degustationName,
         actualChairman: state.systemSettins.competitionChairman,
-        error: state.systemSettins.error
+        error: state.systemSettins.error,
+        isSucces: state.systemSettins.isSucces,
+        succesMessage: state.systemSettins.message
     }
 }
 const mapDispatchToProps = dispatch => {

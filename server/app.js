@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
+const cors = require('cors');
 const result = require('dotenv').config();
 
 const winston = require('./config/winston');
@@ -39,10 +40,11 @@ const app = express();
 
 app.use(express.json()); // aplications/json
 app.use(express.static(path.join(__dirname, 'assets/template/')));
-app.use(express.static(path.join('public')))
+//app.use(express.static(path.join('public')))
 
 app.use(helmet());
 app.use(compression());
+app.use(cors());
 app.use(morgan('combined', {
     stream: winston.stream
 }));
@@ -58,11 +60,11 @@ app.use('/admin', adminFinalResultsRoutes)
 app.use('/admin', loginAdminRoutes);
 app.use('/degustator', degustatorRoutes);
 
-
+/*
 app.use((req, res, next) => {
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 })
-
+*/
 //Error handler
 app.use((error, req, res, next) => {
     const status = error.statusCode || 500;
