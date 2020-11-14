@@ -2,4 +2,10 @@
     color: black;
     width: 50%;
     height: auto;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+.ErrorBoundary pre {
+    width: 100%;
 }

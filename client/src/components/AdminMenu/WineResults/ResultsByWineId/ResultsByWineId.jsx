@@ -86,7 +86,7 @@ const mapStateToProps = state => {
     return {
         token: state.adminAuth.token,
         results: state.finalResults.resultByWineId || [],
-        wineInfo: state.finalResults.wineInfo,
+        wineInfo: state.finalResults.wineInfo || [],
         error: state.finalResults.error,
         loading: state.finalResults.loading
     }

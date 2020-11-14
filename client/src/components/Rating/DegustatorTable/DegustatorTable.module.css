@@ -5,6 +5,10 @@
     border-radius: 8px;
     border: 1px solid white;
 }
+.DegContainer button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 .DegContainer h2 {
     margin: 5px;
 }
