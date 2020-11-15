@@ -12,12 +12,21 @@ const initialState = {
     isImportingDb: false,
     sortAmountUp: true,
     isDeletingDeg: false,
-    error: null
+    error: null,
+    isSucces: false,
+    message: null
 };
 
 const degListErrorClear = (state, action) => {
     return updateObj(state, {
         error: null
+    })
+}
+
+const clearDegListMessage = (state, action) => {
+    return updateObj(state, {
+        isSucces: false,
+        message: null
     })
 }
 
@@ -36,7 +45,9 @@ const addDegSucces = (state, action) => {
     return updateObj(state, {
         degustators: state.degustators.concat( newDeg ),
         loadingAddDeg: false,
-        isAddDegSucces: true
+        isAddDegSucces: true,
+        isSucces: true,
+        message: action.message
     });
 };
 
@@ -68,6 +79,8 @@ const databaseDegDeleteSucces = (state, action) => {
     return updateObj(state, {
         degustators: [],
         loading: false,
+        isSucces: true,
+        message: action.message
     });
 };
 
@@ -95,6 +108,8 @@ const databaseDegImportSucces = (state, action) => {
     return updateObj(state, {
         degustators: action.degData,
         loading: false,
+        isSucces: true,
+        message: action.message
     });
 };
 
@@ -146,6 +161,8 @@ const saveEditDegStart = (state, action) => {
 const saveEditDegSucces = (state, action) => {
     return updateArray(state, {
         loading: {$set: false},
+        isSucces: {$set: true},
+        message: {$set: action.message},
         degustators: {
             [action.index]: {$set: action.editedDegData}
         }
@@ -176,7 +193,9 @@ const deleteDegSucces = (state, action) => {
     return updateObj(state, {
         loading: false,
         isDeletingDeg: false,
-        degustators: action.degListData
+        degustators: action.degListData,
+        isSucces: true,
+        message: action.message
     });
 };
 
@@ -244,6 +263,8 @@ const reducer = (state = initialState, action) => {
             return deleteDegFailled(state, action);
         case actionTypes.DEG_LIST_ERROR_CLEAR:
             return degListErrorClear(state, action);
+        case actionTypes.CLEAR_DEG_LIST_MESSAGE:
+            return clearDegListMessage(state, action);
         default:
             return state;
     };

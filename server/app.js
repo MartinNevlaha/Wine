@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
+const cors = require('cors');
 const result = require('dotenv').config();
 
 const winston = require('./config/winston');
@@ -43,6 +44,7 @@ app.use(express.static(path.join('public')))
 
 app.use(helmet());
 app.use(compression());
+app.use(cors());
 app.use(morgan('combined', {
     stream: winston.stream
 }));

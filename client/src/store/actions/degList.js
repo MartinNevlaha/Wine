@@ -7,16 +7,23 @@ export const degListErrorClear = () => {
     }
 }
 
+export const clearDegListMessage = () => {
+    return {
+        type: actionTypes.CLEAR_DEG_LIST_MESSAGE
+    }
+}
+
 export const addDegStart = () => {
     return {
         type: actionTypes.ADD_DEGUSTATOR_START
     };
 };
-export const addDegSucces = (id, degData) => {
+export const addDegSucces = (id, degData, message) => {
     return {
         type: actionTypes.ADD_DEGUSTATOR_SUCCES,
         _id: id,
-        degData: degData
+        degData,
+        message
     };
 };
 
@@ -36,7 +43,10 @@ export const addDegustator = (data, token) => {
             }
         })
             .then(response => {
-                dispatch(addDegSucces(response.data._id, data));
+                dispatch(addDegSucces(response.data._id, data, response.data.message));
+                setTimeout(()=>{
+                    dispatch(clearDegListMessage())
+                }, 2500)
             })
             .catch(err => {
                 if (err.response) {
@@ -71,9 +81,10 @@ export const databaseDegDeleteStart = () => {
         type: actionTypes.DATABASE_DEG_DELETE_START
     };
 };
-export const databaseDegDeleteSucces = () => {
+export const databaseDegDeleteSucces = (message) => {
     return {
         type: actionTypes.DATABASE_DEG_DELETE_SUCCES,
+        message
     };
 };
 export const databaseDegDeleteFailled = (error) => {
@@ -91,7 +102,12 @@ export const databaseDegDelete = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(response => dispatch(databaseDegDeleteSucces()))
+            .then(response => {
+                dispatch(databaseDegDeleteSucces(response.data.message))
+                setTimeout(()=>{
+                    dispatch(clearDegListMessage())
+                }, 2500)
+            })
             .catch(err => {
                 if (err.response) {
                     const error = {
@@ -123,10 +139,11 @@ export const databaseDegImportStart = () => {
         type: actionTypes.DATABASE_DEG_IMPORT_START
     };
 };
-export const databaseDegImportSucces = (importedDegData) => {
+export const databaseDegImportSucces = (importedDegData, message) => {
     return {
         type: actionTypes.DATABASE_DEG_IMPORT_SUCCES,
-        degData: importedDegData
+        degData: importedDegData,
+        message
     };
 };
 export const databaseDegImportFailled = (error) => {
@@ -144,7 +161,10 @@ export const databaseDegImport = (degData, token) => {
             }
         })
             .then(resp => {
-                dispatch(databaseDegImportSucces(resp.data.degustators))
+                dispatch(databaseDegImportSucces(resp.data.degustators, resp.data.message));
+                setTimeout(()=>{
+                    dispatch(clearDegListMessage())
+                }, 2500)
             })
             .catch(err => {
                 if (err.response) {
@@ -236,11 +256,12 @@ export const saveEditDegStart = () => {
     };
 };
 
-export const saveEditDegSucces = (editedDegData, index) => {
+export const saveEditDegSucces = (editedDegData, index, message) => {
     return {
         type: actionTypes.SAVE_EDIT_DEG_SUCCES,
         editedDegData: editedDegData,
-        index: index
+        index: index,
+        message
     };
 };
 
@@ -260,7 +281,10 @@ export const saveEditDeg = (_id, index, editedDegData, token) => {
         })
             .then(resp => {
                 editedDegData._id = _id;
-                dispatch(saveEditDegSucces(editedDegData, index));
+                dispatch(saveEditDegSucces(editedDegData, index, resp.data.message));
+                setTimeout(()=>{
+                    dispatch(clearDegListMessage())
+                }, 2500)
             })
             .catch(err => {
                 if (err.response) {
@@ -290,10 +314,11 @@ export const deleteDegCanceled = () => {
     };
 };
 
-export const deleteDegSucces = (degListData) => {
+export const deleteDegSucces = (degListData, message) => {
     return {
         type: actionTypes.DELETE_DEG_SUCCES,
-        degListData: degListData
+        degListData: degListData,
+        message
     };
 };
 
@@ -318,7 +343,12 @@ export const deleteDeg = (_id, updatedDegList, token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(res => dispatch(deleteDegSucces(updatedDegList)))
+            .then(res => {
+                dispatch(deleteDegSucces(updatedDegList, res.data.message));
+                setTimeout(()=>{
+                    dispatch(clearDegListMessage())
+                }, 2500)
+            })
             .catch(err => {
                 if (err.response) {
                     const error = {

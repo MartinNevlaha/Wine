@@ -131,7 +131,9 @@ const deleteGroupsSucces = (state, action) => {
     return updateObj(state, {
         loading: false,
         degGroups: [],
-        isDeleteSucces: true
+        isDeleteSucces: true,
+        isSucces: true,
+        message: action.message
     })
 }
 

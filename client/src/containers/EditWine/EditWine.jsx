@@ -252,7 +252,12 @@ class EditWine extends Component {
                 </React.Fragment>
             );
         }
-        
+        let message;
+        if (this.props.error) {
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        }
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 {this.props.isDegustationOpen && <p>Otvorena</p>}
@@ -296,8 +301,10 @@ class EditWine extends Component {
                 />
                 <Back />
                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.props.isSucces}
+                message={message}/>
             </ElementWrapper>
         );
     }
@@ -307,7 +314,9 @@ const mapStateToProps = state => {
     return {
         wineList: state.wineList,
         token: state.adminAuth.token,
-        error: state.wineList.error
+        error: state.wineList.error,
+        succesMessage: state.wineList.message,
+        isSucces: state.wineList.isSucces
     };
 };
 const mapDispatchToProps = dispatch => {

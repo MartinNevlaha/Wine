@@ -12,11 +12,20 @@ const initialState = {
     isAddWineSucces: false,
     sortAmountUp: true,
     importingDb: false,
-    error: null
+    error: null,
+    isSucces: false,
+    message: null
 };
 const wineListErrorClear = (state, action) => {
     return updateObj(state, {
         error: null
+    })
+}
+
+const clearWineListMessage = (state, action) => {
+    return updateObj(state, {
+        isSucces: false,
+        message: null
     })
 }
 
@@ -41,7 +50,9 @@ const addWineSucces = (state, action) => {
     return updateObj(state, {
         wine: state.wine.concat( newWine ),
         loadingSend: false,
-        isAddWineSucces: true
+        isAddWineSucces: true,
+        isSucces: true,
+        message: action.message
     });
 };
 const fetchWineListStart = (state, action) => {
@@ -72,7 +83,9 @@ const deleteWineSucces = (state, action) => {
     return updateObj(state, { 
         loadingFetch: false,
         wine: action.wineListData,
-        error: null
+        error: null,
+        message: action.message,
+        isSucces: true
     });
 };
 const deleteWineFailed = (state, action) => {
@@ -94,6 +107,8 @@ const saveEditWineStart = (state, action) => {
 const saveEditWineSucces = (state, action) => {
     return updateArray(state, {
         loadingSaveWine: {$set: false},
+        isSucces: {$set: true},
+        message: {$set: action.message},
         wine: {
             [action.index]: {$set: action.editedWineData}
         }
@@ -126,6 +141,8 @@ const databaseDeleteSucces = (state, action) => {
     return updateObj(state, {
         loading: false,
         isDeleteDbInProces: false,
+        isSucces: true,
+        message: action.message,
         wine: [],
     });
 };
@@ -149,7 +166,9 @@ const databaseImportSucces = (state, action) => {
     return updateObj(state, {
         wine: action.wineData,
         importingDb: false,
-        loading: false
+        loading: false,
+        isSucces: true,
+        message: action.message
     });
 };
 const databaseImportFailled = (state, action) => {
@@ -206,6 +225,8 @@ const reducer = (state = initialState, action) => {
             return databaseImportFailled(state, action);
         case actionTypes.WINE_LIST_CLEAR_ERROR:
             return wineListErrorClear(state, action);
+        case actionTypes.CLEAR_WINE_LIST_MESSAGE:
+            return clearWineListMessage(state, action)
         default:
             return state;
     }

@@ -44,11 +44,15 @@ class SystemInfo extends Component {
     }
 
     render() {
-        let errorMessage;
+        let message;
         if (this.props.error) {
-            errorMessage = this.props.error.message
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        } else if (this.props.error) {
+            message = this.props.error.message
         } else if (this.state.error) {
-            errorMessage = this.state.error.message
+            message = this.state.error.message
         }
         return (
             <ElementWrapper wrapperType="ElementWrapper">
@@ -64,8 +68,10 @@ class SystemInfo extends Component {
                 errorDownload={this.errorDownloadHandler}
                 token={this.props.token}/>
                 <Popup 
-                show={this.props.error || this.state.error}
-                message={errorMessage}/>
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.state.error || this.props.isSucces}
+                message={message}/>
             </ElementWrapper>
         )
     }
@@ -74,7 +80,9 @@ const mapStateTopProps = state => {
     return {
         systemInfo: state.systemInfo,
         token: state.adminAuth.token,
-        error: state.systemInfo.error
+        error: state.systemInfo.error,
+        isSucces: state.systemInfo.isSucces,
+        succesMessage: state.systemInfo.message
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -7,6 +7,12 @@ export const systemInfoClearError = () => {
     }
 }
 
+export const clearSystemInfoMessge = () => {
+    return {
+        type: actionTypes.CLEAR_SYSTEM_INFO_MESSAGE
+    }
+}
+
 export const fetchSystemInfoStart = () => {
     return {
         type: actionTypes.FETCH_SYSTEM_INFO_START 
@@ -58,9 +64,10 @@ export const completeResetDbStart = () => {
         type: actionTypes.COM_RESET_DB_START
     }
 }
-export const completeDbResetSuccess = () => {
+export const completeDbResetSuccess = (message) => {
     return {
-        type: actionTypes.COM_RESET_DB_SUCCESS
+        type: actionTypes.COM_RESET_DB_SUCCESS,
+        message
     }
 }
 export const completeResetDbFailled = (error) => {
@@ -78,7 +85,12 @@ export const completeResetDb = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(completeDbResetSuccess()))
+        .then(resp => {
+            dispatch(completeDbResetSuccess(resp.data.message));
+            setTimeout(() => {
+                dispatch(clearSystemInfoMessge())
+            }, 2500);
+        })
         .catch(err => {
             if (err.response) {
                 const error = {

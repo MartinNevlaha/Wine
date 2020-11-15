@@ -193,6 +193,12 @@ class EditDegustator extends Component {
             submit={this.deleteDegConfirmHandler}
             />;
         }
+        let message;
+        if (this.props.error) {
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        }
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 {modal}
@@ -224,8 +230,10 @@ class EditDegustator extends Component {
                 />
                 <Back />
                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.props.isSucces}
+                message={message}/>
             </ElementWrapper>
         );
     }
@@ -235,7 +243,9 @@ const mapStateToProps = state => {
     return {
         degList: state.degList,
         error: state.degList.error,
-        token: state.adminAuth.token
+        token: state.adminAuth.token,
+        isSucces: state.degList.isSucces,
+        succesMessage: state.degList.message
     };
 };
 

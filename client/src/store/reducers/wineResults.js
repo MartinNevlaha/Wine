@@ -15,7 +15,7 @@ const initialState = {
         error: null
     },
     wineInGroups: [],
-    error: null
+    error: null,
 }
 
 const resultsClearError = (state, action) => {

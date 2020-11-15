@@ -234,9 +234,10 @@ export const deleteGroupsStart = () => {
     };
 };
 
-export const deleteGroupsSucces = () => {
+export const deleteGroupsSucces = (message) => {
     return {
-        type: actionTypes.DELETE_GROUPS_SUCCES
+        type: actionTypes.DELETE_GROUPS_SUCCES,
+        message
     };
 };
 
@@ -256,7 +257,12 @@ export const deleteGroups = (token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(res => dispatch(deleteGroupsSucces()))
+            .then(res => {
+                dispatch(deleteGroupsSucces(res.data.message));
+                setTimeout(() => {
+                    dispatch(clearDegGroupsMessage())
+                }, 2500);
+            })
             .catch(err => {
                 if (err.response) {
                     const error = {

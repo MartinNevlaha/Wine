@@ -529,7 +529,7 @@ exports.writeFinalResults = async (req, res, next) => {
         competitiveCategory.isFinalResultWrite = true;
         const savedComCat = await competitiveCategory.save();
         res.status(201).json({
-            message: 'Výsledky zápísané',
+            message: 'Výsledky zapísané',
             competitiveCategory: savedComCat
         })
     } catch (error) {
