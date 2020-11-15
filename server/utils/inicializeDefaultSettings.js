@@ -1,5 +1,6 @@
 const Setting = require('../models/settings');
 const winston = require('../config/winston');
+const timestamp = require('time-stamp');
 
 const inicializeDefaultSettins = async () => {
     try {
@@ -15,6 +16,7 @@ const inicializeDefaultSettins = async () => {
         }
     } catch (error) {
         winston.log({
+            time: timestamp('YYYY/MM/DD/HH:mm:ss'),
             level: 'error',
             message: 'Nemôžem inicializovať úvodné nastavenia degustácie' + error
         })

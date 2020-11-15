@@ -4,15 +4,17 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
+const timestamp = require('time-stamp');
 const cors = require('cors');
-const result = require('dotenv').config();
+const envExist = require('dotenv').config();
+
 
 const winston = require('./config/winston');
 
-if (result.error) {
+if (envExist.error) {
     winston.error({
         level: 'error',
-        message: result.parsed
+        message: envExist.parsed
     })
 }
   
@@ -70,7 +72,8 @@ app.use((error, req, res, next) => {
     const status = error.statusCode || 500;
     const message = error.message;
     const data = error.data;
-    winston.error(`${status} - ${message} - ${data} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+
+    winston.error(`${timestamp('YYYY/MM/DD/HH:mm:ss')} - ${status} - ${message} - ${data} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
     res.status(status)
     res.json({message: message, data: data});
 })
@@ -88,19 +91,20 @@ mongoose.connect(MONGO_DB_URI, {
         const io = require('./socket').init(server);
         io.on('connect', socket => {
             winston.log({
+                time: timestamp('YYYY/MM/DD/HH:mm:ss'),
                 level: 'info',
                 message: 'Socket.io: client connected'
             })
         })
-        console.log(`Connect to DB succes and server listen on ${PORT}`)
         winston.log({
+            time: timestamp('YYYY/MM/DD/HH:mm:ss'),
             level: 'info',
             message: `Connect to DB succes and server listen on ${PORT}`
         })
     })
     .catch(err => {
-        console.log('Connect to DB failled', err);
         winston.error({
+            time: timestamp('YYYY/MM/DD/HH:mm:ss'),
             level: 'error',
             message: `Connect to DB failled, due to: ${err}`,
         })

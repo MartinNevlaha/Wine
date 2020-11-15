@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {CSVReader} from 'react-papaparse';
 
 class CsvReader extends Component {
-
   
     handleOnError = (err, file, inputElem, reason) => {
       console.log(err)

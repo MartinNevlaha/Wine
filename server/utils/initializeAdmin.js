@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const Admin = require('../models/admin');
+const timestamp = require('time-stamp');
 
 const winston = require('../config/winston');
 
@@ -19,6 +20,7 @@ const inicializeAdmin = async () => {
         }
     } catch (error) {
         winston.log({
+            time: timestamp('YYYY/MM/DD/HH:mm:ss'),
             level: 'error',
             message: 'Nemôžem inicializovať admina v DB' + error
         })

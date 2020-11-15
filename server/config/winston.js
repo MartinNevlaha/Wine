@@ -18,13 +18,20 @@ const options = {
         json: true,
         maxsize: 5242880, // 5MB
         maxFiles: 5,
+    },
+    console: {
+      level: 'debug',
+      handleExceptions: true,
+      json: false,
+      colorize: true
     }
   };
 
   const logger = new winston.createLogger({
     transports: [
       new winston.transports.File(options.file),
-      new winston.transports.File(options.errorConf)
+      new winston.transports.File(options.errorConf),
+      new winston.transports.Console(options.console)
     ],
     exitOnError: false,
   });
