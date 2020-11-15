@@ -8,6 +8,12 @@ export const resultsClearError = () => {
     }
 };
 
+export const clearResultsSendMessage = () => {
+    return {
+        type: actionTypes.CLEAR_RESULTS_SEND_MESSAGE
+    }
+};
+
 export const resultsSendInit = () => {
     return {
         type: actionTypes.RESULTS_SEND_INIT
@@ -20,11 +26,12 @@ export const resultsSendStart = () => {
     }
 };
 
-export const resultsSendSucces = (id, data) => {
+export const resultsSendSucces = (id, data, message) => {
     return {
         type: actionTypes.RESULTS_SEND_SUCCESS,
         resultsId: id,
-        data: data 
+        data,
+        message
     };
 };
 
@@ -54,8 +61,11 @@ export const resultsSend = (data, token) => {
             }
         })
             .then(response => {
-                dispatch(resultsSendSucces(response.data.name, data));
-                dispatch(resetResults())
+                dispatch(resultsSendSucces(response.data.name, data, response.data.message));
+                dispatch(resetResults());
+                setTimeout(() => {
+                    dispatch(clearResultsSendMessage());
+                }, 2500);
             })
             .catch(err => {
                 if (err.response) {

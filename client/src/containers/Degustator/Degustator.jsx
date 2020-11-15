@@ -90,7 +90,12 @@ class Degustator extends Component {
         const btnsTasteHarmonicPersistence = this.generateBtn(this.state.btnsValue.tasteHarmonicPersistence, 'tasteHarmonicPersistence');
         const btnsTasteQuality = this.generateBtn(this.state.btnsValue.tasteQuality, 'tasteQuality');
         const btnsGeneralImpresion = this.generateBtn(this.state.btnsValue.generalImpresion, 'generalImpresion'); 
-        
+        let message;
+        if (this.props.error) {
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        }
         return (
             <ElementWrapper wrapperType="ElementWrapper">
                 <Modal  
@@ -130,10 +135,13 @@ class Degustator extends Component {
                 wineCategory = {this.props.results.wineCategory}
                 isWineIdValid={this.state.isWineIdValid}
                 idError={this.props.wineInfo.error}
+                isSucces={this.props.isSucces}
                 />
                 <Popup 
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}/>
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.props.isSucces}
+                message={message}/>
             </ElementWrapper>
         );
     }
@@ -148,7 +156,9 @@ const mapStateToProps = state => {
         wineInfo: state.wineResults.wineInfo,
         wineInGroups: state.wineResults.wineInGroups,
         token: state.degAuth.token,
-        error: state.wineResults.error
+        error: state.wineResults.error,
+        isSucces: state.wineResults.isSucces,
+        succesMessage: state.wineResults.message
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -1,5 +1,4 @@
 import * as actionTypes from '../actions/actionTypes';
-
 import { updateObj } from '../../shared/utility';
 
 const initialState = {
@@ -16,10 +15,18 @@ const initialState = {
     },
     wineInGroups: [],
     error: null,
+    isSucces: false,
+    message: null
 }
 
 const resultsClearError = (state, action) => {
     return updateObj(state, {error: null})
+}
+const clearResultsSendMessage = (state, action) => {
+    return updateObj(state, {
+        message: null,
+        isSucces: false
+    })
 }
 const resultsSendInit = (state, action) => {
     return updateObj(state, { sending: true })
@@ -32,7 +39,9 @@ const resultsSendSucces = (state, action) => {
     return updateObj(state, { 
         results: action.data,
         loading: false,
-        sending: false
+        sending: false,
+        isSucces: true,
+        message: action.message
     });
 };
 const resultsSendFailed = (state, action) => {
@@ -130,6 +139,8 @@ const reducer = (state = initialState, action) => {
             return fetchWineInGroupsFailled(state, action);
         case actionTypes.RESULT_CLEAR_ERROR:
             return resultsClearError(state, action);
+        case actionTypes.CLEAR_RESULTS_SEND_MESSAGE:
+            return clearResultsSendMessage(state, action);
         default:
             return state;
     }

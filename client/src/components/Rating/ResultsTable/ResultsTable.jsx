@@ -10,11 +10,21 @@ import * as action from '../../../store/actions/index';
 import {isRatingValid} from '../../../shared/validations';
 
 class ResultsTable extends Component {
-
-    state = {
-        resultsComment: ''
+    constructor(props) {
+        super(props);
+        this.state = this.initialState
     }
-    
+    get initialState() {
+        return {
+            resultsComment: ''
+        }
+    }
+    componentDidUpdate(nextProps) {
+        if (this.props.isSucces !== nextProps.isSucces) {
+            this.setState(this.initialState)
+        }
+    }
+
     getCommentHandler = (e) => {
         this.setState({resultsComment: e.target.value});
     };
@@ -42,7 +52,7 @@ class ResultsTable extends Component {
             change={this.props.onEliminate}/>
             <p>Kategória vína: <span style={{fontWeight:"bold"}}>{this.props.eliminated ? 'Eliminované' : defaultWineCategory}</span></p>
             <p>Celkom bodov: <span style={{fontWeight:"bold"}}>{this.props.eliminated ? 'Eliminované' : defaultSumValue}</span></p>
-            <DegComment getComment={this.getCommentHandler}/>
+            <DegComment getComment={this.getCommentHandler} value={this.state.resultsComment}/>
             <ResultsValidator 
             isRatingValid={isRatingValid(this.props.results, this.props.eliminated)}
             isWineIdValid={this.props.isWineIdValid && !this.props.idError}
