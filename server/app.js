@@ -5,7 +5,6 @@ const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
 const timestamp = require('time-stamp');
-const cors = require('cors');
 const envExist = require('dotenv').config();
 
 
@@ -46,7 +45,6 @@ app.use(express.static(path.join('public')))
 
 app.use(helmet());
 app.use(compression());
-app.use(cors());
 app.use(morgan('combined', {
     stream: winston.stream
 }));
@@ -72,7 +70,6 @@ app.use((error, req, res, next) => {
     const status = error.statusCode || 500;
     const message = error.message;
     const data = error.data;
-
     winston.error(`${timestamp('YYYY/MM/DD/HH:mm:ss')} - ${status} - ${message} - ${data} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
     res.status(status)
     res.json({message: message, data: data});
