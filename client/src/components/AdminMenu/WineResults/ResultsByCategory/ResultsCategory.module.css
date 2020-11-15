@@ -1,6 +1,9 @@
 .HeaderCategoryChoose {
     text-align: left;
     padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
 }
 .HeaderCategoryChoose label {
     padding: 5px;

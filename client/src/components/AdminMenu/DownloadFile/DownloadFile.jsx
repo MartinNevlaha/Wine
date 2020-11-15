@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 import download from 'js-file-download';
 
 import Button from '../../UI/Button/Button';
 import axiosInstance from '../../../axios-instance';
+import Spinner from '../../UI/Spinner/Spinner';
 
-const DownloadFile = props => {
-    const downloadFile = () => {
-        axiosInstance.get(`/admin/${props.endPoint}`, {
+
+class DownloadFile extends Component {
+    state= {
+        showLoading: false
+    }
+    downloadFile = () => {
+        this.setState({showLoading: true})
+        axiosInstance.get(`/admin/${this.props.endPoint}`, {
             headers: {
-                "Authorization": `Bearer ${props.token}`
+                "Authorization": `Bearer ${this.props.token}`
             },
             responseType: 'blob'
         }).then(resp => {
-            download(resp.data, `${props.fileName}`)
+            download(resp.data, `${this.props.fileName}`)
+            this.setState({showLoading: false})
         })
         .catch(err => {
             if (err.response) {
@@ -20,16 +27,24 @@ const DownloadFile = props => {
                     message: err.response.statusText,
                     code: err.response.status
                 }
-                props.errorDownload(error)
+                this.props.errorDownload(error)
+                this.setState({showLoading: false})
             }
-            props.errorDownload(err)
+            this.props.errorDownload(err)
+            this.setState({showLoading: false})
         })
     }
+    render() {
     return (
-            <Button clicked={downloadFile} disabled={props.isComplete}>
-                {props.children}
-            </Button>
+            <React.Fragment>
+                {this.state.showLoading ? <Spinner type='small' /> :
+                <Button clicked={this.downloadFile} disabled={this.props.isComplete}>
+                    {this.props.children}
+                </Button>
+                }   
+            </React.Fragment>
         )
+    }
 }
 
 export default DownloadFile;

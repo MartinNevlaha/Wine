@@ -13,12 +13,14 @@ import ResumeTable from '../../../Rating/ResumeResults/ResumeTable/ResumeTable';
 import Popup from '../../../UI/Popup/Popup';
 import Spinner from '../../../UI/Spinner/Spinner';
 
+
 class ResultsByDegustator extends Component {
     state = {
         tableHeads: ['Číslo vína', 'Názov vína', 'Klasifikácia vína', 'Výrobca vína','Ročník vína', "Víno eliminované", 'Kategoria vína', 'Bodové hodnotenie' ],
         isModalOpen: false,
         wineId: null,
-        selectedDeg: null
+        selectedDeg: null,
+        generateFile: false
     }
     componentDidMount() {
         this.props.onFetchListOfDegustator(this.props.token)
