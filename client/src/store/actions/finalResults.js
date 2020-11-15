@@ -6,7 +6,11 @@ export const finalResultsErrorClear = () => {
         type: actionTypes.FINAL_RESULTS_CLEAR_ERROR
     }
 }
-
+export const clearFinalResultsMessage = () => {
+    return {
+        type: actionTypes.CLEAR_FINAL_RESULTS_MESSAGE
+    }
+}
 
 export const fetchCompetitiveCategoryStart = () => {
     return {
@@ -335,11 +339,12 @@ export const writeFinalResultsStart = () => {
     }
 }
 
-export const writeFinalResultsSuccess = (updatedData, index) => {
+export const writeFinalResultsSuccess = (updatedData, index, message) => {
     return {
         type: actionTypes.WRITE_FINAL_RESULTS_SUCCESS,
         index,
-        updatedData
+        updatedData,
+        message
     }
 }
 
@@ -359,7 +364,12 @@ export const writeFinalResults = (catId, index, token) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-        .then(resp => dispatch(writeFinalResultsSuccess(resp.data.competitiveCategory, index)))
+        .then(resp => {
+            dispatch(writeFinalResultsSuccess(resp.data.competitiveCategory, index, resp.data.message));
+            setTimeout(() => {
+                dispatch(clearFinalResultsMessage());
+            }, 2500);
+        })
         .catch(err => {
             if (err.response) {
                 const error = {

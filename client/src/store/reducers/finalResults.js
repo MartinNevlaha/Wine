@@ -13,11 +13,20 @@ const initialState = {
     resultsByGroup: [],
     resultsByDeg: [],
     degustators: [],
-    isFinalResultWrite: false
+    isFinalResultWrite: false,
+    isSucces: false,
+    message: null
 }
 
 const finalResultsErrorClear = (state, action) => {
     return updateObj(state, {error: null})
+}
+
+const clearFinalResultsMessage = (state, action) => {
+    return updateObj(state, {
+        isSucces: false,
+        message: null
+    })
 }
 
 const fetchCompetitiveCategoryStart = (state, action) => {
@@ -185,6 +194,8 @@ const writeFinalResultsSuccess = (state, action) => {
     const index = action.index
     return updateArray(state, {
         loading: {$set: false},
+        isSucces: {$set: true},
+        message: {$set: action.message},
         isFinalResultWrite: {$set: true},
         competitiveCategory: {
             [index]: {$set: action.updatedData}
@@ -250,6 +261,8 @@ const reducer = (state = initialState, action) => {
             return writeFinalResultsSuccess(state, action);
         case actionTypes.WRITE_FINAL_RESULTS_FAIL:
             return writeFinalResultsFail(state, action);
+        case actionTypes.CLEAR_FINAL_RESULTS_MESSAGE:
+            return clearFinalResultsMessage(state, action);
         default:
             return state;
     }

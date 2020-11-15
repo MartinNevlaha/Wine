@@ -58,11 +58,15 @@ class ResultsByCategory extends Component {
     }
 
     render() {
-        let errorMessage;
+        let message;
         if (this.props.error) {
-            errorMessage = this.props.error.message
+            message = this.props.error.message
+        } else if (this.props.isSucces) {
+            message = this.props.succesMessage
+        } else if (this.props.error) {
+            message = this.props.error.message
         } else if (this.state.error) {
-            errorMessage = this.state.error.message
+            message = this.state.error.message
         }
         return (
             <ElementWrapper wrapperType="ElementWrapper">
@@ -111,8 +115,10 @@ class ResultsByCategory extends Component {
                     }
                 </ElementWrapper>
                 <Popup 
-                show={this.props.error || this.state.error}
-                message={errorMessage}/>
+                isSucces={this.props.isSucces}
+                succesMessage={this.props.succesMessage}
+                show={this.props.error || this.state.error || this.props.isSucces}
+                message={message}/>
             </ElementWrapper>
         )
     }
@@ -124,7 +130,9 @@ const mapStateToProps = state => {
         results: state.finalResults.results,
         error: state.finalResults.error,
         isFinalResultWrite: state.finalResults.isFinalResultWrite,
-        loading: state.finalResults.loading
+        loading: state.finalResults.loading,
+        isSucces: state.finalResults.isSucces,
+        succesMessage: state.finalResults.message
     }
 }
 const mapDispatchToProps = dispatch => {
