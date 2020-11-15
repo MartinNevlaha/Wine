@@ -36,7 +36,9 @@ class ResultsByDegustator extends Component {
         })
     }
     fetchResultByDegustator = () => {
-        this.props.onfetchResultsByDeg(this.state.selectedDeg, this.props.token)
+        let selectedDeg;
+        !this.state.selectedDeg ? selectedDeg = this.props.degustators[0]._id : selectedDeg = this.state.selectedDeg;
+        this.props.onfetchResultsByDeg(selectedDeg, this.props.token)
     }
     closeModalHandler = () => {
         this.setState({isModalOpen: false})

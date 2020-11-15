@@ -35,7 +35,9 @@ class ResultsByCategory extends Component {
         this.props.history.push(`/admin/final-results-by-wineId/${_id}`)
     }
     fetchResultsByComCategory = () => {
-        this.props.onFetchResultsByComCategory(this.state.selectedCategory, this.props.token)
+        let category;
+        !this.state.selectedCategory ? category = this.props.competitiveCategory[0]._id : category = this.state.selectedCategory;
+        this.props.onFetchResultsByComCategory(category, this.props.token)
     }
     writeFinalResultsHandler = () => {
         const catId = this.state.selectedCategory || this.props.competitiveCategory[0]._id;
@@ -63,8 +65,6 @@ class ResultsByCategory extends Component {
             message = this.props.error.message
         } else if (this.props.isSucces) {
             message = this.props.succesMessage
-        } else if (this.props.error) {
-            message = this.props.error.message
         } else if (this.state.error) {
             message = this.state.error.message
         }

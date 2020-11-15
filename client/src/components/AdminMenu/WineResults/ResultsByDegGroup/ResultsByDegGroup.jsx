@@ -36,7 +36,9 @@ class ResultsByDeGroup extends Component {
         })
     }
     fetchResultByGroupHandler = () => {
-        this.props.onFetchResultsByGroup(this.state.selectedGroup, this.props.token)
+        let selectedGroup;
+        !this.state.selectedGroup ? selectedGroup = this.props.degGroups[0]._id : selectedGroup = this.state.selectedGroup;
+        this.props.onFetchResultsByGroup(selectedGroup, this.props.token)
     }
     closeModalHandler = () => {
         this.setState({isModalOpen: false})
