@@ -24,7 +24,7 @@ class Layout extends Component {
         return (
             <ErrorBoudary>
                 {this.state.windowWidth >= 700 && <NavBar isAdminAuth={this.props.isAdminAuth} isDegAuth={this.props.isDegAuth}/>}
-                <main className={this.props.location.pathname === "/rating" ? classes.BackgroundDeg : classes.BackgroundApp }>
+                <main className={classes.BackgroundApp}>
                     {this.state.windowWidth >= 700 ? this.props.children : <h2>Táto aplikácia nie je dimenzovaná pre toto zariadenie !!!</h2>}
                 </main>
             </ErrorBoudary>

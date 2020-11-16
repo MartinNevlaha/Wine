@@ -4,7 +4,7 @@
     border: 1px solid white;
     border-radius: 8px;
     margin: 15px 20px;
-    background-color: rgba(173, 121, 129, 0.603);
+    background-color: rgba(107, 11, 25, 0.733);
 }
 .AddDbElement {
     width: 25%;
@@ -12,7 +12,7 @@
     border: 1px solid white;
     border-radius: 8px;
     margin: 15px 20px;
-    background-color: rgba(173, 121, 129, 0.603);
+    background-color: rgba(107, 11, 25, 0.733);
 }
 .InputContainer {
     margin: auto;
