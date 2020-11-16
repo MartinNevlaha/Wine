@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
 const timestamp = require('time-stamp');
+const cors = require('cors');
 const envExist = require('dotenv').config();
 
 
@@ -45,6 +46,7 @@ app.use(express.static(path.join('public')))
 
 app.use(helmet());
 app.use(compression());
+app.use(cors());
 app.use(morgan('combined', {
     stream: winston.stream
 }));
