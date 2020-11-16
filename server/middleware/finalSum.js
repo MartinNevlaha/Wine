@@ -1,5 +1,6 @@
 const Wine = require('../models/wine');
 const Setting = require('../models/settings');
+const settings = require('../models/settings');
 
 module.exports = async (req, res, next) => {
     if (!req.body.eliminated) {
@@ -27,7 +28,7 @@ module.exports = async (req, res, next) => {
                 const min = Math.min(...wine.totalResults);
                 const max = Math.max(...wine.totalResults);
                 averageResults = ((sumOfarray - min - max) / (lengOfArray-2)).toFixed(2);
-            } else {
+            } else if (!settins[0].isValuesEliminated) {
                 averageResults = (sumOfarray / lengOfArray).toFixed(2);
             }
             wine.finalResult = averageResults;
@@ -50,7 +51,6 @@ module.exports = async (req, res, next) => {
             }
             return next(error);
         }
-       
     }
     return next();
 }
