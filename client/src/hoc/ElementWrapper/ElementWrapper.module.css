@@ -29,7 +29,7 @@
     width: .5rem;
 }
 .ScrollWrapper::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .ScrollWrapper::-webkit-scrollbar-thumb {
     background-color: white;
@@ -50,7 +50,7 @@
     width: .3rem;
 }
 .FullWidthWrapper::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .FullWidthWrapper::-webkit-scrollbar-thumb {
     background-color: white;
@@ -72,7 +72,7 @@
     width: .3rem;
 }
 .DraggableWrapper::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .DraggableWrapper::-webkit-scrollbar-thumb {
     background-color: white;
@@ -92,7 +92,7 @@
     width: .3rem;
 }
 .GroupWrapper::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .GroupWrapper::-webkit-scrollbar-thumb {
     background-color: white;
@@ -120,7 +120,7 @@
     width: .3rem;
 }
 .ResulWrapper::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .ResulWrapper::-webkit-scrollbar-thumb {
     background-color: white;
