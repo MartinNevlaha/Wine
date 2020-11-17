@@ -46,7 +46,7 @@ const postWine = new Schema({
     },
     wineCategory: {
         type: String,
-        default: "Nehodnotené"
+        default: "Nepriradená"
     },
     results: [{
         type: Schema.Types.ObjectId,

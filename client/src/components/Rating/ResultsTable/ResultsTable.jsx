@@ -35,7 +35,7 @@ class ResultsTable extends Component {
 
     render() {
         let defaultSumValue = 'Nehodnotené';
-        let defaultWineCategory = 'Nehodnotené';
+        let defaultWineCategory = 'Nepriradená';
         if (this.props.totalSum) {
             defaultSumValue = this.props.totalSum;
         } 
