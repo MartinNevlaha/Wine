@@ -75,9 +75,11 @@ class AdminZone extends Component {
                 windowWidth={this.state.windowWidth}
                 clicked={this.clickHandler}/>
                 <WineResults 
+                isDegustationOpen={this.props.isDegustationOpen}
                 windowWidth={this.state.windowWidth}
                 clicked={this.clickHandler}/>
                 <SystemMenu 
+                isDegustationOpen={this.props.isDegustationOpen}
                 windowWidth={this.state.windowWidth}
                 clicked={this.clickHandler}/>
             </ElementWrapper>

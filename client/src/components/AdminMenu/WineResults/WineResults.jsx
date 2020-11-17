@@ -11,7 +11,9 @@ const wineResults = (props) => (
         <h4>Výsledky degustácie</h4>
         <FontAwesomeIcon icon={faPoll} size={props.windowWidth <=1300 ? '3x' : '5x'}/>
         <div className={classes.BtnContainer}>
-            <Button clicked={props.clicked}>Zobraz výsledky</Button>
+            <Button 
+            disabled={!props.isDegustationOpen}
+            clicked={props.clicked}>Zobraz výsledky</Button>
         </div>
     </ElementWrapper>
 );

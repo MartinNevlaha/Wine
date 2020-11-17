@@ -11,7 +11,9 @@ const databaseMenu = (props) => (
         <h4>System Info</h4>
         <FontAwesomeIcon icon={faDatabase} size={props.windowWidth <= 1300 ? '3x' : '5x'} />
         <div className={classes.BtnContainer}>
-            <Button clicked={props.clicked}>Zobraz info</Button>
+            <Button 
+            disabled={!props.isDegustationOpen}
+            clicked={props.clicked}>Zobraz info</Button>
         </div>
     </ElementWrapper>
 );  
