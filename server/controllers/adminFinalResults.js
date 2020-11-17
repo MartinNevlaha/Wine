@@ -486,7 +486,7 @@ exports.generatePdf = async (req, res, next) => {
             place: wine.place,
             category: wine.competitiveCategory,
             producer: wine.producer,
-            wine: `${wine.name}, ${wine.color} ${wine.character} ${wine.clasification}`,
+            wine: `${wine.name}, ${wine.color} ${wine.character} ${wine.clasification}, ${wine.vintage}`,
             date: `${dd}.${mm}.${yyyy}`,
             chairman: settings[0].competitionChairman,
         }
