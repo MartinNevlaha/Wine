@@ -17,6 +17,11 @@ const inicializeAdmin = async () => {
                 password: hashedPassword
             })
             await defaultAdmin.save();
+            winston.log({
+                time: timestamp('YYYY/MM/DD/HH:mm:ss'),
+                level: 'info',
+                message: 'Admin bol vytvorený v databáze'
+            })
         }
     } catch (error) {
         winston.log({
