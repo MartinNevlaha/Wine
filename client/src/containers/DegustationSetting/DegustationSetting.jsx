@@ -10,6 +10,7 @@ import Back from '../../components/UI/Back/Back';
 import Popup from '../../components/UI/Popup/Popup';
 import Button from '../../components/UI/Button/Button';
 import DegustationBasic from '../../components/AdminMenu/DegustationSettings/DegustationBasic/DegustationBasic';
+import QRsettings from '../../components/AdminMenu/DegustationSettings/QRsettings/QRsettings';
 
 class DegustationSetting extends Component {
     state = {
@@ -96,6 +97,7 @@ class DegustationSetting extends Component {
                     saveIsLock={this.saveSettingLockHandler}
                     isDegustationOpen={this.props.isDegustationOpen}
                     />
+                    <QRsettings server={this.props.host}/>
                     </React.Fragment>
                 }
                 <div style={{width: '100%', height: 'auto'}}>
@@ -120,7 +122,8 @@ const mapStateToProps = state => {
         actualChairman: state.systemSettins.competitionChairman,
         error: state.systemSettins.error,
         isSucces: state.systemSettins.isSucces,
-        succesMessage: state.systemSettins.message
+        succesMessage: state.systemSettins.message,
+        host: state.systemSettins.host
     }
 }
 const mapDispatchToProps = dispatch => {

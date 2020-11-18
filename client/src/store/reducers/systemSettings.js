@@ -9,7 +9,8 @@ const initialState = {
     isValuesEliminated: false,
     isDegustationOpen: false,
     degustationName: '',
-    competitionChairman: ''
+    competitionChairman: '',
+    host: null
 }
 
 const settingsClearError = (state, action) => {
@@ -63,7 +64,8 @@ const fetchSystemSettingsSucces = (state, action) => {
         isDegustationOpen: action.isDegustationOpen,
         isValuesEliminated: action.isValuesEliminated,
         degustationName: action.degustationName,
-        competitionChairman: action.competitionChairman
+        competitionChairman: action.competitionChairman,
+        host: action.host
     })
 }
 

@@ -26,6 +26,9 @@ class Layout extends Component {
                 {this.state.windowWidth >= 700 && <NavBar isAdminAuth={this.props.isAdminAuth} isDegAuth={this.props.isDegAuth}/>}
                 <main className={classes.BackgroundApp}>
                     {this.state.windowWidth >= 700 ? this.props.children : <h2>Táto aplikácia nie je dimenzovaná pre toto zariadenie !!!</h2>}
+                    <div className={classes.tempFooter}>
+                        <p>Copyright @ 2020 <a href="mailto:martin.nevlaha@gmail.com">Martin Nevlaha</a></p>
+                    </div>
                 </main>
             </ErrorBoudary>
         );

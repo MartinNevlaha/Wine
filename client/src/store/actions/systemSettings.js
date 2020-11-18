@@ -74,13 +74,14 @@ export const fetchSettingStart = () => {
     }
 }
 
-export const fetchSettingSuccess = (isValuesEliminated, isDegustationOpen, degustationName, competitionChairman) => {
+export const fetchSettingSuccess = (isValuesEliminated, isDegustationOpen, degustationName, competitionChairman, host) => {
     return {
         type: actionTypes.FETCH_SETTINGS_SUCCESS,
         isValuesEliminated,
         isDegustationOpen,
         degustationName,
-        competitionChairman
+        competitionChairman,
+        host
     }
 } 
 
@@ -101,8 +102,8 @@ export const fetchSetting = (token) => {
         })
         .then(resp => {
             const {isValuesEliminated, isDegustationOpen, degustationName, competitionChairman} = resp.data.settings;
-
-            dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen, degustationName, competitionChairman))
+            const host = resp.data.host;
+            dispatch(fetchSettingSuccess(isValuesEliminated, isDegustationOpen, degustationName, competitionChairman, host))
         })
         .catch(err => {
             if (err.response) {

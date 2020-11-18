@@ -35,6 +35,7 @@ exports.setSettings = async (req, res, next) => {
 }
 
 exports.getSettings = async (req, res, next) => {
+    const host = process.env.HOST
     try {
         const settings = await Setting.find();
         if (!settings) {
@@ -44,7 +45,8 @@ exports.getSettings = async (req, res, next) => {
         }
         res.status(200).json({
             message: 'Nastavenia načítané',
-            settings: settings[0]
+            settings: settings[0],
+            host: 'http://' + host
         })
     } catch (error) {
         if(!error.statusCode) {

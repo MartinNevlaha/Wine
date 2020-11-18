@@ -8,12 +8,20 @@
     display: flex;
     flex-direction: column;
 }
+.RatingSetting canvas {
+    margin: 0 auto;
+    padding: 10px;
+}
 .RatingSetting ul {
     padding: 0;
 }
+.RatingSetting p {
+    padding: 0;
+    margin: 5px 0; 
+}
 
 .RatingSetting li {
-    padding: 5px;
+    padding: 3px;
     list-style: none;
     padding: 0;
 }

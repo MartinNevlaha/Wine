@@ -28,7 +28,6 @@ const ResultsByCategory = React.lazy(() => import('./components/AdminMenu/WineRe
 const ResultsByDegGroup = React.lazy(() => import('./components/AdminMenu/WineResults/ResultsByDegGroup/ResultsByDegGroup'));
 const ResultsByDegustator = React.lazy(() => import('./components/AdminMenu/WineResults/ResultsByDegustator/ResultsByDegustator'));
 const ResultsByWineId = React.lazy(() => import('./components/AdminMenu/WineResults/ResultsByWineId/ResultsByWineId'));
-const Author = React.lazy(() => import('./components/Author/Author'));
 
 
 function App(props) {
@@ -38,7 +37,6 @@ function App(props) {
   })
   let routes = (
     <Switch>
-      <Route path="/author" render={()=><Suspense fallback={<Spinner />}><Author /></Suspense>}/>
       <Route path="/adminzone" render={()=><Suspense fallback={<Spinner />}><AdminLogin /></Suspense>}/>
       <Route path="/" exact component={EntryLogin} />
       <Redirect to="/" /> 
@@ -47,7 +45,6 @@ function App(props) {
   if (props.isAdminAuth) {
     routes = (
       <Switch>
-        <Route path="/author" render={()=><Suspense fallback={<Spinner />}><Author /></Suspense>}/>
         <Route path="/logout" component={Logout}/>
         <Route path="/admin/final-results-by-wineId/:wineId" render={()=><Suspense fallback={<Spinner />}><ResultsByWineId /></Suspense>} />
         <Route path="/results-by-degustator" render={()=><Suspense fallback={<Spinner />}><ResultsByDegustator /></Suspense>} />
@@ -71,7 +68,6 @@ function App(props) {
   } else if (props.isDegustatorAuth) {
     routes = (
       <Switch>
-        <Route path="/author" render={()=><Suspense fallback={<Spinner />}><Author /></Suspense>}/>
         <Route path="/logout" component={Logout}/>
         <Route path="/results" render={()=><Suspense fallback={<Spinner/>}><DegResults /></Suspense>}/>
         <Route path="/rating" render={()=><Suspense fallback={<Spinner />}><Degustator /></Suspense>} />
