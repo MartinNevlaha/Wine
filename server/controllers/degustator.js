@@ -88,10 +88,8 @@ exports.postResult = async(req, res, next) => {
 
 exports.getWineInfo = async (req, res, next) => {
     const wineId = req.params.wineId;
-    /*const degId = req.userData.degId;
-    const groupId = req.userData.groupId;*/
-    const degId='5fb40b4eb83b540b7c034839';
-    const groupId = "5fb40b76b83b540b7c034843"
+    const degId = req.userData.degId;
+    const groupId = req.userData.groupId;
     try {
         const isAllreadyDegust = await Result.findOne({degId: degId, wineId: wineId});
         const wine = await Wine.findOne({id: wineId, group: groupId}, 'color character competitiveCategory vintage');
@@ -118,8 +116,7 @@ exports.getWineInfo = async (req, res, next) => {
 };
 
 exports.getWineInGroup = async (req, res, next) => {
-    //const groupId = req.userData.groupId;
-    const groupId = "5fb40b76b83b540b7c034843";
+    const groupId = req.userData.groupId;
     try {
         const wineInGroup = await Wine.find({group: groupId}, '_id id');
         if (!wineInGroup) {
@@ -186,6 +183,7 @@ exports.getResults = async (req, res, next) => {
 exports.getResult = async (req, res, next) => {
     const resultId = req.params.resultId;
     const {degId} = req.userData;
+    
     try {
         const result = await Result.findOne({degId: degId, _id: resultId});
         if (!result) {
