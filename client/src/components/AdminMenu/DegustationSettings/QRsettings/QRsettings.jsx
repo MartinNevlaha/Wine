@@ -6,7 +6,9 @@ import classes from '../RatingSetting/RatingSetting.module.css';
 const QRsettings = props => (
     <div className={classes.RatingSetting}>
         <p>Odskenuj QR kód pre nastavenie mobilnej aplikácie</p>
-        <QRcode value={props.server}/>
+        <div className={classes.QrWrapper}>
+            <QRcode value={props.server}/>
+        </div>
     </div>
 );
 
