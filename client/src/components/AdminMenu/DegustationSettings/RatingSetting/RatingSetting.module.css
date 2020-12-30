@@ -10,10 +10,9 @@
     flex-direction: column;
 }
 .QrWrapper {
-    width: 30%;
-    height: auto;
     background-color: white;
-    margin: 25px;
+    margin: 20px;
+    padding: 5px;
     border-radius: 8px;
 }
 .RatingSetting canvas {
