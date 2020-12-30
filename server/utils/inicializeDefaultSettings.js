@@ -13,12 +13,12 @@ const inicializeDefaultSettins = async () => {
                 competitionChairman: 'Zmeniť',
             })
             await defaultSetting.save();
+            winston.log({
+                time: timestamp('YYYY/MM/DD/HH:mm:ss'),
+                level: 'info',
+                message: 'Defaultné nastavenia boli zapísané do DB'
+            })
         }
-        winston.log({
-            time: timestamp('YYYY/MM/DD/HH:mm:ss'),
-            level: 'info',
-            message: 'Defaultné nastavenia boli zapísané do DB'
-        })
     } catch (error) {
         winston.log({
             time: timestamp('YYYY/MM/DD/HH:mm:ss'),
