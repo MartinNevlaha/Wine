@@ -3,10 +3,6 @@ import React, { Component } from "react";
 import classes from "./Button.module.css";
 
 class btn extends Component {
-  componentDidUpdate() {
-    console.log("update");
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     return (
       nextProps.disabled !== this.props.disabled ||
