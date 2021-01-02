@@ -5,18 +5,25 @@ import DownloadFile from '../../DownloadFile/DownloadFile';
 import classes from './LogEvents.module.css';
 
 class LogEvents extends Component {
-    state = {
-        logs: []
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            logs: []
+        };
+        this.server = process.env.REACT_APP_SOCKET_SERVER;
+        this.socket = openSocket(this.server);
+    }
     componentDidMount() {
-        const server = process.env.REACT_APP_SOCKET_SERVER
-        const socket = openSocket(server);
-        socket.on('post-log', data => {
+        this.socket.on('post-log', data => {
             if (data.action === 'create') {
                 this.addPost(data.log)
             }
         })
     }
+    componentWillUnmount() {
+        this.socket.disconnect();
+    }
+
     addPost = (log) => {   
         this.setState(prevState => ({
             logs: [ log , ...prevState.logs ]
