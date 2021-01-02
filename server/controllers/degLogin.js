@@ -56,6 +56,14 @@ exports.degustatorLogin = async (req, res, next) => {
 };
 
 exports.degustatorLoginQr = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error(
+      "Zadané údaje sú nesprávne, skontrolujte dĺžku mena a hesla"
+    );
+    error.statusCode = 422;
+    return next(error);
+  }
   const { name, hassPwd } = req.body;
   try {
     const degustator = await Degustator.findOne({ surname: name }).populate(
