@@ -29,4 +29,6 @@ router.post('/degustator-list/import', isAdminAuth, [
     body('*.surname').trim().not().isEmpty().isString()
 ], adminDegConroller.importDegs);
 
+router.get("/degustator-export-card", adminDegConroller.exportCardWithQr)
+
 module.exports = router;

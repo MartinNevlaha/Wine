@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Degustators Cards</title>
+</head>
+<body style="margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;">
+    <div>
+        {{#each this}}
+        <div style="border: solid black 1px; width: 600px; height: 180px; padding: 10px; display:flex; justify-content:space-between; margin: 20px;">
+            <div style="padding: 10px;">
+                <h3>Meno degustátora: {{name}} {{surname}}</h3>
+                <p>Číslo degustátora: {{id}}</p>
+                <p>Degustačná skupina: {{group.groupName}}</p>
+            </div>
+            <img src="{{bufferImgQr}}" alt="{{id}}">
+        </div>
+        {{/each}}
+    </div>
+</body>
+</html>

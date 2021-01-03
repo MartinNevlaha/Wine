@@ -55,9 +55,4 @@ router.post(
   degLogin.degustatorLogin
 );
 
-router.post("/login-qr", isDegustationLock, [
-  body("name").trim().notEmpty().isString().isLength({ min: 3 }),
-  body("hassPwd").trim().notEmpty().isString(),
-], degLogin.degustatorLoginQr);
-
 module.exports = router;
