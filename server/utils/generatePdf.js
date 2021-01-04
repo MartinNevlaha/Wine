@@ -27,22 +27,29 @@ const generatePdf = async ({ data, templateName, isLandscape }) => {
     printBackground: true,
     landscape: isLandscape,
   };
+  let browser;
   try {
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox"],
+    browser = await puppeteer.launch({
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+      ],
       headless: true,
     });
-    const page = await browser.newPage();
+    const context = await browser.createIncognitoBrowserContext();
+    const page = await context.newPage();
     await page.goto(`data:text/html,${finalHtml}`, {
       waitUntil: "networkidle0",
     });
+    await page.setContent(finalHtml);
+    await page.emulateMediaType("screen");
     const createdPdf = await page.pdf(options);
-    await browser.close();
+    await context.close();
     return createdPdf;
   } catch (error) {
-    console.log(error)
+    throw error;
   }
-
 };
 
 module.exports = generatePdf;

@@ -204,11 +204,11 @@ exports.exportCardWithQr = async (req, res, next) => {
     select: "groupName",
   };
   const qrOptions = {
-    margin: 10,
+    margin: 7,
     width: 180,
   };
   try {
-    const degustators = await Degustator.find({}, "-results -role -password")
+    const degustators = await Degustator.find({}, "-results -role -password -_id")
       .populate(populateQuery)
       .lean();
     if (!degustators) {
