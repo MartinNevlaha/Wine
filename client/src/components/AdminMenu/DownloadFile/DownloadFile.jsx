@@ -5,7 +5,6 @@ import Button from '../../UI/Button/Button';
 import axiosInstance from '../../../axios-instance';
 import Spinner from '../../UI/Spinner/Spinner';
 
-
 class DownloadFile extends Component {
     state= {
         showLoading: false
