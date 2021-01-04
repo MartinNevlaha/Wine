@@ -43,6 +43,12 @@ class ShowDegList extends Component {
   };
   errorHandler = (err) => {
     this.setState({ error: err });
+    this.clearError();
+  };
+  clearError = () => {
+    setTimeout(() => {
+      this.setState({ error: null });
+    }, 2500);
   };
 
   render() {
