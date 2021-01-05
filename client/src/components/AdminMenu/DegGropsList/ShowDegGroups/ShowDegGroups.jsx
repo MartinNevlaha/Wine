@@ -53,15 +53,23 @@ class ShowDegGroups extends Component {
             </DownloadFile>
           </div>
         </ElementWrapper>
-        <Back />
-        <Popup show={this.state.error || this.props.error} message={message} />
       </React.Fragment>
     );
     if (this.props.loading) {
       content = <Spinner />;
     }
     return (
-      <ElementWrapper wrapperType="ElementWrapper">{content}</ElementWrapper>
+      <React.Fragment>
+        {this.props.groups.lenght ? (
+          <ElementWrapper wrapperType="ElementWrapper">
+            {content}
+          </ElementWrapper>
+        ) : (
+          <h3>Neboli vytvorené žiadne skupiny</h3>
+        )}
+        <Back />
+        <Popup show={this.state.error || this.props.error} message={message} />
+      </React.Fragment>
     );
   }
 }
