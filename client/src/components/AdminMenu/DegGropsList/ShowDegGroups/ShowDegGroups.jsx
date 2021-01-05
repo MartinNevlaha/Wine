@@ -45,8 +45,8 @@ class ShowDegGroups extends Component {
           <div className={classes.ShowDegGroups_download}>
             <DownloadFile
               token={this.props.token}
-              endPoint="degustator-export-groups"
-              fileName="DegGroups.pdf"
+              endPoint="degustator-groups/export"
+              fileName="DegGroups.xlsx"
               errorDownload={this.errorHandler}
             >
               Stiahni zoznam
@@ -60,7 +60,7 @@ class ShowDegGroups extends Component {
     }
     return (
       <React.Fragment>
-        {this.props.groups.lenght ? (
+        {this.props.groups.length ? (
           <ElementWrapper wrapperType="ElementWrapper">
             {content}
           </ElementWrapper>

@@ -129,8 +129,8 @@ class ShowAddedWine extends Component {
             <div className={classes.Winelist_download}>
               <DownloadFile
                 token={this.props.token}
-                endPoint="winelist-export"
-                fileName="WineList.pdf"
+                endPoint="wine-list/export"
+                fileName="WineList.xlsx"
                 errorDownload={this.errorHandler}
               >
                 Stiahni zoznam
