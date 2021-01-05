@@ -163,8 +163,8 @@ const EditWineGroup = (props) => {
               <DownloadFile
                 isComplete={props.isGroupEdited}
                 token={props.token}
-                endPoint="wine-groups-list"
-                fileName="WineGroupsList.pdf"
+                endPoint="wine-groups/export"
+                fileName="WineGroupsList.xlsx"
                 errorDownload={props.errorHandler}
               >
                 Stiahni zoznam
