@@ -36,7 +36,6 @@ const isDegustatorAuth = (req, res, next) => {
         return next();
     }
     try {
-        console.log(req.headers.authorization);
         const token = req.headers.authorization.split(' ')[1];
         if (!token) {
             const error = new Error('Autentifikácia zlyhala');

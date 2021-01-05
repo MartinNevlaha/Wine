@@ -22,6 +22,7 @@ class LogEvents extends Component {
     }
     componentWillUnmount() {
         this.socket.disconnect();
+        this.socket.close()
     }
 
     addPost = (log) => {   
