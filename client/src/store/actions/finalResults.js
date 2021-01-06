@@ -129,7 +129,7 @@ export const fetchResultsByWineIdFail = (error) => {
 export const fetchResultsByWineId = (wineId, token) => {
     return dispatch => {
         dispatch(fetchResultsByWineIdStart())
-        axiosInstance.get('' + wineId, {
+        axiosInstance.get(`/admin/final-results-by-wineId/${wineId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

@@ -32,7 +32,7 @@ class ResultsByCategory extends Component {
         this.setState({selectedCategory: _id})
     }
     clickHandler= (_id) => {
-        this.props.history.push(`/admin/final-results-by-wineId/${_id}`)
+        this.props.history.push(`results-by-wineId/${_id}`)
     }
     fetchResultsByComCategory = () => {
         let category;
