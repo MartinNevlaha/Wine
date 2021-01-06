@@ -9,8 +9,7 @@ class LogEvents extends Component {
     logs: [],
   };
   componentDidMount() {
-    //this.server = process.env.REACT_APP_SOCKET_SERVER;
-    this.socket = openSocket();
+    this.socket = openSocket("http://localhost:8080");
     this.socket.on("post-log", (data) => {
       if (data.action === "create") {
         this.addPost(data.log);
