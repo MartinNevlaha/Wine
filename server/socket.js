@@ -2,7 +2,7 @@ let io;
 
 module.exports = {
   init: (httpServer) => {
-    io = require("socket.io")(httpServer, {origins: "http://localhost:3000"}); 
+    io = require("socket.io")(httpServer, {origins: `http://${process.env.HOST}`}); 
     return io;
   },
   getIO: () => {
