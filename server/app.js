@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const path = require("path");
 const compression = require("compression");
 const timestamp = require("time-stamp");
-const cors = require("cors");
 const envExist = require("dotenv").config();
 
 const winston = require("./config/winston");
@@ -37,12 +36,19 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json()); // aplications/json
+
+app.use((req, res, next)=> {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "assets/template/")));
 app.use(express.static(path.join("public")));
 
 app.use(helmet());
 app.use(compression());
-app.use(cors());
 app.use(
   morgan("combined", {
     stream: winston.stream,
