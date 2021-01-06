@@ -2,12 +2,7 @@ let io;
 
 module.exports = {
   init: (httpServer) => {
-    io = require("socket.io")(httpServer, {
-      cors: {
-        origin: "http://localhost:8080",
-        methods: ["GET", "POST"]
-      }
-    });
+    io = require("socket.io")(httpServer, {origins: "http://localhost:3000"}); 
     return io;
   },
   getIO: () => {
