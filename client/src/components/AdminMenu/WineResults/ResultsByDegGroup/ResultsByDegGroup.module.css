@@ -1,19 +1,35 @@
 .HeaderGroupChoose {
-    text-align: left;
-    padding: 5px 10px;
+  text-align: left;
+  padding: 5px 10px;
 }
 .HeaderGroupChoose label {
-    padding: 5px;
-    padding-left: 90px;
+  padding: 5px;
+  padding-left: 90px;
 }
 .HeaderGroupChoose button {
-    margin: 10px;
+  margin: 10px;
 }
-@media(max-width: 1360px) {
-    .HeaderGroupChoose{
-        font-size: small;
-    }
-    .HeaderGroupChoose label, select {
-        font-size: small;
-    }
+.ResultsByGroup_table {
+  height: 85%;
+  overflow: scroll;
+}
+.ResultsByGroup_table::-webkit-scrollbar {
+  width: 0.3rem;
+}
+.ResultsByGroup_table::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.ResultsByGroup_table::-webkit-scrollbar-thumb {
+  background-color: white;
+  outline: 2px solid black;
+  border-radius: 8px;
+}
+@media (max-width: 1360px) {
+  .HeaderGroupChoose {
+    font-size: small;
+  }
+  .HeaderGroupChoose label,
+  select {
+    font-size: small;
+  }
 }

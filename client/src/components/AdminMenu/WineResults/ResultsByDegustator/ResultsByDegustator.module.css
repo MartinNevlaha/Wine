@@ -1,19 +1,34 @@
 .HeaderDegustatorChoose {
-    text-align: left;
-    padding: 5px 10px;
+  text-align: left;
+  padding: 5px 10px;
 }
 .HeaderDegustatorChoose label {
-    padding: 5px;
-    padding-left: 90px;
+  padding: 5px;
+  padding-left: 90px;
 }
 .HeaderDegustatorChoose button {
-    margin: 10px;
+  margin: 10px;
 }
-@media(max-width: 1300px) {
-    .HeaderDegustatorChoose{
-        font-size: small;
-    }
-    .HeaderDegustatorChoose select {
-        font-size: small;
-    }
+.ResultsByDegustator_table {
+  height: 85%;
+  overflow: scroll;
+}
+.ResultsByDegustator_table::-webkit-scrollbar {
+  width: 0.3rem;
+}
+.ResultsByDegustator_table::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.ResultsByDegustator_table::-webkit-scrollbar-thumb {
+  background-color: white;
+  outline: 2px solid black;
+  border-radius: 8px;
+}
+@media (max-width: 1300px) {
+  .HeaderDegustatorChoose {
+    font-size: small;
+  }
+  .HeaderDegustatorChoose select {
+    font-size: small;
+  }
 }
