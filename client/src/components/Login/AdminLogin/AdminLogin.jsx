@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Spring } from "react-spring/renderprops";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import ReactTooltip from "react-tooltip";
 
 import LoginUserInput from "../../UserInput/UserInput";
 import WineGlass from "../../UI/WineGlass/WineGlass";
@@ -103,34 +105,49 @@ class AdminLogin extends Component {
       );
     });
     return (
-      <Spring from={{ opacity: 0 }} to={{ opacity: 1}}>
-        {(props) => (
-          <div style={props}>
-            <div className={classes.AdminLogin}>
-              <WineGlass />
-              {this.props.loading ? (
-                <Spinner />
-              ) : (
-                <div className={classes.LoginContainer}>
-                  {adminLoginForm}
-                  <Button
-                    clicked={this.adminLoginHandler}
-                    disabled={
-                      !(this.state.adminName.valid && this.state.password.valid)
-                    }
-                  >
-                    Prihlásiť
-                  </Button>
-                </div>
-              )}
-              <Popup
-                show={this.props.error}
-                message={this.props.error && this.props.error.message}
-              />
-            </div>
+      <div className={classes.AdminLogin}>
+        <h3>Prihlásenie Administrátora</h3>
+        <div className={classes.SwitchBtn}>
+          <FontAwesomeIcon
+            icon={faExchangeAlt}
+            size={"2x"}
+            cursor={"pointer"}
+            onClick={this.props.toggleLogin}
+            data-tip
+            data-for="switchLogin"
+          />
+          <ReactTooltip
+            id="switchLogin"
+            place="top"
+            effect="solid"
+            backgroundColor="rgba(102, 101, 101, 0.651)"
+            border={true}
+            borderColor="white"
+          >
+            Prepni pre prihlásenie Degustátora
+          </ReactTooltip>
+        </div>
+        <WineGlass />
+        {this.props.loading ? (
+          <Spinner />
+        ) : (
+          <div className={classes.LoginContainer}>
+            {adminLoginForm}
+            <Button
+              clicked={this.adminLoginHandler}
+              disabled={
+                !(this.state.adminName.valid && this.state.password.valid)
+              }
+            >
+              Prihlásiť
+            </Button>
           </div>
         )}
-      </Spring>
+        <Popup
+          show={this.props.error}
+          message={this.props.error && this.props.error.message}
+        />
+      </div>
     );
   }
 }
