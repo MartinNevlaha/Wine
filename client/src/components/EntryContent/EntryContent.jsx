@@ -3,6 +3,7 @@ import { Spring } from "react-spring/renderprops";
 
 import Button from "../UI/Button/Button";
 import classes from "./EntryContent.module.css";
+import WineGlass from "../UI/WineGlass/WineGlass";
 
 class EntryContent extends Component {
   render() {
@@ -12,6 +13,7 @@ class EntryContent extends Component {
           <div style={props}>
             <div className={classes.EntryContent}>
               <h2>Wine Degustator</h2>
+              <WineGlass />
               <p>
                 Je webová aplikácia na hodnotenie vín pri degustačných
                 sútažiach. Pri hodnotení je použitý najznámejší 100 bodový
@@ -31,8 +33,10 @@ class EntryContent extends Component {
                 <li>78 - 69 bodov: Priemerné víno </li>
                 <li>pod 68 bodov: Podprienerné víno</li>
               </ul>
-              <Button clicked={this.props.toggleLoginHandler}>Prihlásiť sa</Button>
-            </div>{" "}
+              <Button clicked={this.props.toggleLoginHandler}>
+                Prihlásiť sa
+              </Button>
+            </div>
           </div>
         )}
       </Spring>
