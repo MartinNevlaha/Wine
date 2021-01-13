@@ -4,6 +4,7 @@
     background-color:rgba(107, 11, 25, 0.733);
     border-radius: 8px;
     border: 1px solid white;
+    padding: 5px;
 }
 .DegContainer button {
     margin-top: 5px;

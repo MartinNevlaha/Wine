@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
  
 import ElementWrapper from '../../hoc/ElementWrapper/ElementWrapper';
 import DegustationTable from '../../components/Rating/DegustatorTable/DegustatorTable';

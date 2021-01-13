@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import EntryContent from '../../components/EntryContent/EntryContent';
-import DegustatorLogin from '../../components/Login/DegustatroLogin/DegustatorLogin';
-
-
+import LoginForm from "../../components/Login/LoginForm";
+import EntryContent from "../../components/EntryContent/EntryContent";
 
 class EntryLogin extends Component {
-    state = {
-        showLogin: false,
-    }
-    toggleLoginHandler = () => {
-        this.setState({showLogin: true})
-    };
-
-    render() {
-        return (
-            <div>
-                {!this.state.showLogin 
-                ? <EntryContent toggleLoginHandler={this.toggleLoginHandler} /> 
-                : <DegustatorLogin />}
-            </div>
-        );
-    }
+  state = {
+    loginShow: false,
+  };
+  togleLogin = () => {
+    this.setState({ loginShow: true });
+  };
+  render() {
+    return (
+      <div>
+        {this.state.loginShow ? (
+          <LoginForm />
+        ) : (
+          <EntryContent toggleLoginHandler={this.togleLogin} />
+        )}
+      </div>
+    );
+  }
 }
 
 export default EntryLogin;
