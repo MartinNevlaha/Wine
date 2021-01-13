@@ -48,7 +48,7 @@ const navItems = (props) => {
           border={true}
           borderColor="white"
         >
-          Minimalizuj menu
+          Minimalizuj
         </ReactTooltip>
       </React.Fragment>
     );

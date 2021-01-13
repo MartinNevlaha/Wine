@@ -144,6 +144,7 @@ class DegustatorLogin extends Component {
         <Popup
           show={this.props.error}
           message={this.props.error && this.props.error.message}
+          login={true}
         />
       </div>
     );
