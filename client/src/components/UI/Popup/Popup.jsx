@@ -9,8 +9,6 @@ class Popup extends Component {
     let style = classes.Popup;
     if (this.props.isSucces) {
       style = classes.Popup_Success;
-    } else if (this.props.login) {
-      style = classes.Popup_login;
     }
     return (
       <div

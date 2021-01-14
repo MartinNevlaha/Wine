@@ -14,7 +14,6 @@ import {
   isInputPassValid,
 } from "../../../shared/validations";
 import * as action from "../../../store/actions/index";
-import Popup from "../../UI/Popup/Popup";
 
 class DegustatorLogin extends Component {
   // state only for rendering components
@@ -141,11 +140,6 @@ class DegustatorLogin extends Component {
             </Button>
           </div>
         )}
-        <Popup
-          show={this.props.error}
-          message={this.props.error && this.props.error.message}
-          login={true}
-        />
       </div>
     );
   }
@@ -158,7 +152,6 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     loading: state.degAuth.loading,
-    error: state.degAuth.error,
   };
 };
 

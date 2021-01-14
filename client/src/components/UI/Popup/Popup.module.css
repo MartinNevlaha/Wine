@@ -11,19 +11,6 @@
     transition: all 0.4s ease-out;
     border: 1px white solid;
 }
-.Popup_login {
-    width: 20%;
-    height: auto;
-    background-color: rgba(182, 24, 24, 0.548);
-    position: fixed;
-    bottom: -50vh;
-    right: 40%;
-    border-radius: 8px;
-    padding: 5px;
-    box-sizing: border-box;
-    transition: all 0.4s ease-out;
-    border: 1px white solid;
-}
 .Popup_Success {
     width: 20%;
     height: auto;

@@ -14,7 +14,6 @@ import {
   isInputPassValid,
 } from "../../../shared/validations";
 import * as action from "../../../store/actions/index";
-import Popup from "../../UI/Popup/Popup";
 
 class AdminLogin extends Component {
   state = {
@@ -105,6 +104,7 @@ class AdminLogin extends Component {
       );
     });
     return (
+      <React.Fragment>
       <div className={classes.AdminLogin}>
         <h3>Prihlásenie Administrátora</h3>
         <div className={classes.SwitchBtn}>
@@ -143,12 +143,8 @@ class AdminLogin extends Component {
             </Button>
           </div>
         )}
-        <Popup
-          show={this.props.error}
-          message={this.props.error && this.props.error.message}
-          login={true}
-        />
       </div>
+      </React.Fragment>
     );
   }
 }
@@ -161,7 +157,6 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     loading: state.adminAuth.loading,
-    error: state.adminAuth.error,
   };
 };
 

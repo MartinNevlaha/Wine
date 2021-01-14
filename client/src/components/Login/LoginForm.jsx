@@ -3,7 +3,6 @@ import { useSpring, animated } from "react-spring";
 
 import DegustatorLogin from "../../components/Login/DegustatroLogin/DegustatorLogin";
 import AdminLogin from "../../components/Login/AdminLogin/AdminLogin";
-import classes from "./LoginForm.module.css";
 
 const LoginForm = (props) => {
   const [adminLoginShow, setAdminLoginShow] = useState(false);
@@ -16,7 +15,7 @@ const LoginForm = (props) => {
     config: { mass: 5, tension: 500, friction: 80 },
   });
   return (
-    <div className={classes.MainLoginContainer}> 
+    <div> 
       <animated.div
         style={{ opacity: opacity.interpolate((o) => 1 - o), transform }}
       >
