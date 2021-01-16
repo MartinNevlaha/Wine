@@ -4,17 +4,6 @@ main {
 img {
     max-width: 100%;
 }
-.BackgroundApp {
-    background: url('../../assets/images/wine_background.jpg') no-repeat center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100vh;
-    overflow: hidden;
-    z-index: -100;
-    padding-bottom: 50px;
-}
 .tempFooter {
     background-color: rgba(128, 128, 128, 0.548);
     height: 25px;
