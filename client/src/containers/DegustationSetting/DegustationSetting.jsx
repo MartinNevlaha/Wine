@@ -100,7 +100,7 @@ class DegustationSetting extends Component {
                     <QRsettings server={this.props.host}/>
                     </React.Fragment>
                 }
-                <div style={{width: '100%', height: 'auto'}}>
+                <div style={{width: '100%', height: 'auto', marginBottom: "50px"}}>
                     <Button clicked={this.saveSettingValueHandler}>Ulož nastavenia</Button>
                 </div>
                 <Popup 

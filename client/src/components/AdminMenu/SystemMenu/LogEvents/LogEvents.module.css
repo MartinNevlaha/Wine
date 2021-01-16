@@ -8,7 +8,8 @@
     padding: 5px 15px;
     border-radius: 8px;
     border: 1px solid white;
-    
+    padding-bottom: 50px;
+    margin-bottom: 50px;
 }
 .LogContainer h4 {
     text-align: center;
