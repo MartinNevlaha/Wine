@@ -70,8 +70,13 @@ exports.deleteGroups = async (req, res, next) => {
 };
 
 exports.getGroups = async (req, res, next) => {
+  const populateQuery = {
+    path: "items",
+    model: "Degustator",
+    select: "id name surname group"
+  }
   try {
-    const groups = await Groups.find().populate("items");
+    const groups = await Groups.find().populate(populateQuery);
     if (!groups) {
       const error = new Error("Nepodarilo sa načítať skupiny");
       error.statusCode = 404;
