@@ -7,8 +7,10 @@
     border: 1px solid white;
     margin: 0 auto;
     margin-top: 150px;
+    margin-bottom: 50px;
     font-style: normal;
     position: relative;
+    overflow-x: hidden;
 }
 .LoginContainer {
     margin: auto;
