@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWineGlass } from '@fortawesome/free-solid-svg-icons';
+import { faWineGlass, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 import ElementWrapper from '../../../hoc/ElementWrapper/ElementWrapper';
 import Button from '../../UI/Button/Button';
@@ -8,7 +8,8 @@ import classes from './WineList.module.css';
 
 const wineList = (props) => (
     <ElementWrapper wrapperType="SmallWrapper">
-        <h4>Zoznam vín</h4>
+        <h4 className={classes.CardHeader}>Zoznam vín</h4>
+        <FontAwesomeIcon icon={faInfoCircle} size={"1x"} className={classes.InfoIcon} />
         <FontAwesomeIcon icon={faWineGlass} size={props.windowWidth <=1300 ? '3x' : '5x'} />
         <div className={classes.BtnContainer}>
             {!props.isDegustationOpen && 

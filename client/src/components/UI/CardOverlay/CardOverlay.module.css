@@ -1,0 +1,12 @@
+.CardOverlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  background-color: rgba(70, 67, 67, 0.897);
+}
+
+.On {
+  left: 0;
+}
