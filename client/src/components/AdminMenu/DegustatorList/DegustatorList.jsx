@@ -23,7 +23,9 @@ class DegustatorList extends Component {
       <ElementWrapper wrapperType="SmallWrapper">
         <CardOverlay isShow={this.state.isInfoShow}>
           Priradenie degustátorov do degustácie, ich editácia, import pomocou
-          csv súborov, vymazanie databázy degustátorov.
+          csv súborov, vymazanie databázy degustátorov, stiahnutie xlsx súboru
+          so zoznamom degustátorov a vygenerovaným QR kódom pre prihlásenie v
+          natívnej aplikácii.
         </CardOverlay>
         <FontAwesomeIcon
           icon={this.state.isInfoShow ? faTimes : faInfoCircle}

@@ -24,7 +24,7 @@ class WineList extends Component {
       <ElementWrapper wrapperType="SmallWrapper">
         <CardOverlay isShow={this.state.isInfoShow}>
           Pridanie vín do degustácie, ich editácia, import pomocou csv suborov,
-          vymazanie databázy vín.
+          vymazanie databázy vín, stiahnutie xlsx zoznamu vín.
         </CardOverlay>
         <h4 className={classes.CardHeader}>Zoznam vín</h4>
         <FontAwesomeIcon
