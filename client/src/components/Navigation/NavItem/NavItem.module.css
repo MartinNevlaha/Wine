@@ -3,6 +3,7 @@
     margin: 0;
     color: white;
     text-decoration: none;
+    transition: all .5s;
 }
 .NavItem a:hover,
 .NavItem a:active,
@@ -11,6 +12,7 @@
     color: black;
     border-radius: 8px;
     cursor: pointer;
+    letter-spacing: 1px;
 }
  @media(max-width: 950px) {
     .NavItem a {
