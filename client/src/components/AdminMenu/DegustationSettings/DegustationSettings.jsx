@@ -23,7 +23,7 @@ class DegustationSettings extends Component {
       <ElementWrapper wrapperType="SmallWrapper">
         <CardOverlay isShow={this.state.isInfoShow}>
           Nastavenie názvu degustácie, mena organizátora degustácie, systému
-          bodového hodnotenia, zatvorenie otvorenie degustácie, QR kód pre
+          bodového hodnotenia, zatvorenie/otvorenie degustácie, QR kód pre
           nastavenie natívnej aplickácie.
         </CardOverlay>
         <FontAwesomeIcon
