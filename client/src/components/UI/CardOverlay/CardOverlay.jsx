@@ -11,7 +11,7 @@ const CardOverlay = (props) => {
           : [classes.CardOverlay, classes.Show].join(" ")
       }
     >
-      {props.children}
+      <div className={classes.InfoText}>{props.children}</div>
     </div>
   );
 };

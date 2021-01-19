@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCogs, faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCogs,
+  faInfoCircle,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 import ElementWrapper from "../../../hoc/ElementWrapper/ElementWrapper";
 import Button from "../../UI/Button/Button";
@@ -17,9 +21,13 @@ class DegustationSettings extends Component {
   render() {
     return (
       <ElementWrapper wrapperType="SmallWrapper">
-        <CardOverlay isShow={this.state.isInfoShow}>125</CardOverlay>
+        <CardOverlay isShow={this.state.isInfoShow}>
+          Nastavenie názvu degustácie, mena organizátora degustácie, systému
+          bodového hodnotenia, zatvorenie otvorenie degustácie, QR kód pre
+          nastavenie natívnej aplickácie.
+        </CardOverlay>
         <FontAwesomeIcon
-          icon={this.state.isInfoShow ? faTimes: faInfoCircle}
+          icon={this.state.isInfoShow ? faTimes : faInfoCircle}
           size={"1x"}
           className={classes.InfoIcon}
           onClick={this.infoShowHandler}
