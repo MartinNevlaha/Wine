@@ -11,3 +11,37 @@
     top: 6px;
     right: 10px;
 }
+
+.InfoIcon:hover {
+    -webkit-animation: puls .8s ease-in-out infinite both;
+    animation: puls .8s ease-in-out infinite both;
+}
+
+@-webkit-keyframes puls {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.2);
+              transform: scale(1.2);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes puls {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.2);
+              transform: scale(1.2);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
