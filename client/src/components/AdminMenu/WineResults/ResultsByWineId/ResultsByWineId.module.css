@@ -1,6 +1,6 @@
 .Results_Table {
   height: 70%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .Results_Table::-webkit-scrollbar {

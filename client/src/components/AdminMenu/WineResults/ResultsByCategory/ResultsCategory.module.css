@@ -14,7 +14,7 @@
 }
 .ResultsByCategoty_table {
   height: 85%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .ResultsByCategoty_table::-webkit-scrollbar {
   width: 0.3rem;

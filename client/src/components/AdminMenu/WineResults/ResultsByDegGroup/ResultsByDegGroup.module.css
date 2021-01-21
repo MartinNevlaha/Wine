@@ -11,7 +11,7 @@
 }
 .ResultsByGroup_table {
   height: 85%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .ResultsByGroup_table::-webkit-scrollbar {
   width: 0.3rem;

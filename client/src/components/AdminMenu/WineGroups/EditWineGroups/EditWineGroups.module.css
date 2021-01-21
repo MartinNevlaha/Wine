@@ -26,7 +26,7 @@
 }
 .ShowWines_table_container {
   height: 85%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .ShowWines_table_container::-webkit-scrollbar {
   width: 0.3rem;

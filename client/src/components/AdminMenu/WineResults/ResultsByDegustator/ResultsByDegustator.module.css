@@ -11,7 +11,7 @@
 }
 .ResultsByDegustator_table {
   height: 85%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .ResultsByDegustator_table::-webkit-scrollbar {
   width: 0.3rem;
