@@ -23,7 +23,7 @@
 }
 .ShowDegList_table_container {
     height: 85%;
-    overflow: scroll;
+    overflow-x: scroll;
 }
 .ShowDegList_table_container::-webkit-scrollbar {
     width: .3rem;
