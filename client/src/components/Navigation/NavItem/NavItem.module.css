@@ -1,3 +1,7 @@
+.NavItem {
+    width: 30%;
+}
+
 .NavItem a {
     padding: 10px;
     margin: 0;
