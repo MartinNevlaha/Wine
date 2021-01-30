@@ -16,6 +16,7 @@ const LockDegustation = props => (
         </ul>
         <h5 style={{color: "red"}}>POZOR</h5>
         <p style={{color: "red"}}>Nastavenia nemeniť počas prebiehajúcej degustácie</p>
+        <div className={classes.selectWrapper}>
         <select
         type='select'
         defaultValue={props.isDegustationOpen ? props.lock.options[0] : props.lock.options[1]}
@@ -26,6 +27,10 @@ const LockDegustation = props => (
                 </option>
             ))}
         </select>
+        <p>
+        <i className={classes.arrowDown}></i>
+      </p>
+        </div>
     </div>
 );
 

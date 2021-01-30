@@ -35,10 +35,37 @@
 .RatingSetting label {
     margin: 0 50px;
 }
-.RatingSetting select {
-    text-align: center;
+.selectWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
     margin: 20px 50px;
+}
+.arrowDown {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    z-index: -1;
+}
+.RatingSetting select {
+    border: none;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    color: white;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    padding-right: 30px;
+}
 
+.RatingSetting select:hover {
+    cursor: pointer;
 }
 .RatingSetting input {
     margin: 20px 50px;
@@ -47,5 +74,8 @@
     .RatingSetting {
         width: 25%;
         font-size: small;
+    }
+    .RatingSetting select {
+        width: 100%;
     }
 }
