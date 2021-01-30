@@ -65,9 +65,9 @@ class DegGroups extends Component {
             );
         })
         return (
-            <ElementWrapper wrapperType="GroupWrapper">
+            <React.Fragment>
                 {groups}
-            </ElementWrapper>
+            </React.Fragment>
         );
     }
 }
