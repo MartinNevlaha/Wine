@@ -22,12 +22,14 @@ class UserInput extends Component {
                 className={classes.Icon}
                 cursor="pointer"
                 onClick={this.props.tooglePwShow}
+                color="white"
                 icon={this.props.isPwShowed ? faEye : faEyeSlash}/>}
             </div>
         ); 
         if (this.props.inputType === "select") {
             let options = this.props.options;
             inputType = (
+                <React.Fragment>
                 <select 
                 className={classes.UserSelect}
                 id={this.props.id} 
@@ -39,6 +41,8 @@ class UserInput extends Component {
                         >{opt}</option>
                     })}
                 </select>
+                <p><i class={classes.arrowDown}></i></p>
+                </React.Fragment>
             );
         }
         return (
