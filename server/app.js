@@ -48,6 +48,7 @@ app.use(
     stream: winston.stream,
   })
 );
+app.use('trust proxy', 'loopback'); //fix Ip adress behind the reverse proxy
 
 //routes
 app.use("/admin", adminSettingsRoutes);
