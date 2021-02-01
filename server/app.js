@@ -96,6 +96,13 @@ mongoose
         level: "info",
         message: "Socket.io: client connected",
       });
+      socket.on("disconnect", () => {
+        winston.log({
+          time: timestamp("YYYY/MM/DD/HH:mm:ss"),
+          level: "info",
+          message: "Socket.io: client disconnected"
+        })
+      })
     });
     winston.log({
       time: timestamp("YYYY/MM/DD/HH:mm:ss"),
