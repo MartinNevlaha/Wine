@@ -43,12 +43,13 @@ app.use(express.static(path.join("public")));
 app.use(helmet());
 app.use(compression());
 app.use(cors());
+app.set('trust proxy', 'loopback'); //fix wrong Ip adress behind the reverse proxy
 app.use(
   morgan("combined", {
     stream: winston.stream,
   })
 );
-app.set('trust proxy', 'loopback'); //fix wrong Ip adress behind the reverse proxy
+
 
 //routes
 app.use("/admin", adminSettingsRoutes);
