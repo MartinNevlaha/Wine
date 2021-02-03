@@ -1,7 +1,7 @@
 # Wine
 
 Wine is a web application for rating wines during the tasting competitions.
-Consist of client side and server side and use MongoDb as database.
+Consist of client side (react js) and server side (express, REST API) and use MongoDb as database.
 
 ## Instalation proces
 
