@@ -15,6 +15,7 @@ Content of file:
 ```env
 REACT_APP_BACKEND_URL=http(s)://own_backend_url
 REACT_APP_SOCKET_SERVER=ws(s)://own_backend_url
+INLINE_RUNTIME_CHUNK=false(optional)
 ```
 
 2. Install packages
@@ -36,11 +37,15 @@ Create .env file in root directory in server.
 
 Content of file:
 ```env
+NODE_ENV=production
 MONGO_DB_URI=own_mongodb_uri_connection_string
 PORT=own_port
 DEFAULT_ADMIN_NAME=own_admin_name
 DEFAULT_ADMIN_PASSWORD=own_admin_password
-HTTPS=true/false
+ADMIN_JWT_SECRET=own_secret
+DEGUSTATOR_JWT_SECRET=own_secret
+HOST=onw_host
+SSL=true/false
 ```
 
 2. Install packages
