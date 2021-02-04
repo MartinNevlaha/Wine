@@ -58,4 +58,4 @@ If you have problems with npm install in particular installing Chromium browser 
 
 4. Copy all files from "client/build" to "server/public".
 
-5. run server (use for example [pm2](https://pm2.keymetrics.io/)). 
+5. run server npm start (or use for example [pm2](https://pm2.keymetrics.io/)). 
