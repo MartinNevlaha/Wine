@@ -34,7 +34,7 @@ function App(props) {
   useEffect(() => {
     props.onAdminAutoLogin();
     props.onDegAutoLogin();
-  })
+  }, [])
   let routes = (
     <Switch>
       <Route path="/adminzone" render={()=><Suspense fallback={<Spinner />}><AdminLogin /></Suspense>}/>
